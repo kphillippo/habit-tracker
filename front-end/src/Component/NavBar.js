@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function NavBar() {
 
   return (
-    <Nav>
+    <Nav className="navbar">
         <NavItem>
             <NavLink
                 active
