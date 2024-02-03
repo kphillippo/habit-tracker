@@ -1,18 +1,19 @@
 .navbar-bot {
     background-color: #c4d3ad; 
     padding: 3px;
-    font-weight: bold;
     color: #ffcc00;
   }
 
   .nav-item {
     padding: 0%;
+    border-radius: 10px;
   }
   
   .navbar-bot .nav-item .nav-link {
     color: black; 
     margin-right: 0px; 
-    transition: color 0.3s ease-in-out;
+    border-radius: 10px; 
+    transition: background-color 0.5s ease;
   }
   
   .navbar-bot .nav-item .nav-link:hover {
@@ -25,12 +26,46 @@
     font-weight: bold;
     border: 0px solid; 
     border-radius: 10px; 
+    border-color: #8ba876;
     background-color: #93b27d;
   }
 
   .navbar-top {
     background-color: #548f68; 
     padding: 5px;
+    color: white;
+  }
+
+  .navbar-top .nav-item .nav-link {
+    color: black; 
+    margin-right: 0px; 
+    border-radius: 10px; 
+    transition: background-color 0.5s ease;
+  }
+  
+  .navbar-top .nav-item .nav-link:hover {
+    text-decoration: none;
+    border-radius: 10px; 
+    background-color: #93b27d;
+  }
+
+  .top-right {
+    margin-left: auto;
+  }
+
+  .sign-link {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+  }
+
+  .title {
+    font-size: xx-large;
+    padding-right: 10px;
+  }
+
+  .sign-link-div {
+    padding-top: 10px;
   }
   
 
