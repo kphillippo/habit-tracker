@@ -52,16 +52,16 @@
     background-color: #93b27d;
   }
 
-  .navbar-top .top-right .nav-item {
+  .navbar-top .align-right .nav-item {
     padding-top: 15px;
     padding-right: 0;
   }
 
-  .navbar-top .top-right .nav-item a {
+  .navbar-top .align-right .nav-item a {
     padding-left: 15px;
   }
 
-  .top-right {
+  .align-right {
     margin-left: auto;
   }
 

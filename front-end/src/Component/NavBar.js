@@ -6,6 +6,8 @@ import "../Css/navbar.css"
 import { IoNotifications } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 function NavBar() {
+    // test data, will be replaced by data from backend in the future
+    // will be added to props in the future
     const login = true;
   return (
     <div>
@@ -15,7 +17,7 @@ function NavBar() {
                 <span>your path to a better you!</span>
             </NavItem> 
             
-            <NavItem className="top-right">
+            <NavItem className="align-right">
             {login === true && 
                     <NavItem>
                         Welcome User!
@@ -119,7 +121,7 @@ function NavBar() {
                 </NavLink>
             </NavItem>
             
-            <NavItem className="top-right">
+            <NavItem className="align-right">
                 <IoMdFlame size={30} color="#e57028"></IoMdFlame>
                 <span>30</span>
             </NavItem>
