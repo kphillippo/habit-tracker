@@ -2,10 +2,11 @@ import React from "react";
 import { Container } from "reactstrap";
 
 function Home(){
+    
     return(
-        <Container>
+        <div className="main-container">
             this is home page
-        </Container>
+        </div>
     );
 }
 export default Home;
