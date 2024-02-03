@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {Nav, NavItem} from "reactstrap"
 import { NavLink } from "react-router-dom";
-
+import { IoMdFlame } from "react-icons/io";
 import "../Css/navbar.css"
-import { Link } from "react-router-dom";
-
+import { IoNotifications } from "react-icons/io5";
+import { FaRegUserCircle } from "react-icons/fa";
 function NavBar() {
-    const login = false;
+    const login = true;
   return (
     <div>
         <Nav className="navbar-top row-12">
@@ -17,8 +17,15 @@ function NavBar() {
             
             <NavItem className="top-right">
             {login === true && 
-                    <span>Welcome User!</span>
-                }
+                    <NavItem>
+                        Welcome User!
+                        <NavLink to="/profile">
+                        <FaRegUserCircle size={30} color="#292d32"/>
+                        </NavLink> 
+                    </NavItem>
+                
+                
+            }
 
             {login === false && 
                     <div className="sign-link-div">
@@ -110,6 +117,16 @@ function NavBar() {
                 >
                 Help
                 </NavLink>
+            </NavItem>
+            
+            <NavItem className="top-right">
+                <IoMdFlame size={30} color="#e57028"></IoMdFlame>
+                <span>30</span>
+            </NavItem>
+            
+            <NavItem>
+                <IoNotifications size={30} color="#4e5445"></IoNotifications>
+                <span>0</span>
             </NavItem>
 
 

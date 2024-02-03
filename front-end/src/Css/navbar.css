@@ -1,19 +1,22 @@
 .navbar-bot {
     background-color: #c4d3ad; 
     padding: 3px;
-    color: #ffcc00;
+    color: black;
   }
 
   .nav-item {
     padding: 0%;
     border-radius: 10px;
+    padding-right: 10px;
   }
   
   .navbar-bot .nav-item .nav-link {
     color: black; 
-    margin-right: 0px; 
+    padding: 3px; 
     border-radius: 10px; 
     transition: background-color 0.5s ease;
+    font-size: 120%;
+    font-weight: 100;
   }
   
   .navbar-bot .nav-item .nav-link:hover {
@@ -49,6 +52,15 @@
     background-color: #93b27d;
   }
 
+  .navbar-top .top-right .nav-item {
+    padding-top: 15px;
+    padding-right: 0;
+  }
+
+  .navbar-top .top-right .nav-item a {
+    padding-left: 15px;
+  }
+
   .top-right {
     margin-left: auto;
   }
@@ -68,5 +80,6 @@
     padding-top: 10px;
   }
   
+
 
   

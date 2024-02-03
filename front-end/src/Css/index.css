@@ -8,6 +8,11 @@
   }
 
 
-  body {
+  html, body {
     font-family: 'Protest_Riot', fallback-font, sans-serif;
+    height: 100%;
+  }
+
+  #root {
+    height: 100%;
   }

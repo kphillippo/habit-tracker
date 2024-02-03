@@ -1,4 +1,4 @@
 .main-container {
-    min-height: calc(93vh); /* 100% of the viewport height */
-    background-color: gray; /* Set the background color to gray */
+    min-height: calc(100vh - 110px); 
+    background-color: gray; 
 }
