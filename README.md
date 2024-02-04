@@ -1,8 +1,8 @@
 # Habit Tracker
 
-Introducing "Habit Tracker" (working title), an innovative online platform serving as a personal growth coach, designed to cultivate positive habits and monitor individual progress. It empowers users to establish and pursue personal development goals, including reminders, daily streaks, motivational quotes, and engaging group challenges, ensuring users stay motivated and on course.
+Introducing HabitConnect, an innovative online platform serving as a personal growth coach, designed to cultivate positive habits and monitor individual progress. It empowers users to establish and pursue personal development goals, including reminders, daily streaks, motivational quotes, and engaging group challenges, ensuring users stay motivated and on course.
 
-The application prioritizes accessibility and user-friendliness, offering the option to create an account linked to an email for personalized tracking or allowing users to explore the app as guests. Logging achievements is seamless, with visual representations enhancing user comprehension. For those seeking a competitive edge, participation in leaderboards allows users to gauge their progress against others.
+The application prioritizes accessibility and user-friendliness, offering the option to create an account linked to an email for personalized tracking or allowing users to explore the app as guests. Logging achievements is seamless, with visual representations enhancing user comprehension. For those seeking a competitive edge, participation in challenges against allows users to gauge their progress against others.
 
 Operating under Agile principles, the project, led by a team of 7—including the Product Owner, Project Manager, Scrum Master, and the development team, will closely collaborate with stakeholders to ensure flexibility and adaptability. This is a culminating project for the COSC 4P02 course at Brock University.
 
@@ -28,7 +28,7 @@ Addressing the growing prevalence of unhealthy lifestyles, there is an increasin
 
 ## Timeline
 
-Release Planning Document Due: January 26th
+Release Planning Document Due: January 26th (COMPLETE)
 
 Sprint 1 Deadline: February 23rd
 
