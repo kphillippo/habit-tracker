@@ -1,4 +1,4 @@
-# Habit Tracker
+# HabitConnect
 
 Introducing HabitConnect, an innovative online platform serving as a personal growth coach, designed to cultivate positive habits and monitor individual progress. It empowers users to establish and pursue personal development goals, including reminders, daily streaks, motivational quotes, and engaging group challenges, ensuring users stay motivated and on course.
 
