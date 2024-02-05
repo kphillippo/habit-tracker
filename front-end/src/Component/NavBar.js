@@ -13,7 +13,7 @@ function NavBar() {
     <div>
         <Nav className="navbar-top row-12">
             <NavItem className="row-6">
-                <span className="title">Lifetrack</span> 
+                <span className="title">HabitConnect</span> 
                 <span>your path to a better you!</span>
             </NavItem> 
             

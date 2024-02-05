@@ -1,5 +1,11 @@
+:root {
+  --navbar-bot-bg-color: #c4d3ad; 
+  --navbar-top-bg-color: #548f68; 
+}
+
+
 .navbar-bot {
-    background-color: #c4d3ad; 
+    background-color: var(--navbar-bot-bg-color);
     padding: 3px;
     color: black;
   }
@@ -34,7 +40,7 @@
   }
 
   .navbar-top {
-    background-color: #548f68; 
+    background-color: var(--navbar-top-bg-color); 
     padding: 5px;
     color: white;
   }
