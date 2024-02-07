@@ -1,7 +1,7 @@
 var config = {
     production: {
         //url to be used in link generation
-        url: '',
+        url: 'www.habitConnect.com',
         //mongodb connection settings
         database: {
             host: 'cluster.rbzvfkr.mongodb.net',
