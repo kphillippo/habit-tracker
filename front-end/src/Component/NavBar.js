@@ -8,7 +8,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 function NavBar() {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
-    const login = true;
+    const login = false;
   return (
     <div>
         <Nav className="navbar-top row-12">

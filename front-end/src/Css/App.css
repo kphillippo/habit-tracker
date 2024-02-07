@@ -1,4 +1,4 @@
 .main-container {
-    min-height: calc(100vh - 110px); 
+    min-height: calc(80vh); 
     background-color: white; 
 }
