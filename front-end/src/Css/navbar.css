@@ -1,21 +1,91 @@
-.navbar {
-    background-color: #004d99; /* Replace with your desired color */
-    padding: 10px 15px;
+:root {
+  --navbar-bot-bg-color: #c4d3ad; 
+  --navbar-top-bg-color: #548f68; 
+}
+
+
+.navbar-bot {
+    background-color: var(--navbar-bot-bg-color);
+    padding: 3px;
+    color: black;
+  }
+
+  .nav-item {
+    padding: 0%;
+    border-radius: 10px;
+    padding-right: 10px;
   }
   
-  .navbar .nav-item .nav-link {
-    color: white; /* Replace with your desired text color */
-    margin-right: 10px; /* Spacing between items */
-    transition: color 0.3s ease-in-out;
+  .navbar-bot .nav-item .nav-link {
+    color: black; 
+    padding: 3px; 
+    border-radius: 10px; 
+    transition: background-color 0.5s ease;
+    font-size: 120%;
+    font-weight: 100;
   }
   
-  .navbar .nav-item .nav-link:hover {
-    color: #ffcc00; /* Replace with your desired hover color */
+  .navbar-bot .nav-item .nav-link:hover {
     text-decoration: none;
+    border-radius: 10px; 
+    background-color: #93b27d;
   }
   
-  .navbar .nav-item .nav-link.active {
+  .navbar-bot .nav-item .nav-link.active {
     font-weight: bold;
-    color: #ffcc00; /* Replace with your desired active link color */
+    border: 0px solid; 
+    border-radius: 10px; 
+    border-color: #8ba876;
+    background-color: #93b27d;
   }
+
+  .navbar-top {
+    background-color: var(--navbar-top-bg-color); 
+    padding: 5px;
+    color: white;
+  }
+
+  .navbar-top .nav-item .nav-link {
+    color: black; 
+    margin-right: 0px; 
+    border-radius: 10px; 
+    transition: background-color 0.5s ease;
+  }
+  
+  .navbar-top .nav-item .nav-link:hover {
+    text-decoration: none;
+    border-radius: 10px; 
+    background-color: #93b27d;
+  }
+
+  .navbar-top .align-right .nav-item {
+    padding-top: 15px;
+    padding-right: 0;
+  }
+
+  .navbar-top .align-right .nav-item a {
+    padding-left: 15px;
+  }
+
+  .align-right {
+    margin-left: auto;
+  }
+
+  .sign-link {
+    text-decoration: none;
+    color: white;
+    font-size: large;
+  }
+
+  .title {
+    font-size: xx-large;
+    padding-right: 10px;
+  }
+
+  .sign-link-div {
+    padding-top: 10px;
+  }
+  
+
+
   
