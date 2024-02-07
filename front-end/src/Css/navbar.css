@@ -1,0 +1,21 @@
+.navbar {
+    background-color: #004d99; /* Replace with your desired color */
+    padding: 10px 15px;
+  }
+  
+  .navbar .nav-item .nav-link {
+    color: white; /* Replace with your desired text color */
+    margin-right: 10px; /* Spacing between items */
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .navbar .nav-item .nav-link:hover {
+    color: #ffcc00; /* Replace with your desired hover color */
+    text-decoration: none;
+  }
+  
+  .navbar .nav-item .nav-link.active {
+    font-weight: bold;
+    color: #ffcc00; /* Replace with your desired active link color */
+  }
+  
