@@ -3,13 +3,19 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongoose": "^8.0.4",
+    "nodemon": "^3.0.3",
     "react": "^18.2.0"
   },
   "name": "back-end",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+<<<<<<< Updated upstream
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+>>>>>>> Stashed changes
   },
   "author": "",
   "license": "ISC",
