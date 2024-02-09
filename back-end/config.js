@@ -6,7 +6,7 @@ var config = {
         database: {
             host: 'cluster.rbzvfkr.mongodb.net',
             port: '27017',
-            db:   'Habit_tracker'
+            db:   'Habit_Tracker'
         },
         //server details
         server: {
