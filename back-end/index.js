@@ -6,7 +6,7 @@ const config = require("./config")[env];
 //const cors = require("cors");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 8081;
-const UserModel = require('./models/User.js');
+//const UserModel = require('./models/User.js');
 
 app.use(express.json());
 
