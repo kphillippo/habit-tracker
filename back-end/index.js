@@ -11,7 +11,7 @@ const UserModel = require('./models/User.js');
 const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@"+config.database.host+"/"+config.database.db;
 
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 
 mongoose.connect(serverLink);
 
