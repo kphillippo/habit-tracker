@@ -9,9 +9,13 @@ const mongoDB = "mongodb+srv://"+process.env.USERNAME+":"+process.env.PASSWORD+"
 const PORT = process.env.PORT || 8081;
 const UserModel = require('./models/User.js');
 const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@"+config.database.host+"/"+config.database.db;
+const userRoutes = require('./routes/UserRoutes.js');
 
 app.use(express.json());
 app.use(cors());
+
+//routes
+app.use('/api/user', userRoutes)
 
 mongoose.connect(serverLink);
 
