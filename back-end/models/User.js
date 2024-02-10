@@ -25,12 +25,21 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     Streak:{
-        type: int
+        type: Number
     }
 }, { collection: 'User'});
 
 // static signup method, hashes and adds salt to password to protect it
 //http://localhost:8081/api/user/signup to try it out
+/*jason format for testing: 
+{
+  "FirstName": "Lysa",
+  "LastName": "Hannes",
+  "Email": "Test@gmail.com",
+  "Username": "CristalKitty",
+  "Password": "password"
+}
+*/
 UserSchema.statics.signup = async function(FirstName, LastName, Email, Username, Password) {
 
     const exists = await this.findOne({Username});
