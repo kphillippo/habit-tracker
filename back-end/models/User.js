@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const validator = require('validator')
 
 const UserSchema = new mongoose.Schema({
     FirstName: {
@@ -29,7 +30,7 @@ const UserSchema = new mongoose.Schema({
     }
 }, { collection: 'User'});
 
-// static signup method, hashes and adds salt to password to protect it
+// static signup method, adds salt to password, then hashed to protect it
 //http://localhost:8081/api/user/signup to try it out
 /*jason format for testing: 
 {
@@ -42,12 +43,36 @@ const UserSchema = new mongoose.Schema({
 */
 UserSchema.statics.signup = async function(FirstName, LastName, Email, Username, Password) {
 
-    const exists = await this.findOne({Username});
 
-    if(exists){
+    //validation
+    if (!FirstName || !LastName || !Email || !Username || !Password){
+        throw Error('All fields must be filled!')
+    }
+
+    if(!validator.isEmail(Email)){
+        throw Error('Email is not valid!')
+    }
+
+    if(!validator.isStrongPassword(Password)){
+        throw Error('Password must contain a capital, a lowercase, a symbol and 8 characters total!')
+    }
+
+
+    //checks if username is already in use
+    const existsUsername = await this.findOne({Username});
+
+    if(existsUsername){
         throw Error('Username already in use!')
     }
 
+    //checks if email is already in use
+    const existsEmail = await this.findOne({Email});
+
+    if(existsEmail){
+        throw Error('Email already in use!')
+    }
+
+    //encrypts password with salt, then hashes
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(Password, salt);
 
