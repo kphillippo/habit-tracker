@@ -30,9 +30,9 @@ const UserSchema = new mongoose.Schema({
     }
 }, { collection: 'User'});
 
-// static signup method, adds salt to password, then hashed to protect it
-//http://localhost:8081/api/user/signup to try it out
-/*jason format for testing: 
+/* static signup method
+http://localhost:8081/api/user/signup to try it out
+jason format for testing: 
 {
   "FirstName": "Lysa",
   "LastName": "Hannes",
@@ -80,6 +80,38 @@ UserSchema.statics.signup = async function(FirstName, LastName, Email, Username,
 
     return user;
 
+}
+
+/* static login method
+http://localhost:8081/api/user/login to try it out
+jason format for testing: 
+{
+  "Username": "CristalKitty",
+  "Password": "password"
+}
+*/
+UserSchema.statics.login = async function(Username, Password){
+
+    //checks if all fields are filled
+    if ((!Username || !Password)){
+        throw Error('All fields must be filled!')
+    }
+
+    //checks is the username is assosiated with a user
+    const user = await this.findOne({Username});
+
+    if(!user){
+        throw Error('That user does not exist!')
+    }
+
+    //chekcs if the password matches the username
+    const match = await bcrypt.compare(Password, user.Password)
+
+    if(!match){
+        throw Error('Incorrect Password')
+    }
+
+    return user
 }
 
 const UserModel = mongoose.model("User", UserSchema);
