@@ -1,0 +1,99 @@
+:root {
+  --navbar-bot-bg-color: #c4d3ad;
+  --navbar-top-bg-color: #548f68;
+}
+
+
+.navbar-bot {
+  background-color: var(--navbar-bot-bg-color);
+  padding: 3px;
+  color: black;
+  font-family: 'Kotta One', serif;
+}
+
+.nav-item {
+  padding: 0;
+  border-radius: 10px;
+  padding-right: 10px;
+}
+
+.navbar-bot .nav-item .nav-link {
+  color: black;
+  padding: 3px;
+  border-radius: 10px;
+  transition: background-color 0.5s ease;
+  font-size: 120%;
+  font-weight: 100;
+}
+
+.navbar-bot .nav-item .nav-link:hover {
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #93b27d;
+}
+
+.navbar-bot .nav-item .nav-link.active {
+  font-weight: bold;
+  border: 0 solid;
+  border-radius: 10px;
+  border-color: #8ba876;
+  background-color: #93b27d;
+}
+
+.navbar-top {
+  background-color: var(--navbar-top-bg-color);
+  padding: 5px;
+  color: white;
+  font-family: 'Kotta One', serif;
+}
+
+.navbar-top .nav-item .nav-link {
+  color: black;
+  margin-right: 0;
+  border-radius: 10px;
+  transition: background-color 0.5s ease;
+}
+
+.navbar-top .nav-item .nav-link:hover {
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #93b27d;
+}
+
+.navbar-top .align-right .nav-item {
+  padding-top: 15px;
+  padding-right: 0;
+}
+
+.navbar-top .align-right .nav-item a {
+  padding-left: 15px;
+}
+
+.align-right {
+  margin-left: auto;
+}
+
+.sign-link {
+  text-decoration: none;
+  color: white;
+  font-size: large;
+}
+
+.title {
+  font-size: xx-large;
+  padding-right: 10px;
+}
+
+.sign-link-div {
+  padding-top: 10px;
+}
+
+._nav{
+  z-index: 1;
+  width: 100vw;
+  left: 0;
+  position: absolute;
+}
+
+
+  

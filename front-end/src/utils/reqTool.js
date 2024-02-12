@@ -2,12 +2,12 @@
 const BASE_URL = ''
 
 var DEFAULT_GET_HEADS = {
-  'content-type': 'application/json'
+    'content-type': 'application/json'
 }
 
 var DEFAULT_POST_JSON_HEADS = {
-  accept: 'application/json',
-  'content-type': 'application/json'
+    accept: 'application/json',
+    'content-type': 'application/json'
 }
 
 //GET call
@@ -20,15 +20,15 @@ function getRequest(path, data, heads = {}) {
             headers: headers,
             data: data
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .catch(error => {
-            console.error('Error during GET request:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Error during GET request:', error);
+            });
     })
     return promise;
 }
@@ -43,15 +43,15 @@ function postRequestJson(path, data, heads = {}) {
             headers: headers,
             data: JSON.stringify(data)
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .catch(error => {
-            console.error('Error during GET request:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Error during GET request:', error);
+            });
     })
     return promise;
 }
@@ -69,15 +69,15 @@ function postRequestParam(path, data, heads = {}) {
             headers: headers,
             data: param
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .catch(error => {
-            console.error('Error during GET request:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Error during GET request:', error);
+            });
     })
     return promise;
 }
@@ -89,19 +89,19 @@ function postRequestParam(path, data, heads = {}) {
 function getParam(data) {
     let param = ''
     if (data) {
-      let keys = Object.keys(data)
-      let kv = []
-      keys.forEach(value => {
-        kv.push(value + '=' + data[value])
-      })
-      if (kv.length > 0) {
-        param = kv.join('&')
-      }
-      return param
+        let keys = Object.keys(data)
+        let kv = []
+        keys.forEach(value => {
+            kv.push(value + '=' + data[value])
+        })
+        if (kv.length > 0) {
+            param = kv.join('&')
+        }
+        return param
     } else {
-      return param
+        return param
     }
-  }
+}
 
 
 const Request = {

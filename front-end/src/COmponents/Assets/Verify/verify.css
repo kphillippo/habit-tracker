@@ -1,0 +1,27 @@
+.v-wrapper{
+    position: relative;
+    top: 25vh;
+    z-index: 0;
+    background: rgba(226, 233, 214, 1);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
+    border-radius: 15px;
+    padding-top: 20px;
+    width: 450px;
+    height: 400px;
+    text-align: center;
+}
+
+.flexInput{
+    width: 35px;
+    height: 20px;
+    padding: 10px;
+    margin: 0 5px 0;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+}
+
+
+
