@@ -1,7 +1,7 @@
 :root {
     --log-in-form-bg-color: #c4d3ad; 
   }
-
+/* 
   .log-in-form {
     min-height: 60vh;
     margin:auto;
@@ -37,13 +37,114 @@
     margin-bottom: 3%;
     width: 30%;
     font-size: large;
-}
+} */
 
 
 .lg-font {
     font-size: xx-large;
 }
 
-span {
-    padding-top: 2%;
+text{
+    font-family: 'Kotta One', serif;
 }
+
+.LoginForm{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+.wrapper{
+    position: relative;
+    width: 70vw;
+    height: 50vh;
+    margin: auto;
+    top: 20%;
+    background: rgba(226, 233, 214, 1);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
+    border-radius: 15px;
+    padding-top: 20px;
+}
+
+.wrapper h1{
+    font-size: 200%;
+    text-align: center;
+    color: rgb(0,0,0);
+    margin-bottom: 50px;
+    font-family: 'Kotta One', serif;
+}
+
+
+.wrapper .inputBox{
+    position: relative;
+    width: 450px;
+    height: 45px;
+    border: transparent;
+    margin: 10px 20px 15px 40px;
+    color: rgb(09,0,0);
+
+}
+
+.inputBox input{
+    position: absolute;
+    bottom: 10px;
+    left: 25%;
+    width: 40vw;
+    height: 7vh;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 7px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    padding-left: 10px;
+
+}
+
+
+
+.inputBox input::placeholder{
+    color: rgba(165, 165, 165, 1);
+    padding-left: 10px;
+    font-family: 'Kotta One', serif;
+}
+
+.inputBox .icon{
+    position: relative;
+    font-size: 16px;
+    color: rgba(165, 165, 165, 1);
+}
+
+button{
+    display: block;
+    width: 20%;
+    height: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background: rgba(146, 178, 122, 1);
+    margin: auto;
+    border: 1px solid rgba(146, 178, 122, 1);
+    font-family: 'Kotta One', serif;
+}
+.register-link{
+    text-align: center;
+    margin-top: 15px;
+    font-family: 'Kotta One', serif;
+}
+
+.remember-forget{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-family: 'Kotta One', serif;
+}
+
+.Top{
+    position: relative;
+    top: 18vh;
+    left:0;
+    margin: 10px 5px 30px;
+    font-family: 'Kotta One', serif;
+}
+
