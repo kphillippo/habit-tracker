@@ -76,11 +76,19 @@ text{
     height: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    background: rgba(146, 178, 122, 1);
+    background: #93b27d;
     margin: auto;
     border: 1px solid rgba(146, 178, 122, 1);
     font-family: 'Kotta One', serif;
+    color: white;
 }
+
+.wrapper button:hover{
+    background-color: transparent;
+    color: black;
+    border: none;
+}
+
 .register-link{
     text-align: center;
     margin-top: 15px;

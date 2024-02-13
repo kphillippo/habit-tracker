@@ -1,17 +1,16 @@
-
-import LoginForm from "./COmponents/Assets/LoginForm/LoginForm";
-import Footer from "./COmponents/Container/Footer";
-import NavBar from "./COmponents/Container/NavBar";
-import Home from "./COmponents/Assets/Home/Home.js"
-import Signup from "./COmponents/Assets/Signup/signup.js"
-import Profile from "./COmponents/Assets/Profile/profile.js"
-import Stats from "./COmponents/Assets/Stats/Stats.js"
-import Challenges from "./COmponents/Assets/Challenges/Challenges.js"
-import Help from "./COmponents/Assets/Help/Help.js"
-import Leaderboard from "./COmponents/Assets/Leaderboard/Leaderboard.js"
-import Journal from "./COmponents/Assets/Journal/Journal.js"
-import Dailies from "./COmponents/Assets/Dailies/Dailies.js"
-import Verify from "./COmponents/Assets/Verify/verify.js"
+import "./CSS/App.css"
+import LoginForm from "./Container/LoginForm/LoginForm";
+import Footer from "./Components/Footer";
+import NavBar from "./Components/NavBar";
+import Home from "./Container/Home/Home.js"
+import Signup from "./Container/Signup/signup.js"
+import Profile from "./Container/Profile/profile.js"
+import Stats from "./Container/Stats/Stats.js"
+import Challenges from "./Container/Challenges/Challenges.js"
+import Help from "./Container/Help/Help.js"
+import Leaderboard from "./Container/Leaderboard/Leaderboard.js"
+import Journal from "./Container/Journal/Journal.js"
+import Dailies from "./Container/Dailies/Dailies.js"
 
 
 import {
@@ -36,7 +35,6 @@ function App() {
                    <Route path="/profile" element={<Profile />} />
                    <Route path="/loginForm" element={<LoginForm />} />
                    <Route path="/signup" element={<Signup />} />
-                   <Route path="/verify" element={<Verify />} />
                </Routes>
                <Footer/>
            </div>
