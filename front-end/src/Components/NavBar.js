@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Nav, NavItem} from "reactstrap"
 import { NavLink } from "react-router-dom";
 import { IoMdFlame } from "react-icons/io";
-import "./navbar.css"
+import "../CSS/navbar.css"
 import { IoNotifications } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 function NavBar() {
