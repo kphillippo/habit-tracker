@@ -1,17 +1,18 @@
 
-import './Css/App.css';
+import './CSS/App.css';
 import React, { useState, useEffect } from "react";
-import Home from "./Containers/Home.js"
-import NavBar from "./Component/NavBar.js"
-import Footer from "./Component/Footer.js"
-import Signup from "./Containers/Signup/signup.js"
-import Profile from "./Containers/Profile/profile.js"
-import Stats from "./Containers/Stats/Stats.js"
-import Challenges from "./Containers/Challenges/Challenges.js"
-import Help from "./Containers/Help/Help.js"
-import Leaderboard from "./Containers/Leaderboard/Leaderboard.js"
-import Journal from "./Containers/Journal/Journal.js"
-import Dailies from "./Containers/Dailies/Dailies.js"
+import Home from "./Container/Home/Home"
+import LoginForm from "./Container/LoginForm/LoginForm"
+import NavBar from "./Components/NavBar"
+import Footer from "./Components/Footer.js"
+import Signup from "./Container/Signup/signup.js"
+import Profile from "./Container/Profile/profile.js"
+import Stats from "./Container/Stats/Stats.js"
+import Challenges from "./Container/Challenges/Challenges.js"
+import Help from "./Container/Help/Help.js"
+import Leaderboard from "./Container/Leaderboard/Leaderboard.js"
+import Journal from "./Container/Journal/Journal.js"
+import Dailies from "./Container/Dailies/Dailies.js"
 import {
   BrowserRouter as Router,
   Route,
