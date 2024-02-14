@@ -1,4 +1,4 @@
-import "./CSS/App.css"
+import ".CSS/App.css"
 import LoginForm from "./Container/LoginForm/LoginForm";
 import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
