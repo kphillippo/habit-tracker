@@ -1,9 +1,12 @@
 import React from "react";
 import { Container } from "reactstrap";
-import "./Home.css"
+
 function Home(){
+    
     return(
-        <div className="main-container">Home test</div>
+        <div className="main-container">
+            this is home page
+        </div>
     );
 }
 export default Home;

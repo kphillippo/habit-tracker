@@ -1,5 +1,6 @@
 import React from "react";
-import "../CSS/footer.css"
+import {Container, Row, Col} from "reactstrap";
+import "../Css/footer.css"
 
 function Footer(){
     return(
