@@ -3,11 +3,10 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #c4d3ad; /* Example background color */
+    background-color: #333; /* Example background color */
     color: white; /* Example text color */
     text-align: center;
     padding: 10px 0; /* Example padding */
-    height: .5%;
-
+    height: 0%;
   }
   

@@ -1,0 +1,58 @@
+:root {
+    --light-green-color: #c4d3ad; 
+    --lighter-green-color: #E2E9D6; 
+    --dark-green-color: #92B27A; 
+}
+/* Applies to all windows on the home page*/
+#windowGeneral{
+    background-color: var(--lighter-green-color);
+    border: 15px solid var(--dark-green-color);
+    border-radius: 10px;
+    font-size: 120%;
+    box-shadow: 7px 7px 7px #858a84;
+    transition: box-shadow 0.5s ease;
+}
+#windowGeneral:hover {
+    box-shadow: 12px 12px 12px #a5a8a5;
+    margin-top: 2.35%;
+}
+/* Specifics for different windows  */
+.window{
+    width: 25%;
+    margin: 2.5%;
+}
+
+.windowSecond{
+    width: 20%;
+    margin-left: 20%;
+    margin-top: 2.5%;
+}
+
+.windowStats{
+    width: 35%;
+    margin: 2.5%;
+}
+
+.StreakNumber{
+    font-size: 450%;
+}
+
+.windowLine{
+    display: inline-flex;
+    width: 100%;
+}
+@media (max-width: 750px) {
+    .windowLine {
+        display:list-item;
+    }
+    #windowGeneral{
+        width: 90%;
+    }
+    .windowSecond{
+        margin-left: 2.5%;
+    }
+}
+
+.message{
+    margin-left: 18px;
+}
