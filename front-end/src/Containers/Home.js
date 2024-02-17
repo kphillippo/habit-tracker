@@ -7,9 +7,12 @@ import { GrAchievement } from "react-icons/gr";
 import { GoGoal } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function Home(props) {
+    console.log(props)
+    const userStatus = props.data.status
+    const streakActive = true
+    const currentStreak = props.data.data.user.Streak
     let navigate = useNavigate();//For links on windows to different pages
-    let userStatus = true;//Read status
 
     //Generates a message to welcome user or guest 
     //Returns html with message
@@ -45,8 +48,6 @@ function Home() {
     //Returns html with window
     function generateStreakWindow() {
         if (userStatus) {
-            let currentStreak = 30;
-            let streakActive = false;
             let flameColor = "#4e5445";
             let message = <>You've been consistent for {currentStreak} days!<br></br>Extend your streak now!</>
             if (streakActive) {

@@ -29,7 +29,7 @@ function App() {
       <div className="App">
         <NavBar />
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<Home data={testData}/>} />
           <Route path="/dailies" element={<Dailies />} />
           <Route path="/journal" element={<Journal />} />
           <Route path="/challenges" element={<Challenges />} />
