@@ -5,19 +5,21 @@ import { IoMdFlame } from "react-icons/io";
 import "../Css/navbar.css"
 import { IoNotifications } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
-function NavBar() {
+function NavBar(props) {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
-    const login = false;
+    const login = (props.data.status === 'success');
+    const notificaitons = 10;
+    const streak = props.data.data.user.Streak;
   return (
     <div>
         <Nav className="navbar-top row-12">
             <NavItem className="row-6">
-                <span className="title">HabitConnect</span> 
+                <span className="title">HabbitConnect</span> 
                 <span>your path to a better you!</span>
             </NavItem> 
             
-            <NavItem className="align-right">
+            <div className="align-right">
             {login === true && 
                     <NavItem>
                         Welcome User!
@@ -33,8 +35,7 @@ function NavBar() {
                     <div className="sign-link-div">
                     <NavLink
                         className= "sign-link"
-                        activeClassName = "active"
-                        active
+                        activeclassname="active"
                         to="/signin"
                         >
                         Signin
@@ -42,8 +43,7 @@ function NavBar() {
                     <span>/</span>
                     <NavLink
                     className= "sign-link"
-                    activeClassName = "active"
-                    active
+                    activeclassname="active"
                     to="/signup"
                     >
                     Signup
@@ -51,15 +51,14 @@ function NavBar() {
                     </div>
 
                 }     
-            </NavItem>      
+            </div>      
         </Nav>
         <Nav className="navbar-bot row-12">
 
             <NavItem>
                 <NavLink
                     className = "nav-link"
-                    activeClassName = "active"
-                    active
+                    activeclassname="active"
                     to="/home"
                 >
                 Home
@@ -69,7 +68,7 @@ function NavBar() {
             <NavItem>
                 <NavLink 
                 className = "nav-link"
-                activeClassName = "active"
+                activeclassname="active"
                 to="/dailies" 
                 >
                 Dailies
@@ -79,6 +78,7 @@ function NavBar() {
             <NavItem>
                 <NavLink
                 className = "nav-link"
+                activeclassname="active"
                 to="/journal"
                 >
                 Journal
@@ -89,6 +89,7 @@ function NavBar() {
                 <NavLink
                 className = "nav-link"
                 to="/challenges"
+                activeclassname="active"
                 >
                 Challenges
                 </NavLink>
@@ -97,6 +98,7 @@ function NavBar() {
             <NavItem>
                 <NavLink
                 className = "nav-link"
+                activeclassname="active"
                 to="/leaderboard"
                 >
                 My Leaderboard
@@ -106,6 +108,7 @@ function NavBar() {
             <NavItem>
                 <NavLink
                 className = "nav-link"
+                activeclassname="active"
                 to="/stats"
                 >
                 My Stats
@@ -115,6 +118,7 @@ function NavBar() {
             <NavItem>
                 <NavLink
                 className = "nav-link"
+                activeclassname="active"
                 to="/help"
                 >
                 Help
@@ -123,12 +127,12 @@ function NavBar() {
             
             <NavItem className="align-right">
                 <IoMdFlame size={30} color="#e57028"></IoMdFlame>
-                <span>30</span>
+                <span>{streak}</span>
             </NavItem>
             
             <NavItem>
                 <IoNotifications size={30} color="#4e5445"></IoNotifications>
-                <span>0</span>
+                <span>{notificaitons}</span>
             </NavItem>
 
 

@@ -8,10 +8,11 @@ import { GoGoal } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 
 function Home(props) {
-    console.log(props)
-    const userStatus = props.data.status
-    const streakActive = true
-    const currentStreak = props.data.data.user.Streak
+    console.log("Home page props:");
+    console.log(props);
+    const userStatus = props.data.status;
+    const streakActive = true;
+    const currentStreak = props.data.data.user.Streak;
     let navigate = useNavigate();//For links on windows to different pages
 
     //Generates a message to welcome user or guest 
