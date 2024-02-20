@@ -16,6 +16,12 @@ const HabitSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    /*
+    * PrivacyType is an enum type
+    * 0 - Public
+    * 1 - Friends Only
+    * 2 - Private
+    * */
     PrivacyType: {
         type: Number,
         required: true
