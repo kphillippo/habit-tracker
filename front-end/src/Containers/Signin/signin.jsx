@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import './LoginForm.css';
+import './signin.css';
 import { FaRegUserCircle, FaLock } from "react-icons/fa";
 
-const LoginForm = () =>{
+const Signin = () =>{
 
     //problems: when the window size is small, the layout is messed up
     const [username, setUsername] = useState('');
@@ -59,4 +59,4 @@ const LoginForm = () =>{
     );
 };
 
-export default LoginForm;
+export default Signin;
