@@ -27,7 +27,12 @@ const UserSchema = new mongoose.Schema({
     },
     Streak:{
         type: Number
+    },
+    PrivacySettings:{
+        type: mongoose.ObjectId,
+        required: true
     }
+    
 }, { collection: 'User'});
 
 /* static signup method
@@ -77,6 +82,7 @@ UserSchema.statics.signup = async function(FirstName, LastName, Email, Username,
     const hash = await bcrypt.hash(Password, salt);
 
     const user = await this.create({FirstName, LastName, Email, Username, Password: hash});
+
 
     return user;
 

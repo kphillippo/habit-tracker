@@ -28,9 +28,7 @@ const HabitSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-}, {
-
-});
+}, { collection: 'Habit'});
 
 const HabitModel = mongoose.model("Habit", HabitSchema);
 module.exports = HabitModel;

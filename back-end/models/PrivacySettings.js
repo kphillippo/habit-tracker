@@ -8,5 +8,9 @@ const UserSchema = new mongoose.Schema({
     ProfilePublic: {
         type: Bollean,
         required: true
+    },
+    User:{
+        type: mongoose.ObjectId,
+        required: true
     }
 }, { collection: 'PrivacySettings'});
