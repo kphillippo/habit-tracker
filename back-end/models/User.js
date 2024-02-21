@@ -44,11 +44,7 @@ jason format for testing:
 */
 UserSchema.statics.signup = async function(FirstName, LastName, Email, Username, Password) {
 
-    console.log(FirstName)
-    console.log(LastName)
-    console.log(EmailName)
-    console.log(Username)
-    console.log(Password)
+
     //validation
     if (!FirstName || !LastName || !Email || !Username || !Password){
         throw Error('All fields must be filled!')
