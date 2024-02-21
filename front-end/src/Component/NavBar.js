@@ -5,7 +5,8 @@ import { IoMdFlame } from "react-icons/io";
 import "../Css/navbar.css"
 import { IoNotifications } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
-function NavBar() {
+
+function NavBar(props) {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
     const login = false;
