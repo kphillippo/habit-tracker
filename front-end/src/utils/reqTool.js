@@ -1,5 +1,5 @@
 //base url of API
-const BASE_URL = ''
+const BASE_URL = 'http://localhost:8081/'
 
 var DEFAULT_GET_HEADS = {
   'content-type': 'application/json'
@@ -11,26 +11,30 @@ var DEFAULT_POST_JSON_HEADS = {
 }
 
 //GET call
-function getRequest(path, data, heads = {}) {
+function getRequest(path, queryParams = {}, heads = {}) {
     let headers = Object.assign(DEFAULT_GET_HEADS, heads);
+    let queryString = new URLSearchParams(queryParams).toString();
     let url = BASE_URL + path;
-    let promise = new Promise((res, req) => {
-        fetch(url, {
-            method: 'GET',
-            headers: headers,
-            data: data
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .catch(error => {
-            console.error('Error during GET request:', error);
-        });
+
+    return fetch(url, {
+        method: 'GET',
+        headers: headers
     })
-    return promise;
+    .then(response => {
+        // console.log("GET call");
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json(); 
+    })
+    .then(data => {
+        // console.log(data);
+        return data; 
+    })
+    .catch(error => {
+        console.error('Error during GET request:', error);
+        throw error; 
+    });
 }
 
 //POST call with json as input data format
