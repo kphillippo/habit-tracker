@@ -1,11 +1,11 @@
 {
-  "status": "success",
-  "data": {
-    "user": {
-      "user_name": "testuser",
-      "nickname": "Tester",
-      "email": "testuser@example.com"
+    "status": "success",
+    "data": {
+      "user": {
+        "user_name": "testuser",
+        "nickname": "Tester",
+        "email": "testuser@example.com"
+      }
     }
   }
-}
-
+  

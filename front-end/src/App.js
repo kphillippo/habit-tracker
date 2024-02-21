@@ -38,7 +38,7 @@ function App() {
           <Route path="/stats" element={<Stats />} />
           <Route path="/help" element={<Help />} />
           <Route path="/profile" element={<Profile />} />
-            <Route path="/signin" element={<Signin />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
         <Footer />
@@ -46,6 +46,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;

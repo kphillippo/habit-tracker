@@ -9,7 +9,8 @@ function NavBar() {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
     const login = false;
-    return (
+
+  return (
         <div className={"_nav"}>
             <Nav className="navbar-top row-12">
                 <NavItem className="row-6">

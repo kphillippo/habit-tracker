@@ -1,6 +1,7 @@
 :root {
   --navbar-bot-bg-color: #c4d3ad;
   --navbar-top-bg-color: #548f68;
+
 }
 
 
@@ -92,5 +93,4 @@
   left: 0;
   position: absolute;
 }
-
 
