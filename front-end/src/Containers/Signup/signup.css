@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Kotta+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Riot&display=swap');
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0
+}
+
+.text{
+    font-family: 'Kotta One', serif;
+}
+
+.SignUp{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+.SignUp .wrapper{
+    margin: auto;
+    height: 50vh;
+    padding-top: 40px;
+}
+
+.SignUp button{
+    font-size: 20px;
+    color: white;
+    width: 30%;
+}
+
+.signup-Top{
+    position: relative;
+    margin-left: auto;
+    top: 18vh;
+    text-align: center;
+    font-family: 'Kotta One', serif;
+}
+
+.v-wrapper{
+    position: relative;
+    top: 25vh;
+    z-index: 0;
+    background: rgba(226, 233, 214, 1);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
+    border-radius: 15px;
+    padding: 20px 0 0 30px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    width: 500px;
+    height: 400px;
+    text-align: left;
+}
+
+.v-wrapper p h2{
+    font-family: 'Kotta One', serif;
+    color: rgba(0,0,0,0.2);
+}
+
+.v-wrapper input{
+    width: 45px;
+    height: 45px;
+    padding: 10px;
+    margin: 0 5px 0;
+    color: red;
+    border: 0 transparent;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 3px 5px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.v-wrapper input:focus{
+    border: 1px solid orange;
+}
+.v-wrapper .flex-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.v-wrapper button{
+    background-color: #93b27d;
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+    padding: 7px 15px 7px 15px;
+    font-family: 'Kotta One', serif;
+    font-size: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+
+
+
+
+
+
