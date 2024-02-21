@@ -27,10 +27,6 @@ const UserSchema = new mongoose.Schema({
     },
     Streak:{
         type: Number
-    },
-    PrivacySettings:{
-        type: mongoose.ObjectId,
-        required: true
     }
     
 }, { collection: 'User'});
