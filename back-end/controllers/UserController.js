@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 //creates a token using the sercret variable from our .env file
 const createToken = (_id) => {
-    return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
+    return jwt.sign({_id}, process.env.SECRET_KEY, {expiresIn: '3d'})
 }
 
 //login user
@@ -25,6 +25,7 @@ const {Username, Email, Password} = req.body
 
 //signup user
 const signupUser = async (req, res) => {
+    console.log(req.body)
     const {FirstName, LastName, Email, Username, Password} = req.body
 
     try{

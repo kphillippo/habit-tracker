@@ -13,6 +13,9 @@ import Leaderboard from "./Containers/Leaderboard/Leaderboard.js"
 import Journal from "./Containers/Journal/Journal.js"
 import Dailies from "./Containers/Dailies/Dailies.js"
 import Request from './utils/reqTool.js';
+import {configureStore} from "./store/index.js";
+import { setAuthorizationToken, setCurrentUser } from './store/actions/auth';
+import {jwtDecode} from 'jwt-decode';
 import {
   BrowserRouter as Router,
   Route,
@@ -25,28 +28,18 @@ import testData from "./mock/user.json"
 
 function App() {
 
-  const [userInfo, setUserInfo] = useState(null);
-  let apiTest
-  console.log("app.js:")
+  const store = configureStore();
 
-  useEffect(() => {
-    if(userInfo == null){
-      getUserInfo()
+  if(localStorage.jwtToken){
+    setAuthorizationToken(localStorage.jwtToken);
+    try{
+      store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
+    }catch(e){
+      store.dispatch(setCurrentUser({}));
     }
-    console.log(userInfo)
-  })
-
-  function getUserInfo(){
-    Request.getRequest("getUser")
-    .then(data => {
-      setUserInfo(data);
-    })
-    .catch(error => {
-      console.error('Request failed:', error);
-    });
   }
-  
 
+  const [userInfo, setUserInfo] = useState(null);
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
