@@ -13,7 +13,7 @@ import Help from "./Containers/Help/Help.js"
 import Leaderboard from "./Containers/Leaderboard/Leaderboard.js"
 import Journal from "./Containers/Journal/Journal.js"
 import Dailies from "./Containers/Dailies/Dailies.js"
-import Request from './utils/reqTool.js';
+import {apiRequest }from './utils/reqTool.js';
 import {
   BrowserRouter as Router,
   Route,
@@ -25,36 +25,38 @@ import {
 import testData from "./mock/user.json"
 
 function App() {
+  const [isUpdated, setisUpdated] = useState(false);
+  const [userName, setUserName] = useState(null);
+  const [userToken, setUserToken] = useState(null);
+  const [userStreak, setUserStreak] = useState(0);
 
-  const [userInfo, setUserInfo] = useState(null);
-  let apiTest
-  console.log("app.js:")
+  let userInfo = {
+    userName: userName,
+    userToken: userToken,
+    userStreak: userStreak
+  }
+
 
   useEffect(() => {
-    if(userInfo == null){
-      getUserInfo()
-    }
-    console.log(userInfo)
-  })
-
-  function getUserInfo(){
-    Request.getRequest("getUser")
-    .then(data => {
-      setUserInfo(data);
-    })
-    .catch(error => {
-      console.error('Request failed:', error);
-    });
-  }
-  
+      setUserToken(sessionStorage.getItem("userToken"));
+      setUserStreak(sessionStorage.getItem("userStreak"));
+      setUserName(sessionStorage.getItem("userName"));
+      
+      userInfo = {
+        userName: userName,
+        userToken: userToken,
+        userStreak: userStreak
+      }
+      console.log(userInfo)
+  }, [isUpdated])
 
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
-        <NavBar data={testData}/>
+        <NavBar user={userInfo}/>
         <Routes>
-          <Route path="/home" element={<Home data={testData}/>} />
+          <Route path="/home" element={<Home data={userInfo}/>} />
           <Route path="/dailies" element={<Dailies />} />
           <Route path="/journal" element={<Journal />} />
           <Route path="/challenges" element={<Challenges />} />
@@ -62,7 +64,7 @@ function App() {
           <Route path="/stats" element={<Stats />} />
           <Route path="/help" element={<Help />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/signin" element={<Signin />} />
+          <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)}/>} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Navigate replace to="/home" />} />
         </Routes>

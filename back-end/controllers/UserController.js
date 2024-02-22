@@ -25,6 +25,7 @@ const {Username, Email, Password} = req.body
 
 //signup user
 const signupUser = async (req, res) => {
+    console.log(req)
     const {FirstName, LastName, Email, Username, Password} = req.body
 
     try{
@@ -33,7 +34,7 @@ const signupUser = async (req, res) => {
 
         //create a token
         const token = createToken(user._id)
-
+        
         res.status(200).json({Username, token})
     }catch(error){
         res.status(400).json({error: error.message})

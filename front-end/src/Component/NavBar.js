@@ -9,20 +9,22 @@ import { FaRegUserCircle } from "react-icons/fa";
 function NavBar(props) {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
-    const login = false;
+    const userInfo = props.user;
+    const isLogin = userInfo.userToken;
+    console.log(props);
 
   return (
         <div className={"_nav"}>
             <Nav className="navbar-top row-12">
                 <NavItem className="row-6">
-                    <span className="title">HabbitConnect</span>
+                    <span className="title">HabitConnect</span>
                     <span>your path to a better you!</span>
                 </NavItem>
 
                 <NavItem className="align-right">
-                    {login === true &&
+                    {isLogin &&
                         <NavItem>
-                            Welcome User!
+                            Welcome back {userInfo.userName}!
                             <NavLink to="/profile">
                                 <FaRegUserCircle size={30} color="#292d32"/>
                             </NavLink>
@@ -31,7 +33,7 @@ function NavBar(props) {
 
                     }
 
-                    {login === false &&
+                    {!isLogin &&
                         <div className="sign-link-div">
                             <NavLink
                                 className= "sign-link"
@@ -126,7 +128,7 @@ function NavBar(props) {
 
                 <NavItem className="align-right">
                     <IoMdFlame size={30} color="#e57028"></IoMdFlame>
-                    <span>30</span>
+                    <span>{userInfo.Streak && userInfo.Streak}{!userInfo.Streak && 0}</span>
                 </NavItem>
 
                 <NavItem>

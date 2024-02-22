@@ -10,9 +10,12 @@ import { useNavigate } from "react-router-dom";
 function Home(props) {
     console.log("Home page props:");
     console.log(props);
-    const userStatus = props.data.status;
+    const userStatus = props.data.userToken;
     const streakActive = true;
-    const currentStreak = props.data.data.user.Streak;
+    let currentStreak = props.data.userStreak;
+    if(currentStreak == "undefined"){
+        currentStreak = 0;
+    }
     let navigate = useNavigate();//For links on windows to different pages
 
     //Generates a message to welcome user or guest 
