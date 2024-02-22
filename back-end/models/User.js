@@ -26,7 +26,8 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     Streak:{
-        type: Number
+        type: Number,
+        default: 0
     }
     
 }, { collection: 'User'});
