@@ -25,17 +25,16 @@ const {Username, Email, Password} = req.body
 
 //signup user
 const signupUser = async (req, res) => {
-    console.log(req)
-    const {FirstName, LastName, Email, Username, Password} = req.body
+    const {FirstName, LastName, Email, Username, Password, Streak} = req.body
 
     try{
         //trys to sign up user
-        const user = await User.signup(FirstName, LastName, Email, Username, Password)
+        const user = await User.signup(FirstName, LastName, Email, Username, Password, Streak, Email)
 
         //create a token
         const token = createToken(user._id)
-        
-        res.status(200).json({Username, token})
+
+        res.status(200).json({Username, token, FirstName, LastName, Streak, Email})
     }catch(error){
         res.status(400).json({error: error.message})
     }
