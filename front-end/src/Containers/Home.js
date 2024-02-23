@@ -24,10 +24,10 @@ function Home(props) {
         let message = <></>;
         if (userStatus) {
             //Greet user
-            message = <><div className="lg-font"> Welcome back, User! </div> </>;
+            message = <><div className="lg-font"> Welcome back, {props.data.userName}! </div> </>;
         } else {
             //Welcome guest
-            message = <><div className="lg-font"> Welcome to HabbitConnect! </div> </>;
+            message = <><div className="lg-font"> Welcome to HabitConnect! </div> </>;
         }
         return message;
     }
