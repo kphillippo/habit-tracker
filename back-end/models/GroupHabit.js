@@ -29,7 +29,7 @@ const GroupHabitSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-}, { collection: 'Habit'});
+}, { collection: 'GroupHabit'});
 
 const GroupHabitModel = mongoose.model("GroupHabit", GroupHabitSchema);
 module.exports = GroupHabitModel;
