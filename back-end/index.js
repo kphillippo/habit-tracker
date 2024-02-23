@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 const PORT = process.env.PORT || 8081;
 const UserModel = require('./models/User.js');
 const HabitModel = require('./models/Habit.js')
-//const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@"+config.database.host+"/"+config.database.db;
-const serverLink = "mongodb+srv://lysa200125:AppYay@cluster.rbzvfkr.mongodb.net/Habit_Tracker"
+const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@"+config.database.host+"/"+config.database.db;
+
 const userRoutes = require('./routes/UserRoutes.js');
 const habitRoutes = require('./routes/HabitRoutes.js');
 

@@ -10,7 +10,7 @@ describe('insert', () => {
   let db;
 
   beforeAll(async () => {
-    connection = await MongoClient.connect("mongodb+srv://lysa200125:AppYay@cluster.rbzvfkr.mongodb.net/", {
+    connection = await MongoClient.connect(serverLink, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
