@@ -43,14 +43,6 @@ app.post("/createUser", async(req,res) =>{
     res.json(user);
 });
 
-//creates a new Habit
-app.post("/createHabit", async(req,res)=>{
-    const habit = req.body;
-    const newHabit = new HabitModel(habit);
-    await newHabit.save();
-    res.json(habit);
-});
-
 //listening function
 app.listen(PORT,function(){
     console.log(`Sever is listening at port ${PORT}`);
