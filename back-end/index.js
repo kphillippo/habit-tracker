@@ -23,26 +23,6 @@ app.use('/api/habit', habitRoutes)
 
 mongoose.connect(serverLink);
 
-//returns list of users
-app.get("/getUser", async(req, res) =>{
-    UserModel.find({})
-    .then(result => {
-      res.json(result);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-//creates a user
-app.post("/createUser", async(req,res) =>{
-    const user = req.body;
-    const newUser = new UserModel(user);
-    await newUser.save();
-
-    res.json(user);
-});
-
 //listening function
 app.listen(PORT,function(){
     console.log(`Sever is listening at port ${PORT}`);
