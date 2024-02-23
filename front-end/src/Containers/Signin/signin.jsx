@@ -23,13 +23,13 @@ const Signin = ({ isSignedin }) =>{
                 sessionStorage.setItem("userToken", token);
                 sessionStorage.setItem("userName", user.Username);
                 sessionStorage.setItem("userStreak", user.Streak);
+                isSignedin()
                 navigate('/home');
             })
             .catch(err => {
                 console.log(err);
             })
         console.log('Login with:', username, password);
-        isSignedin()
     };
 
     return (

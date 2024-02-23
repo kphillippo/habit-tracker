@@ -30,33 +30,24 @@ function App() {
   const [userToken, setUserToken] = useState(null);
   const [userStreak, setUserStreak] = useState(0);
 
-  let userInfo = {
-    userName: userName,
-    userToken: userToken,
-    userStreak: userStreak
-  }
-
 
   useEffect(() => {
-      setUserToken(sessionStorage.getItem("userToken"));
-      setUserStreak(sessionStorage.getItem("userStreak"));
-      setUserName(sessionStorage.getItem("userName"));
-      
-      userInfo = {
-        userName: userName,
-        userToken: userToken,
-        userStreak: userStreak
+      if(sessionStorage.getItem("userToken")!="undefined"){
+        setUserToken(sessionStorage.getItem("userToken"));
+        setUserStreak(sessionStorage.getItem("userStreak"));
+        setUserName(sessionStorage.getItem("userName"));
       }
-      console.log(userInfo)
+
   }, [isUpdated])
+
 
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
-        <NavBar user={userInfo}/>
+        <NavBar data={{userName, userToken, userStreak}}/>
         <Routes>
-          <Route path="/home" element={<Home data={userInfo}/>} />
+          <Route path="/home" element={<Home data={{userName, userToken, userStreak}}/>} />
           <Route path="/dailies" element={<Dailies />} />
           <Route path="/journal" element={<Journal />} />
           <Route path="/challenges" element={<Challenges />} />

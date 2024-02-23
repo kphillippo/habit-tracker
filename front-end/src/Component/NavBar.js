@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Nav, NavItem} from "reactstrap"
 import { NavLink } from "react-router-dom";
 import { IoMdFlame } from "react-icons/io";
@@ -9,7 +9,8 @@ import { FaRegUserCircle } from "react-icons/fa";
 function NavBar(props) {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
-    const userInfo = props.user;
+    
+    const userInfo = props.data;
     const isLogin = userInfo.userToken;
     console.log(props);
 
