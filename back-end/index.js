@@ -5,11 +5,12 @@ const env = process.env.NODE_ENV || "development";
 const config = require("./config")[env];
 const cors = require("cors");
 const mongoose = require('mongoose');
-const mongoDB = "mongodb+srv://"+process.env.USERNAME+":"+process.env.PASSWORD+"@"+config.database.host+":"+config.database.port+"/"+config.database.db;
+//const mongoDB = "mongodb+srv://"+process.env.USERNAME+":"+process.env.PASSWORD+"@"+config.database.host+":"+config.database.port+"/"+config.database.db;
 const PORT = process.env.PORT || 8081;
 const UserModel = require('./models/User.js');
 const HabitModel = require('./models/Habit.js')
-const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@"+config.database.host+"/"+config.database.db;
+//const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@"+config.database.host+"/"+config.database.db;
+const serverLink = "mongodb+srv://lysa200125:AppYay@cluster.rbzvfkr.mongodb.net/Habit_Tracker"
 const userRoutes = require('./routes/UserRoutes.js');
 const habitRoutes = require('./routes/HabitRoutes.js');
 
