@@ -6,6 +6,6 @@ const router = express.Router()
 
 router.post('/createHabit', createHabit)
 
-router.post('/getHabits', getHabits)
+router.get('/getHabits', getHabits)
 
 module.exports = router
