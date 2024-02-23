@@ -2,10 +2,13 @@
     "status": "success",
     "data": {
       "user": {
-        "user_name": "testuser",
-        "nickname": "Tester",
-        "email": "testuser@example.com"
+        "FirstName": "James",
+        "LastName": "Miller",
+        "Email": "test@testmail.com",
+        "Streak": "10",
+        "Username": "testuser",
+        "Password": "test123"
       }
     }
-  }
-  
+}
+

@@ -91,6 +91,6 @@
   z-index: 1;
   width: 100vw;
   left: 0;
-  position: absolute;
+  position: relative;
 }
 
