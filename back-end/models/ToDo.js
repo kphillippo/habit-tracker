@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    User:{
+    Owner:{
         type: mongoose.ObjectId,
         required: true
     },
