@@ -65,15 +65,15 @@ const Signin = ({ isSignedin }) =>{
                     </div>
 
                     <button type={"submit"}>Login</button>
-
-                    <div className={'register-link'}>
-                        <p>Don't have an account? <a href={"#"}>Sign up </a></p>
-                    </div>
-
                     <div className='remember-forget'>
-                        <label><input type="checkbox"/>Remember Me</label>
                         <a href="#"> Forgot password</a>
                     </div>
+
+                    <div className={'register-link'}>
+                        <p>Don't have an account? <a href={"/signup"}>Sign up </a></p>
+                    </div>
+
+
                 </form>
             </div>
         </div>
