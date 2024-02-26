@@ -1,4 +1,4 @@
-// First, mock the axios module
+// mock the axios module
 jest.mock('axios', () => {
   return {
     get: jest.fn(),
@@ -6,7 +6,7 @@ jest.mock('axios', () => {
   };
 });
 
-// Import axios here to configure mock implementations
+// Import axios to configure mock implementations
 const axios = require('axios');
 import { apiRequest } from './reqTool.js';
 
@@ -24,7 +24,7 @@ describe('apiRequest', () => {
 
     await expect(apiRequest('GET', 'test', {})).resolves.toEqual(data);
 
-    // Optionally, check if axios.get was called correctly
+    // check if axios.get was called correctly
     expect(axios.get).toHaveBeenCalledWith('http://localhost:8081/api/test', {});
   });
 
@@ -36,7 +36,7 @@ describe('apiRequest', () => {
 
     await expect(apiRequest('POST', 'test', postData)).resolves.toEqual(responseData);
 
-    // Optionally, check if axios.post was called correctly
+    // check if axios.post was called correctly
     expect(axios.post).toHaveBeenCalledWith('http://localhost:8081/api/test', postData);
   });
 
@@ -47,7 +47,7 @@ describe('apiRequest', () => {
 
     await expect(apiRequest('GET', 'error', {})).rejects.toThrow(errorMessage);
 
-    // Optionally, check if axios.get was called correctly
+    // check if axios.get was called correctly
     expect(axios.get).toHaveBeenCalledWith('http://localhost:8081/api/error', {});
   });
 });
