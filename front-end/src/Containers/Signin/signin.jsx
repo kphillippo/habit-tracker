@@ -28,7 +28,9 @@ const Signin = ({ isSignedin }) =>{
             })
             .catch(err => {
                 console.log(err);
+                window.alert(err.error);
             })
+            
         console.log('Login with:', username, password);
     };
 

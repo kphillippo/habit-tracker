@@ -37,6 +37,7 @@ const Signup = ({isSignedin}) => {
             })
             .catch(err => {
                 console.log(err);
+                window.alert(err.error);
             })
         console.log('signed up with:', Fname, Lname, email, username, password);
         
