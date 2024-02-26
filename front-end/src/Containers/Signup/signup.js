@@ -13,12 +13,32 @@ function Signup(){
     const [email, setEmail] = useState('');
     const [Fname, setFname] = useState('');
     const [Lname, setLname] = useState('');
-    const [usernamee, setUsername] = useState('');
+    const [username, setUsername] = useState('');
     const [password , setPassword] = useState('');
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log('signed up with:', Fname, Lname, email, usernamee, password);
+        let data = {
+            "Username": username,
+            "Password": password,
+            "Email": email,
+            "FirstName": Fname,
+            "LastName": Lname,
+            "Streak": 0
+          }
+        apiRequest("POST", "user/signup", data)
+            .then(({token, ...user}) => {
+                console.log(user);
+                sessionStorage.setItem("userToken", token);
+                sessionStorage.setItem("userName", user.Username);
+                sessionStorage.setItem("userStreak", user.Streak);
+                isSignedin()
+                navigate('/home');
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        console.log('signed up with:', Fname, Lname, email, username, password);
         
     };
 
@@ -28,7 +48,7 @@ function Signup(){
                 <h1>Create Your Account!</h1>
             </div>
             <div className={'wrapper'}>
-                <form action={""}>
+                <form action={handleSubmit()}>
                     <div className={'inputBox'}>
                         <FaRegUserCircle className="icon"/> First Name: <input type={"text"}
                                                                                placeholder={' First Name'}
@@ -60,7 +80,7 @@ function Signup(){
                         <FaRegUserCircle className="icon"/> Username: <input type={"text"}
                                                                              placeholder={'  Username'}
                                                                              name={"usernamee"}
-                                                                             value={usernamee}
+                                                                             value={username}
                                                                              onChange={e => setUsername(e.target.value)}
                                                                              required/>
                     </div>
@@ -73,8 +93,8 @@ function Signup(){
                                                                     onChange={e => setPassword(e.target.value)}
                                                                     required/>
                     </div>
-
-                    <Popup
+                    <button className={"btn"} type={"submit"}>Create Account</button>
+                    {/* <Popup
                         className={"popUp"}
                         trigger={<button className={"btn"} type={"submit"}>Create Account</button>}
                         position={"top center"}  offsetY={150}
@@ -113,7 +133,7 @@ function Signup(){
                             </form>
 
                         </div>
-                    </Popup>
+                    </Popup> */}
 
 
                 </form>
