@@ -4,6 +4,7 @@ import "./signup.css";
 import {FaLock, FaRegUserCircle} from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import {NavLink} from "react-router-dom";
+import {apiRequest} from "../../utils/reqTool"
 
 
 
@@ -13,12 +14,12 @@ function Signup(){
     const [Fname, setFname] = useState('');
     const [Lname, setLname] = useState('');
     const [usernamee, setUsername] = useState('');
-    const [passwordd , setPassword] = useState('');
+    const [password , setPassword] = useState('');
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log('signed up with:', Fname, Lname, email, usernamee, passwordd);
-
+        console.log('signed up with:', Fname, Lname, email, usernamee, password);
+        
     };
 
     return (
@@ -67,8 +68,8 @@ function Signup(){
                     <div className={'inputBox'}>
                         <FaLock className="icon"/> Password: <input type={"password"}
                                                                     placeholder={'  Password'}
-                                                                    name={"passwordd"}
-                                                                    value={passwordd}
+                                                                    name={"password"}
+                                                                    value={password}
                                                                     onChange={e => setPassword(e.target.value)}
                                                                     required/>
                     </div>
@@ -112,7 +113,7 @@ function Signup(){
                             </form>
 
                         </div>
-                    </Popup>;
+                    </Popup>
 
 
                 </form>

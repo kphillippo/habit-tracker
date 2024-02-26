@@ -45,7 +45,7 @@ function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
-        <NavBar data={{userName, userToken, userStreak}}/>
+        <NavBar isSignedout={() => setisUpdated(true)} data={{userName, userToken, userStreak}}/>
         <Routes>
           <Route path="/home" element={<Home data={{userName, userToken, userStreak}}/>} />
           <Route path="/dailies" element={<Dailies />} />

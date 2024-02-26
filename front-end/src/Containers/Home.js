@@ -11,7 +11,7 @@ function Home(props) {
     console.log("Home page props:");
     console.log(props);
     const userStatus = props.data.userToken;
-    const streakActive = true;
+    const streakActive = false;
     let currentStreak = props.data.userStreak;
     if(currentStreak == "undefined"){
         currentStreak = 0;
