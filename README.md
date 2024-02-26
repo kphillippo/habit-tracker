@@ -30,13 +30,13 @@ Addressing the growing prevalence of unhealthy lifestyles, there is an increasin
 
 Release Planning Document Due: January 26th (COMPLETE)
 
-Sprint 1 Deadline: February 23rd
+Sprint 1 Deadline: February 23rd (COMPLETE)
 
-Progress Report 1 Due: February 27th
+Progress Report 1 Due: March 1st
 
 Sprint 2 Deadline: March 15th
 
-Progress Report 2 Due: March 22nd
+Progress Report 2 Due: April 1st
 
 Sprint 3 Deadline (Final Product): April 12th 
 
