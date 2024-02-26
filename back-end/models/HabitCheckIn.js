@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
-    ChechInTime:{
+    CheckInTime:{
         type: Date,
         required: true
     }
