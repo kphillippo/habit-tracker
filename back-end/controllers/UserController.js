@@ -31,7 +31,7 @@ const {Username, Password} = req.body
 
 //signup user
 const signupUser = async (req, res) => {
-    const {FirstName, LastName, Email, Username, Password} = req.body
+    const {FirstName, LastName, Email, Username, Password, Streak} = req.body
 
     try{
         //trys to sign up user
