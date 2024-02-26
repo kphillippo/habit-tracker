@@ -8,7 +8,7 @@ const createToken = (_id) => {
 
 //login user
 const loginUser = async (req, res) => {
-const {Username, Email, Password} = req.body
+const {Username, Password} = req.body
 
     try{
         //trys to login user
@@ -17,7 +17,13 @@ const {Username, Email, Password} = req.body
         //create a token
         const token = createToken(user._id)
 
-        res.status(200).json({Username, token})
+        //gets required data
+        const FirstName = user.FirstName
+        const LastName = user.LastName
+        const Email = user.Email
+        const Streak = user.Streak
+
+        res.status(200).json({Username, token, FirstName, LastName, Streak, Email})
     }catch(error){
         res.status(400).json({error: error.message})
     }
@@ -29,7 +35,7 @@ const signupUser = async (req, res) => {
 
     try{
         //trys to sign up user
-        const user = await User.signup(FirstName, LastName, Email, Username, Password, Streak, Email)
+        const user = await User.signup(FirstName, LastName, Email, Username, Password)
 
         //create a token
         const token = createToken(user._id)
