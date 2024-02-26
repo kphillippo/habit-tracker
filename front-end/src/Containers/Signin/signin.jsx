@@ -35,7 +35,7 @@ const Signin = ({ isSignedin }) =>{
     return (
         <div className={'LoginForm'}>
             <div className={'Top'}>
-                <h1>Welcome to Lifetrack!!</h1>
+                <h1>Welcome to HabitConnect!!</h1>
                 <p>"I am a random quote everyday to give you motivation." = Person McPerson</p>
             </div>
             <div className={'wrapper'}>
