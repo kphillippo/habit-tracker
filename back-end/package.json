@@ -24,5 +24,8 @@
     "@shelf/jest-mongodb": "^4.2.0",
     "supertest": "^6.3.4"
   },
+  "directories": {
+    "test": "tests"
+  },
   "description": ""
 }
