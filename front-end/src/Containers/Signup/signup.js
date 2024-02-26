@@ -5,17 +5,17 @@ import {FaLock, FaRegUserCircle} from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import {NavLink} from "react-router-dom";
 import {apiRequest} from "../../utils/reqTool"
+import { useNavigate } from "react-router-dom";
 
 
-
-function Signup(){
+const Signup = ({isSignedin}) => {
     
     const [email, setEmail] = useState('');
     const [Fname, setFname] = useState('');
     const [Lname, setLname] = useState('');
     const [username, setUsername] = useState('');
     const [password , setPassword] = useState('');
-
+    let navigate = useNavigate();
     const handleSubmit = (event) =>{
         event.preventDefault();
         let data = {
@@ -48,7 +48,7 @@ function Signup(){
                 <h1>Create Your Account!</h1>
             </div>
             <div className={'wrapper'}>
-                <form action={handleSubmit()}>
+                <form action={""}>
                     <div className={'inputBox'}>
                         <FaRegUserCircle className="icon"/> First Name: <input type={"text"}
                                                                                placeholder={' First Name'}
@@ -93,7 +93,7 @@ function Signup(){
                                                                     onChange={e => setPassword(e.target.value)}
                                                                     required/>
                     </div>
-                    <button className={"btn"} type={"submit"}>Create Account</button>
+                    <button className={"btn"} type={"submit"} onClick={handleSubmit}>Create Account</button>
                     {/* <Popup
                         className={"popUp"}
                         trigger={<button className={"btn"} type={"submit"}>Create Account</button>}
