@@ -8,8 +8,8 @@ import { GoGoal } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 
 function Home(props) {
-    console.log("Home page props:");
-    console.log(props);
+    // console.log("Home page props:");
+    // console.log(props);
     const userStatus = props.data.userToken;
     const streakActive = false;
     let currentStreak = props.data.userStreak;

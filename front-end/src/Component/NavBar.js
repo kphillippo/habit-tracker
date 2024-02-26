@@ -14,7 +14,7 @@ function NavBar({isSignedout, data}) {
     
     const userInfo = data;
     const isLogin = userInfo.userToken?true:false;
-    console.log(data);
+    // console.log(data);
     let navigate = useNavigate();
 
     const PopupContent = ({ close }) => (
@@ -66,8 +66,7 @@ function NavBar({isSignedout, data}) {
                         <div className="sign-link-div">
                             <NavLink
                                 className= "sign-link"
-                                activeClassName = "active"
-                                active
+                                activeclassname = "active"
                                 to="/Signin"
                             >
                                 Signin
@@ -75,8 +74,7 @@ function NavBar({isSignedout, data}) {
                             <span>/</span>
                             <NavLink
                                 className= "sign-link"
-                                activeClassName = "active"
-                                active
+                                activeclassname = "active"
                                 to="/signup"
                             >
                                 Signup
@@ -91,8 +89,7 @@ function NavBar({isSignedout, data}) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
-                        activeClassName = "active"
-                        active
+                        activeclassname = "active"
                         to="/home"
                     >
                         Home
@@ -102,7 +99,7 @@ function NavBar({isSignedout, data}) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
-                        activeClassName = "active"
+                        activeclassname = "active"
                         to="/dailies"
                     >
                         Dailies
@@ -112,6 +109,7 @@ function NavBar({isSignedout, data}) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
+                        activeclassname = "active"
                         to="/journal"
                     >
                         Journal
@@ -121,6 +119,7 @@ function NavBar({isSignedout, data}) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
+                        activeclassname = "active"
                         to="/challenges"
                     >
                         Challenges
@@ -131,6 +130,7 @@ function NavBar({isSignedout, data}) {
                     <NavLink
                         className = "nav-link"
                         to="/leaderboard"
+                        activeclassname = "active"
                     >
                         My Leaderboard
                     </NavLink>
@@ -140,6 +140,7 @@ function NavBar({isSignedout, data}) {
                     <NavLink
                         className = "nav-link"
                         to="/stats"
+                        activeclassname = "active"
                     >
                         My Stats
                     </NavLink>
@@ -149,6 +150,7 @@ function NavBar({isSignedout, data}) {
                     <NavLink
                         className = "nav-link"
                         to="/help"
+                        activeclassname = "active"
                     >
                         Help
                     </NavLink>
