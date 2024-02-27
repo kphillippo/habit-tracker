@@ -1,0 +1,55 @@
+.main-container{
+    font-family: 'Kotta One', serif;
+}
+.profile{
+    display: inline-flex;
+    margin-top: 2%;
+    width: 70%;
+}
+.profilePic{
+    width: 25%;
+    margin-right: 12%;
+    color: grey;
+}
+.profileInfo{
+    font-size: 200%;
+    width: 100%;
+}
+.profileInfo td{
+    border-bottom: 0.5px solid #000; 
+    width: 33%;
+}
+#pen{
+    float: right;
+}
+.friendsForm{
+    background: rgba(226, 233, 214, 1);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
+    border-radius: 15px;
+    width: 90%;
+    margin-top: 5%;
+    font-size: 200%;
+    padding: 0.8%;
+}
+.myFriendsTitle{
+    float: left;
+}
+.addFriendsButton{
+    float: right;
+    background: rgba(146, 178, 122, 1);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
+    border-radius: 15px;
+    padding: 0.5%;
+    color: white;
+    font-size: 90%;
+}
+.friendsList{
+    margin-top: 5%;
+    background-color: white;
+    width: 100%;
+    border-radius: 12px;
+}
+.friend{
+    font-size: 90%;
+    border-bottom: 0.5px solid #000; 
+}
