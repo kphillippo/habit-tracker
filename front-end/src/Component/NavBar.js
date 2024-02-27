@@ -5,15 +5,48 @@ import { IoMdFlame } from "react-icons/io";
 import "../Css/navbar.css"
 import { IoNotifications } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
+import Popup from "reactjs-popup";
+import { useNavigate } from "react-router-dom";
 
-function NavBar(props) {
+function NavBar({isSignedout, data}) {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
     
-    const userInfo = props.data;
-    const isLogin = userInfo.userToken;
-    console.log(props);
+    const userInfo = data;
+    const isLogin = userInfo.userToken?true:false;
+    // console.log(data);
+    let navigate = useNavigate();
 
+    const PopupContent = ({ close }) => (
+        <div>
+          <button onClick={() => {
+            // Implement your log-out logic here
+            console.log('Logging out...');
+            sessionStorage.clear()
+            isSignedout()
+            navigate('/home');
+            close();
+          }}>Log-out</button>
+        </div>
+      );
+
+    const UserIconWithPopup = ({ userInfo }) => (
+        <NavItem>
+          Welcome back {userInfo.userName}!
+          <Popup
+            trigger={<span><FaRegUserCircle size={30} color="#292d32"/></span>}
+            position="bottom"
+            on="click"
+            closeOnDocumentClick
+            mouseLeaveDelay={300}
+            contentStyle={{ padding: '20px', border: 'none' }}
+            arrow={false}
+          >
+            {close => <PopupContent close={close} />}
+          </Popup>
+        </NavItem>
+      );
+    
   return (
         <div className={"_nav"}>
             <Nav className="navbar-top row-12">
@@ -24,12 +57,7 @@ function NavBar(props) {
 
                 <NavItem className="align-right">
                     {isLogin &&
-                        <NavItem>
-                            Welcome back {userInfo.userName}!
-                            <NavLink to="/profile">
-                                <FaRegUserCircle size={30} color="#292d32"/>
-                            </NavLink>
-                        </NavItem>
+                        <UserIconWithPopup userInfo={userInfo}></UserIconWithPopup>
 
 
                     }
@@ -38,8 +66,7 @@ function NavBar(props) {
                         <div className="sign-link-div">
                             <NavLink
                                 className= "sign-link"
-                                activeClassName = "active"
-                                active
+                                activeclassname = "active"
                                 to="/Signin"
                             >
                                 Signin
@@ -47,8 +74,7 @@ function NavBar(props) {
                             <span>/</span>
                             <NavLink
                                 className= "sign-link"
-                                activeClassName = "active"
-                                active
+                                activeclassname = "active"
                                 to="/signup"
                             >
                                 Signup
@@ -63,8 +89,7 @@ function NavBar(props) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
-                        activeClassName = "active"
-                        active
+                        activeclassname = "active"
                         to="/home"
                     >
                         Home
@@ -74,7 +99,7 @@ function NavBar(props) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
-                        activeClassName = "active"
+                        activeclassname = "active"
                         to="/dailies"
                     >
                         Dailies
@@ -84,6 +109,7 @@ function NavBar(props) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
+                        activeclassname = "active"
                         to="/journal"
                     >
                         Journal
@@ -93,6 +119,7 @@ function NavBar(props) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
+                        activeclassname = "active"
                         to="/challenges"
                     >
                         Challenges
@@ -103,6 +130,7 @@ function NavBar(props) {
                     <NavLink
                         className = "nav-link"
                         to="/leaderboard"
+                        activeclassname = "active"
                     >
                         My Leaderboard
                     </NavLink>
@@ -112,6 +140,7 @@ function NavBar(props) {
                     <NavLink
                         className = "nav-link"
                         to="/stats"
+                        activeclassname = "active"
                     >
                         My Stats
                     </NavLink>
@@ -120,7 +149,18 @@ function NavBar(props) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
+                        to="/profile"
+                        activeclassname = "active"
+                    >
+                        Profile
+                    </NavLink>
+                </NavItem>
+
+                <NavItem>
+                    <NavLink
+                        className = "nav-link"
                         to="/help"
+                        activeclassname = "active"
                     >
                         Help
                     </NavLink>

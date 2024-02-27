@@ -36,6 +36,7 @@ function App() {
         setUserToken(sessionStorage.getItem("userToken"));
         setUserStreak(sessionStorage.getItem("userStreak"));
         setUserName(sessionStorage.getItem("userName"));
+        setisUpdated(false);
       }
 
   }, [isUpdated])
@@ -45,7 +46,7 @@ function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
-        <NavBar data={{userName, userToken, userStreak}}/>
+        <NavBar isSignedout={() => setisUpdated(true)} data={{userName, userToken, userStreak}}/>
         <Routes>
           <Route path="/home" element={<Home data={{userName, userToken, userStreak}}/>} />
           <Route path="/dailies" element={<Dailies />} />
@@ -56,7 +57,7 @@ function App() {
           <Route path="/help" element={<Help />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)}/>} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup isSignedin={() => setisUpdated(true)}/>} />
           <Route path="/" element={<Navigate replace to="/home" />} />
         </Routes>
       </div>

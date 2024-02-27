@@ -13,7 +13,7 @@ const {Username, Password} = req.body
     try{
         //trys to login user
         const user = await User.login(Username, Password)
-
+        
         //create a token
         const token = createToken(user._id)
 

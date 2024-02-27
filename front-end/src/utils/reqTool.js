@@ -29,7 +29,13 @@ export function apiRequest(method,path,data){
         .then(res => {
             return resolve(res.data)
         }).catch(err => {
-            return reject(err.response.error);
+            if (err.response) {
+                // Reject with the entire response or a specific message, depending on your needs
+                reject(err.response.data || err.response.statusText);
+            } else {
+                // This handles cases where the error might not be a response error (e.g., network issues)
+                reject(err.message);
+            }
         })
     })
 }

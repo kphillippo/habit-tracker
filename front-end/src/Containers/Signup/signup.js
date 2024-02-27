@@ -4,21 +4,43 @@ import "./signup.css";
 import {FaLock, FaRegUserCircle} from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import {NavLink} from "react-router-dom";
+import {apiRequest} from "../../utils/reqTool"
+import { useNavigate } from "react-router-dom";
 
 
-
-function Signup(){
+const Signup = ({isSignedin}) => {
     
     const [email, setEmail] = useState('');
     const [Fname, setFname] = useState('');
     const [Lname, setLname] = useState('');
-    const [usernamee, setUsername] = useState('');
-    const [passwordd , setPassword] = useState('');
-
+    const [username, setUsername] = useState('');
+    const [password , setPassword] = useState('');
+    let navigate = useNavigate();
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log('signed up with:', Fname, Lname, email, usernamee, passwordd);
-
+        let data = {
+            "Username": username,
+            "Password": password,
+            "Email": email,
+            "FirstName": Fname,
+            "LastName": Lname,
+            "Streak": 0
+          }
+        apiRequest("POST", "user/signup", data)
+            .then(({token, ...user}) => {
+                console.log(user);
+                sessionStorage.setItem("userToken", token);
+                sessionStorage.setItem("userName", user.Username);
+                sessionStorage.setItem("userStreak", user.Streak);
+                isSignedin()
+                navigate('/home');
+            })
+            .catch(err => {
+                console.log(err);
+                window.alert(err.error);
+            })
+        console.log('signed up with:', Fname, Lname, email, username, password);
+        
     };
 
     return (
@@ -59,7 +81,7 @@ function Signup(){
                         <FaRegUserCircle className="icon"/> Username: <input type={"text"}
                                                                              placeholder={'  Username'}
                                                                              name={"usernamee"}
-                                                                             value={usernamee}
+                                                                             value={username}
                                                                              onChange={e => setUsername(e.target.value)}
                                                                              required/>
                     </div>
@@ -67,13 +89,13 @@ function Signup(){
                     <div className={'inputBox'}>
                         <FaLock className="icon"/> Password: <input type={"password"}
                                                                     placeholder={'  Password'}
-                                                                    name={"passwordd"}
-                                                                    value={passwordd}
+                                                                    name={"password"}
+                                                                    value={password}
                                                                     onChange={e => setPassword(e.target.value)}
                                                                     required/>
                     </div>
-
-                    <Popup
+                    <button className={"btn"} type={"submit"} onClick={handleSubmit}>Create Account</button>
+                    {/* <Popup
                         className={"popUp"}
                         trigger={<button className={"btn"} type={"submit"}>Create Account</button>}
                         position={"top center"}  offsetY={150}
@@ -112,7 +134,7 @@ function Signup(){
                             </form>
 
                         </div>
-                    </Popup>;
+                    </Popup> */}
 
 
                 </form>
