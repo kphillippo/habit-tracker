@@ -55,7 +55,7 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/help" element={<Help />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile data={{userName, userToken}}/>} />
           <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)}/>} />
           <Route path="/signup" element={<Signup isSignedin={() => setisUpdated(true)}/>} />
           <Route path="/" element={<Navigate replace to="/home" />} />
