@@ -3,10 +3,11 @@ import './signin.css';
 import { FaRegUserCircle, FaLock } from "react-icons/fa";
 import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
+import { ServerResponse } from 'http';
 
 const Signin = ({ isSignedin }) =>{
 
-    //problems: when the window size is small, the layout is messed up
+    //todo: when the window size is small, the layout is messed up
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     let navigate = useNavigate();
@@ -23,6 +24,8 @@ const Signin = ({ isSignedin }) =>{
                 sessionStorage.setItem("userToken", token);
                 sessionStorage.setItem("userName", user.Username);
                 sessionStorage.setItem("userStreak", user.Streak);
+                sessionStorage.setItem("userFirstName", user.FirstName);
+                sessionStorage.setItem("userLastName", user.LastName);
                 isSignedin()
                 navigate('/home');
             })

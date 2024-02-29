@@ -22,6 +22,14 @@ export function setTokenHeader(token){
     }
 }
 
+//example use case of apiRequest:
+// apiRequest("POST", "user/login", data)
+//             .then(({token, ...user}) => {
+//                 handle the response
+//             })
+//             .catch(err => {
+//                 handle the error
+//             })
 export function apiRequest(method,path,data){
     path = BASE_URL + path
     return new Promise((resolve,reject) => {
