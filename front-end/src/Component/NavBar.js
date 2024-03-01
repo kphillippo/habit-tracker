@@ -18,15 +18,18 @@ function NavBar({isSignedout, data}) {
     let navigate = useNavigate();
 
     const PopupContent = ({ close }) => (
-        <div>
-          <button onClick={() => {
-            // Implement your log-out logic here
-            console.log('Logging out...');
-            sessionStorage.clear()
-            isSignedout()
-            navigate('/home');
-            close();
-          }}>Log-out</button>
+        <div className="user-icon-popup">
+            <Nav>
+                <NavItem onClick={() => {
+                // Implement your log-out logic here
+                    console.log('Logging out...');
+                    sessionStorage.clear()
+                    isSignedout()
+                    navigate('/home');
+                    close();
+                    }}>Log-out</NavItem>
+            </Nav>
+          
         </div>
       );
 
@@ -35,11 +38,10 @@ function NavBar({isSignedout, data}) {
           Welcome back {userInfo.userName}!
           <Popup
             trigger={<span><FaRegUserCircle size={30} color="#292d32"/></span>}
-            position="bottom"
+            position="left bottom"
             on="click"
             closeOnDocumentClick
             mouseLeaveDelay={300}
-            contentStyle={{ padding: '20px', border: 'none' }}
             arrow={false}
           >
             {close => <PopupContent close={close} />}
