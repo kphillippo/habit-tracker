@@ -158,16 +158,6 @@ function NavBar({isSignedout, data}) {
                 <NavItem>
                     <NavLink
                         className = "nav-link"
-                        to="/profile"
-                        activeclassname = "active"
-                    >
-                        Profile
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className = "nav-link"
                         to="/help"
                         activeclassname = "active"
                     >
