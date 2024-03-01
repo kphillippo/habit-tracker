@@ -8,4 +8,6 @@ router.post('/createHabit', createHabit)
 
 router.get('/getHabits', getHabits)
 
+router.post('/updateHabit', updateHabit)
+
 module.exports = router

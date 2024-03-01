@@ -21,4 +21,16 @@ const createHabit = async (req, res) => {
     }
 }
 
+const updateHabit = async (req, res) => {
+    const {HabitID, UserID, field_name, field_value} = req.body;
+    try {
+        const habit_id = new ObjectID(HabitID);
+        const user_id = new ObjectID(UserID);
+        const habit = await Habit.updateHabit(habit_id, user_id, field_name, field_value);
+        res.status(200).json(habit);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
 module.exports = {getHabits, createHabit}
