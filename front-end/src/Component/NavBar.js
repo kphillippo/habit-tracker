@@ -13,21 +13,27 @@ function NavBar({isSignedout, data}) {
     // will be added to props in the future
     
     const userInfo = data;
-    const isLogin = userInfo.userToken?true:false;
+    const isLogin = true;
+    // const isLogin = userInfo.userToken?true:false;
     // console.log(data);
     let navigate = useNavigate();
 
     const PopupContent = ({ close }) => (
         <div className="user-icon-popup">
             <Nav>
-                <NavItem onClick={() => {
-                // Implement your log-out logic here
-                    console.log('Logging out...');
-                    sessionStorage.clear()
-                    isSignedout()
-                    navigate('/home');
-                    close();
-                    }}>Log-out</NavItem>
+                <NavItem><NavLink>Settings</NavLink></NavItem>
+                <NavItem><NavLink>Profile</NavLink></NavItem>
+                <NavItem><NavLink 
+                onClick={() => {
+                    // Implement your log-out logic here
+                        console.log('Logging out...');
+                        sessionStorage.clear()
+                        isSignedout()
+                        navigate('/home');
+                        close();
+                        }}
+                >Sign-out</NavLink></NavItem>
+                
             </Nav>
           
         </div>
@@ -38,7 +44,7 @@ function NavBar({isSignedout, data}) {
           Welcome back {userInfo.userName}!
           <Popup
             trigger={<span><FaRegUserCircle size={30} color="#292d32"/></span>}
-            position="left bottom"
+            position="bottom center"
             on="click"
             closeOnDocumentClick
             mouseLeaveDelay={300}

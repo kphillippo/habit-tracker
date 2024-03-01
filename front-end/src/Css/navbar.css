@@ -96,9 +96,14 @@
 
 .popup-content{
   margin-top: 0.5%;
-  margin-right:2%;
-  padding-right:2%;
+  margin-right:0%;
+  margin-left:-2%;
+  padding-right:4%;
   width:10%;
+}
+
+.user-icon-popup{
   background-color: #92b27a;
+  border-radius: 10px;
 }
 
