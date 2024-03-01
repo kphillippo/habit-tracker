@@ -99,11 +99,51 @@
   margin-right:0%;
   margin-left:-2%;
   padding-right:4%;
-  width:10%;
+  width:13%;
 }
 
 .user-icon-popup{
-  background-color: #92b27a;
+  background-color: #c4d3ad;
   border-radius: 10px;
+  border: solid 3px black;
 }
+
+.user-icon :hover{
+  cursor:pointer;
+}
+
+.user-icon-popup ul li{
+  margin-top:1%;
+  margin-bottom: 1%;
+  border-bottom: 3px;
+  width:100%;
+  padding:1%;
+  font-size: 120%;
+}
+
+
+.popup-content .nav-item .nav-link {
+  color: black;
+  padding: 3px;
+  border-radius: 10px;
+  transition: background-color 0.5s ease;
+  font-size: 85%;
+  font-weight: 100;
+  width: 100%;
+  text-align: center;
+}
+
+.popup-content .nav-item .nav-link:hover {
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #93b27d;
+  font-weight: bold;
+}
+
+.popup-content .nav-item .nav-link.active {
+  
+  border-radius: 10px;
+  border: 0 solid #8ba876;
+}
+
 
