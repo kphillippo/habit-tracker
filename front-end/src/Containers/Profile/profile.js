@@ -92,8 +92,9 @@ function Profile(props) {
 
     return (
         <div className="main-container">
-            {generateUserProfile()}
-            {generateFriendsList()}
+            
+            { userInfo.userToken && generateUserProfile()}
+            { userInfo.userToken && generateFriendsList()}
         </div>
     );
 }

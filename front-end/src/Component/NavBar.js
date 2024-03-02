@@ -13,33 +13,42 @@ function NavBar({isSignedout, data}) {
     // will be added to props in the future
     
     const userInfo = data;
+    // const isLogin = true;
     const isLogin = userInfo.userToken?true:false;
     // console.log(data);
     let navigate = useNavigate();
 
     const PopupContent = ({ close }) => (
-        <div>
-          <button onClick={() => {
-            // Implement your log-out logic here
-            console.log('Logging out...');
-            sessionStorage.clear()
-            isSignedout()
-            navigate('/home');
-            close();
-          }}>Log-out</button>
+        <div className="user-icon-popup">
+            <Nav>
+            <NavItem><NavLink className='nav-link' activeclassname='active' to="/profile">Profile</NavLink></NavItem>
+                <NavItem><NavLink className='nav-link' activeclassname='active' to="/setting">Settings</NavLink></NavItem>
+                
+                <NavItem><NavLink  className='nav-link' activeclassname='active'
+                onClick={() => {
+                    // Implement your log-out logic here
+                        console.log('Logging out...');
+                        sessionStorage.clear()
+                        isSignedout()
+                        navigate('/home');
+                        close();
+                        }}
+                >Sign-out</NavLink></NavItem>
+                
+            </Nav>
+          
         </div>
       );
 
     const UserIconWithPopup = ({ userInfo }) => (
         <NavItem>
           Welcome back {userInfo.userName}!
-          <Popup
-            trigger={<span><FaRegUserCircle size={30} color="#292d32"/></span>}
-            position="bottom"
+          <Popup 
+            trigger={<span className="user-icon"><FaRegUserCircle size={30} color="#292d32"/></span>}
+            position="bottom center"
             on="click"
             closeOnDocumentClick
             mouseLeaveDelay={300}
-            contentStyle={{ padding: '20px', border: 'none' }}
             arrow={false}
           >
             {close => <PopupContent close={close} />}
@@ -143,16 +152,6 @@ function NavBar({isSignedout, data}) {
                         activeclassname = "active"
                     >
                         My Stats
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className = "nav-link"
-                        to="/profile"
-                        activeclassname = "active"
-                    >
-                        Profile
                     </NavLink>
                 </NavItem>
 
