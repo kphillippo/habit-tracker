@@ -25,12 +25,13 @@ import {
 import testData from "./mock/user.json"
 
 function App() {
+  //state
   const [isUpdated, setisUpdated] = useState(false);
   const [userName, setUserName] = useState(null);
   const [userToken, setUserToken] = useState(null);
   const [userStreak, setUserStreak] = useState(0);
 
-
+  //a hook function, will update all states once the isUpdate state is updated
   useEffect(() => {
       if(sessionStorage.getItem("userToken")!="undefined"){
         setUserToken(sessionStorage.getItem("userToken"));

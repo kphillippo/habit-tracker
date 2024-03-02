@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Popup from "reactjs-popup";
-import "./signup.css";
+import "../../Css/signup.css";
 import {FaLock, FaRegUserCircle} from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import {NavLink} from "react-router-dom";
