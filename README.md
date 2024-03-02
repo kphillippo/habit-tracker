@@ -8,7 +8,11 @@ Operating under Agile principles, the project, led by a team of 7—including th
 
 ## Product Backlog/Sprint Backlog
 
-[User Story Management Using Jira](https://habittracker.atlassian.net/jira/software/projects/SCRUM/boards/1) 
+[User Story and Task Management Using Jira](https://habittracker.atlassian.net/jira/software/projects/SCRUM/boards/1) 
+
+## Webpage Design
+
+[Webpage Design Using Figma](https://www.figma.com/file/g4kPNHlQEehR718MbzswRJ/Design?type=design&node-id=0%3A1&mode=design&t=GJo5eAb9d65voeO9-1)
 
 ## Team Members
 
@@ -32,7 +36,7 @@ Release Planning Document Due: January 26th (COMPLETE)
 
 Sprint 1 Deadline: February 23rd (COMPLETE)
 
-Progress Report 1 Due: March 1st
+Progress Report 1 Due: March 1st (COMPLETE)
 
 Sprint 2 Deadline: March 15th
 
