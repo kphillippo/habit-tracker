@@ -1,0 +1,18 @@
+/* All Font Settings Should be Here */
+
+@font-face {
+    font-family: 'Protest_Riot';
+    src: url('../../public/ProtestRiot-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
+  html, body {
+    font-family: 'Protest_Riot', fallback-font, sans-serif;
+    height: 100%;
+  }
+
+  #root {
+    height: 100%;
+  }
