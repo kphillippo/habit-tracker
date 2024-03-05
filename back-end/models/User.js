@@ -31,6 +31,11 @@ const UserSchema = new mongoose.Schema({
     }, 
     PrivacySettings:{
         type: mongoose.ObjectId
+    },
+    ProfilePicture:
+    {
+        data: Buffer,
+        contentType: String
     }
     
 }, { collection: 'User'});
