@@ -22,6 +22,7 @@ const createHabit = async (req, res) => {
 }
 
 const updateHabit = async (req, res) => {
+    const ObjectID = require('mongoose').Types.ObjectId;
     const {HabitID, UserID, field_name, field_value} = req.body;
     try {
         const habit_id = new ObjectID(HabitID);
@@ -33,4 +34,4 @@ const updateHabit = async (req, res) => {
     }
 }
 
-module.exports = {getHabits, createHabit}
+module.exports = {getHabits, createHabit, updateHabit}

@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { createHabit, getHabits } = require('../controllers/HabitController');
+const { createHabit, getHabits, updateHabit } = require('../controllers/HabitController');
 
 const router = express.Router()
 

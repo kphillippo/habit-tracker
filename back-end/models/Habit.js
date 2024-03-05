@@ -51,19 +51,7 @@ HabitSchema.statics.createHabit = async function(Owner, Title, PrivacyType, Meas
 }
 
 HabitSchema.statics.updateHabit = async function(HabitID, UserID, field_name, field_value) {
-    const habit = await this.findById(HabitID);
-    if (!habit) {
-        throw Error('Habit does not exist!');
-    }
-    const user = await UserModel.findById(UserID);
-    if (!user) {
-        throw Error('User does not exist!');
-    }
-    if (habit.Owner !== UserID) {
-        throw Error('User does not own this habit!');
-    }
-    habit.set(field_name, field_value);
-    habit.save();
+    const habit = await this.findOneAndUpdate({_id: HabitID, Owner: UserID}, {[field_name]: field_value}, {returnDocument: "after"});
     return habit;
 }
 
