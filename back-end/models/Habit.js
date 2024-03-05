@@ -50,5 +50,10 @@ HabitSchema.statics.createHabit = async function(Owner, Title, PrivacyType, Meas
     return habit;
 }
 
+HabitSchema.statics.updateHabit = async function(HabitID, UserID, field_name, field_value) {
+    const habit = await this.findOneAndUpdate({_id: HabitID, Owner: UserID}, {[field_name]: field_value}, {returnDocument: "after"});
+    return habit;
+}
+
 const HabitModel = mongoose.model("Habit", HabitSchema);
 module.exports = HabitModel;
