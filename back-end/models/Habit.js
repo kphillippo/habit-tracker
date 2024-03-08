@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const UserModel = require("./User");
 
 const HabitSchema = new mongoose.Schema({
     Owner: {
@@ -35,6 +36,24 @@ const HabitSchema = new mongoose.Schema({
         required: true
     }
 }, { collection: 'Habit'});
+
+HabitSchema.statics.findHabits = async function(Owner) {
+    return await this.find({Owner: Owner});
+}
+
+HabitSchema.statics.createHabit = async function(Owner, Title, PrivacyType, MeasurementType, Goal) {
+    const user = await UserModel.findById(Owner);
+    if (!user) {
+        throw Error('User does not exist!');
+    }
+    const habit = this.create({Owner, Title, PrivacyType, MeasurementType, Goal});
+    return habit;
+}
+
+HabitSchema.statics.updateHabit = async function(HabitID, UserID, field_name, field_value) {
+    const habit = await this.findOneAndUpdate({_id: HabitID, Owner: UserID}, {[field_name]: field_value}, {returnDocument: "after"});
+    return habit;
+}
 
 const HabitModel = mongoose.model("Habit", HabitSchema);
 module.exports = HabitModel;

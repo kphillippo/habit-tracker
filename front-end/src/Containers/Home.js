@@ -7,9 +7,16 @@ import { GrAchievement } from "react-icons/gr";
 import { GoGoal } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function Home(props) {
+    // console.log("Home page props:");
+    // console.log(props);
+    const userStatus = props.data.userToken;
+    const streakActive = false;
+    let currentStreak = props.data.userStreak;
+    if(currentStreak == "undefined"){
+        currentStreak = 0;
+    }
     let navigate = useNavigate();//For links on windows to different pages
-    let userStatus = true;//Read status
 
     //Generates a message to welcome user or guest 
     //Returns html with message
@@ -17,10 +24,10 @@ function Home() {
         let message = <></>;
         if (userStatus) {
             //Greet user
-            message = <><div className="lg-font"> Welcome back, User! </div> </>;
+            message = <><div className="lg-font"> Welcome back, {props.data.userName}! </div> </>;
         } else {
             //Welcome guest
-            message = <><div className="lg-font"> Welcome to HabbitConnect! </div> </>;
+            message = <><div className="lg-font"> Welcome to HabitConnect! </div> </>;
         }
         return message;
     }
@@ -45,8 +52,6 @@ function Home() {
     //Returns html with window
     function generateStreakWindow() {
         if (userStatus) {
-            let currentStreak = 30;
-            let streakActive = false;
             let flameColor = "#4e5445";
             let message = <>You've been consistent for {currentStreak} days!<br></br>Extend your streak now!</>
             if (streakActive) {

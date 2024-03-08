@@ -26,11 +26,16 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     Streak:{
-        type: Number
-    },
+        type: Number,
+        default: 0
+    }, 
     PrivacySettings:{
-        type: mongoose.ObjectId,
-        required: true
+        type: mongoose.ObjectId
+    },
+    ProfilePicture:
+    {
+        data: Buffer,
+        contentType: String
     }
     
 }, { collection: 'User'});
@@ -43,7 +48,7 @@ jason format for testing:
   "LastName": "Hannes",
   "Email": "Test@gmail.com",
   "Username": "CristalKitty",
-  "Password": "password"
+  "Password": "Password!1"
 }
 */
 UserSchema.statics.signup = async function(FirstName, LastName, Email, Username, Password) {
@@ -93,7 +98,7 @@ http://localhost:8081/api/user/login to try it out
 jason format for testing: 
 {
   "Username": "CristalKitty",
-  "Password": "password"
+  "Password": "Password!1"
 }
 */
 UserSchema.statics.login = async function(Username, Password){
