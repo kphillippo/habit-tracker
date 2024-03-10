@@ -11,7 +11,7 @@ const UserModel = require('./models/User.js');
 const HabitModel = require('./models/Habit.js')
 
 //variabes for routing
-const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@"+config.database.host+"/"+config.database.db;
+const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@cluster.rbzvfkr.mongodb.net/Habit_Tracker";
 //const mongoDB = "mongodb+srv://"+process.env.USERNAME+":"+process.env.PASSWORD+"@"+config.database.host+":"+config.database.port+"/"+config.database.db;
 const PORT = process.env.PORT || 8081;
 const userRoutes = require('./routes/UserRoutes.js');
@@ -82,10 +82,15 @@ app.post('/', upload.single('image'), (req, res, next) => {
         }
     });
 });
+
+
  
+//if testing it doesnt open the port
+if (process.env.NODE_ENV !== 'test') {
+    //listening function
+    app.listen(PORT,function(){
+        console.log(`Sever is listening at port ${PORT}`);
+    });
+}
 
-//listening function
-app.listen(PORT,function(){
-    console.log(`Sever is listening at port ${PORT}`);
-});
-
+module.exports = { app };

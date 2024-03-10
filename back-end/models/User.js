@@ -51,6 +51,21 @@ jason format for testing:
   "Password": "Password!1"
 }
 */
+
+UserSchema.statics.delete = async function(Username){
+    // Check if the user exists
+  const user = await this.findOne({ Username });
+
+  // If the user exists, delete it
+  if (user) {
+    await this.findOneAndDelete({ Username });
+    return { success: true, message: 'User deleted successfully' };
+  }
+
+  // User does not exist
+  return { success: false, message: 'User not found' };
+}
+
 UserSchema.statics.signup = async function(FirstName, LastName, Email, Username, Password) {
 
 

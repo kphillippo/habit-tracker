@@ -1,116 +1,98 @@
-const {MongoClient} = require('mongodb');
-const env = process.env.NODE_ENV || "development";
-const config = require("../config.js")[env];
-const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@cluster.rbzvfkr.mongodb.net/";
+// Load environment variables from .env file
+require('dotenv').config();
+
+// Import necessary modules
 const request = require('supertest');
-const app = require('../index.js')
+const mongoose = require('mongoose');
+const { app } = require('../index'); // Import your express app instance
+const User = require('../models/User'); // Import your schema
 
-describe('insert', () => {
-  let connection;
-  let db;
+// MongoDB connection string
+const serverLink = `mongodb+srv://${process.env.DBUSER}:${process.env.PASSWORD}@cluster.rbzvfkr.mongodb.net/Habit_Tracker`;
 
-  beforeAll(async () => {
-    connection = await MongoClient.connect(serverLink, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    db = await connection.db("Habit_Tracker");
-  });
+// Connect to the MongoDB database before running tests
+beforeAll(async () => {
+  await mongoose.connect(serverLink, { useNewUrlParser: true });
+});
 
-  afterAll(async () => {
-    await connection.close();
-  });
+// Disconnect from the MongoDB database after running tests
+afterAll(async () => {
+  await mongoose.connection.close();
+});
 
-  it('Create a valid User', async() => {
+describe('User API', () => {
 
-    const mockUser = {
-      "FirstName": "Lysa",
-      "LastName": "Hannes",
-      "Email": "Testing@email.com",
-      "Username": "Kitty",
-      "Password": "Password1!",
-      "Streak": 0
+  //create new user without errors
+  test('Create new user', async () => {
+
+    //deletes the user if it already exists
+    const deleteUser = await request(app)
+      .post('/api/user/delete')
+      .send({ username: 'testuser'})
+
+    const userData = {
+      FirstName: 'test',
+      LastName: 'tester',
+      Email: 'tester@email.com',
+      Username: 'testuser',
+      Password: 'passwordW1!'
     };
 
-    const response = await request(app).post('/api/user/signup').send({mockUser});
+    //signs up user 
+    const response = await request(app)
+    .post('/api/user/signup')
+    .send(userData)
+    .set('Accept', 'application/json');
 
-    expect(response.statusCode).toBe(200);
+    expect(response.status).toBe(200); // Assuming successful user creation returns status 201
     
+    // You can add more assertions as needed
   });
 
-  /*
-  //test for sign up
-  it('should insert a user into collectionm then if try to sign up a user thats already inserted, it fails', async () => {
-    const users = db.collection('User');
+  test('Create new user', async () => {
 
-    //if you sign up a user it works
-    const mockUser = {
-        "FirstName": "Lysa",
-        "LastName": "Hannes",
-        "Email": "Testing@email.com",
-        "Username": "Kitty",
-        "Password": "Password1!",
-        "Streak": 0
-      };
-    await users.insertOne(mockUser);
+    //deletes the user if it already exists
+    const deleteUser = await request(app)
+      .post('/api/user/delete')
+      .send({ username: 'testuser'})
 
-    //if try to sign up a user thats already inserted, it fails
-    const mockUser2 = {
-        "FirstName": "Lysa",
-        "LastName": "Hannes",
-        "Email": "Testing@email.com",
-        "Username": "Kitty",
-        "Password": "Password1!",
-        "Streak": 0
-      };
-    await(expect(users.insertOne(mockUser2)).rejects.toThrowError());
+    const userData = {
+      FirstName: 'test',
+      LastName: 'tester',
+      Email: 'tester@email.com',
+      Username: 'testuser',
+      Password: 'passwordW1!'
+    };
+
+    //signs up user 
+    const response = await request(app)
+    .post('/api/user/signup')
+    .send(userData)
+    .set('Accept', 'application/json');
+
+    expect(response.status).toBe(200); // Assuming successful user creation returns status 201
+    
+    // You can add more assertions as needed
   });
 
-  //test for sign up
-  it('if try to insert a user with same email, but differnt username as someone, it fails', async () => {
-    const users = db.collection('User');
+  test('User login', async () => {
 
-    //if try to insert a user with same email, but differnt username as someone, it fails
-    const mockUser3 = {
-        "FirstName": "Lysa",
-        "LastName": "Hannes",
-        "Email": "Testing@email.com",
-        "Username": "Lysa",
-        "Password": "Password1!",
-        "Streak": 0
-      };
-    await(expect(users.insertOne(mockUser3)).rejects.toThrowError());
+    // Create a test user
+    const testUser = new User({ username: 'testuser', password: 'password123' });
+    await testUser.save();
+
+    // Call the login static method
+    const response = await request(app)
+      .post('/api/user/login')
+      .send({ username: 'testuser', password: 'password123' })
+      .set('Accept', 'application/json');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('token');
+    expect(response.body.errors).toBeDefined();
+
+    console.log(response.body.errors);
+
+    // Optionally, you can verify additional properties of the response
   });
-
-  //test for sign up
-  it('if try to insert a user with same username, but differnt email as someone, it fails', async () => {
-    const users = db.collection('User');
-
-    //if try to insert a user with same username, but differnt email as someone, it fails
-    const mockUser4 = {
-        "FirstName": "Lysa",
-        "LastName": "Hannes",
-        "Email": "Tester@email.com",
-        "Username": "Kitty",
-        "Password": "Password1!",
-        "Streak": 0
-      };
-    await(expect(users.insertOne(mockUser4)).rejects.toThrowError());
-  });
-
-  //test for sign up
-  it('if the password isnt good enough, it fails', async () => {
-    const users = db.collection('User');
-
-    //if the password isnt good enough, it fails
-    const mockUser5 = {
-        "FirstName": "Lysa",
-        "LastName": "Hannes",
-        "Email": "Tester@email.com",
-        "Username": "Lysa",
-        "Password": "test",
-        "Streak": 0
-      };
-    await(expect(users.insertOne(mockUser5)).rejects.toThrowError());
-  });*/
 });
