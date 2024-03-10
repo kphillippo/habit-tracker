@@ -34,8 +34,10 @@ describe('User API', () => {
     //deletes the user if it already exists
     const deleteUser = await request(app)
       .post('/api/user/delete')
-      .send({ username: 'testuser'})
+      .send({ Username: 'testuser'})
 
+
+    //test data
     const userData = {
       FirstName: 'test',
       LastName: 'tester',
@@ -55,31 +57,7 @@ describe('User API', () => {
     // You can add more assertions as needed
   });
 
-  test('Create new user', async () => {
 
-    //deletes the user if it already exists
-    const deleteUser = await request(app)
-      .post('/api/user/delete')
-      .send({ username: 'testuser'})
-
-    const userData = {
-      FirstName: 'test',
-      LastName: 'tester',
-      Email: 'tester@email.com',
-      Username: 'testuser',
-      Password: 'passwordW1!'
-    };
-
-    //signs up user 
-    const response = await request(app)
-    .post('/api/user/signup')
-    .send(userData)
-    .set('Accept', 'application/json');
-
-    expect(response.status).toBe(200); // Assuming successful user creation returns status 201
-    
-    // You can add more assertions as needed
-  });
 
   /*can add more tests after too just by doing this:
   test('other Terstcase', async () => {
