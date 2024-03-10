@@ -22,8 +22,9 @@ const {Username, Password} = req.body
         const LastName = user.LastName
         const Email = user.Email
         const Streak = user.Streak
+        const _id = user._id
 
-        res.status(200).json({Username, token, FirstName, LastName, Streak, Email})
+        res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email})
     }catch(error){
         res.status(400).json({error: error.message})
     }
