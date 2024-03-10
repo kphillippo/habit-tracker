@@ -17,12 +17,14 @@ const PORT = process.env.PORT || 8081;
 const userRoutes = require('./routes/UserRoutes.js');
 const habitRoutes = require('./routes/HabitRoutes.js');
 
+/*
 //variables for image
 const bodyParser = require('body-parser');
 const fs = require('fs');
 var path = require('path');
 app.set("view engine", "ejs");
 require('dotenv').config();
+*/
 
 app.use(express.json());
 app.use(cors());
@@ -33,6 +35,7 @@ app.use('/api/habit', habitRoutes)
 
 mongoose.connect(serverLink);
 
+/*
 //Upload Image code starts here
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -82,7 +85,7 @@ app.post('/', upload.single('image'), (req, res, next) => {
         }
     });
 });
-
+*/
 
  
 //if testing it doesnt open the port

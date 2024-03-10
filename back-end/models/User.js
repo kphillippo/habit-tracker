@@ -59,11 +59,8 @@ UserSchema.statics.delete = async function(Username){
   // If the user exists, delete it
   if (user) {
     await this.findOneAndDelete({ Username });
-    return { success: true, message: 'User deleted successfully' };
+    return { success: true, message: 'User deleted successfully!' };
   }
-
-  // User does not exist
-  return { success: false, message: 'User not found' };
 }
 
 UserSchema.statics.signup = async function(FirstName, LastName, Email, Username, Password) {
@@ -134,7 +131,7 @@ UserSchema.statics.login = async function(Username, Password){
     const match = await bcrypt.compare(Password, user.Password)
 
     if(!match){
-        throw Error('Incorrect Password')
+        throw Error('Incorrect Password!')
     }
 
     return user
