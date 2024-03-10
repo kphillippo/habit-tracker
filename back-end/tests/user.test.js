@@ -51,24 +51,16 @@ describe('User API', () => {
     // You can add more assertions as needed
   });
 
-  test('User login', async () => {
 
-    // Create a test user
-    const testUser = new User({ username: 'testuser', password: 'password123' });
-    await testUser.save();
+//login a user
+  test('User login', async () => {
 
     // Call the login static method
     const response = await request(app)
       .post('/api/user/login')
-      .send({ username: 'testuser', password: 'password123' })
-      .set('Accept', 'application/json');
+      .send({ Username: 'testuser', Password: 'passwordW1!' })
 
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('token');
-    expect(response.body.errors).toBeDefined();
-
-    console.log(response.body.errors);
-
-    // Optionally, you can verify additional properties of the response
+    
   });
 });

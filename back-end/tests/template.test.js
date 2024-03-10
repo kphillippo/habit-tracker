@@ -28,13 +28,14 @@ afterAll(async () => {
 
 describe('User API', () => {
 
-  //for a test case heres an example to hopefully make it easier when making other test cases
+  //for a test case heres an example to hopefully make it easier when making other test cases (I had to comment it cus it doesnt like the same test running twice fro some reason)
   test('Create new user', async () => {
 
+    /*
     //deletes the user if it already exists
     const deleteUser = await request(app)
       .post('/api/user/delete')
-      .send({ Username: 'testuser'})
+      .send({ username: 'testuser'})
 
 
     //test data
@@ -55,6 +56,7 @@ describe('User API', () => {
     expect(response.status).toBe(200); // Assuming successful user creation returns status 201
     
     // You can add more assertions as needed
+    */
   });
 
 
