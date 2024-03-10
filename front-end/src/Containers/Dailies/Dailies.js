@@ -91,6 +91,24 @@ function Dailies(){
                                 <td><button class = "btn_counter"><FaPlusCircle  color="#92B27A" size = "2.5vw"></FaPlusCircle></button></td>
                                 <td><button class = "btn_edit"> <LuPencil  color="#000000" size = "2.5vw" ></LuPencil></button></td>
                             </tr>
+                            <tr>
+                                <td class = "check"><input type = "checkbox" id="habit" name="habit"></input></td>
+                                <td class = "habit"> Make Bed</td>
+                                <td><IoMdFlame id ="flame" color="#e57028" size = "3.5vw"></IoMdFlame></td>
+                                <td>5</td>
+                                <td class = "amount">0/1</td>
+                                <td><button class = "btn_counter"><FaPlusCircle  color="#92B27A" size = "2.5vw"></FaPlusCircle></button></td>
+                                <td><button class = "btn_edit"> <LuPencil  color="#000000" size = "2.5vw" ></LuPencil></button></td>
+                            </tr>
+                            <tr>
+                                <td class = "check"><input type = "checkbox" id="habit" name="habit"></input></td>
+                                <td class = "habit"> Make Bed</td>
+                                <td><IoMdFlame id ="flame" color="#e57028" size = "3.5vw"></IoMdFlame></td>
+                                <td>5</td>
+                                <td class = "amount">0/1</td>
+                                <td><button class = "btn_counter"><FaPlusCircle  color="#92B27A" size = "2.5vw"></FaPlusCircle></button></td>
+                                <td><button class = "btn_edit"> <LuPencil  color="#000000" size = "2.5vw" ></LuPencil></button></td>
+                            </tr>
                       </table>
                     </div>
               </div>

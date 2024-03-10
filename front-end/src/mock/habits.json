@@ -1,0 +1,29 @@
+[
+    {
+        "Owner": "a680d58244934254bc634cf0",
+        "Title": "Read a book",
+        "LastCheckIn": "2024-03-05T21:34:19Z",
+        "Streak": 4,
+        "PrivacyType": 0,
+        "MeasurementType": 1,
+        "Goal": 30
+    },
+    {
+        "Owner": "b84337936a9f482db5c848e5",
+        "Title": "Morning Jogging",
+        "LastCheckIn": "2024-03-05T21:34:19Z",
+        "Streak": 7,
+        "PrivacyType": 2,
+        "MeasurementType": 2,
+        "Goal": 5
+    },
+    {
+        "Owner": "d974c6b12bd9439f87e1f5c6",
+        "Title": "Meditation",
+        "LastCheckIn": "2024-03-05T21:34:19Z",
+        "Streak": 10,
+        "PrivacyType": 1,
+        "MeasurementType": 1,
+        "Goal": 15
+    }
+]

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    ToDoID:{
+    HabitID:{
         type: mongoose.ObjectId,
         required: true
     },
