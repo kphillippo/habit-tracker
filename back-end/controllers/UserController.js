@@ -1,5 +1,7 @@
 const User = require('../models/User')
+const Friends = require('../models/Friends');
 const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
 
 //creates a token using the sercret variable from our .env file
 const createToken = (_id) => {
@@ -62,5 +64,44 @@ const deleteUserByUsername = async (req, res) => {
     return res.status(500).json({ error: 'User not found!' });
   }
 }
+
+//Controller function to get User Info for the Profile Page
+const getUserProfileInfo = async (req, res) => {
+  try {
+    
+    const Owner = req.query.user_id;
+
+    // Retrieve user information
+    const userInfo = await User.getUserProfileInfo(Owner);
+
+    // Retrieve friends of the user
+    const userFriends = await Friends.findFriends(Owner);
+
+    // Extract the _id of each friend
+    const friendIds = userFriends.map(friend => friend.FriendsWith);
+
+    // Retrieve the username and Streak of each friend based on their _id
+    const friendData = await User.aggregate([
+      { $match: { _id: { $in: friendIds } } },
+      { $project: { _id: 1, Username: 1, Streak: 1 } }
+    ]);
+
+    // Map friend data to friend objects
+    const populatedFriends = userFriends.map(friend => {
+      const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
+      return {
+        ...friend.toObject(),
+        username: friendInfo ? friendInfo.Username : null,
+        Streak: friendInfo ? friendInfo.Streak : null
+      };
+    });
+
+    // Respond with user information and populated friends' data
+    const Email = userInfo.Email;
+    res.status(200).json({ Email, userFriends: populatedFriends });
+  } catch (error) {
+      res.status(400).json({error: error.message});
+  }
+}
   
-module.exports = {signupUser, loginUser, deleteUserByUsername}
+module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo}
