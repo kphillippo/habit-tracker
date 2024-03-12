@@ -55,10 +55,18 @@ HabitSchema.statics.createHabit = async function(Owner, Title, PrivacyType, Meas
 HabitSchema.statics.updateHabit = async function(HabitID, UserID, field_name, field_value) {
     const habit = await this.findOne({_id: HabitID, Owner: UserID});
     if (!habit) {
-        return false;
+        throw Error('Habit does not exist or you do not own this habit')
     }
     habit[field_name] = field_value;
     await habit.save();
+    return true;
+}
+
+HabitSchema.statics.deleteHabit = async function(HabitID, UserID) {
+    const habit = await this.findOneAndDelete({_id: HabitID, Owner: UserID});
+    if (!habit) {
+        throw Error('Habit does not exist or you do not own this habit')
+    }
     return true;
 }
 

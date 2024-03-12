@@ -10,4 +10,6 @@ router.get('/getHabits', getHabits)
 
 router.post('/updateHabit', updateHabit)
 
+router.delete('/deleteHabit', deleteHabit)
+
 module.exports = router
