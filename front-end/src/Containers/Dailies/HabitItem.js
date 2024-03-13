@@ -28,7 +28,7 @@ export default class HabitItem extends Component {
             Current: this.state.Current + 1
         })
         if(this.state.Current === this.state.Goal){
-            
+            //todo: send a POST request to update habit
         }
         
     }

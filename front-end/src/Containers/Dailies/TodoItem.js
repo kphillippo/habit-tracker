@@ -9,6 +9,7 @@ import { FaRegCalendar } from "react-icons/fa";
 import { FaCirclePlay } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
 import EditToDoPopup from "./EditTodoPopup.js";
+import apiRequest from "../../utils/reqTool.js"
 
 export default class TodoItem extends Component {
     constructor(props){
@@ -16,10 +17,14 @@ export default class TodoItem extends Component {
         this.state = {
             Title:props.data.Title,
             Status:false,
-            editTodo: false
+            editTodo: false,
+            Date:props.data.Date,
+            Remind:props.data.Remind,
+            Repeat:props.data.Repeat
         }
         this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
         this.toggleEditTodo = this.toggleEditTodo.bind(this);
+        this.updateTodo = this.updateTodo.bind(this);
     }
     
 
@@ -28,9 +33,12 @@ export default class TodoItem extends Component {
     }
 
     toggleEditTodo = () => {
-        console.log("test")
         this.setState(prevState => ({ editTodo: !prevState.editTodo }));
-        console.log(this.state)
+    }
+
+    updateTodo(data){
+        console.log(data)
+        //send a POST request to update ToDo
     }
 
     render(){
@@ -46,9 +54,10 @@ export default class TodoItem extends Component {
                 <td><button onClick={this.toggleEditTodo} class = "btn_edit2"><LuPencil id ="edit" size="2.5vw"color="#000000"></LuPencil></button></td>
                 <td><button class = "btn_delete"><IoTrashOutline id ="delete" size="2.5vw" color="#000000"></IoTrashOutline></button></td>
             </tr>
-            {editTodo && <EditToDoPopup habit={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} />}
+            {editTodo && <EditToDoPopup data={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} updateTodo={this.updateTodo} />}
             </>
         )
+
         
     }
 }
