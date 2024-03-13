@@ -6,24 +6,27 @@
         "Streak": 4,
         "PrivacyType": 0,
         "MeasurementType": 1,
-        "Goal": 30
+        "Goal": 30,
+        "id":"a680d58244934254bc634cf0"
     },
     {
-        "Owner": "b84337936a9f482db5c848e5",
+        "Owner": "a680d58244934254bc634cf0",
         "Title": "Morning Jogging",
         "LastCheckIn": "2024-03-05T21:34:19Z",
         "Streak": 7,
         "PrivacyType": 2,
         "MeasurementType": 2,
-        "Goal": 5
+        "Goal": 5,
+        "id":"a680d582449561856163854f0"
     },
     {
-        "Owner": "d974c6b12bd9439f87e1f5c6",
+        "Owner": "a680d58244934254bc634cf0",
         "Title": "Meditation",
         "LastCheckIn": "2024-03-05T21:34:19Z",
         "Streak": 10,
         "PrivacyType": 1,
         "MeasurementType": 1,
-        "Goal": 15
+        "Goal": 15,
+        "id":"a680d58244486152c634cf0"
     }
 ]
