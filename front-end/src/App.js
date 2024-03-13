@@ -50,11 +50,11 @@ function App() {
         <NavBar isSignedout={() => setisUpdated(true)} data={{userName, userToken, userStreak}}/>
         <Routes>
           <Route path="/home" element={<Home data={{userName, userToken, userStreak}}/>} />
-          <Route path="/dailies" element={<Dailies />} />
-          <Route path="/journal" element={<Journal />} />
-          <Route path="/challenges" element={<Challenges />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/stats" element={<Stats />} />
+          <Route path="/dailies" element={<Dailies user={{userName, userToken, userStreak}}/>} />
+          <Route path="/journal" element={<Journal user={{userName, userToken, userStreak}}/>} />
+          <Route path="/challenges" element={<Challenges user={{userName, userToken, userStreak}}/>} />
+          <Route path="/leaderboard" element={<Leaderboard user={{userName, userToken, userStreak}}/>} />
+          <Route path="/stats" element={<Stats user={{userName, userToken, userStreak}}/>} />
           <Route path="/help" element={<Help />} />
           <Route path="/profile" element={<Profile data={{userName, userToken}}/>} />
           <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)}/>} />
