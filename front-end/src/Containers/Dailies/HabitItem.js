@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import "./dailies.css";
-import { FaCalendar, FaCog } from "react-icons/fa";
 import { IoMdFlame } from "react-icons/io";
 import { LuPencil } from "react-icons/lu";
 import { FaPlusCircle } from "react-icons/fa";
-import { IoTrashOutline } from "react-icons/io5";
-import { FaRegCalendar } from "react-icons/fa";
 import { FaCirclePlay } from "react-icons/fa6";
-import { FaPlus } from "react-icons/fa";
 
 export default class HabitItem extends Component {
     constructor(props){
@@ -17,9 +13,11 @@ export default class HabitItem extends Component {
             Streak:props.data.Streak,
             MeasurementType: props.data.MeasurementType,
             Goal: props.data.Goal,
-            Current: 0
+            Current: 0,
+            Status: false,
+            editHabit: false
         }
-
+        this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
         this.handleGoalBtnClick = this.handleGoalBtnClick.bind(this);
     }
 
@@ -33,17 +31,32 @@ export default class HabitItem extends Component {
         
     }
 
+    
+    handleCheckBoxClick(event){
+        this.setState({ Status: event.target.checked });
+        //todo: send POST request to check in the habit
+    }
+
     render(){
+        const { Status, Title, editHabit} = this.state;
+        const deletedStyle = Status ? { textDecoration: 'line-through' } : {};
+        const flameColor = Status?"#e57028":"#c0c6b7";
+        const fontColor = Status?"#000000":"#c0c6b7";
         console.log(this.state)
         return(
             <tr>
-            <td class = "check"width = "5%"><input type = "checkbox" id="habit" name="habit"></input></td>
-            <td class = "habit" width = "53%"> {this.state.Title}</td>
-            <td width = "2%"><IoMdFlame id ="flame" color="#e57028" size = "3.5vw"></IoMdFlame></td>
-            <td width = "12.5%">{this.state.Streak}</td>
-            <td class = "amount" width = "20.5%">{this.state.Current}/{this.state.Goal}{this.state.MeasurementType === 2 && ":00"}</td>
-            <td width = "2%"><button class = "btn_counter" onClick={this.handleGoalBtnClick}><FaPlusCircle  color="#92B27A" size = "2.5vw"></FaPlusCircle></button></td>
-            <td width = "7%"><button class = "btn_edit"> <LuPencil  color="#000000" size = "2.5vw" ></LuPencil></button></td>
+            <td className = "check"width = "5%"><input type = "checkbox" id="habit" name="habit" onClick={this.handleCheckBoxClick}></input></td>
+            <td className = "habit" width = "53%" style={deletedStyle}> {Title}</td>
+            <td width = "2%"><IoMdFlame id ="flame" color={flameColor} size = "3.5vw"></IoMdFlame></td>
+            <td width = "12.5%" style={{ color: fontColor }}>{this.state.Streak}</td>
+            <td className = "amount" width = "20.5%">{this.state.Current}/{this.state.Goal}{this.state.MeasurementType === 2 && ":00"}</td>
+            <td width = "2%">
+                <button className = "btn_counter" onClick={this.handleGoalBtnClick}>
+                    {this.state.MeasurementType === 1 && <FaPlusCircle  color="#92B27A" size = "2.5vw"></FaPlusCircle>}
+                    {this.state.MeasurementType === 2 && <FaCirclePlay  color="#92B27A" size = "2.5vw"></FaCirclePlay>}
+                </button>
+            </td>
+            <td width = "7%"><button className = "btn_edit"> <LuPencil  color="#000000" size = "2.5vw" ></LuPencil></button></td>
         </tr>
         )
         

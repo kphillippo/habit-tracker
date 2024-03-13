@@ -252,13 +252,15 @@ input[type=checkbox] {
   }
   .TODO_bar {
     left:1.25vw;
-    position: absolute;
+    position: relative;
     border-radius: 15.02px;
     background-color: var(--color-white);
     border: 0.5px solid var(--color-black);
     box-sizing: border-box;
     width: 95%;
     height: 6.537037037%;
+    z-index: 0;
+    margin-top: 2%;
   }
   .plus{
     position:absolute;
@@ -616,6 +618,7 @@ input[type=checkbox] {
     display:flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
   }
 
   .edittodo_popup-inner{
@@ -630,6 +633,7 @@ input[type=checkbox] {
     box-shadow: 0 5px 30px rgba(0,0,0,.30);
     background:#E2E9D6;
     border-radius: 10px;
+    z-index: 2;
   }
   .edittodo_Title {
     font-weight: 500;

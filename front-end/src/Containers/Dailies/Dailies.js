@@ -1,33 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./dailies.css";
-import { FaCalendar, FaCog } from "react-icons/fa";
-import { IoMdFlame } from "react-icons/io";
-import { LuPencil } from "react-icons/lu";
-import { FaPlusCircle } from "react-icons/fa";
-import { IoTrashOutline } from "react-icons/io5";
+import { FaCog } from "react-icons/fa";
 import { FaRegCalendar } from "react-icons/fa";
-import { FaCirclePlay } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
 import HabitItem from "./HabitItem";
 import TodoItem from "./TodoItem";
 import mockHabits from "../../mock/habits.json";
 import mockTodos from "../../mock/todos.json"
+import { useNavigate } from "react-router-dom";
+import NewToDoPopup from "./NewTodoPopup";
 
-function Dailies(){
-  
+function Dailies(props){
+
+  let navigate = useNavigate()
+
+  const[newToDoPopup,setNewToDoPopup] = useState(false);
+
+  function isSignIn(){
+    if(!props.user.userToken){
+        navigate("/signin")
+    }
+  }
+
+  useEffect(() => {
+    isSignIn();
+  })
 
   return (
   <body>
-    <div class="dailies-page">
-      <div class = "tbl_container1">
-            <div class = "tbl_container">
+    <div className="dailies-page">
+      <div className = "tbl_container1">
+            <div className = "tbl_container">
                     <div id = "div1">
                     <table id = "table1">
                       <tr>
                       <td width = "50%">Habit</td>
                       <td width = "22.5%">Streak</td>
                       <td width = "22.5%">Goal</td>
-                      <td width = "5%"><button class = "btn_cog"><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
+                      <td width = "5%"><button className = "btn_cog"><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
                       </tr>
                       </table>
                     </div>
@@ -45,7 +55,7 @@ function Dailies(){
                     </div>
               </div>
         </div>
-    <div class = "tbl_container2">
+    <div className = "tbl_container2">
         <div id = "div3">
           <table id = "table3">
             {mockTodos.map((item => (
@@ -57,23 +67,25 @@ function Dailies(){
             )))}
             
         </table>
-  </div>
-        <div class="TODO_bar">
-        <input class="type-new" placeholder="Type new to do item here"type="text"/>
-        <button class="plus">< FaPlus size = "2vw"></FaPlus></button>
+        
+        </div>
+        <div className="TODO_bar">
+        <input className="type-new" placeholder="Type new to do item here" type="text"/>
+        <button className="plus" onClick ={() => setNewToDoPopup(true)} >< FaPlus size = "2vw"></FaPlus></button>
         </div>
     </div>
-      <div class="my-habits">My Habits</div>
-      <div class="to-do-list">To Do List</div>
-      <div class = "date_container">
-      <div class="january">January</div>
-      <div class="calendar_container">
-        <div class="calendar"><FaRegCalendar color="#000000" size = "3.5vw"></FaRegCalendar>
-        <button class="calendar_button">29</button></div>
+      <div className="my-habits">My Habits</div>
+      <div className="to-do-list">To Do List</div>
+      <div className = "date_container">
+      <div className="january">January</div>
+      <div className="calendar_container">
+        <div className="calendar"><FaRegCalendar color="#000000" size = "3.5vw"></FaRegCalendar>
+        <button className="calendar_button">29</button></div>
     </div>
-      <button class="Up">^</button>
-      <button class="Down">^</button>
+      <button className="Up">^</button>
+      <button className="Down">^</button>
       </div>
+      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup}/>
     </div>
 </body>
     );
