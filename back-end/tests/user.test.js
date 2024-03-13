@@ -209,7 +209,7 @@ describe('User API', () => {
   //delete user
   test('Delete user', async () => {
 
-    // Call the delte static method
+    // Call the delete static method
     const response = await request(app)
       .post('/api/user/delete')
       .send({ Username: 'testuser'})
@@ -220,12 +220,45 @@ describe('User API', () => {
   //delete user when user doesnt exist
   test('Fail delete user, user doesn not exist', async () => {
 
-    // Call the delte static method
+    // Call the delete static method
     const response = await request(app)
       .post('/api/user/delete')
       .send({ Username: 'testuser'})
 
     expect(response.status).toBe(500);// Assuming failed user deletion returns status 500
     expect(response.body.error).toBe('User not found!'); //expected error message
+  });
+
+  //access profile info
+  test('Access Profile Info', async () => {
+
+    // Call the getUserprofileInfo static method
+    const response = await request(app)
+      .post('/api/user/userProfileInfo?user_id=65ee645da982142253c9e080')
+      .send({ _id: '65ee645da982142253c9e080'})
+
+    expect(response.status).toBe(200);// Assuming successful user profile info access returns status 200
+  });
+
+  //access profile info, someone with no friends
+  test('Access Profile Info, someone with no friends', async () => {
+
+    // Call the getUserprofileInfo static method
+    const response = await request(app)
+      .post('/api/user/userProfileInfo?user_id=65dd29e3a56bbd3248a5a76b')
+      .send({ _id: '665dd29e3a56bbd3248a5a76b'})
+
+    expect(response.status).toBe(200);// Assuming successful user profile info access returns status 200
+  });
+
+  //fail to access profile info
+  test('Fail to Access Profile Info', async () => {
+
+    // Call the getUserprofileInfo static method
+    const response = await request(app)
+      .post('/api/user/userProfileInfo?user_id=65ee645da982142253c9e081')
+      .send({ _id: '65ee645da982142253c9e081'})
+
+    expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
   });
 });

@@ -90,8 +90,13 @@ const getUserProfileInfo = async (req, res) => {
     const populatedFriends = userFriends.map(friend => {
       const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
       return {
+         // Include all existing properties of the friend object
         ...friend.toObject(),
+
+        // Assign the Username property from friendInfo if available, otherwise null
         username: friendInfo ? friendInfo.Username : null,
+
+        // Assign the Streak property from friendInfo if available, otherwise null
         Streak: friendInfo ? friendInfo.Streak : null
       };
     });
