@@ -10,6 +10,28 @@ import { FaCirclePlay } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
 import {useState} from 'react';
 
+function HabitManager(habit){
+    return (habit.trigger) ? (
+        <div className="habitmanager_popup">
+            <div className= "habitmanager_popup-inner">
+                <div class = "habitmanager_Title">Habit Manager</div>
+                <div class = "habitmanager_div">
+                <table id = "habitmanager_table">
+                            <tr>
+                                <td class = "todo_item"> Go for a walk</td>
+                                <td><button class = "managerbtn_edit" > <LuPencil  color="#000000" size = "2.5vw"></LuPencil></button></td>
+                                <td><button class = "managerbtn_delete"><IoTrashOutline id ="delete" size="2.5vw" color="#000000"></IoTrashOutline></button></td>
+                            </tr>
+                </table>
+                </div>
+                    <button class = "habitmanager_close" onClick={() => habit.setTrigger(false)}>X</button>
+                    <button class = "habitmanager_Add_New_Habit" >Add New Habit</button>
+                {habit.children}
+            </div>
+        </div> 
+    ) : "";
+}
+
 function NewHabit(props){
     return (props.trigger) ? (
         <div className="popup">
@@ -149,6 +171,8 @@ function Dailies(){
 
     const[editToDo,setEditToDo] = useState(false);
 
+    const[habitManagerPopup,setHabitManagerPopup] = useState(false);
+
 
 
     return (
@@ -163,7 +187,7 @@ function Dailies(){
                       <td width = "22.5%">Streak</td>
                       <td width = "22.5%">Goal</td>
                       <td width = "3%"><button class = "plus1" onClick ={() => setButtonPopup(true)}>< FaPlus size = "2vw"></FaPlus></button></td>
-                      <td width = "2%"><button class = "btn_cog" onClick ={() => setButtonPopup(true)}><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
+                      <td width = "2%"><button class = "btn_cog" onClick ={() => setHabitManagerPopup(true)}><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
                       </tr>
                       </table>
                     </div>
@@ -289,6 +313,7 @@ function Dailies(){
     <NewToDo trigger = {newToDoPopup} setTrigger = {setNewToDoPopup}/>
     <EditHabit trigger ={editHabitPopup} setTrigger = {setEditHabitPopup}/>
     <EditToDo trigger ={editToDo} setTrigger = {setEditToDo}/>
+    <HabitManager trigger ={habitManagerPopup} setTrigger = {setHabitManagerPopup}/>
 </body>
 
     );
