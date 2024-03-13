@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const ToDoSchema = new mongoose.Schema({
     Owner:{
         type: mongoose.ObjectId,
         required: true
@@ -30,3 +30,5 @@ const UserSchema = new mongoose.Schema({
         required: true
     }
 }, {collection: 'ToDo'});
+
+module.exports = mongoose.model('ToDo', ToDoSchema);

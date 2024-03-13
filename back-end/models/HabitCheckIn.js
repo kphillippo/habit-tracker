@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    ToDoID:{
+    HabitId:{
         type: mongoose.ObjectId,
         required: true
     },
@@ -14,4 +14,4 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         required: true
     }
-}, { collection: 'ToDoCheckIn'});
+}, { collection: 'HabitCheckIn'});
