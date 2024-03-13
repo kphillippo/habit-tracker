@@ -52,7 +52,7 @@ function Home(props) {
     //Returns html with window
     function generateStreakWindow() {
         if (userStatus) {
-            let flameColor = "#4e5445";
+            let flameColor = "#c0c6b7";
             let message = <>You've been consistent for {currentStreak} days!<br></br>Extend your streak now!</>
             if (streakActive) {
                 flameColor = "#e57028";

@@ -61,7 +61,7 @@ function NavBar({isSignedout, data}) {
             <Nav className="navbar-top row-12">
                 <NavItem className="row-6">
                     <span className="title">HabitConnect</span>
-                    <span>your path to a better you!</span>
+                    <span>Connect! Commit! Change!</span>
                 </NavItem>
 
                 <NavItem className="align-right">

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const ToDoCheckInSchema = new mongoose.Schema({
     ToDoID:{
         type: mongoose.ObjectId,
         required: true

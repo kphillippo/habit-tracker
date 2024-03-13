@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const PrivacySettingsSchema = new mongoose.Schema({
     EmailOptIn: {
         type: Boolean,
         required: true
