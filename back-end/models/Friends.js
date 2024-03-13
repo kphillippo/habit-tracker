@@ -10,3 +10,10 @@ const FriendsSchema = new mongoose.Schema({
         required: true
     }
 }, { collection: 'Friends'});
+
+FriendsSchema.statics.findFriends = async function(User) {
+    return await this.find({User: User});
+}
+
+const FriendsModel = mongoose.model("Friends", FriendsSchema);
+module.exports = FriendsModel;

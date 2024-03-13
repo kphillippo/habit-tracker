@@ -49,10 +49,23 @@ HabitSchema.statics.createHabit = async function(Owner, Title, PrivacyType, Meas
     const habit = this.create({Owner, Title, PrivacyType, MeasurementType, Goal});
     return habit;
 }
+/**
+ * Function to update habit and return boolean which indicates if the update was successful
+ **/
+HabitSchema.statics.updateHabit = async function(HabitID, UserID, data) {
+    const habit = await this.findOneAndUpdate({_id: HabitID, Owner: UserID}, {$set: data}, {new: true});
+    if (!habit) {
+        throw Error('Habit does not exist or you do not own this habit')
+    }
+    return true;
+}
 
-HabitSchema.statics.updateHabit = async function(HabitID, UserID, field_name, field_value) {
-    const habit = await this.findOneAndUpdate({_id: HabitID, Owner: UserID}, {[field_name]: field_value}, {returnDocument: "after"});
-    return habit;
+HabitSchema.statics.deleteHabit = async function(HabitID, UserID) {
+    const habit = await this.findOneAndDelete({_id: HabitID, Owner: UserID});
+    if (!habit) {
+        throw Error('Habit does not exist or you do not own this habit')
+    }
+    return true;
 }
 
 const HabitModel = mongoose.model("Habit", HabitSchema);
