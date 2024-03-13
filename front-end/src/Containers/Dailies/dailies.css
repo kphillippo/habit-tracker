@@ -1,268 +1,283 @@
 @import url("https://fonts.googleapis.com/css2?family=Kotta+One:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Overpass:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Krona+One:wght@400&display=swap");
+:root {
+  /* fonts */
+  --font-krona-one: "Krona One";
+  --font-kotta-one: "Kotta One";
+  --font-overpass: "Overpass";
+
+  /* Colors */
+  --color-white: #fff;
+  --color-gray-1: rgba(0, 0, 0, 0.2);
+  --color-gray-2: rgba(0, 0, 0, 0.3);
+  --color-black: #000;
+  --color-darkgreen: rgba(196, 211, 171, 0.49);
+}
+*{
+  padding:0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.tbl_container1{
+  position: absolute;
+  top: 11vh;
+  left: 1.848958333vw;
+  border-radius: 15.02px;
+  background-color: var(--color-darkgreen);
+  box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+  border: 0.5px solid var(--color-black);
+  box-sizing: border-box;
+  width: 47.182291666vw;
+  height: 72vh;
+}
+
+#div1{
+  border-radius: 15.02px;
+  background-color: #92B27A;
+  border: 0.5px solid var(--color-black);
+  height:6vh; 
+  width:47.182291666vw;
+  padding-top:0;
+  margin:0;
+}
+#table1{
+  font-size: 1.9vw;
+  line-height:5vh;
+}
+
+#div2{
+  height:65vh;
+  width:100%;
+  overflow:scroll;
+  overflow-x: hidden;
+}
+#table2{
+  border-collapse: collapse;
+  width:98%;
+  font-size: 1.9vw;
+  align-items: left;
+  margin-left:2%;
+  margin-top: 3%;
+}
+#table2 td{
+  border-bottom: 0.01vh solid #000;
+  padding-top:2%;
+  padding-bottom:2%;
+}
+.amount{
+  text-align:right;
+  padding-right:1%;
+}
+input[type=checkbox] {
+  width: 5vw;
+  height: 5vh;
+}
+.tbl button{
+  display: inline-block;
+  border: none;
+  border-radius: 1px;
+  outline: none;
+  cursor: pointer;
+}
+.btn_cog{
+  border: none;
+  border-radius: none;
+  outline:none;
+  background: none;
+}
+.habit{
+  padding-left:1%;
+}
+
+.btn_delete{
+  border: none;
+  border-radius: none;
+  outline:none;
+  background: none;
+  padding-right:0.5vw;;
+}
+.btn_edit{
+  border: none;
+  border-radius: none;
+  outline:none;
+  background: none;
+  padding-left: 3vw;
+}
+.btn_edit2{
+  border: none;
+  border-radius: none;
+  outline:none;
+  background: none;
+}
+.btn_counter,.btn_play{
+  border: none;
+  border-radius: none;
+  outline:none;
+  background: none;
+  color:"#92B27A";
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 1.5vw;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border:1px solid #000;
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #92B27A; 
+  border:1px solid #000;
+  border-radius: 10px;
+}
+
+.tbl_container2{
+  position: absolute;
+    top: 11%;
+    left: 51.04166667%;
+    border-radius: 15.02px;
+    background-color: var(--color-darkgreen);
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+    border: 0.5px solid var(--color-black);
+    box-sizing: border-box;
+    width: 47.18229167%;
+    height: 72%;
+}
+#div3{
+  height:65vh;
+  width:100%;
+  overflow:scroll;
+  overflow-x: hidden;
+}
+#table3{
+  border-collapse: collapse;
+  width:98%;
+  font-size: 1.9vw;
+  align-items: left;
+  margin-left:2%;
+  margin-top: 3%;
+}
+#table3 td{
+  border-bottom: 0.01vh solid #000;
+  padding-top:2%;
+  padding-bottom:2%;
+}
+
 body {
     margin: 0;
     line-height: normal;
     font-size:16px;
   }
-  
-  :root {
-    /* fonts */
-    --font-krona-one: "Krona One";
-    --font-kotta-one: "Kotta One";
-    --font-overpass: Overpass;
-  
-    /* Colors */
-    --color-white: #fff;
-    --color-gray-100: rgba(0, 0, 0, 0.15);
-    --color-gray-200: rgba(0, 0, 0, 0.6);
-    --color-gray-400: rgba(0, 0, 0, 0.2);
-    --color-gray-300: rgba(0, 0, 0, 0.3);
-    --color-black: #000;
-    --color-darkseagreen-100: #c4d3ab;
-    --color-darkseagreen-200: #92b27a;
-    --color-darkseagreen-400: rgba(146, 178, 122, 0.15);
-    --color-darkseagreen-300: rgba(196, 211, 171, 0.49);
-    --color-darkslategray: #49593d;
-    --color-olivedrab: rgba(121, 154, 63, 0.44);
-    --color-beige-100: #e2e9d6;
-    --color-beige-200: rgba(226, 233, 214, 0.15);
-  }
-  .dailies-page-child {
-    position: absolute;
-    top: 11%;
-    left: 1.848958333%;
-    border-radius: 15.02px;
-    border-radius: 15.02px;
-    background-color: var(--color-darkseagreen-300);
-    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
-    border: 0.5px solid var(--color-black);
-    box-sizing: border-box;
-    width: 47.182291666%;
-    height: 72%;
-  }
-  .dailies-page-item {
-    position: absolute;
-    top: 11%;
-    left: 51.04166667%;
-    border-radius: 15.02px;
-    background-color: var(--color-darkseagreen-300);
-    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
-    border: 0.5px solid var(--color-black);
-    box-sizing: border-box;
-    width: 47.18229167%;
-    height: 72%;
-  }
-  .my-habits1, .to-do-list1 {
+  .my-habits, .to-do-list {
     position: absolute;
     top: 4%;
     left: 2.1875%;
-    font-size: 200%;
+    font-size: 2.5vw;
 }
-  .to-do-list1 {
+  .to-do-list {
     left: 51.09375%;
   }
-  /*  
-  .calendar-1-icon {
+  .date_container{
     position: absolute;
-    top: 2.949275051%;
-    left: 75%;
-    width: 10%;
-    height: 50%;
-    object-fit: cover;
-    background: url(calendar.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
+    top: 1vh;
+    left: 77vw;
+    width:23vw;
+    height:10vh;
   }
-*/
-  .january1 {
+  .january{
     position: absolute;
-    top: 2.5%;
-    left: 77.16145833%;
-    font-size: 200%;
+    font-size: 2.5vw;
+    left:10%;
+    top:2vh;
   }
-  .button3 {
+  .calendar_container{
+    position: absolute;
+    display:inline-block;
+    left:49%;
+  }
+  .calendar_button {
     cursor: pointer;
     border: 0;
     padding: 0;
     background-color: transparent;
     position: absolute;
-    top: 3%;
-    left: 90.77083333%;
-    font-size: 200%;
+    top: 20%;
+    left: 10%;
+    font-size: 2.5vw;
     font-family: var(--font-kotta-one);
     color: var(--color-black);
     text-align: left;
     display: inline-block;
   }
-  .dailies-page-inner {
-    position: absolute;
-    top: 5.530697414%;
-    left: 90.38020833%;
-    border-radius: 12.01px;
-    background-color: var(--color-white);
-    width: 4.302083333%;
-    height: 5.5%;
+  .calendar{
+    display:block;
   }
-  /* My habits scroll + todo scroll */
-  .dailies-page-child1,
-  .dailies-page-child2 {
-    position: absolute;
-    top: 24.7515381%;
-    left: 47.20833333%;
-    border-radius: 12.01px;
-    background-color: var(--color-darkseagreen-100);
-    border: 0.5px solid var(--color-black);
-    box-sizing: border-box;
-    width: 1.354166667%;
-    height: 50.37215506%;
-  }
-  /* todo scroll */
-  .dailies-page-child2 {
-    top: 15.75958353%;
-    left: 96.296875%;
-    height: 59.36410962%;
-  }
-  .dailies-page-child3 {
-    top: 33.04435744%;
-    left: 47.20833333%;
-    border-radius: 12.01px;
-    background-color: var(--color-darkseagreen-200);
-    width: 1.354166667%;
-    height: 5.03125%;
-  }
-  .dailies-page-child3,
-  .dailies-page-child4,
-  .rectangle-input12 {
-    position: absolute;
-    border: 0.5px solid var(--color-black);
-    box-sizing: border-box;
-  }
-  .dailies-page-child4 {
-    top: 67.7107086%;
-    left: 96.296875%;
-    border-radius: 12.01px;
-    background-color: var(--color-darkseagreen-200);
-    width: 1.354166667%;
-    height: 5.03125%;
-  }
-  
-  .dailies-page-child17 {
-    position: absolute;
-    top: 11%;
-    left: 1.848958333%;
-    border-radius: 15.02px;
-    background-color: var(--color-darkseagreen-200);
-    box-shadow: 0 5px 2px rgba(0, 0, 0, 0.25);
-    border: 0.5px solid var(--color-black);
-    box-sizing: border-box;
-    width: 47.18229167%;
-    height: 6.444444444%;
-  }
-  .goal1,
-  .habit1,
-  .streak1 {
-    position: absolute;
-    top: 11.35%;
-    left: 2.84375%;
-    text-align: right;
-    font-size: 150%;
-  }
-  .goal1,
-  .streak1 {
-    left: 24.86979167%;
-  }
-  .goal1 {
-    left: 35.50520833%;
-    width: 4.09375%;
-    height: 4.398148148%;
-  }
-  .cog-1 {
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    background-color: transparent;
-    position: absolute;
-    top: 12%;
-    left: 45.85416667%;
-    width: 2.473958333%;
-    height: 4.296296296%;
-    background-image: url(cog.png);
-    background-size: 30px;
-  }
-  .dailies-page-child24 {
-    position: absolute;
-    top: 74%;
-    left: 52.109375%;
-    border-radius: 15.02px;
-    background-color: var(--color-white);
-    border: 0.5px solid var(--color-black);
-    box-sizing: border-box;
-    width: 42.984375%;
-    height: 6.537037037%;
-  }
-  .button4{
-    border: 0;
-    background-color: transparent;
-    position: absolute;
-    top: 77.5%;
-    text-align: left;
-  }
-  .type-new-to1 {
-    border: 0;
-    background-color: transparent;
-    position: absolute;
-    top: 75%;
-    text-align: left;
-    outline: 0;
-    font-family: var(--font-kotta-one);
-    left: 53.17708333%;
-    color: var(--color-gray-400);
-  }
-  .button4 {
-    cursor: pointer;
-    padding: 0;
-    left: 91.5%;
-    font-size: 250%;
-    font-family: var(--font-krona-one);
-    color: var(--color-gray-200);
-    display: flex;
-    align-items: center;
-    width: 0.05%;
-    height: 0.05%;
-  }
-  .button5,
-  .button6 {
+  .Up,
+  .Down {
     cursor: pointer;
     border: 0;
     padding: 0;
     background-color: transparent;
     position: absolute;
     font-family: var(--font-krona-one);
-    color: var(--color-gray-300);
+    color: var(--color-gray-2);
     text-align: left;
     display: inline-block;
   }
-  .button5{
-    top: 3%;
-    left: 74%;
-    font-size:200%;
+  .Up{
+    top: 25%;
+    left: 0%;
+    font-size:2.5vw;
   }
   /* arrow down button */
-  .button6 {
-    top: 12.2%;
-    left: 97%;
+  .Down {
+    top: 90%;
+    left: 73%;
     transform: rotate(-180deg);
     transform-origin: 0 0;
-    font-size:200%;
+    font-size:2.5vw;
+  }
+  .TODO_bar {
+    left:1.25vw;
+    position: absolute;
+    border-radius: 15.02px;
+    background-color: var(--color-white);
+    border: 0.5px solid var(--color-black);
+    box-sizing: border-box;
+    width: 95%;
+    height: 6.537037037%;
+  }
+  .plus{
+    position:absolute;
+    border: none;
+    border-radius: none;
+    outline:none;
+    background: none;
+    left:95%;
+  }
+  .type-new {
+    border: 0;
+    padding-left: 2%;
+    padding-top: 0.3%;
+    background-color: transparent;
+    font-size: 1.5vw;
+    position: absolute;
+    text-align: left;
+    outline: 0;
+    font-family: var(--font-kotta-one);
+    color: var(--color-gray-1);
   }
   .dailies-page {
     width: 100%;
+    height: 100%;
     position: fixed;
     background-color: var(--color-white);
-    height: 100%;
     text-align: left;
     color: var(--color-black);
     font-family: var(--font-kotta-one);
