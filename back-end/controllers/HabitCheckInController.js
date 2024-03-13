@@ -1,4 +1,4 @@
-const HabbitCheckIn = require('../models/HabbitCheckIn');
+const HabitCheckIn = require('../models/HabitCheckIn');
 
 //controller functions go here
 
