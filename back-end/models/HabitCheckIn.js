@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const HabitCheckInSchema = new mongoose.Schema({
     HabitID:{
         type: mongoose.ObjectId,
         required: true

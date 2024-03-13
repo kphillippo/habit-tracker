@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const FriendsSchema = new mongoose.Schema({
     User:{
         type: mongoose.ObjectId,
         required: true
