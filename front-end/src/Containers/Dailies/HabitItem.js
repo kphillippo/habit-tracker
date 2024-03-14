@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./dailies.css";
 import { IoMdFlame } from "react-icons/io";
-import { LuPencil } from "react-icons/lu";
+
 import { FaPlusCircle } from "react-icons/fa";
 import { FaCirclePlay } from "react-icons/fa6";
 
@@ -56,7 +56,7 @@ export default class HabitItem extends Component {
                     {this.state.MeasurementType === 2 && <FaCirclePlay  color="#92B27A" size = "2.5vw"></FaCirclePlay>}
                 </button>
             </td>
-            <td width = "7%"><button className = "btn_edit"> <LuPencil  color="#000000" size = "2.5vw" ></LuPencil></button></td>
+            <td width = "7%"></td>
         </tr>
         )
         

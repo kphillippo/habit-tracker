@@ -9,12 +9,16 @@ import mockHabits from "../../mock/habits.json";
 import mockTodos from "../../mock/todos.json"
 import { useNavigate } from "react-router-dom";
 import NewToDoPopup from "./NewTodoPopup";
+import HabitManager from "./HabitManager";
+
 
 function Dailies(props){
 
   let navigate = useNavigate()
 
   const[newToDoPopup,setNewToDoPopup] = useState(false);
+  const[habitManager,setHabitManager] = useState(false);
+
 
   function isSignIn(){
     if(!props.user.userToken){
@@ -37,7 +41,7 @@ function Dailies(props){
                       <td width = "50%">Habit</td>
                       <td width = "22.5%">Streak</td>
                       <td width = "22.5%">Goal</td>
-                      <td width = "5%"><button className = "btn_cog"><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
+                      <td width = "5%"><button onClick={() => setHabitManager(true)} className = "btn_cog"><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
                       </tr>
                       </table>
                     </div>
@@ -85,7 +89,9 @@ function Dailies(props){
       <button className="Up">^</button>
       <button className="Down">^</button>
       </div>
+              
       <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup}/>
+      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} habits={mockHabits}></HabitManager>
     </div>
 </body>
     );

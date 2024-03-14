@@ -508,16 +508,17 @@ input[type=checkbox] {
     display:flex;
     justify-content: center;
     align-items: center;
+    z-index: 99;
   }
 
   .edithabit_popup-inner{
     position:fixed;
-    top: 60%;
+    top: 50%;
     left: 50%;
     padding-left: 4%;
-    padding-top:2%;
+    padding-top:0%;
     transform:translate(-50%,-50%);
-    width: 43%;
+    width: 110%;
     height: 75%;
     box-shadow: 0 5px 30px rgba(0,0,0,.30);
     background:#E2E9D6;
@@ -572,8 +573,8 @@ input[type=checkbox] {
   }
   .edithabit_close{
     position: absolute;
-    top: 5%;
-    left: 85%;
+    top: 0%;
+    left: 90%;
     width: 10%;
     height: 10%;
     font-size: 1.5vw;
@@ -715,4 +716,228 @@ input[type=checkbox] {
     border-width: 0.1vw;
     border-radius: 1.5vw;
   }
+
+
+  .habitmanager_popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background-color: var(--color-darkgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .habitmanager_popup-inner{
+    position:fixed;
+    top: 57vh;
+    left: 50vw;
+    padding-left: 4%;
+    padding-top:2%;
+    transform:translate(-50%,-50%);
+    width: 43vw;
+    height: 83vh;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background:#E2E9D6;
+    border-radius: 10px;
+    z-index: 1;
+  }
+  .habitmanager_Title {
+    font-weight: 500;
+    font-size: 3vw;
+    color:#333;
+    font-family: Kotta One;
+  }
+  .habitmanager_div{
+    overflow:scroll;
+    overflow-x: hidden;
+    border-radius: 15.02px;
+    border: 0.5px solid var(--color-black);
+    background-color: white;
+    width: 90%;
+    height: 73%;
+    font-family: Kotta One;
+  }
+  #habitmanager_table{
+  border-collapse: collapse;
+  width:98%;
+  font-size: 1.9vw;
+  align-items: left;
+  margin-left:2%;
+  margin-top: 3%;
+  }
+  #habitmanager_table td{
+    border-bottom: 0.01vh solid #000;
+    padding-top:2%;
+    padding-bottom:2%;
+  }
+  .todo_item{
+    padding-right:30%;
+  }
+  .managerbtn_delete{
+    border: none;
+    border-radius: none;
+    outline:none;
+    background: none;
+    padding-left:20%;
+  }
+  .managerbtn_edit{
+    border: none;
+    border-radius: none;
+    outline:none;
+    background: none;
+    padding-left:45%;
+  }
+  .habitmanager_close{
+    position: absolute;
+    top: 0%;
+    left: 90%;
+    width: 10%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+  }
+
+  .habitmanager_Add_New_Habit{
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.1vw;
+    border-radius: 1.5vw;
+  }
   
+
+
+
+  .newhabit_popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background-color: var(--color-darkgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .newhabit_popup-inner{
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    padding-left: 4%;
+    padding-top:0%;
+    transform:translate(-50%,-50%);
+    width: 50%;
+    height: 75%;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background:#E2E9D6;
+    border-radius: 10px;
+  }
+  .newhabit_Title {
+    font-weight: 500;
+    font-size: 3vw;
+    color:#333;
+    font-family: Kotta One;
+  }
+  .newhabit_columns{
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+
+    display: grid;
+    grid-template-columns: 1.3fr 2.7fr;
+
+    padding-top:5%;
+  }
+  .newhabit_name_label,
+  .newhabit_timer_label,
+  .newhabit_counter_label,
+  .newhabit_frequency_label{
+    margin-bottom: 2.5vh;
+  }
+  #newhabit_name_input,
+  #newhabit_timer_input,
+  #newhabit_counter_input,
+  #newhabit_frequency_input{
+    height: 7vh;
+  }
+  #newhabit_name_input{
+    width:95%;
+  }
+  #newhabit_timer_input{
+    width:40%;
+    text-align: center;
+  }
+  #newhabit_counter_input{
+    width:40%;
+  }
+  #newhabit_frequency_input{
+    width:95%;
+  }
+  .newhabit_currentstr{
+    padding-top:2.5vh;
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+  }
+  .newhabit_close{
+    position: absolute;
+    top: 0%;
+    left: 90%;
+    width: 10%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+  }
+  
+  .newhabit_savesubmit{
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.1vw;
+    border-radius: 1.5vw;
+  }
