@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 //schema
 const UserModel = require('./models/User.js');
 const HabitModel = require('./models/Habit.js')
+const FriendsModel = require('./models/Friends.js')
 
 //variabes for routing
 const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@cluster.rbzvfkr.mongodb.net/Habit_Tracker";
@@ -16,6 +17,7 @@ const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+
 const PORT = process.env.PORT || 8081;
 const userRoutes = require('./routes/UserRoutes.js');
 const habitRoutes = require('./routes/HabitRoutes.js');
+const freindsRoutes = require('./routes/FriendsRoutes.js');
 
 /*
 //variables for image
@@ -32,6 +34,7 @@ app.use(cors());
 //routes
 app.use('/api/user', userRoutes)
 app.use('/api/habit', habitRoutes)
+app.use('/api/friends', freindsRoutes)
 
 mongoose.connect(serverLink);
 

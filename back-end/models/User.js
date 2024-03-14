@@ -113,11 +113,23 @@ UserSchema.statics.login = async function(Username, Password){
     return user
 }
 
-//statuc get profile info function
+//static get profile info function
 UserSchema.statics.getUserProfileInfo = async function(_id){
     const user = await this.findOne({_id: _id});
 
     return user
+}
+
+//static ger user id function
+UserSchema.statics.getUserId = async function(Username){
+    const user = await this.findOne({Username: Username});
+
+    if(!user){
+        
+        throw Error('Username does not exist!')
+    }
+
+    return user._id;
 }
 
 const UserModel = mongoose.model("User", UserSchema);

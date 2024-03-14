@@ -108,5 +108,25 @@ const getUserProfileInfo = async (req, res) => {
       res.status(400).json({error: error.message});
   }
 }
+
+//edits user information (later we will have to make them verify thier email before it updates)
+const updateUserByID = async (req, res) => {
+  try {
+    const { FirstName, LastName, Email, Username } = req.body;
+
+    // Call the static method defined in the User schema to update the user's record by username
+    const updateResult = await User.findOneAndUpdate( );
+
+    // Check if the user's record was updated successfully
+    if (updateResult) {
+      res.status(200).json({ message: 'User record updated successfully', user: updateResult });
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    // Handle errors
+    return res.status(500).json({ error: 'Error updating user record!' });
+  }
+}
   
 module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo}
