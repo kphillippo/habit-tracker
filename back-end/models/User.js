@@ -32,8 +32,7 @@ const UserSchema = new mongoose.Schema({
     PrivacySettings:{
         type: mongoose.ObjectId
     },
-    ProfilePicture:
-    {
+    ProfilePicture:{
         data: Buffer,
         contentType: String
     }
