@@ -26,6 +26,8 @@ const Signin = ({ isSignedin }) =>{
                 sessionStorage.setItem("userStreak", user.Streak);
                 sessionStorage.setItem("userFirstName", user.FirstName);
                 sessionStorage.setItem("userLastName", user.LastName);
+                sessionStorage.setItem("userId", user._id);
+                sessionStorage.setItem("userEmail", user.Email);
                 isSignedin()
                 navigate('/home');
             })
