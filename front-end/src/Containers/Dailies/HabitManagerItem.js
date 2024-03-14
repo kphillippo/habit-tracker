@@ -3,6 +3,7 @@ import "./dailies.css";
 import { LuPencil } from "react-icons/lu";
 import { IoTrashOutline } from "react-icons/io5";
 import EditHabitPopup from "./EditHabitPopup";
+import {apiRequest} from "../../utils/reqTool"
 
 export default class HabitManagerItem extends Component {
     constructor(props){
@@ -15,6 +16,7 @@ export default class HabitManagerItem extends Component {
             Current: 0,
             Status: false,
             editHabit: false,
+            Owner: sessionStorage.getItem("userId")
         }
         this.toggleEditHabit = this.toggleEditHabit.bind(this);
         this.updateHabit = this.updateHabit.bind(this);
@@ -27,7 +29,17 @@ export default class HabitManagerItem extends Component {
     
     updateHabit(data){
         console.log(data)
-        //send a POST request to update ToDo
+        //send a POST request to update Habit
+        apiRequest("POST", "habit/update", data)
+        .then(({token, ...user}) => {
+            console.log(user);
+            
+        })
+        .catch(err => {
+            console.log(err);
+            window.alert(err.error);
+        })
+        
     }
 
     render(){
@@ -35,7 +47,7 @@ export default class HabitManagerItem extends Component {
         const deletedStyle = Status ? { textDecoration: 'line-through' } : {};
         const flameColor = Status?"#e57028":"#c0c6b7";
         const fontColor = Status?"#000000":"#c0c6b7";
-        console.log(this.state)
+
         return(
             <>
                 <tr>

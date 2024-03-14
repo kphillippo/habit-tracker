@@ -12,6 +12,7 @@ const getHabits = async (req, res) => {
 }
 
 const createHabit = async (req, res) => {
+    console.log(req.body)
     const {Owner, Title, MeasurementType, Goal} = req.body;
     try {
         const user_id = new ObjectId(Owner);

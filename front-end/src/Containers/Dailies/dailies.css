@@ -867,7 +867,7 @@ input[type=checkbox] {
     font-family: Overpass;
     font-size: 2vw;
     font-weight: 300;
-
+    gap: 5px;
     display: grid;
     grid-template-columns: 1.3fr 2.7fr;
 
@@ -878,6 +878,7 @@ input[type=checkbox] {
   .newhabit_counter_label,
   .newhabit_frequency_label{
     margin-bottom: 2.5vh;
+    padding-right: 5%;
   }
   #newhabit_name_input,
   #newhabit_timer_input,
@@ -889,11 +890,11 @@ input[type=checkbox] {
     width:95%;
   }
   #newhabit_timer_input{
-    width:40%;
+    width:30%;
     text-align: center;
   }
   #newhabit_counter_input{
-    width:40%;
+    width:30%;
   }
   #newhabit_frequency_input{
     width:95%;
@@ -941,3 +942,48 @@ input[type=checkbox] {
     border-width: 0.1vw;
     border-radius: 1.5vw;
   }
+
+  .timer_input_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    margin-bottom: 1.5%;
+    margin-top: 1.5%;
+}
+
+#newhabit_timer_input {
+    width: auto; 
+    text-align: center;
+}
+
+
+#newhabit_counter_input {
+  width: auto; 
+  text-align: center;
+}
+
+
+.timer_input_wrapper, .newhabit_counter_wrapper {
+  display: flex;
+  align-items: center; 
+  gap: 5px; 
+}
+
+
+input:disabled {
+  background-color: #f0f0f0; /* Light grey background */
+  color: #a9a9a9; /* Dim text color */
+}
+
+
+.newhabit_timer_label, .newhabit_counter_label {
+  display: block; /* Ensure labels are on their own line */
+  margin-bottom: 5px; /* Space between label and input or radio button */
+}
+
+/* Adjustments for radio buttons to align with your design */
+input[type="radio"] {
+  margin-right: 5%; 
+  margin-left: auto;
+  transform: scale(1.5);
+}

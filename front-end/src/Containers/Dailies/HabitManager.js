@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import HabitManagerItem from './HabitManagerItem';
 import NewHabitPopup from './NewHabitPopup';
-
+import {apiRequest} from "../../utils/reqTool"
 
 class HabitManager extends Component {
     constructor(props) {
@@ -12,6 +12,7 @@ class HabitManager extends Component {
             newHabit: false
         };
         this.toggleNewHabit = this.toggleNewHabit.bind(this);
+        this.createHabit = this.createHabit.bind(this);
     }
 
     toggleNewHabit = () => {
@@ -19,7 +20,18 @@ class HabitManager extends Component {
     }
 
     createHabit(data){
+        data.Goal = Number(data.Goal);
         console.log(data)
+        
+        apiRequest("POST", "habit/createHabit", data)
+        .then(({token, ...data}) => {
+            console.log(data);
+            this.props.isUpdated();
+        })
+        .catch(err => {
+            console.log(err);
+            window.alert(err.error);
+        })
     }
 
 

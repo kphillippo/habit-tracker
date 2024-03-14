@@ -31,12 +31,12 @@ HabitSchema.statics.findHabits = async function(Owner) {
     return await this.find({Owner: Owner});
 }
 
-HabitSchema.statics.createHabit = async function(Owner, Title, PrivacyType, MeasurementType, Goal) {
+HabitSchema.statics.createHabit = async function(Owner, Title, MeasurementType, Goal) {
     const user = await UserModel.findById(Owner);
     if (!user) {
         throw Error('User does not exist!');
     }
-    const habit = this.create({Owner, Title, PrivacyType, MeasurementType, Goal});
+    const habit = this.create({Owner, Title, MeasurementType, Goal});
     return habit;
 }
 /**

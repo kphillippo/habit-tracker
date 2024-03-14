@@ -10,15 +10,15 @@ import mockTodos from "../../mock/todos.json"
 import { useNavigate } from "react-router-dom";
 import NewToDoPopup from "./NewTodoPopup";
 import HabitManager from "./HabitManager";
-
+import {apiRequest} from "../../utils/reqTool"
 
 function Dailies(props){
 
   let navigate = useNavigate()
-
+  const [isUpdated, setisUpdated] = useState(false);
   const[newToDoPopup,setNewToDoPopup] = useState(false);
   const[habitManager,setHabitManager] = useState(false);
-
+  const[habits, setHabits] = useState();
 
   function isSignIn(){
     if(!props.user.userToken){
@@ -26,9 +26,23 @@ function Dailies(props){
     }
   }
 
+  function getHabits(){
+      apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
+      .then(res => {
+          console.log(res);
+          setHabits(res);
+      })
+      .catch(err => {
+          console.log(err);
+          window.alert(err.error);
+      })
+  
+  }
+
   useEffect(() => {
     isSignIn();
-  })
+    getHabits();
+  }, [isUpdated])
 
   return (
   <body>
@@ -47,7 +61,7 @@ function Dailies(props){
                     </div>
                     <div id ="div2">
                         <table id = "table2">
-                            {mockHabits.map((item) => (
+                            {habits.map((item) => (
                                 <HabitItem
                                     key={item.id}
                                     data = {item}
@@ -90,8 +104,8 @@ function Dailies(props){
       <button className="Down">^</button>
       </div>
               
-      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup}/>
-      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} habits={mockHabits}></HabitManager>
+      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => setisUpdated(true)}/>
+      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => setisUpdated(true)} habits={habits}></HabitManager>
     </div>
 </body>
     );
