@@ -14,4 +14,4 @@ const HabitCheckInSchema = new mongoose.Schema({
         type: Date,
         required: true
     }
-}, { collection: 'ToDoCheckIn'});
+}, { collection: 'HabitCheckIn'});

@@ -32,28 +32,27 @@ const UserSchema = new mongoose.Schema({
     PrivacySettings:{
         type: mongoose.ObjectId
     },
-    ProfilePicture:
-    {
+    ProfilePicture:{
         data: Buffer,
         contentType: String
     }
     
 }, { collection: 'User'});
 
-/* static signup method
-http://localhost:8081/api/user/signup to try it out
-jason format for testing: 
-{
-  "FirstName": "Lysa",
-  "LastName": "Hannes",
-  "Email": "Test@gmail.com",
-  "Username": "CristalKitty",
-  "Password": "Password!1"
+//static delete user function- later more will need to be added since all the settings and friends of the user will also need to be deleted if we will even use this for anythig other then testing
+UserSchema.statics.delete = async function(Username){
+    // Check if the user exists
+  const user = await this.findOne({ Username });
+
+  // If the user exists, delete it
+  if (user) {
+    await this.findOneAndDelete({ Username });
+    return { success: true, message: 'User deleted successfully!' };
+  }
 }
-*/
+
+//static sign up function
 UserSchema.statics.signup = async function(FirstName, LastName, Email, Username, Password) {
-
-
     //validation
     if (!FirstName || !LastName || !Email || !Username || !Password){
         throw Error('All fields must be filled!')
@@ -66,7 +65,6 @@ UserSchema.statics.signup = async function(FirstName, LastName, Email, Username,
     if(!validator.isStrongPassword(Password)){
         throw Error('Password must contain a capital, a lowercase, a symbol and 8 characters total!')
     }
-
 
     //checks if username is already in use
     const existsUsername = await this.findOne({Username});
@@ -85,22 +83,12 @@ UserSchema.statics.signup = async function(FirstName, LastName, Email, Username,
     //encrypts password with salt, then hashes
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(Password, salt);
-
     const user = await this.create({FirstName, LastName, Email, Username, Password: hash});
 
-
     return user;
-
 }
 
-/* static login method
-http://localhost:8081/api/user/login to try it out
-jason format for testing: 
-{
-  "Username": "CristalKitty",
-  "Password": "Password!1"
-}
-*/
+// static login method
 UserSchema.statics.login = async function(Username, Password){
 
     //checks if all fields are filled
@@ -108,7 +96,7 @@ UserSchema.statics.login = async function(Username, Password){
         throw Error('All fields must be filled!')
     }
 
-    //checks is the username is assosiated with a user
+    //gets the user assosiated to the username
     const user = await this.findOne({Username});
 
     if(!user){
@@ -119,8 +107,15 @@ UserSchema.statics.login = async function(Username, Password){
     const match = await bcrypt.compare(Password, user.Password)
 
     if(!match){
-        throw Error('Incorrect Password')
+        throw Error('Incorrect Password!')
     }
+
+    return user
+}
+
+//statuc get profile info function
+UserSchema.statics.getUserProfileInfo = async function(_id){
+    const user = await this.findOne({_id: _id});
 
     return user
 }

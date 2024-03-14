@@ -13,20 +13,18 @@ const ToDoSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    Time:{
-        type: Date,
-        required: true
-    },
     Repeat:{
-        type: String,
+        type: Boolean,
         required: true
     },
     Remind:{
-        type: String,
+        type: Boolean,
         required: true
     },
     Status:{
         type: Boolean,
-        required: true
+        default: false
     }
 }, {collection: 'ToDo'});
+
+module.exports = mongoose.model('ToDo', ToDoSchema);
