@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Kotta+One:wght@400&display=swap");
+
+.setting_container{
+    position: absolute;
+}
+.button_container{
+    position: absolute;
+    left: 85vw;
+    top:3vh;
+    height:5vh;
+    width:11vw;
+    background-color: #E2E9D6;
+}
+.save{
+    position: relative;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+    cursor: pointer;
+}
+.discard{
+    position: relative;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+    cursor: pointer;
+}
+.privacy_container{
+  position: absolute;
+  top: 11vh;
+  left: 1.848958333vw;
+  border-radius: 15.02px;
+  background-color: #E2E9D6;
+  box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+  border: 0.5px solid var(--color-black);
+  box-sizing: border-box;
+  width: 94vw;
+  height: 72vh;
+}
+.Privacy{
+    position: relative;
+    top: 3%;
+    left: 1.5%;
+    font-size: 3vw;
+    font-weight: 500;
+    font-family: Kotta One;
+}
+.privacy_inner{
+    position: relative;
+    border: 0.5px solid black;
+    border-radius: 15.02px;
+    background-color: white;
+    left:1%;
+    top:5%;
+    width:98%;
+    height:80%;
+}
+.row1,
+.row2,
+.row3,
+.row4,
+.row5,
+.row6{
+    position: relative;
+    left: 1%;
+    padding-top: 0.5%;
+    padding-bottom:0.5%;
+    width: 97%;
+    height:10%;
+    font-size: 2vw;
+    font-weight: 300;
+    font-family: Kotta One;
+    border-bottom:0.01vh solid #000;
+}
+.notifications_container{
+    position: absolute;
+    top: 87vh;
+    left: 1.848958333vw;
+    border-radius: 15.02px;
+    background-color: #E2E9D6;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+    border: 0.5px solid var(--color-black);
+    box-sizing: border-box;
+    width: 94vw;
+    height: 72vh;
+  }
+.Notifications{
+    position: relative;
+    top: 3%;
+    left: 1.5%;
+    font-size: 3vw;
+    font-weight: 500;
+    font-family: Kotta One;
+}
+.notification_inner{
+    position: relative;
+    border: 0.5px solid black;
+    border-radius: 15.02px;
+    background-color: white;
+    left:1%;
+    top:5%;
+    width:98%;
+    height:80%;
+}
