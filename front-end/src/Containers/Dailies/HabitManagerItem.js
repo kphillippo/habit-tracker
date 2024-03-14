@@ -16,7 +16,9 @@ export default class HabitManagerItem extends Component {
             Current: 0,
             Status: false,
             editHabit: false,
-            Owner: sessionStorage.getItem("userId")
+            Owner: sessionStorage.getItem("userId"),
+            HabitID: props.data._id,
+            habit: props.data
         }
         this.toggleEditHabit = this.toggleEditHabit.bind(this);
         this.updateHabit = this.updateHabit.bind(this);
@@ -28,21 +30,34 @@ export default class HabitManagerItem extends Component {
 
     
     updateHabit(data){
+        data.Goal = Number(data.Goal);
         console.log(data)
-        //send a POST request to update Habit
-        apiRequest("POST", "habit/update", data)
-        .then(({token, ...user}) => {
-            console.log(user);
-            
+        
+        apiRequest("POST", "habit/updateHabit", data)
+        .then((habit) => {
+            this.props.isUpdated()
         })
         .catch(err => {
             console.log(err);
             window.alert(err.error);
         })
-        
     }
 
+    componentDidUpdate(prevProps) {
+        // Compare the current props with the previous ones
+        if (this.props.data !== prevProps.data) {
+          // Perform the state update based on the new props
+          this.setState({
+            Title: this.props.data.Title,
+            Streak: this.props.data.Streak,
+            MeasurementType: this.props.data.MeasurementType,
+            Goal: this.props.data.Goal
+          });
+        }
+      }
+
     render(){
+       
         const { Status, Title, editHabit} = this.state;
         const deletedStyle = Status ? { textDecoration: 'line-through' } : {};
         const flameColor = Status?"#e57028":"#c0c6b7";

@@ -9,7 +9,8 @@ class HabitManager extends Component {
         super(props);
         this.state = {
             trigger: false,
-            newHabit: false
+            newHabit: false,
+            habits: props.habits
         };
         this.toggleNewHabit = this.toggleNewHabit.bind(this);
         this.createHabit = this.createHabit.bind(this);
@@ -37,8 +38,16 @@ class HabitManager extends Component {
 
     componentDidUpdate(prevProps) {
     // Only update state if the trigger prop has changed
-    if (prevProps.trigger !== this.props.trigger) {
-        this.setState({ trigger: this.props.trigger });
+        if (prevProps.trigger !== this.props.trigger) {
+                this.setState({ 
+                    trigger: this.props.trigger,
+                });
+            }
+        if (prevProps.habits!== this.props.habits ) {
+            // Perform the state update based on the new props
+            this.setState({
+                habits: this.props.habits
+            });
         }
     }
 
@@ -52,10 +61,11 @@ class HabitManager extends Component {
                 <div class = "habitmanager_Title">Habit Manager</div>
                 <div class = "habitmanager_div">
                 <table id = "habitmanager_table">
-                        {this.props.habits.map((item) => (
+                        {this.state.habits.map((item) => (
                                 <HabitManagerItem
                                     key={item.id}
                                     data = {item}
+                                    isUpdated={() => this.props.isUpdated()}
                                 >
                                 </HabitManagerItem>
                             ))}

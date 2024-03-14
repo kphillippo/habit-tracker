@@ -5,61 +5,77 @@ class EditHabitPopup extends Component {
         super(props);
         this.state = {
             trigger: props.trigger,
-            Title: props.data.Title,
-            Frequency: props.data.Frequency,
+            Title:props.data.Title,
+            Streak:0,
             Goal: props.data.Goal,
-            Streak: props.data.Streak,
-            MeasurementType: props.data.MeasurementType,
-            PrivacyType: props.data.PrivacyType
+            Status: false,
+            MeasurementType: "1",
+            UserID: sessionStorage.getItem("userId"),
+            HabitID: props.data.HabitID
         };
 
         this.handleSave = this.handleSave.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
     }
 
     handleSave(){
         this.props.updateHabit(this.state)
+        this.props.setTrigger(false)
     }
 
     handleChange= (event) => {
         const { name, value } = event.target;
-        console.log(name)
-        console.log(value)
         this.setState({
             [name]: value
         });
     }
 
+    handleOptionChange(event) {
+        this.setState({
+            MeasurementType: event.target.value,
+        });
+    }
+
     render() {
-        const { trigger, Title, Streak } = this.state;
-        
+        const { trigger, Title, Streak, Goal} = this.state;
+        console.log(this.props)
         return trigger ? (
-            <div className="edithabit_popup">
+            <div className="newhabit_popup">
                 <div className= "edithabit_popup-inner">
-                    <div class = "edithabit_Title">Edit {Title}</div>
-                    <div class = "edithabit_columns">
-                        <label class = "edithabit_name_label" for = "edithabit_name_input">Name:</label>
-                        <input  id = "edithabit_name_input" 
-                                type="text"
-                                value={this.state.Title}
-                        ></input>
+                    <div class = "newhabit_Title">Add New Habit</div>
+                    <div class = "newhabit_columns">
+                        <label class = "newhabit_name_label" for = "name_input">Name:</label>
+                        <div class="timer_input_wrapper">
+                        <input id = "newhabit_name_input" type="text" name="Title" onChange={this.handleChange} value={Title}></input>
+                        </div>
 
-                        <label class = "edithabit_timer_label"for = "edithabit_timer_input">Timer:</label>
-                        <input id = "edithabit_timer_input" type="text"></input>
 
-                        <label class = "edithabit_counter_label"for = "edithabit_counter_input">Counter:</label>
-                        <input id = "edithabit_counter_input" type="text"></input>
+                        <label class = "newhabit_name_label" for="newhabit_timer_input">Timer:</label>
+                        <div class="timer_input_wrapper">
+                            <input id="newhabit_timer_input" type="number" name="Goal" value={Goal} disabled={this.state.MeasurementType !== "1"} onChange={this.handleChange}/>
+                            <span>(s)</span>
+                            <input type="radio" id="timerOption" name="MeasurementType" value="1" onChange={this.handleOptionChange} checked={this.state.MeasurementType === "1"} />
+                        </div>
+                            
+                        <label class = "newhabit_name_label" for="newhabit_counter_input">Counter:</label>
+                        <div class="timer_input_wrapper">
+                                
+                            <input id="newhabit_counter_input" type="number" name="Goal" value={Goal} disabled={this.state.MeasurementType !== "2"} onChange={this.handleChange}/>
+                            <input type="radio" id="counterOption" name="MeasurementType" value="2" onChange={this.handleOptionChange} checked={this.state.MeasurementType === "2"} />
+                        </div>
+
+                            
+                        <label class = "newhabit_frequency_label"for = "frequency_input">Current Streak:</label>
+                        <div class="timer_input_wrapper">
+                            {Streak}
+                        </div>
+                            
                         
-                        <label class = "edithabit_frequency_label"for = "edithabit_frequency_input">Frequency:</label>
-                        <select id = "edithabit_frequency_input">
-                            <option value = "Daily">Every Day</option>
-                            <option value = "Weekly">Every Week</option>
-                            <option value = "Monthly">Every Month</option>
-                        </select>
                     </div>
-                        <div class = "edithabit_currentstr">Current Streak: {Streak}</div>
-                        <button class = "edithabit_close" onClick={() => this.props.setTrigger(false)}>X</button>
-                        <button class = "edithabit_savesubmit" >Save & Close</button>
+                        <button class = "newhabit_close" onClick={() => this.props.setTrigger(false)}>X</button>
+                        <button class = "newhabit_savesubmit" onClick={() => this.handleSave()}>Save & Close</button>
+                   
                 </div>
             </div> 
         ) : null;

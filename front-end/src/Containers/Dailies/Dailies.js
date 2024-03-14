@@ -15,7 +15,7 @@ import {apiRequest} from "../../utils/reqTool"
 function Dailies(props){
 
   let navigate = useNavigate()
-  const [isUpdated, setisUpdated] = useState(false);
+  const [updateTrigger, setUpdateTrigger] = useState(0);
   const[newToDoPopup,setNewToDoPopup] = useState(false);
   const[habitManager,setHabitManager] = useState(false);
   const[habits, setHabits] = useState();
@@ -23,8 +23,15 @@ function Dailies(props){
   function isSignIn(){
     if(!props.user.userToken){
         navigate("/signin")
+        return false;
     }
+    return true;
   }
+
+  const triggerDataRefresh = () => {
+    setUpdateTrigger(currentValue => currentValue + 1);
+};
+
 
   function getHabits(){
       apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
@@ -40,9 +47,10 @@ function Dailies(props){
   }
 
   useEffect(() => {
-    isSignIn();
-    getHabits();
-  }, [isUpdated])
+    if(isSignIn()){
+      getHabits();
+    }
+  }, [updateTrigger])
 
   return (
   <body>
@@ -61,7 +69,7 @@ function Dailies(props){
                     </div>
                     <div id ="div2">
                         <table id = "table2">
-                            {habits.map((item) => (
+                            {habits && habits.map((item) => (
                                 <HabitItem
                                     key={item.id}
                                     data = {item}
@@ -104,8 +112,8 @@ function Dailies(props){
       <button className="Down">^</button>
       </div>
               
-      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => setisUpdated(true)}/>
-      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => setisUpdated(true)} habits={habits}></HabitManager>
+      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()}/>
+      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
     </div>
 </body>
     );
