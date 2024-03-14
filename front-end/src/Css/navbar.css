@@ -112,6 +112,10 @@
   cursor:pointer;
 }
 
+.notification-icon :hover{
+  cursor: pointer;
+}
+
 .user-icon-popup ul li{
   margin-top:1%;
   margin-bottom: 1%;
