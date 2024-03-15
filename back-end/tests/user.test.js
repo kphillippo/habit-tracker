@@ -229,7 +229,7 @@ describe('User API', () => {
     expect(response.status).toBe(200);// Assuming successful user profile info access returns status 200
   });
 
-  //fail to access profile info
+  //fail to access profile info, wrong id
   test('Fail to Access Profile Info', async () => {
 
     // Call the getUserprofileInfo static method
@@ -300,6 +300,94 @@ describe('User API', () => {
 
     expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
     expect(response.body.error).toBe('Email already in use!'); //expected error message
+  });
+
+  //Update users password
+  test('Update users password', async () => {
+
+    //test data
+    const userData = {
+      _id: _id,
+      Password: 'Password!1',
+      newPassword:'Password!2'
+    };
+
+    // Call the updateUserInfo static method
+    const response = await request(app)
+      .post('/api/user/updatePassword')
+      .send(userData)
+
+    expect(response.status).toBe(200);// Assuming failed user profile info access returns status 200
+
+    //change it again so it works again next time
+    //test data
+    const userData2 = {
+      _id: _id,
+      Password: 'Password!2',
+      newPassword:'Password!1'
+    };
+
+    // Call the updateUserInfo static method
+    const response2 = await request(app)
+      .post('/api/user/updatePassword')
+      .send(userData2)
+  });
+
+  //Fail to Update users password, incorrect password
+  test('Fail to update users password, incorrect password', async () => {
+
+    //test data
+    const userData = {
+      _id: _id,
+      Password: 'Password!2',
+      newPassword:'Password!2'
+    };
+
+    // Call the updateUserInfo static method
+    const response = await request(app)
+      .post('/api/user/updatePassword')
+      .send(userData)
+
+    expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
+    expect(response.body.error).toBe('Incorrect Password!'); //expected error message
+  });
+
+  //Fail to Update users password, new password must be different then current password
+  test('Fail to update users password, new password must be different then current password', async () => {
+
+    //test data
+    const userData = {
+      _id: _id,
+      Password: 'Password!1',
+      newPassword:'Password!1'
+    };
+
+    // Call the updateUserInfo static method
+    const response = await request(app)
+      .post('/api/user/updatePassword')
+      .send(userData)
+
+    expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
+    expect(response.body.error).toBe('Your new password must be different from your current password!'); //expected error message
+  });
+
+  //Fail to Update users password, new password must contain a capital, a lowercase, a symbol and 8 characters total
+  test('Fail to update users password, new password must contain a capital, a lowercase, a symbol and 8 characters total', async () => {
+
+    //test data
+    const userData = {
+      _id: _id,
+      Password: 'Password!1',
+      newPassword:'Password'
+    };
+
+    // Call the updateUserInfo static method
+    const response = await request(app)
+      .post('/api/user/updatePassword')
+      .send(userData)
+
+    expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
+    expect(response.body.error).toBe('Password must contain a capital, a lowercase, a symbol and 8 characters total!'); //expected error message
   });
 
   //delete user

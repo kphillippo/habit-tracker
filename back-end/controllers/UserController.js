@@ -134,5 +134,23 @@ const updateUserInfo = async (req, res) => {
   // the user's record was updated successfully
   res.status(200).json({ message: 'User record updated successfully!', success: true});
 }
+
+//updates password
+const updatePassword = async (req, res) => {
+  try {
   
-module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo }
+    const { _id, Password, newPassword } = req.body;
+
+    
+
+    // Call the static method defined in the User schema to update the user's record by username
+    const updateResult = await User.updatePassword( _id, Password, newPassword );
+
+    // the user's record was updated successfully
+    res.status(200).json({ message: 'User password updated successfully!', success: true});
+  } catch (error) {
+    res.status(400).json({error: error.message});
+  }
+}
+  
+module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword }

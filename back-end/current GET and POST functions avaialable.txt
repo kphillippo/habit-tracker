@@ -5,6 +5,7 @@ Login                   http://localhost:8081/api/user/login
 Delete a user           http://localhost:8081/api/user/delete
 Get User Profile Info   http://localhost:8081/api/user/userProfileInfo?user_id={userId}
 Update User Info        http://localhost:8081/api/user/updateUserInfo
+Update User Password    http://localhost:8081/api/user/updatePassword
 
 Habit:
 Get a user's habits     http://localhost:8081/api/habit/getHabits?user_id={userId}
