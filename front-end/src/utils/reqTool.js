@@ -37,13 +37,15 @@ export function apiRequest(method,path,data){
         .then(res => {
             return resolve(res.data)
         }).catch(err => {
+            let errorMessage;
             if (err.response) {
-                // Reject with the entire response or a specific message, depending on your needs
-                reject(err.response.data || err.response.statusText);
+                // Extract the message from the response
+                errorMessage = err.response.data.message || err.response.statusText;
             } else {
-                // This handles cases where the error might not be a response error (e.g., network issues)
-                reject(err.message);
+                // Use the message from the error object
+                errorMessage = err.message;
             }
+            reject(new Error(errorMessage));
         })
     })
 }
