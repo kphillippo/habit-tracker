@@ -9,22 +9,48 @@ import mockHabits from "../../mock/habits.json";
 import mockTodos from "../../mock/todos.json"
 import { useNavigate } from "react-router-dom";
 import NewToDoPopup from "./NewTodoPopup";
+import HabitManager from "./HabitManager";
+import {apiRequest} from "../../utils/reqTool"
 
 function Dailies(props){
 
   let navigate = useNavigate()
-
+  const [updateTrigger, setUpdateTrigger] = useState(0);
   const[newToDoPopup,setNewToDoPopup] = useState(false);
+  const[habitManager,setHabitManager] = useState(false);
+  const[habits, setHabits] = useState();
 
   function isSignIn(){
     if(!props.user.userToken){
         navigate("/signin")
+        return false;
     }
+    return true;
+  }
+
+  const triggerDataRefresh = () => {
+    setUpdateTrigger(currentValue => currentValue + 1);
+};
+
+
+  function getHabits(){
+      apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
+      .then(res => {
+          console.log(res);
+          setHabits(res);
+      })
+      .catch(err => {
+          console.log(err);
+          window.alert(err.error);
+      })
+  
   }
 
   useEffect(() => {
-    isSignIn();
-  })
+    if(isSignIn()){
+      getHabits();
+    }
+  }, [updateTrigger])
 
   return (
   <body>
@@ -37,13 +63,13 @@ function Dailies(props){
                       <td width = "50%">Habit</td>
                       <td width = "22.5%">Streak</td>
                       <td width = "22.5%">Goal</td>
-                      <td width = "5%"><button className = "btn_cog"><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
+                      <td width = "5%"><button onClick={() => setHabitManager(true)} className = "btn_cog"><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
                       </tr>
                       </table>
                     </div>
                     <div id ="div2">
                         <table id = "table2">
-                            {mockHabits.map((item) => (
+                            {habits && habits.map((item) => (
                                 <HabitItem
                                     key={item.id}
                                     data = {item}
@@ -85,7 +111,9 @@ function Dailies(props){
       <button className="Up">^</button>
       <button className="Down">^</button>
       </div>
-      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup}/>
+              
+      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()}/>
+      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
     </div>
 </body>
     );

@@ -92,7 +92,7 @@ class NewToDoPopup extends Component {
                             <option value="true">Done</option>
                         </select>
                     </div>
-                    <button className="edittodo_close" onClick={() =>  {console.log(this.state.trigger); this.props.setTrigger(false)}}>X</button>
+                    <button className="edittodo_close" onClick={() =>  {this.props.setTrigger(false)}}>X</button>
                     <button className="edittodo_savesubmit" onClick={() => this.handleSave()}>Save & Close</button>
                 </div>
             </div>
