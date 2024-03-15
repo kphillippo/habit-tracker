@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import HabitManagerItem from './HabitManagerItem';
 import NewHabitPopup from './NewHabitPopup';
 import {apiRequest} from "../../utils/reqTool"
+import toast, { Toaster } from 'react-hot-toast';
 
 class HabitManager extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class HabitManager extends Component {
         .then(({token, ...data}) => {
             console.log(data);
             this.props.isUpdated();
+            toast.success("A habit is created!")
         })
         .catch(err => {
             console.log(err);
@@ -61,7 +63,9 @@ class HabitManager extends Component {
         return trigger ? (
             <>
             <div className="habitmanager_popup">
+            
             <div className= "habitmanager_popup-inner">
+                <Toaster />
                 <div class = "habitmanager_Title">Habit Manager</div>
                 <div class = "habitmanager_div">
                 <table id = "habitmanager_table">
