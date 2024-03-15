@@ -91,7 +91,7 @@ export default class HabitManagerItem extends Component {
                     <td><button onClick={this.toggleDeleteHabit} class = "managerbtn_delete"><IoTrashOutline id ="delete" size="2.5vw" color="#000000" ></IoTrashOutline></button></td>
                 </tr>
                 {editHabit && <EditHabitPopup data={this.state} trigger={editHabit} setTrigger={this.toggleEditHabit} updateHabit={this.updateHabit} />}
-                {deleteHabit && <DeletePopup data={this.state} trigger={deleteHabit} setTrigger={this.toggleDeleteHabit} deleteHabit={this.deleteHabit} />}
+                {deleteHabit && <DeletePopup type={"habit"} data={this.state} trigger={deleteHabit} setTrigger={this.toggleDeleteHabit} deleteHabit={this.deleteHabit} />}
             </>
         )
         

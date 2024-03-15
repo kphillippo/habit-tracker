@@ -4,6 +4,7 @@ import { LuPencil } from "react-icons/lu";
 import { IoTrashOutline } from "react-icons/io5";
 import EditToDoPopup from "./EditTodoPopup.js";
 import {apiRequest} from "../../utils/reqTool.js"
+import DeletePopup from "./DeletePopup.js";
 
 export default class TodoItem extends Component {
     constructor(props){
@@ -13,6 +14,7 @@ export default class TodoItem extends Component {
             Title:props.data.Title,
             Status:false,
             editTodo: false,
+            deleteTodo:false,
             Date:props.data.Date,
             Remind:props.data.Remind,
             Repeat:props.data.Repeat,
@@ -21,7 +23,9 @@ export default class TodoItem extends Component {
         }
         this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
         this.toggleEditTodo = this.toggleEditTodo.bind(this);
+        this.toggleDeleteTodo = this.toggleDeleteTodo.bind(this)
         this.updateTodo = this.updateTodo.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this)
     }
     
 
@@ -31,6 +35,10 @@ export default class TodoItem extends Component {
 
     toggleEditTodo = () => {
         this.setState(prevState => ({ editTodo: !prevState.editTodo }));
+    }
+
+    toggleDeleteTodo = () => {
+        this.setState(prevState => ({ deleteTodo: !prevState.deleteTodo }));
     }
 
    updateTodo(data){
@@ -45,6 +53,19 @@ export default class TodoItem extends Component {
             window.alert(err);
         })
       }
+    
+      deleteTodo(bool){
+        if(bool){
+            apiRequest("DELETE", `todo/deleteTodo?user_id=${this.state.UserId}&todo_id=${this.state.ToDoId}`)
+                .then(() => {
+                    this.props.isUpdated()
+                })
+                .catch(err => {
+                    console.log(err);
+                    window.alert(err);
+                })
+        }
+      }
 
       componentDidUpdate(prevProps) {
             if (prevProps.data!== this.props.data ) {
@@ -56,7 +77,7 @@ export default class TodoItem extends Component {
         }
 
     render(){
-        const { Status, Title, editTodo } = this.state;
+        const { Status, editTodo, deleteTodo } = this.state;
         const deletedStyle = Status ? { textDecoration: 'line-through' } : {};
 
         return(
@@ -66,9 +87,10 @@ export default class TodoItem extends Component {
                 {this.state.Status === false && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick}></input><label for = "todo"> {this.state.Title}</label></td>}
                 
                 <td><button onClick={this.toggleEditTodo} className = "btn_edit2"><LuPencil id ="edit" size="2.5vw"color="#000000"></LuPencil></button></td>
-                <td><button className = "btn_delete"><IoTrashOutline id ="delete" size="2.5vw" color="#000000"></IoTrashOutline></button></td>
+                <td><button className = "btn_delete" onClick={this.toggleDeleteTodo}><IoTrashOutline id ="delete" size="2.5vw" color="#000000"></IoTrashOutline></button></td>
             </tr>
             {editTodo && <EditToDoPopup data={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} updateTodo={(data) => this.updateTodo(data)} />}
+            {deleteTodo && <DeletePopup type={"todo"} data={this.state} trigger={deleteTodo} setTrigger={this.toggleDeleteTodo} deleteTodo={this.deleteTodo}></DeletePopup>}
             </>
         )
 

@@ -68,6 +68,7 @@ const deleteToDo = async (req, res) => {
         }
         throw new Error("ToDo not found");
     } catch (error) {
+        console.log(error)
         res.status(400).json({ error: error.message });
     }
 }

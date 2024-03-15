@@ -6,7 +6,8 @@ class DeletePopup extends Component {
         this.state = {
             trigger: props.trigger,
         };
-
+        this.handleYesClick = this.handleYesClick.bind(this);
+        this.handleNoClick = this.handleNoClick.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -16,24 +17,47 @@ class DeletePopup extends Component {
         }
     }
 
+    handleYesClick(){
+        if(this.props.type === "habit"){
+            this.props.deleteHabit(true);
+            this.props.setTrigger(false)
+        }
+        else if(this.props.type === "todo"){
+            this.props.deleteTodo(true);
+            this.props.setTrigger(false);
+        }
+    }
+
+
+    handleNoClick(){
+        if(this.props.type === "habit"){
+            this.props.deleteHabit(false);
+            this.props.setTrigger(false)
+        }
+        else if(this.props.type === "todo"){
+            this.props.deleteTodo(false);
+            this.props.setTrigger(false);
+        }
+    }
+
     render() {
         const { trigger } = this.state;
-        
+        const temp = (this.props.type === "habit")?"delete_popup-inner-1":"delete_popup-inner-2"
         return trigger ? (
             <div class ="delete_popup"> 
 
-                <div className= "delete_popup-inner"> 
+                <div className={temp}> 
 
-                    <div class = "delete_Title">Are you sure you want to <b>delete</b> this item?</div> 
+                    <div class = "delete_Title">Are you sure you want to <b>delete</b> this {this.props.type === "habit" && "habit"} {this.props.type === "todo" && "todo"}?</div> 
 
                     <button class = "delete_no" 
-                        onClick={() => {this.props.deleteHabit(false);this.props.setTrigger(false)}}
+                        onClick={() => this.handleNoClick()}
                     >
                         No
                     </button> 
 
                     <button class = "delete_yes" 
-                        onClick={() => {this.props.deleteHabit(true);this.props.setTrigger(false)}}
+                        onClick={() => this.handleYesClick()}
                     >
                         Yes
                     </button> 
