@@ -9,7 +9,9 @@ class EditToDoPopup extends Component {
             Status: props.data.Status,
             Repeat: props.data.Repeat,
             Remind: props.data.Remind,
-            Date: props.data.Date
+            Date: props.data.Date,
+            UserId: sessionStorage.getItem("userId"),
+            ToDoId:props.data.ToDoId
         };
 
         this.handleSave = this.handleSave.bind(this);
@@ -17,7 +19,8 @@ class EditToDoPopup extends Component {
     }
 
     handleSave(){
-        this.props.updateTodo(this.state)
+        this.props.updateTodo(this.state);
+        this.props.setTrigger();
     }
 
     handleChange= (event) => {
@@ -33,7 +36,7 @@ class EditToDoPopup extends Component {
         return trigger ? (
             <div className="edittodo_popup">
                 <div className="edittodo_popup-inner">
-                    <div className="edittodo_Title">Edit {this.state.Title}</div>
+                    <div className="edittodo_Title">Edit {this.props.data.Title}</div>
                     <div className="edittodo_columns">
                         <label className="edittodo_name_label" htmlFor="edittodo_name_input">Name:</label>
                         <input  id="edittodo_name_input" 
@@ -47,7 +50,7 @@ class EditToDoPopup extends Component {
                         <input  id="edittodo_timer_input" 
                                 type="text" 
                                 name="Date"
-                                value={this.state.Date}
+                                value={this.state.Date.split('T')[0]}
                                 onChange={this.handleChange}
                         />
 
@@ -86,7 +89,7 @@ class EditToDoPopup extends Component {
                         </select>
                     </div>
                     <button className="edittodo_close" onClick={() =>  this.props.setTrigger()}>X</button>
-                    <button className="edittodo_savesubmit" onClick={() => this.handleSave()}>Save & Close</button>
+                    <button className="edittodo_savesubmit" onClick={() => {this.handleSave();}}>Save & Close</button>
                 </div>
             </div>
         ) : null;

@@ -7,9 +7,9 @@ const router = express.Router()
 
 //any routes go here
 
-router.post('/create', createToDo);
-router.delete('/delete', deleteToDo);
-router.get('/get', getToDos);
-router.post('/update', updateToDo);
+router.post('/createTodo', createToDo);
+router.delete('/deleteTodo', deleteToDo);
+router.get('/getTodos', getToDos);
+router.post('/updateTodo', updateToDo);
 
 module.exports = router

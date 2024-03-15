@@ -19,13 +19,13 @@ const createToDo = async (req, res) => {
 
 const getToDos = async (req, res) => {
     try {
-        let { UserId } = req.query;
-        UserId = new ObjectId(UserId);
+        let { user_id } = req.query;
+        const UserId = new ObjectId(user_id);
         let owner = await User.findById(UserId);
         if (!owner) {
             throw new Error("User not found");
         }
-        const todos = await ToDo.find({ Owner: UserId });
+        const todos = await ToDo.find({ Owner: UserId  });
         res.status(200).json(todos);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -34,7 +34,7 @@ const getToDos = async (req, res) => {
 
 const updateToDo = async (req, res) => {
     try {
-        let { ToDoId, UserId, data } = req.body;
+        let { ToDoId, UserId, ...data } = req.body;
         ToDoId = new ObjectId(ToDoId);
         UserId = new ObjectId(UserId);
         if (!await User.findById(UserId)) {
@@ -52,15 +52,16 @@ const updateToDo = async (req, res) => {
         }
         throw new Error("ToDo could not be updated.");
     } catch (error) {
+        console.log(error)
         res.status(400).json({ error: error.message });
     }
 }
 
 const deleteToDo = async (req, res) => {
     try {
-        let { UserId, ToDoId } = req.body;
-        UserId = new ObjectId(UserId);
-        ToDoId = new ObjectId(ToDoId);
+        let { user_id, todo_id } = req.query;
+        const UserId = new ObjectId(user_id);
+        const ToDoId = new ObjectId(todo_id);
         const tempToDo = await ToDo.findOneAndDelete({ _id: ToDoId, Owner: UserId });
         if (tempToDo) {
             return res.status(200).send({message: tempToDo.message});
