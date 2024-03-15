@@ -20,6 +20,7 @@ function Dailies(props){
   const[habitManager,setHabitManager] = useState(false);
   const[habits, setHabits] = useState();
 
+  //check if the user is signed in
   function isSignIn(){
     if(!props.user.userToken){
         navigate("/signin")
@@ -32,25 +33,28 @@ function Dailies(props){
     setUpdateTrigger(currentValue => currentValue + 1);
 };
 
+//get habits list from backend
+function getHabits(){
+    apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
+    .then(res => {
+        console.log(res);
+        setHabits(res);
+    })
+    .catch(err => {
+        console.log(err);
+        window.alert(err.error);
+    })
+}
 
-  function getHabits(){
-      apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
-      .then(res => {
-          console.log(res);
-          setHabits(res);
-      })
-      .catch(err => {
-          console.log(err);
-          window.alert(err.error);
-      })
-  
+//hook that updates the state
+useEffect(() => {
+  if(isSignIn()){
+    getHabits();
   }
-
-  useEffect(() => {
-    if(isSignIn()){
-      getHabits();
-    }
-  }, [updateTrigger])
+  else{
+    navigate("/signin")
+  }
+}, [updateTrigger])
 
   return (
   <body>

@@ -35,6 +35,10 @@ class HabitManager extends Component {
         })
     }
 
+    isDeleted = () => {
+        this.props.setTrigger(false);
+    }
+
 
     componentDidUpdate(prevProps) {
     // Only update state if the trigger prop has changed
@@ -66,6 +70,7 @@ class HabitManager extends Component {
                                     key={item.id}
                                     data = {item}
                                     isUpdated={() => this.props.isUpdated()}
+                                    isDeleted={() => this.isDeleted()}
                                 >
                                 </HabitManagerItem>
                             ))}
