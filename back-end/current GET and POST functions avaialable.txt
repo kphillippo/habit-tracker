@@ -11,3 +11,9 @@ Habit:
 Get a user's habits     http://localhost:8081/api/habit/getHabits?user_id={userId}
 Update a habit          http://localhost:8081/api/habit/updateHabit
 Add new habit           http://localhost:8081/api/habit/createHabit
+
+Todos:
+Get a user's todos      http://localhost:8081/api/todo/getTodos?user_id={userId}
+Update a todo           http://localhost:8081/api/todo/updateTodo
+Add new todo            http://localhost:8081/api/todo/createTodo
+```
