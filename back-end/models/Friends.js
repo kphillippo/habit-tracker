@@ -34,18 +34,18 @@ FriendsSchema.statics.sendFriendRequest = async function(User, FriendsWith) {
         throw Error('You are already friends with this user!')
     }
 
-    //checks if there is already a freind request sent by the Requester
+    //checks if there is already a friend request sent by the Requester
     const existingRecord2 = await this.findOne({ User: User, FriendsWith: FriendsWith, RequestPending: true, Requester: User});
 
     if(existingRecord){
         throw Error('You have already sent a friend request to this user!')
     }
 
-    //checks if there is already a freind request sent by the Requestee
+    //checks if there is already a friend request sent by the Requestee
     const existingRecord3 = await this.findOne({ User: User, FriendsWith: FriendsWith, RequestPending: true, Requester: FriendsWith});
 
     if(existingRecord){
-        throw Error('You have a freind request from this user already!')
+        throw Error('You have a friend request from this user already!')
     }
 
     //checks if the user is trying to friend themself

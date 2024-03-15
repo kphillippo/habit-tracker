@@ -402,7 +402,7 @@ describe('User API', () => {
   });
 
   //delete user when user doesnt exist
-  test('Fail delete user, user doesn not exist', async () => {
+  test('Fail delete user, user does not exist', async () => {
 
     // Call the delete static method
     const response = await request(app)

@@ -17,7 +17,7 @@ const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+
 const PORT = process.env.PORT || 8081;
 const userRoutes = require('./routes/UserRoutes.js');
 const habitRoutes = require('./routes/HabitRoutes.js');
-const freindsRoutes = require('./routes/FriendsRoutes.js');
+const friendsRoutes = require('./routes/FriendsRoutes.js');
 
 /*
 //variables for image
@@ -34,7 +34,7 @@ app.use(cors());
 //routes
 app.use('/api/user', userRoutes)
 app.use('/api/habit', habitRoutes)
-app.use('/api/friends', freindsRoutes)
+app.use('/api/friends', friendsRoutes)
 
 mongoose.connect(serverLink);
 

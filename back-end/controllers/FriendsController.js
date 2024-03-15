@@ -1,7 +1,7 @@
 const Friend = require('../models/Friends');
 const UserModel = require('../models/User');
 
-//send freind request
+//send friend request
 const sendFriendRequest = async (req, res) => {
     const {User, FriendsWith} = req.body
   
