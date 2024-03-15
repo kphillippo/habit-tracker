@@ -17,7 +17,7 @@ const createToDo = async (req, res) => {
     }
 }
 
-const getTodos = async (req, res) => {
+const getToDos = async (req, res) => {
     try {
         let { UserId } = req.query;
         UserId = new ObjectId(UserId);
@@ -27,6 +27,30 @@ const getTodos = async (req, res) => {
         }
         const todos = await ToDo.find({ Owner: UserId });
         res.status(200).json(todos);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+const updateToDo = async (req, res) => {
+    try {
+        let { ToDoId, UserId, data } = req.body;
+        ToDoId = new ObjectId(ToDoId);
+        UserId = new ObjectId(UserId);
+        if (!await User.findById(UserId)) {
+            throw new Error("User not found");
+        }
+        if (!await ToDo.findById(ToDoId)) {
+            throw new Error("ToDo not found");
+        }
+        if (!await ToDo.find({ _id: ToDoId, Owner: UserId })) {
+            throw new Error("You do not own this ToDo");
+        }
+        const tempToDo = await ToDo.findOneAndUpdate({ _id: ToDoId, Owner: UserId }, { $set: data }, { new: true });
+        if (tempToDo) {
+            return res.status(200).json(tempToDo);
+        }
+        throw new Error("ToDo could not be updated.");
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -47,4 +71,4 @@ const deleteToDo = async (req, res) => {
     }
 }
 
-module.exports = { createToDo, getTodos, deleteToDo }
+module.exports = { createToDo, getToDos, updateToDo, deleteToDo }
