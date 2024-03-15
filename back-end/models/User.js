@@ -120,7 +120,7 @@ UserSchema.statics.getUserProfileInfo = async function(_id){
     return user
 }
 
-//static ger user id function
+//static get user id function
 UserSchema.statics.getUserId = async function(Username){
     const user = await this.findOne({Username: Username});
 
@@ -131,6 +131,8 @@ UserSchema.statics.getUserId = async function(Username){
 
     return user._id;
 }
+
+
 
 const UserModel = mongoose.model("User", UserSchema);
 module.exports = UserModel;

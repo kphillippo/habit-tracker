@@ -6,6 +6,7 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 const { app } = require('../index'); // Import your express app instance
 const User = require('../models/User'); // Import your schema
+const _id = '65f3a52aa08c8a8cafda8d4c';
 
 // MongoDB connection string
 const serverLink = `mongodb+srv://${process.env.DBUSER}:${process.env.PASSWORD}@cluster.rbzvfkr.mongodb.net/Habit_Tracker`;
@@ -206,6 +207,101 @@ describe('User API', () => {
     expect(response.body.error).toBe('Incorrect Password!'); //expected error message
   });
 
+  //access profile info
+  test('Access Profile Info', async () => {
+
+    // Call the getUserprofileInfo static method
+    const response = await request(app)
+      .post('/api/user/userProfileInfo?user_id=65ee645da982142253c9e080')
+      .send({ _id: '65ee645da982142253c9e080'})
+
+    expect(response.status).toBe(200);// Assuming successful user profile info access returns status 200
+  });
+
+  //access profile info, someone with no friends
+  test('Access Profile Info, someone with no friends', async () => {
+
+    // Call the getUserprofileInfo static method
+    const response = await request(app)
+      .post('/api/user/userProfileInfo?user_id=65f3a52aa08c8a8cafda8d4c')
+      .send({ _id: '65f3a52aa08c8a8cafda8d4c'})
+
+    expect(response.status).toBe(200);// Assuming successful user profile info access returns status 200
+  });
+
+  //fail to access profile info
+  test('Fail to Access Profile Info', async () => {
+
+    // Call the getUserprofileInfo static method
+    const response = await request(app)
+      .post('/api/user/userProfileInfo?user_id=65ee645da982142253c9e081')
+      .send({ _id: '65ee645da982142253c9e081'})
+
+    expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
+  });
+
+  //Sucessful update profile info
+  test('Update Profile Info', async () => {
+
+    //test data
+    const userData = {
+      _id: _id,
+      FirstName: 'John',
+      LastName: 'Doe',
+      Email: 'JohnDoe@email.com',
+      Username: 'JohnDoe'
+    };
+
+    // Call the updateUserInfo static method
+    const response = await request(app)
+      .post('/api/user/updateUserInfo')
+      .send(userData)
+
+    expect(response.status).toBe(200);// Assuming failed user profile info access returns status 400
+  });
+
+  //fail to update profile info, username already exists
+  test('Fail to update Profile Info, username already exists', async () => {
+
+    //test data
+    const userData = {
+      _id: _id,
+      FirstName: 'test',
+      LastName: 'tester',
+      Email: 'tester123@email.com',
+      Username: 'testuser'
+    };
+
+    // Call the updateUserInfo static method
+    const response = await request(app)
+      .post('/api/user/updateUserInfo')
+      .send(userData)
+
+    expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
+    expect(response.body.error).toBe('Username already exists!'); //expected error message
+  });
+
+  //fail to update profile info, email already in use
+  test('Fail to update Profile Info, email already in use', async () => {
+
+    //test data
+    const userData = {
+      _id: _id,
+      FirstName: 'test',
+      LastName: 'tester',
+      Email: 'tester@email.com',
+      Username: 'testuser123'
+    };
+
+    // Call the updateUserInfo static method
+    const response = await request(app)
+      .post('/api/user/updateUserInfo')
+      .send(userData)
+
+    expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
+    expect(response.body.error).toBe('Email already in use!'); //expected error message
+  });
+
   //delete user
   test('Delete user', async () => {
 
@@ -227,38 +323,5 @@ describe('User API', () => {
 
     expect(response.status).toBe(500);// Assuming failed user deletion returns status 500
     expect(response.body.error).toBe('User not found!'); //expected error message
-  });
-
-  //access profile info
-  test('Access Profile Info', async () => {
-
-    // Call the getUserprofileInfo static method
-    const response = await request(app)
-      .post('/api/user/userProfileInfo?user_id=65ee645da982142253c9e080')
-      .send({ _id: '65ee645da982142253c9e080'})
-
-    expect(response.status).toBe(200);// Assuming successful user profile info access returns status 200
-  });
-
-  //access profile info, someone with no friends
-  test('Access Profile Info, someone with no friends', async () => {
-
-    // Call the getUserprofileInfo static method
-    const response = await request(app)
-      .post('/api/user/userProfileInfo?user_id=65dd29e3a56bbd3248a5a76b')
-      .send({ _id: '665dd29e3a56bbd3248a5a76b'})
-
-    expect(response.status).toBe(200);// Assuming successful user profile info access returns status 200
-  });
-
-  //fail to access profile info
-  test('Fail to Access Profile Info', async () => {
-
-    // Call the getUserprofileInfo static method
-    const response = await request(app)
-      .post('/api/user/userProfileInfo?user_id=65ee645da982142253c9e081')
-      .send({ _id: '65ee645da982142253c9e081'})
-
-    expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
   });
 });
