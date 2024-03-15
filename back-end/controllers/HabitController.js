@@ -36,11 +36,11 @@ const updateHabit = async (req, res) => {
 }
 
 const deleteHabit = async (req, res) => {
-    const {HabitID, UserID} = req.body;
+    const {user_id, habit_id} = req.query;
     try {
-        const habit_id = new ObjectId(HabitID);
-        const user_id = new ObjectId(UserID);
-        const habit = await Habit.deleteHabit(habit_id, user_id);
+        const Habit_id = new ObjectId(habit_id);
+        const User_id = new ObjectId(user_id);
+        const habit = await Habit.deleteHabit(Habit_id, User_id);
         res.status(200).json(habit);
     } catch (error) {
         res.status(400).json({error: error.message});

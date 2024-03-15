@@ -3,6 +3,7 @@ import '../../Css/signin.css';
 import { FaRegUserCircle, FaLock } from "react-icons/fa";
 import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Signin = ({ isSignedin }) =>{
@@ -29,6 +30,7 @@ const Signin = ({ isSignedin }) =>{
                 sessionStorage.setItem("userId", user._id);
                 sessionStorage.setItem("userEmail", user.Email);
                 isSignedin()
+                toast.success(`Welcome back ${user.Username}`)
                 navigate('/home');
             })
             .catch(err => {
@@ -41,6 +43,7 @@ const Signin = ({ isSignedin }) =>{
 
     return (
         <div className={'LoginForm'}>
+            <Toaster/>
             <div className={'Top'}>
                 <h1>Welcome to HabitConnect!!</h1>
                 <p>"I am a random quote everyday to give you motivation." = Person McPerson</p>

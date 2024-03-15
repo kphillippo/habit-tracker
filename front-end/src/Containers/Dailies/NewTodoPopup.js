@@ -7,9 +7,10 @@ class NewToDoPopup extends Component {
             trigger: false,
             Title: "",
             Status: false,
-            Repeat: "",
-            Remind: "",
-            Date: ""
+            Repeat: false,
+            Remind: false,
+            Date:  new Date(),
+            Owner: sessionStorage.getItem("userId")
         };
 
         this.handleSave = this.handleSave.bind(this);
@@ -17,7 +18,8 @@ class NewToDoPopup extends Component {
     }
 
     handleSave(){
-        this.props.updateTodo(this.state)
+        this.props.createTodo(this.state);
+        this.props.isUpdated();
     }
 
     handleChange= (event) => {
@@ -54,7 +56,7 @@ class NewToDoPopup extends Component {
                         <input  id="edittodo_timer_input" 
                                 type="text" 
                                 name="Date"
-                                value={this.state.Date}
+                                value={this.state.Date.toISOString().split('T')[0]}
                                 onChange={this.handleChange}
                         />
 
@@ -67,8 +69,8 @@ class NewToDoPopup extends Component {
                             onChange={this.handleChange}
                             
                         >
-                            <option value="Do not Repeat">Do not Repeat</option>
-                            <option value="Notify Me">Notify Me</option>
+                            <option value="false">Do not Repeat</option>
+                            <option value="true">Notify Me</option>
                         </select>
 
                         <label className="edittodo_frequency_label" htmlFor="edittodo_frequecny_input">Remind:</label>
@@ -78,8 +80,8 @@ class NewToDoPopup extends Component {
                                 defaultValue={this.state.Remind}
                                 onChange={this.handleChange}
                         >
-                            <option value="noRemind">Do not Remind</option>
-                            <option value="Remind">Remind Me</option>
+                            <option value="false">Do not Remind</option>
+                            <option value="true">Remind Me</option>
                         </select>
                         <label className="edittodo_status_label" htmlFor="edittodo_status_input">Status:</label>
                         <select id="edittodo_status_input"
@@ -93,7 +95,7 @@ class NewToDoPopup extends Component {
                         </select>
                     </div>
                     <button className="edittodo_close" onClick={() =>  {this.props.setTrigger(false)}}>X</button>
-                    <button className="edittodo_savesubmit" onClick={() => this.handleSave()}>Save & Close</button>
+                    <button className="edittodo_savesubmit" onClick={() => {this.handleSave(); this.props.setTrigger(false)}}>Save & Close</button>
                 </div>
             </div>
         ) : null;
