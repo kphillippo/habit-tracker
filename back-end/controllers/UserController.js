@@ -108,5 +108,49 @@ const getUserProfileInfo = async (req, res) => {
       res.status(400).json({error: error.message});
   }
 }
+
+//edits user information (later we will have to make them verify thier email before it updates)
+const updateUserInfo = async (req, res) => {
   
-module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo}
+  const { _id, FirstName, LastName, Email, Username } = req.body;
+
+  // Check if the provided email already exists in the database
+  const existingEmailUser = await User.findOne({ Email });
+  if (existingEmailUser && existingEmailUser._id.toString() !== _id) {
+    return res.status(400).json({ success: false, error: 'Email already in use!' });
+  }
+
+  // Check if the provided username already exists in the database
+  const existingUsernameUser = await User.findOne({ Username });
+  if (existingUsernameUser && existingUsernameUser._id.toString() !== _id) {
+    return res.status(400).json({ success: false, error: 'Username already exists!' });
+  }
+
+  const updatedFields = {FirstName, LastName, Email, Username};
+
+  // Call the static method defined in the User schema to update the user's record by username
+  const updateResult = await User.findOneAndUpdate( {_id: _id}, { $set: updatedFields }, { new: true });
+
+  // the user's record was updated successfully
+  res.status(200).json({ message: 'User record updated successfully!', success: true});
+}
+
+//updates password
+const updatePassword = async (req, res) => {
+  try {
+  
+    const { _id, Password, newPassword } = req.body;
+
+    
+
+    // Call the static method defined in the User schema to update the user's record by username
+    const updateResult = await User.updatePassword( _id, Password, newPassword );
+
+    // the user's record was updated successfully
+    res.status(200).json({ message: 'User password updated successfully!', success: true});
+  } catch (error) {
+    res.status(400).json({error: error.message});
+  }
+}
+  
+module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword }
