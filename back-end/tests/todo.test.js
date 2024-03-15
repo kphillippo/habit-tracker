@@ -77,4 +77,18 @@ describe('ToDo API', () => {
       expect(response.status).toBe(400);
     });
   });
+  describe('Get ToDos', () => {
+    test('Get ToDos Successfully', async () => {
+      let response = await request(app)
+          .get('/api/todo/get')
+          .query({ UserId: userID });
+      expect(response.status).toBe(200);
+    });
+    test('Get ToDos with invalid UserId', async () => {
+      let response = await request(app)
+          .get('/api/todo/get')
+          .query({ UserId: 'abcabcabcabcabcabcabcabc'});
+      expect(response.status).toBe(400);
+    });
+  });
 });

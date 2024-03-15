@@ -1,7 +1,7 @@
 const express = require('express')
 
 //controller functions
-const { createToDo, deleteToDo } = require('../controllers/ToDoController')
+const { createToDo, getTodos, deleteToDo } = require('../controllers/ToDoController')
 
 const router = express.Router()
 
@@ -9,6 +9,6 @@ const router = express.Router()
 
 router.post('/create', createToDo);
 router.delete('/delete', deleteToDo);
-
+router.get('/get', getTodos);
 
 module.exports = router

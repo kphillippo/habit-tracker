@@ -17,6 +17,21 @@ const createToDo = async (req, res) => {
     }
 }
 
+const getTodos = async (req, res) => {
+    try {
+        let { UserId } = req.query;
+        UserId = new ObjectId(UserId);
+        let owner = await User.findById(UserId);
+        if (!owner) {
+            throw new Error("User not found");
+        }
+        const todos = await ToDo.find({ Owner: UserId });
+        res.status(200).json(todos);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 const deleteToDo = async (req, res) => {
     try {
         let { UserId, ToDoId } = req.body;
@@ -32,4 +47,4 @@ const deleteToDo = async (req, res) => {
     }
 }
 
-module.exports = { createToDo, deleteToDo }
+module.exports = { createToDo, getTodos, deleteToDo }
