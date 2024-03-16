@@ -29,6 +29,7 @@ const {Username, Password} = req.body
     }
 }
 
+
 //signup user
 const signupUser = async (req, res) => {
     const {FirstName, LastName, Email, Username, Password, Streak} = req.body

@@ -51,6 +51,7 @@ jason format for testing:
   "Password": "Password!1"
 }
 */
+
 UserSchema.statics.signup = async function(FirstName, LastName, Email, Username, Password) {
 
 
@@ -81,6 +82,8 @@ UserSchema.statics.signup = async function(FirstName, LastName, Email, Username,
     if(existsEmail){
         throw Error('Email already in use!')
     }
+
+
 
     //encrypts password with salt, then hashes
     const salt = await bcrypt.genSalt(10);
