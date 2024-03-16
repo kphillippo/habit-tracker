@@ -83,7 +83,7 @@ const getUserProfileInfo = async (req, res) => {
     // Retrieve the username and Streak of each friend based on their _id
     const friendData = await User.aggregate([
       { $match: { _id: { $in: friendIds } } },
-      { $project: { _id: 1, Username: 1, Streak: 1 } }
+      { $project: { _id: 1, Username: 1, Streak: 1, FirstName: 1, LastName: 1, Email: 1 } }
     ]);
 
     // Map friend data to friend objects
@@ -97,7 +97,16 @@ const getUserProfileInfo = async (req, res) => {
         username: friendInfo ? friendInfo.Username : null,
 
         // Assign the Streak property from friendInfo if available, otherwise null
-        Streak: friendInfo ? friendInfo.Streak : null
+        Streak: friendInfo ? friendInfo.Streak : null,
+
+        // Assign the FirstName property from friendInfo if available, otherwise null
+        FirstName: friendInfo ? friendInfo.FirstName : null,
+
+        // Assign the LastName property from friendInfo if available, otherwise null
+        LastName: friendInfo ? friendInfo.LastName : null,
+
+        // Assign the LastName property from friendInfo if available, otherwise null
+        Email: friendInfo ? friendInfo.Email : null
       };
     });
 
