@@ -9,20 +9,25 @@ const mongoose = require('mongoose');
 //schema
 const UserModel = require('./models/User.js');
 const HabitModel = require('./models/Habit.js')
+const FriendsModel = require('./models/Friends.js')
 
 //variabes for routing
-const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@"+config.database.host+"/"+config.database.db;
+const serverLink = "mongodb+srv://"+process.env.DBUSER+":"+process.env.PASSWORD+"@cluster.rbzvfkr.mongodb.net/Habit_Tracker";
 //const mongoDB = "mongodb+srv://"+process.env.USERNAME+":"+process.env.PASSWORD+"@"+config.database.host+":"+config.database.port+"/"+config.database.db;
 const PORT = process.env.PORT || 8081;
 const userRoutes = require('./routes/UserRoutes.js');
 const habitRoutes = require('./routes/HabitRoutes.js');
+const todoRoutes = require('./routes/TodoRoutes.js');
+const friendsRoutes = require('./routes/FriendsRoutes.js');
 
+/*
 //variables for image
 const bodyParser = require('body-parser');
 const fs = require('fs');
 var path = require('path');
 app.set("view engine", "ejs");
 require('dotenv').config();
+*/
 
 app.use(express.json());
 app.use(cors());
@@ -30,9 +35,12 @@ app.use(cors());
 //routes
 app.use('/api/user', userRoutes)
 app.use('/api/habit', habitRoutes)
+app.use('/api/todo', todoRoutes)
+app.use('/api/friends', friendsRoutes)
 
 mongoose.connect(serverLink);
 
+/*
 //Upload Image code starts here
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -83,8 +91,13 @@ app.post('/', upload.single('image'), (req, res, next) => {
     });
 });
 
-//listening function
-app.listen(PORT,function(){
-    console.log(`Sever is listening at port ${PORT}`);
-});
+ 
+//if testing it doesnt open the port
+if (process.env.NODE_ENV !== 'test') {
+    //listening function
+    app.listen(PORT,function(){
+        console.log(`Sever is listening at port ${PORT}`);
+    });
+}
 
+module.exports = { app };

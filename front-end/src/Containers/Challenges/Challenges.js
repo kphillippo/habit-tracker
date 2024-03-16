@@ -1,4 +1,6 @@
-import React from "react";
+
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../Css/challenges.css";
 import ReactDOM from "react-dom/client";
 import { ImFire } from "react-icons/im";
@@ -6,7 +8,19 @@ import { LuPencil } from "react-icons/lu";
 
 
 
-function Challenges(){
+function Challenges(props){
+
+    let navigate = useNavigate()
+
+    function isSignIn(){
+        if(!props.user.userToken){
+            navigate("/signin")
+        }
+    }
+
+    useEffect(() => {
+        isSignIn();
+    })
     
     return (
         <body>
@@ -50,6 +64,7 @@ function Challenges(){
             </div>
         </div>
         </body>
+
     );
 }
 

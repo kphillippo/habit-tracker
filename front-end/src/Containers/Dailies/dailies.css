@@ -19,6 +19,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 .tbl_container1{
   position: absolute;
   top: 11vh;
@@ -81,6 +82,12 @@ input[type=checkbox] {
   cursor: pointer;
 }
 .btn_cog{
+  border: none;
+  border-radius: none;
+  outline:none;
+  background: none;
+}
+.plus1{
   border: none;
   border-radius: none;
   outline:none;
@@ -155,21 +162,21 @@ input[type=checkbox] {
   overflow:scroll;
   overflow-x: hidden;
 }
-#table3{
+  #table3{
   border-collapse: collapse;
   width:98%;
   font-size: 1.9vw;
   align-items: left;
   margin-left:2%;
   margin-top: 3%;
-}
-#table3 td{
+  }
+  #table3 td{
   border-bottom: 0.01vh solid #000;
   padding-top:2%;
   padding-bottom:2%;
-}
+  }
 
-body {
+  body {
     margin: 0;
     line-height: normal;
     font-size:16px;
@@ -245,13 +252,14 @@ body {
   }
   .TODO_bar {
     left:1.25vw;
-    position: absolute;
+    position: relative;
     border-radius: 15.02px;
     background-color: var(--color-white);
     border: 0.5px solid var(--color-black);
     box-sizing: border-box;
     width: 95%;
     height: 6.537037037%;
+    z-index: 0;
   }
   .plus{
     position:absolute;
@@ -278,8 +286,792 @@ body {
     height: 100%;
     position: fixed;
     background-color: var(--color-white);
-    text-align: left;
     color: var(--color-black);
     font-family: var(--font-kotta-one);
   }
+
+  .popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background-color: var(--color-darkgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-inner{
+    position:fixed;
+    top: 60%;
+    left: 50%;
+    padding-left: 4%;
+    padding-top:2%;
+    transform:translate(-50%,-50%);
+    width: 43%;
+    height: 75%;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background:#E2E9D6;
+    border-radius: 10px;
+  }
+  .Title {
+    font-weight: 500;
+    font-size: 3vw;
+    color:#333;
+    font-family: Kotta One;
+  }
+  .columns{
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+
+    display: grid;
+    grid-template-columns: 1.3fr 2.7fr;
+
+    padding-top:5%;
+  }
+  .name_label,
+  .timer_label,
+  .counter_label,
+  .frequency_label{
+    margin-bottom: 5vh;
+  }
+  #name_input,
+  #timer_input,
+  #counter_input,
+  #frequency_input{
+    height: 7vh;
+  }
+  #name_input{
+    width:95%;
+  }
+  #timer_input{
+    width:40%;
+    text-align: center;
+  }
+  #counter_input{
+    width:40%;
+  }
+  #frequency_input{
+    width:95%;
+  }
+  .Close{
+    position: absolute;
+    top: 5%;
+    left: 85%;
+    width: 10%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+  }
   
+  .SaveSubmit{
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.1vw;
+    border-radius: 1.5vw;
+  }
+
+  .todo_popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background-color: var(--color-darkgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .todo_popup-inner{
+    position:fixed;
+    top: 60%;
+    left: 50%;
+    padding-left: 4%;
+    padding-top:2%;
+    transform:translate(-50%,-50%);
+    width: 43%;
+    height: 75%;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background:#E2E9D6;
+    border-radius: 10px;
+  }
+  .todo_Title {
+    font-weight: 500;
+    font-size: 3vw;
+    color:#333;
+    font-family: Kotta One;
+  }
+  .todo_columns{
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+
+    display: grid;
+    grid-template-columns: 1.3fr 2.7fr;
+
+    padding-top:5%;
+  }
+  .todo_name_label,
+  .todo_timer_label,
+  .todo_counter_label,
+  .todo_frequency_label{
+    margin-bottom: 5vh;
+  }
+  #todo_name_input,
+  #todo_timer_input,
+  #todo_counter_input,
+  #todo_frequency_input{
+    height: 7vh;
+  }
+  #todo_name_input{
+    width:95%;
+  }
+  #todo_timer_input{
+    width:95%;
+    text-align: center;
+  }
+  #todo_counter_input{
+    width:95%;
+  }
+  #todo_frequency_input{
+    width:95%;
+  }
+  .todo_close{
+    position: absolute;
+    top: 5%;
+    left: 85%;
+    width: 10%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+  }
+  
+  .todo_savesubmit{
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.1vw;
+    border-radius: 1.5vw;
+  }
+  
+  .edithabit_popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background-color: var(--color-darkgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .edithabit_popup-inner{
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    padding-left: 4%;
+    padding-top:0%;
+    transform:translate(-50%,-50%);
+    width: 110%;
+    height: 75%;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background:#E2E9D6;
+    border-radius: 10px;
+  }
+  .edithabit_Title {
+    font-weight: 500;
+    font-size: 3vw;
+    color:#333;
+    font-family: Kotta One;
+  }
+  .edithabit_columns{
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+
+    display: grid;
+    grid-template-columns: 1.3fr 2.7fr;
+
+    padding-top:5%;
+  }
+  .edithabit_name_label,
+  .edithabit_timer_label,
+  .edithabit_counter_label,
+  .edithabit_frequency_label{
+    margin-bottom: 2.5vh;
+  }
+  #edithabit_name_input,
+  #edithabit_timer_input,
+  #edithabit_counter_input,
+  #edithabit_frequency_input{
+    height: 7vh;
+  }
+  #edithabit_name_input{
+    width:95%;
+  }
+  #edithabit_timer_input{
+    width:40%;
+    text-align: center;
+  }
+  #edithabit_counter_input{
+    width:40%;
+  }
+  #edithabit_frequency_input{
+    width:95%;
+  }
+  .edithabit_currentstr{
+    padding-top:2.5vh;
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+  }
+  .edithabit_close{
+    position: absolute;
+    top: 0%;
+    left: 90%;
+    width: 10%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+  }
+  
+  .edithabit_savesubmit{
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.1vw;
+    border-radius: 1.5vw;
+  }
+  .edittodo_popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background-color: var(--color-darkgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .edittodo_popup-inner{
+    position:fixed;
+    top: 60%;
+    left: 50%;
+    padding-left: 4%;
+    padding-top:2%;
+    transform:translate(-50%,-50%);
+    width: 43%;
+    height: 75%;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background:#E2E9D6;
+    border-radius: 10px;
+    z-index: 2;
+  }
+  .edittodo_Title {
+    font-weight: 500;
+    font-size: 3vw;
+    color:#333;
+    font-family: Kotta One;
+  }
+  .edittodo_columns{
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+
+    display: grid;
+    grid-template-columns: 1.3fr 2.7fr;
+
+    padding-top:5%;
+  }
+  .edittodo_name_label,
+  .edittodo_timer_label,
+  .edittodo_counter_label,
+  .edittodo_frequency_label{
+    margin-bottom: 3vh;
+  }
+  #edittodo_name_input,
+  #edittodo_timer_input,
+  #edittodo_counter_input,
+  #edittodo_frequency_input{
+    height: 7vh;
+  }
+  #edittodo_name_input{
+    width:95%;
+  }
+  #edittodo_timer_input{
+    width:95%;
+    text-align: center;
+  }
+  #edittodo_counter_input{
+    width:95%;
+  }
+  #edittodo_frequency_input{
+    width:95%;
+  }
+  #edittodo_status_input{
+    width:95%;
+  }
+  .edittodo_close{
+    position: absolute;
+    top: 5%;
+    left: 85%;
+    width: 10%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+  }
+  
+  .edittodo_savesubmit{
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.1vw;
+    border-radius: 1.5vw;
+  }
+
+
+  .habitmanager_popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background-color: var(--color-darkgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .habitmanager_popup-inner{
+    position:fixed;
+    top: 57vh;
+    left: 50vw;
+    padding-left: 4%;
+    padding-top:2%;
+    transform:translate(-50%,-50%);
+    width: 43vw;
+    height: 83vh;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background:#E2E9D6;
+    border-radius: 10px;
+    z-index: 1;
+  }
+  .habitmanager_Title {
+    font-weight: 500;
+    font-size: 3vw;
+    color:#333;
+    font-family: Kotta One;
+  }
+  .habitmanager_div{
+    overflow:scroll;
+    overflow-x: hidden;
+    border-radius: 15.02px;
+    border: 0.5px solid var(--color-black);
+    background-color: white;
+    width: 90%;
+    height: 73%;
+    font-family: Kotta One;
+  }
+  #habitmanager_table{
+  border-collapse: collapse;
+  width:98%;
+  font-size: 1.9vw;
+  align-items: left;
+  margin-left:2%;
+  margin-top: 3%;
+  }
+  #habitmanager_table td{
+    border-bottom: 0.01vh solid #000;
+    padding-top:2%;
+    padding-bottom:2%;
+  }
+  .todo_item{
+    padding-right:30%;
+  }
+  .managerbtn_delete{
+    border: none;
+    border-radius: none;
+    outline:none;
+    background: none;
+    padding-left:20%;
+  }
+  .managerbtn_edit{
+    border: none;
+    border-radius: none;
+    outline:none;
+    background: none;
+    padding-left:45%;
+  }
+  .habitmanager_close{
+    position: absolute;
+    top: 0%;
+    left: 90%;
+    width: 10%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+  }
+
+  .habitmanager_Add_New_Habit{
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.1vw;
+    border-radius: 1.5vw;
+  }
+  
+
+
+
+  .newhabit_popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background-color: var(--color-darkgreen);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+  }
+
+  .newhabit_popup-inner{
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    padding-left: 4%;
+    padding-top:0%;
+    transform:translate(-50%,-50%);
+    width: 50%;
+    height: 75%;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+    background:#E2E9D6;
+    border-radius: 10px;
+  }
+  .newhabit_Title {
+    font-weight: 500;
+    font-size: 3vw;
+    color:#333;
+    font-family: Kotta One;
+  }
+  .newhabit_columns{
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+    gap: 5px;
+    display: grid;
+    grid-template-columns: 1.3fr 2.7fr;
+
+    padding-top:5%;
+  }
+  .newhabit_name_label,
+  .newhabit_timer_label,
+  .newhabit_counter_label,
+  .newhabit_frequency_label{
+    margin-bottom: 2.5vh;
+    padding-right: 5%;
+  }
+  #newhabit_name_input,
+  #newhabit_timer_input,
+  #newhabit_counter_input,
+  #newhabit_frequency_input{
+    height: 7vh;
+  }
+  #newhabit_name_input{
+    width:95%;
+  }
+  #newhabit_timer_input{
+    width:30%;
+    text-align: center;
+  }
+  #newhabit_counter_input{
+    width:30%;
+  }
+  #newhabit_frequency_input{
+    width:95%;
+  }
+  .newhabit_currentstr{
+    padding-top:2.5vh;
+    font-family: Overpass;
+    font-size: 2vw;
+    font-weight: 300;
+  }
+  .newhabit_close{
+    position: absolute;
+    top: 0%;
+    left: 90%;
+    width: 10%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 1.5vw;
+  }
+  
+  .newhabit_savesubmit{
+    position: absolute;
+    top: 85%;
+    left: 35%;
+    width: 30%;
+    height: 10%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.1vw;
+    border-radius: 1.5vw;
+  }
+
+  .timer_input_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    margin-bottom: 1.5%;
+    margin-top: 1.5%;
+}
+
+#newhabit_timer_input {
+    width: auto; 
+    text-align: center;
+}
+
+
+#newhabit_counter_input {
+  width: auto; 
+  text-align: center;
+}
+
+
+.timer_input_wrapper, .newhabit_counter_wrapper {
+  display: flex;
+  align-items: center; 
+  gap: 5px; 
+}
+
+
+input:disabled {
+  background-color: #f0f0f0; /* Light grey background */
+  color: #a9a9a9; /* Dim text color */
+}
+
+
+.newhabit_timer_label, .newhabit_counter_label {
+  display: block; /* Ensure labels are on their own line */
+  margin-bottom: 5px; /* Space between label and input or radio button */
+}
+
+/* Adjustments for radio buttons to align with your design */
+input[type="radio"] {
+  margin-right: 5%; 
+  margin-left: auto;
+  transform: scale(1.5);
+}
+
+
+.delete_popup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100vh;
+  background-color: var(--color-darkgreen);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+.delete_popup-inner-1{
+  position:fixed;
+  top: 37vh;
+  left: 21vw;
+  padding-left: 4%;
+  padding-top:2%;
+  transform:translate(-50%,-50%);
+  width: 43vw;
+  height: 41.5vh;
+  box-shadow: 0 5px 30px rgba(0,0,0,.30);
+  background:#E2E9D6;
+  border-radius: 10px;
+  z-index: 3;
+}
+
+.delete_popup-inner-2{
+  position:fixed;
+  top: 47vh;
+  left: 52vw;
+  padding-left: 2%;
+  padding-top:2%;
+  transform:translate(-50%,-50%);
+  width: 43vw;
+  height: 41.5vh;
+  box-shadow: 0 5px 30px rgba(0,0,0,.30);
+  background:#E2E9D6;
+  border-radius: 10px;
+  z-index: 3;
+}
+
+.delete_Title {
+  position:absolute;
+  top:20%;
+  font-weight: 500;
+  font-size: 2.5vw;
+  color:#333;
+  font-family: Kotta One;
+}
+.delete_no{
+  position: absolute;
+  top: 60%;
+  left: 60%;
+  width: 30%;
+  height: 30%;
+  font-size: 1.5vw;
+  font-family: Kotta One;
+  border: 0;
+  text-align: center;
+  color:#fff;
+  background:#92B27A;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+  border:#111;
+  border-style:solid;
+  border-width: 0.1vw;
+  border-radius: 1.5vw;
+}
+.delete_yes{
+  position: absolute;
+  top: 60%;
+  left: 10%;
+  width: 30%;
+  height: 30%;
+  font-size: 1.5vw;
+  font-family: Kotta One;
+  border: 0;
+  text-align: center;
+  color:#fff;
+  background:#92B27A;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+  border:#111;
+  border-style:solid;
+  border-width: 0.1vw;
+  border-radius: 1.5vw;
+}
