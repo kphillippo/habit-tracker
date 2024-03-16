@@ -8,8 +8,11 @@
 }
 .profilePic{
     width: 25%;
-    margin-right: 12%;
+    margin-right: 7px;
     color: grey;
+}
+.profilePic:hover{
+    cursor: pointer;
 }
 .profileInfo{
     font-size: 200%;
@@ -21,6 +24,9 @@
 }
 #pen{
     float: right;
+}
+#pen:hover{
+    cursor: pointer;
 }
 .friendsForm{
     background: rgba(226, 233, 214, 1);
@@ -52,4 +58,35 @@
 .friend{
     font-size: 90%;
     border-bottom: 0.5px solid #000; 
+}
+#viewProfile:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media (max-width: 780px) {
+    .profile{
+        width: 542px;
+    }
+    .profilePic{
+        width: 135px;
+        margin-right: 12%;
+    }
+    .profileInfo{
+        width: 377px;
+    }
+    .profileInfo td{
+        width: 33%;
+    }
+    .friendsForm{
+        width: 697px;
+        margin-top: 5%;
+        padding: 0.8%;
+    }
+    .addFriendsButton{
+        padding: 0.5%;
+    }
+    .friendsList{
+        width:685px;
+    }
 }

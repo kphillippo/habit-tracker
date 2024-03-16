@@ -19,7 +19,9 @@ function Dailies(props){
   const[newToDoPopup,setNewToDoPopup] = useState(false);
   const[habitManager,setHabitManager] = useState(false);
   const[habits, setHabits] = useState();
+  const[todos, setTodos] = useState();
 
+  //check if the user is signed in
   function isSignIn(){
     if(!props.user.userToken){
         navigate("/signin")
@@ -32,25 +34,56 @@ function Dailies(props){
     setUpdateTrigger(currentValue => currentValue + 1);
 };
 
+//get habits list from backend
+function getHabits(){
+    apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
+    .then(res => {
+        console.log(res);
+        setHabits(res);
+    })
+    .catch(err => {
+        console.log(err);
+        window.alert(err.error);
+    })
+}
 
-  function getHabits(){
-      apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
-      .then(res => {
-          console.log(res);
-          setHabits(res);
-      })
-      .catch(err => {
-          console.log(err);
-          window.alert(err.error);
-      })
-  
+function getTodos(){
+  console.log("get todos in the front-end")
+    apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
+    .then(res => {
+        console.log(res);
+        setTodos(res);
+    })
+    .catch(err => {
+        console.log(err);
+        window.alert(err.error);
+    })
+}
+
+function createTodo(data){
+        console.log(data)
+        data.Date = new Date(data.Date);
+        apiRequest("POST", "todo/createTodo", data)
+        .then(({token, ...data}) => {
+            console.log(data);
+            triggerDataRefresh()
+        })
+        .catch(err => {
+            console.log(err);
+            window.alert(err.error);
+        })
+}
+
+//hook that updates the state
+useEffect(() => {
+  if(isSignIn()){
+    getTodos();
+    getHabits();
   }
-
-  useEffect(() => {
-    if(isSignIn()){
-      getHabits();
-    }
-  }, [updateTrigger])
+  else{
+    navigate("/signin")
+  }
+}, [updateTrigger])
 
   return (
   <body>
@@ -84,10 +117,11 @@ function Dailies(props){
     <div className = "tbl_container2">
         <div id = "div3">
           <table id = "table3">
-            {mockTodos.map((item => (
+            {todos && todos.map((item => (
                 <TodoItem
                     key={item.id}
                     data={item}
+                    isUpdated={() => triggerDataRefresh()}
                 >
                 </TodoItem>
             )))}
@@ -112,7 +146,7 @@ function Dailies(props){
       <button className="Down">^</button>
       </div>
               
-      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()}/>
+      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
       <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
     </div>
 </body>

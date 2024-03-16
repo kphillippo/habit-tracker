@@ -1,23 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaPencil } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
 import "../../Css/profile.css";
 import { IoMdFlame } from "react-icons/io";
 import { GoTrash } from "react-icons/go";
+import { apiRequest } from "../../utils/reqTool";
+import AddFriendsPopUp from './AddFriendsPopUp';
+import UpdateUserPopUp from './UpdateUserPopUp';
+import ViewFriendPopup from './ViewFriendPopup';
 
 function Profile(props) {
     const userInfo = props.data;
-    console.log(userInfo);
+    //console.log(userInfo);
+    const [fullInfo, setFullInfo] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [showAddFriendsPopUp, setAddFriendsShowPopUp] = useState(false);
+    const [showUpdateUserPopUp, setUpdateUserPopUp] = useState("");
+    const [showViewFriendPopup, setViewFriendPopup] = useState("");
+
+    useEffect(() => {
+        // Function to fetch user info
+        const fetchUserInfo = async () => {
+            try {
+                // Perform the API request
+                const response = await apiRequest("POST", "user/userProfileInfo?user_id=" + sessionStorage.getItem("userId"))
+                const data = await response; // Assuming the response is JSON
+
+                // Update state with the fetched user info
+                setFullInfo(data);
+            } catch (err) {
+                console.error("Failed to fetch user info:", err);
+                // Optionally handle error state here
+            } finally {
+                setIsLoading(false); // Set loading to false regardless of outcome
+            }
+        };
+
+        fetchUserInfo(); // Call the fetch function when the component mounts
+    }, []); // Empty dependency array means this effect runs once on mount
+
+    if (isLoading) {
+        return <div>Loading...</div>; // Render loading state
+    }
+
+    if (!fullInfo) {
+        return <div>Error loading user information.</div>; // Render error state or alternative content
+    }
 
     //Returns html for form with user information
     function generateUserProfile() {
         let penColor = "#B3B3B3";
-        let email = "user123@email.com";
         let pictureDefault = <><CgProfile size={200} id="profilePictureIcon"></CgProfile></>;
         return <>
             <center>
                 <div className="profile">
-                    <div className="profilePic">
+                    <div className="profilePic" onClick={() => setUpdateUserPopUp("Pic")}>
                         {pictureDefault}
                         Edit profile <br></br> picture
                     </div>
@@ -25,22 +62,22 @@ function Profile(props) {
                         <tr>
                             <td>Name:</td>
                             <td>{userInfo.userName}</td>
-                            <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                            <td><FaPencil size={25} color={penColor} id="pen" onClick={() => setUpdateUserPopUp("Name")}></FaPencil></td>
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td>{email}</td>
-                            <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                            <td>{fullInfo.Email}</td>
+                            <td><FaPencil size={25} color={penColor} id="pen" onClick={() => setUpdateUserPopUp("Email")}></FaPencil></td>
                         </tr>
                         <tr>
                             <td>Username:</td>
                             <td>user123</td>
-                            <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                            <td><FaPencil size={25} color={penColor} id="pen" onClick={() => setUpdateUserPopUp("Username")}></FaPencil></td>
                         </tr>
                         <tr>
                             <td>Password:</td>
                             <td>**********</td>
-                            <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                            <td><FaPencil size={25} color={penColor} id="pen" onClick={() => setUpdateUserPopUp("Password")}></FaPencil></td>
                         </tr>
                     </table>
                 </div>
@@ -48,40 +85,29 @@ function Profile(props) {
         </>;
     }
 
+    //Deletes friend by sending API request
+    
+
     //Returns html for Friends list
     function generateFriendsList() {
         let friendsList = [];
-        let flameColor = "#4e5445";
-        friendsList[0] = <><tr className="friend">
-            <td>Username</td>
-            <td><IoMdFlame color={flameColor} size={40}></IoMdFlame></td>
-            <td>10</td>
-            <td>View Profile</td>
-            <td>Remove</td>
-            <td><GoTrash size={25}></GoTrash></td>
-        </tr></>
-        flameColor = "#e57028";
-        friendsList[1] = <><tr className="friend">
-            <td>iamaFriend</td>
-            <td><IoMdFlame color={flameColor} size={40}></IoMdFlame></td>
-            <td>8</td>
-            <td>View Profile</td>
-            <td>Remove</td>
-            <td><GoTrash size={25}></GoTrash></td>
-        </tr></>
-        friendsList[2] = <><tr className="friend">
-            <td>nellyFurtado</td>
-            <td><IoMdFlame color={flameColor} size={40}></IoMdFlame></td>
-            <td>6</td>
-            <td>View Profile</td>
-            <td>Remove</td>
-            <td><GoTrash size={25}></GoTrash></td>
-        </tr></>
+        let flameColor = "#e57028";
+        console.log(fullInfo);
+        for (let i = 0; i < fullInfo.userFriends.length; i++) {
+            friendsList[i] = <><tr className="friend">
+                <td style={{ width: '10%' }}>&nbsp;&nbsp;{fullInfo.userFriends[i].username}</td>
+                <td style={{ float: 'right' }}><IoMdFlame color={flameColor} size={40}></IoMdFlame></td>
+                <td style={{ width: '18%' }}>{fullInfo.userFriends[i].Streak}</td>
+                <td id="viewProfile" onClick={() => setViewFriendPopup(fullInfo.userFriends[i]._id)}>View Profile</td>
+                <td style={{ float: 'right' }}>Remove&nbsp;&nbsp;</td>
+                <td><GoTrash size={25}></GoTrash></td>
+            </tr></>
+        }
         return <>
             <center>
                 <div className="friendsForm">
                     <div className="myFriendsTitle">My Friends</div>
-                    <div className="addFriendsButton">Add Friends +</div>
+                    <button className="addFriendsButton" onClick={() => setAddFriendsShowPopUp(true)}>Add Friends +</button>
                     <table className="friendsList">
                         {friendsList}
                     </table>
@@ -92,9 +118,15 @@ function Profile(props) {
 
     return (
         <div className="main-container">
-            
-            { userInfo.userToken && generateUserProfile()}
-            { userInfo.userToken && generateFriendsList()}
+
+            {userInfo.userToken && generateUserProfile()}
+            {userInfo.userToken && generateFriendsList()}
+
+            <div>
+                {showViewFriendPopup!="" && <ViewFriendPopup onClose={() => setViewFriendPopup("") } friend={showViewFriendPopup} />}
+                {showAddFriendsPopUp && <AddFriendsPopUp onClose={() => setAddFriendsShowPopUp(false)} />}
+                {showUpdateUserPopUp!="" && <UpdateUserPopUp onClose={() => setUpdateUserPopUp("") } fieldToUpdate={showUpdateUserPopUp} />}
+            </div>
         </div>
     );
 }
