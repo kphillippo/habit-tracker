@@ -83,7 +83,6 @@ app.post('/', upload.single('image'), (req, res, next) => {
     });
 });
 
- 
 //listening function
 app.listen(PORT,function(){
     console.log(`Sever is listening at port ${PORT}`);

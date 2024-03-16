@@ -5,14 +5,12 @@ import { ImFire } from "react-icons/im";
 import { LuPencil } from "react-icons/lu";
 
 
+
 function Challenges(){
-
-
-
-
+    
     return (
         <body>
-        <button className="newChallenge"> Create New Challenge</button>
+        <button className="newChallenge"> Create New Challenge</button>    
         <div className="challenge-page">
             <div id="TableHead">
                 <table>
