@@ -83,6 +83,7 @@ const Signup = ({isSignedin}) => {
                                                                              name={"usernamee"}
                                                                              value={username}
                                                                              onChange={e => setUsername(e.target.value)}
+                                                                             max={20}
                                                                              required/>
                     </div>
 
