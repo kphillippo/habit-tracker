@@ -46,7 +46,7 @@ function getHabits(){
     })
     .catch(err => {
         console.log(err);
-        window.alert(err.error);
+        toast.alert(err.error);
     })
 }
 

@@ -14,6 +14,9 @@ import Leaderboard from "./Containers/Leaderboard/Leaderboard.js"
 import Journal from "./Containers/Journal/Journal.js"
 import Dailies from "./Containers/Dailies/Dailies.js"
 import {apiRequest }from './utils/reqTool.js';
+import 'react-datepicker/dist/react-datepicker.css';
+
+
 import {
   BrowserRouter as Router,
   Route,

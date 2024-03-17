@@ -1075,3 +1075,7 @@ input[type="radio"] {
   border-width: 0.1vw;
   border-radius: 1.5vw;
 }
+
+.react-datepicker__tab-loop {
+  display: contents;
+}

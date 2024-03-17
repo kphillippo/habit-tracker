@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import DatePicker from "react-datepicker"
+
 
 class EditToDoPopup extends Component {
     constructor(props) {
@@ -47,11 +49,12 @@ class EditToDoPopup extends Component {
                         />
 
                         <label className="edittodo_timer_label" htmlFor="edittodo_timer_input">Date:</label>
-                        <input  id="edittodo_timer_input" 
-                                type="text" 
-                                name="Date"
-                                value={this.state.Date.split('T')[0]}
-                                onChange={this.handleChange}
+                        <DatePicker 
+                            selected={this.state.Date} 
+                            onChange={date => this.setState({Date: date})} 
+                            dateFormat="dd/MM/yyyy"
+                            showYearDropdown
+                            scrollableMonthYearDropdown
                         />
 
                         <label className="edittodo_counter_label" htmlFor="edittodo_counter_input">Repeat:</label>
