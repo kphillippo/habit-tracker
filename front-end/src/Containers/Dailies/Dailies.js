@@ -79,6 +79,7 @@ useEffect(() => {
   if(isSignIn()){
     getTodos();
     getHabits();
+    
   }
   else{
     navigate("/signin")
