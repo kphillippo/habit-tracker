@@ -11,7 +11,6 @@ import ViewFriendPopup from './ViewFriendPopup';
 
 function Profile(props) {
     const userInfo = props.data;
-    //console.log(userInfo);
     const [fullInfo, setFullInfo] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [showAddFriendsPopUp, setAddFriendsShowPopUp] = useState(false);
@@ -19,32 +18,27 @@ function Profile(props) {
     const [showViewFriendPopup, setViewFriendPopup] = useState("");
 
     useEffect(() => {
-        // Function to fetch user info
         const fetchUserInfo = async () => {
             try {
-                // Perform the API request
                 const response = await apiRequest("POST", "user/userProfileInfo?user_id=" + sessionStorage.getItem("userId"))
-                const data = await response; // Assuming the response is JSON
-
-                // Update state with the fetched user info
+                const data = await response;
                 setFullInfo(data);
             } catch (err) {
                 console.error("Failed to fetch user info:", err);
-                // Optionally handle error state here
             } finally {
-                setIsLoading(false); // Set loading to false regardless of outcome
+                setIsLoading(false);
             }
         };
 
-        fetchUserInfo(); // Call the fetch function when the component mounts
-    }, []); // Empty dependency array means this effect runs once on mount
+        fetchUserInfo(); 
+    }, []); 
 
     if (isLoading) {
-        return <div>Loading...</div>; // Render loading state
+        return <div>Loading...</div>; 
     }
 
     if (!fullInfo) {
-        return <div>Error loading user information.</div>; // Render error state or alternative content
+        return <div>Error loading user information.</div>; 
     }
 
     //Returns html for form with user information
@@ -92,7 +86,6 @@ function Profile(props) {
     function generateFriendsList() {
         let friendsList = [];
         let flameColor = "#e57028";
-        console.log(fullInfo);
         for (let i = 0; i < fullInfo.userFriends.length; i++) {
             friendsList[i] = <><tr className="friend">
                 <td style={{ width: '10%' }}>&nbsp;&nbsp;{fullInfo.userFriends[i].username}</td>
