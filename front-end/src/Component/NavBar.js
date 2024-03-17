@@ -71,7 +71,6 @@ function NavBar({isSignedout, data}) {
                     // Implement your log-out logic here
                         console.log('Logging out...');
                         sessionStorage.clear()
-                        isSignedout()
                         navigate('/home');
                         close();
                         }}

@@ -23,6 +23,7 @@ import {
 
 
 import testData from "./mock/user.json"
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
   //state
@@ -47,18 +48,19 @@ function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
+        <Toaster></Toaster>
         <NavBar isSignedout={() => setisUpdated(true)} data={{userName, userToken, userStreak}}/>
         <Routes>
-          <Route path="/home" element={<Home data={{userName, userToken, userStreak}}/>} />
-          <Route path="/dailies" element={<Dailies user={{userName, userToken, userStreak}}/>} />
-          <Route path="/journal" element={<Journal user={{userName, userToken, userStreak}}/>} />
-          <Route path="/challenges" element={<Challenges user={{userName, userToken, userStreak}}/>} />
-          <Route path="/leaderboard" element={<Leaderboard user={{userName, userToken, userStreak}}/>} />
-          <Route path="/stats" element={<Stats user={{userName, userToken, userStreak}}/>} />
+          <Route path="/home" element={<Home data={{userName, userToken, userStreak}} toast={toast}/>} />
+          <Route path="/dailies" element={<Dailies user={{userName, userToken, userStreak}} toast={toast}/>} />
+          <Route path="/journal" element={<Journal user={{userName, userToken, userStreak}} toast={toast}/>} />
+          <Route path="/challenges" element={<Challenges user={{userName, userToken, userStreak}} toast={toast}/>} />
+          <Route path="/leaderboard" element={<Leaderboard user={{userName, userToken, userStreak}} toast={toast}/>} />
+          <Route path="/stats" element={<Stats user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/help" element={<Help />} />
-          <Route path="/profile" element={<Profile data={{userName, userToken}}/>} />
-          <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)}/>} />
-          <Route path="/signup" element={<Signup isSignedin={() => setisUpdated(true)}/>} />
+          <Route path="/profile" element={<Profile data={{userName, userToken}} toast={toast}/>} />
+          <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)} toast={toast}/>} />
+          <Route path="/signup" element={<Signup isSignedin={() => setisUpdated(true)} toast={toast}/>} />
           <Route path="/" element={<Navigate replace to="/home" />} />
         </Routes>
       </div>

@@ -3,15 +3,15 @@ import '../../Css/signin.css';
 import { FaRegUserCircle, FaLock } from "react-icons/fa";
 import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from 'react-hot-toast';
 
 
-const Signin = ({ isSignedin }) =>{
+const Signin = ({ isSignedin, toast }) =>{
 
     //todo: when the window size is small, the layout is messed up
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     let navigate = useNavigate();
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -30,12 +30,12 @@ const Signin = ({ isSignedin }) =>{
                 sessionStorage.setItem("userId", user._id);
                 sessionStorage.setItem("userEmail", user.Email);
                 isSignedin()
-                toast.success(`Welcome back ${user.Username}`)
                 navigate('/home');
+                toast.success(`Welcome back ${user.Username}!`);
             })
             .catch(err => {
                 console.log(err);
-                window.alert(err.error);
+                toast.error(err.error);
             })
             
         console.log('Login with:', username, password);
@@ -43,7 +43,6 @@ const Signin = ({ isSignedin }) =>{
 
     return (
         <div className={'LoginForm'}>
-            <Toaster/>
             <div className={'Top'}>
                 <h1>Welcome to HabitConnect!!</h1>
                 <p>"I am a random quote everyday to give you motivation." = Person McPerson</p>

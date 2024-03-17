@@ -20,7 +20,7 @@ function Dailies(props){
   const[habitManager,setHabitManager] = useState(false);
   const[habits, setHabits] = useState();
   const[todos, setTodos] = useState();
-
+  const toast = props.toast;
   //check if the user is signed in
   function isSignIn(){
     if(!props.user.userToken){
@@ -32,7 +32,7 @@ function Dailies(props){
 
   const triggerDataRefresh = () => {
     setUpdateTrigger(currentValue => currentValue + 1);
-};
+  };
 
 //get habits list from backend
 function getHabits(){
@@ -56,7 +56,7 @@ function getTodos(){
     })
     .catch(err => {
         console.log(err);
-        window.alert(err.error);
+        toast.error(err.error);
     })
 }
 
@@ -66,11 +66,12 @@ function createTodo(data){
         apiRequest("POST", "todo/createTodo", data)
         .then(({token, ...data}) => {
             console.log(data);
+            toast.success("create a new todo!")
             triggerDataRefresh()
         })
         .catch(err => {
             console.log(err);
-            window.alert(err.error);
+            toast.error(err.error);
         })
 }
 
@@ -79,10 +80,9 @@ useEffect(() => {
   if(isSignIn()){
     getTodos();
     getHabits();
-    
   }
   else{
-    navigate("/signin")
+    navigate("/home")
   }
 }, [updateTrigger])
 
