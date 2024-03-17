@@ -57,7 +57,6 @@ const Signin = ({ isSignedin }) =>{
                         type={"text"} placeholder={'  Username'}
                         name={"username"}
                         value={username}
-                        max={20}
                         onChange={e => setUsername(e.target.value)}
                         required/>
 
