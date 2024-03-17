@@ -108,8 +108,9 @@ useEffect(() => {
                         <table id = "table2">
                             {habits && habits.map((item) => (
                                 <HabitItem
-                                    key={item.id}
+                                    key={item._id}
                                     data = {item}
+                                    toast = {toast}
                                 >
                                 </HabitItem>
                             ))}
@@ -123,9 +124,10 @@ useEffect(() => {
           <table id = "table3">
             {todos && todos.map((item => (
                 <TodoItem
-                    key={item.id}
+                    key={item._id}
                     data={item}
                     isUpdated={() => triggerDataRefresh()}
+                    toast = {toast}
                 >
                 </TodoItem>
             )))}
@@ -150,8 +152,8 @@ useEffect(() => {
       <button className="Down">^</button>
       </div>
               
-      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
-      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
+      <NewToDoPopup toast = {toast} trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
+      <HabitManager toast = {toast} trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
     </div>
 </body>
     );

@@ -45,6 +45,7 @@ export default class HabitManagerItem extends Component {
         apiRequest("POST", "habit/updateHabit", data)
         .then(() => {
             this.props.isUpdated()
+            this.props.toast.success("The habit is updated!")
         })
         .catch(err => {
             console.log(err);
@@ -57,11 +58,11 @@ export default class HabitManagerItem extends Component {
             apiRequest("DELETE", `habit/deleteHabit?user_id=${this.state.Owner}&habit_id=${this.state.HabitID}`)
                 .then(() => {
                     this.props.isUpdated()
-                    this.props.isDeleted()
+                    this.props.toast.success("The habit is deleted!")
                 })
                 .catch(err => {
                     console.log(err);
-                    window.alert(err.error);
+                    this.props.toast.error(err.error);
                 })
         }
     }

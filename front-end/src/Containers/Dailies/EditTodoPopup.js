@@ -32,6 +32,8 @@ class EditToDoPopup extends Component {
         });
     }
 
+    
+
     render() {
         const { trigger } = this.state;
         
