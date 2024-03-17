@@ -32,6 +32,7 @@ function NavBar({isSignedout, data}) {
                         console.log('Logging out...');
                         sessionStorage.clear()
                         isSignedout()
+                        window.location.reload();
                         navigate('/home');
                         close();
                         }}

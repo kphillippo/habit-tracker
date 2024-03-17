@@ -40,6 +40,13 @@ function App() {
         setUserName(sessionStorage.getItem("userName"));
         setisUpdated(false);
       }
+      if(sessionStorage.getItem("userToken") === null){
+        sessionStorage.clear();
+        setUserToken(null);
+        setUserStreak(null);
+        setUserName(null);
+        setisUpdated(false);
+      }
 
   }, [isUpdated])
 

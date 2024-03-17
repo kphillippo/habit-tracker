@@ -21,9 +21,12 @@ function Dailies(props){
   const[habits, setHabits] = useState();
   const[todos, setTodos] = useState();
   const toast = props.toast;
+  const [userToken, setUserToken] = useState(props.user.userToken);
+
   //check if the user is signed in
   function isSignIn(){
-    if(!props.user.userToken){
+    console.log("check signin")
+    if(!sessionStorage.getItem("userToken")){
         navigate("/signin")
         return false;
     }
@@ -84,7 +87,7 @@ useEffect(() => {
   else{
     navigate("/home")
   }
-}, [updateTrigger])
+}, [updateTrigger, userToken])
 
   return (
   <body>
