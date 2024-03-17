@@ -90,6 +90,7 @@ app.post('/', upload.single('image'), (req, res, next) => {
         }
     });
 });
+*/
 
  
 //if testing it doesnt open the port

@@ -127,7 +127,7 @@ input[type=checkbox] {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10%;
+  width: 1.5vw;
 }
 
 /* Track */
