@@ -56,12 +56,18 @@ text{
 
 }
 
-
-
 .inputBox input::placeholder{
     color: rgba(165, 165, 165, 1);
     padding-left: 10px;
     font-family: 'Kotta One', serif;
+}
+
+input:invalid{
+    border-color: red;
+}
+
+input:valid{
+    border-color: green;
 }
 
 .LoginForm .inputBox .icon{

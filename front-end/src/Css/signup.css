@@ -92,7 +92,14 @@ input::-webkit-inner-spin-button{
     margin-left: auto;
     margin-right: auto;
 
+}
 
+input:invalid{
+    border-color: red;
+}
+
+input:valid{
+    border-color: green;
 }
 
 

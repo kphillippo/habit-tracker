@@ -10,7 +10,8 @@ import CreateChallenge from "./CreateChallenge";
 
 function Challenges(props){
 
-    let navigate = useNavigate()
+    let navigate = useNavigate();
+    let name = props.user.userName;
 
     function isSignIn(){
         if(!props.user.userToken){
@@ -22,10 +23,15 @@ function Challenges(props){
         isSignIn();
     })
 
+    let currentStreak = props.user.userStreak;
+    if(currentStreak == "undefined"){
+        currentStreak = 0;
+    }
+
     
     return (
         <body>
-         <CreateChallenge/>
+         <CreateChallenge data={{name, currentStreak}}/>
         <div className="challenge-page">
             <div id="TableHead">
                 <table>
@@ -44,7 +50,7 @@ function Challenges(props){
                     <tbody id="TableBody">
                     <tr className="Trow">
                         <td width="50%" id="challenge">Exercise 30 minutes</td>
-                        <td width="20%"><ImFire color='#e57028'></ImFire> 21</td>
+                        <td width="20%"><ImFire color='#e57028'></ImFire> {currentStreak} </td>
                         <td width="25%">You</td>
                         <td width="5%"><LuPencil id="pencil"></LuPencil></td>
                     </tr>

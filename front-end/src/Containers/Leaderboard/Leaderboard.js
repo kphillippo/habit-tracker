@@ -12,6 +12,10 @@ import {LuPencil} from "react-icons/lu";
 function Leaderboard(props){
 
     let navigate = useNavigate()
+    let currentStreak = props.user.userStreak;
+    if(currentStreak == "undefined"){
+        currentStreak = 0;
+    }
 
     function isSignIn(){
         if(!props.user.userToken){
@@ -34,7 +38,7 @@ function Leaderboard(props){
                             <tr>
                                 <td width="20%"> <Bs1CircleFill id="placement" color="gold"/></td>
                                 <td width="60%"> You</td>
-                                <td width="20%"> <ImFire color="orange"></ImFire> 31</td>
+                                <td width="20%"> <ImFire color="orange"></ImFire> {currentStreak}</td>
                             </tr>
                             <tr>
                                 <td> <Bs2CircleFill id="placement" color="silver"/></td>

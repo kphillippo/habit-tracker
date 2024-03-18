@@ -66,10 +66,10 @@ body{
     border-bottom: 0.01vh solid #000;
     padding-top:2%;
     padding-bottom:2%;
+    padding-left: 10px;
 }
 
 #Table tr:hover{
-    border: 0.5px solid grey;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
     border-radius: 15px;
     background: rgba(196, 211, 171, 49);
