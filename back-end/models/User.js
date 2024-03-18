@@ -29,13 +29,17 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0
     }, 
-    PrivacySettings:{
+    LongestStreak:{
+        type: Number,
+        default: 0
+    }, 
+    Settings:{
         type: mongoose.ObjectId
     },
     ProfilePicture:{
         data: Buffer, // Image data as buffer
         contentType: String // MIME type of the image
-    }
+    },
     
 }, { collection: 'User'});
 
