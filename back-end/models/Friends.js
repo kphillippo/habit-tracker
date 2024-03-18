@@ -51,6 +51,11 @@ FriendsSchema.statics.findFriends = async function(User) {
     return await this.find({ User: User, RequestPending: false });
 }
 
+//finds friends and adds user and sorts by streak for leaderboard
+FriendsSchema.statics.findLeaderboard = async function(User) {
+    return await this.find({ User: User, RequestPending: false });
+}
+
 //static send friend request function
 FriendsSchema.statics.sendFriendRequest = async function(User, FriendsWith) {
 
@@ -85,11 +90,6 @@ FriendsSchema.statics.sendFriendRequest = async function(User, FriendsWith) {
     const request2 = await this.create({User: FriendsWith, FriendsWith: User, RequestPending: true, Requester: User, Requestee: FriendsWith});
 
     return request, request2;
-}
-
-//static decline friend request function
-FriendsSchema.statics.declineFriendRequest = async function(User, FriendsWith) {
-    
 }
 
 const FriendsModel = mongoose.model("Friends", FriendsSchema);
