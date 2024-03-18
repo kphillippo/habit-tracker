@@ -20,10 +20,13 @@ function Dailies(props){
   const[habitManager,setHabitManager] = useState(false);
   const[habits, setHabits] = useState();
   const[todos, setTodos] = useState();
+  const toast = props.toast;
+  const [userToken, setUserToken] = useState(props.user.userToken);
 
   //check if the user is signed in
   function isSignIn(){
-    if(!props.user.userToken){
+    console.log("check signin")
+    if(!sessionStorage.getItem("userToken")){
         navigate("/signin")
         return false;
     }
@@ -32,7 +35,7 @@ function Dailies(props){
 
   const triggerDataRefresh = () => {
     setUpdateTrigger(currentValue => currentValue + 1);
-};
+  };
 
 //get habits list from backend
 function getHabits(){
@@ -43,7 +46,7 @@ function getHabits(){
     })
     .catch(err => {
         console.log(err);
-        window.alert(err.error);
+        toast.alert(err.error);
     })
 }
 
@@ -56,7 +59,7 @@ function getTodos(){
     })
     .catch(err => {
         console.log(err);
-        window.alert(err.error);
+        toast.error(err.error);
     })
 }
 
@@ -66,11 +69,12 @@ function createTodo(data){
         apiRequest("POST", "todo/createTodo", data)
         .then(({token, ...data}) => {
             console.log(data);
+            toast.success("create a new todo!")
             triggerDataRefresh()
         })
         .catch(err => {
             console.log(err);
-            window.alert(err.error);
+            toast.error(err.error);
         })
 }
 
@@ -81,9 +85,9 @@ useEffect(() => {
     getHabits();
   }
   else{
-    navigate("/signin")
+    navigate("/home")
   }
-}, [updateTrigger])
+}, [updateTrigger, userToken])
 
   return (
   <body>
@@ -104,8 +108,9 @@ useEffect(() => {
                         <table id = "table2">
                             {habits && habits.map((item) => (
                                 <HabitItem
-                                    key={item.id}
+                                    key={item._id}
                                     data = {item}
+                                    toast = {toast}
                                 >
                                 </HabitItem>
                             ))}
@@ -119,9 +124,10 @@ useEffect(() => {
           <table id = "table3">
             {todos && todos.map((item => (
                 <TodoItem
-                    key={item.id}
+                    key={item._id}
                     data={item}
                     isUpdated={() => triggerDataRefresh()}
+                    toast = {toast}
                 >
                 </TodoItem>
             )))}
@@ -146,8 +152,8 @@ useEffect(() => {
       <button className="Down">^</button>
       </div>
               
-      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
-      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
+      <NewToDoPopup toast = {toast} trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
+      <HabitManager toast = {toast} trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
     </div>
 </body>
     );

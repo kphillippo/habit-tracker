@@ -8,7 +8,7 @@ import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
 
 
-const Signup = ({isSignedin}) => {
+const Signup = ({isSignedin, toast}) => {
     
     const [email, setEmail] = useState('');
     const [Fname, setFname] = useState('');
@@ -34,10 +34,11 @@ const Signup = ({isSignedin}) => {
                 sessionStorage.setItem("userStreak", user.Streak);
                 isSignedin()
                 navigate('/home');
+                toast.success(`Welcome back ${user.Username}!`)
             })
             .catch(err => {
                 console.log(err);
-                window.alert(err.error);
+                toast.alert(err.error);
             })
         console.log('signed up with:', Fname, Lname, email, username, password);
         
