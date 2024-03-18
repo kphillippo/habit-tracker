@@ -82,6 +82,7 @@ const Signup = ({isSignedin}) => {
                                                                              placeholder={'  Username'}
                                                                              name={"usernamee"}
                                                                              value={username}
+                                                                             max={20}
                                                                              onChange={e => setUsername(e.target.value)}
                                                                              required/>
                     </div>
