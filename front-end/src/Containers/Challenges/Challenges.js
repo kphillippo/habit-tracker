@@ -1,11 +1,11 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Css/challenges.css";
 import ReactDOM from "react-dom/client";
 import { ImFire } from "react-icons/im";
 import { LuPencil } from "react-icons/lu";
-
+import CreateChallenge from "./CreateChallenge";
 
 
 function Challenges(props){
@@ -21,10 +21,11 @@ function Challenges(props){
     useEffect(() => {
         isSignIn();
     })
+
     
     return (
         <body>
-        <button className="newChallenge"> Create New Challenge</button>    
+         <CreateChallenge/>
         <div className="challenge-page">
             <div id="TableHead">
                 <table>
@@ -40,7 +41,7 @@ function Challenges(props){
             </div>
             <div className="Lcontent">
                 <table id="Table">
-                    <tbody>
+                    <tbody id="TableBody">
                     <tr className="Trow">
                         <td width="50%" id="challenge">Exercise 30 minutes</td>
                         <td width="20%"><ImFire color='#e57028'></ImFire> 21</td>
@@ -63,7 +64,10 @@ function Challenges(props){
                 </table>
             </div>
         </div>
+
         </body>
+
+        
 
     );
 }

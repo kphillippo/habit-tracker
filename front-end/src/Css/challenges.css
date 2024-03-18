@@ -25,6 +25,7 @@ body{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
     background: rgba(226, 233, 214);
     position: absolute;
+    position: absolute;
     left: 25%;
     margin-top: 20px;
     padding: 10px 10px 0 10px;
@@ -80,3 +81,36 @@ body{
 }
 
 
+#Mbody{
+    background: rgba(226, 233, 214, 1);
+    font-family: 'Kotta One', serif;
+    border-radius: 15ps;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+    color: red;
+}
+
+.input{
+    position: relative;
+    width: 70%;
+    height: 45px;
+    border: transparent;
+    margin: 10px 20px 15px 40px;
+    color: rgb(09,0,0);
+}
+
+.input input{
+    position: absolute;
+    bottom: 10px;
+    left: 25%;
+    width: 100%;
+    height: 45px;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 7px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    padding-left: 10px;
+}
+
+Lcontent{
+    overflow-y: scroll;
+}
