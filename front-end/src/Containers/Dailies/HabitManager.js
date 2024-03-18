@@ -29,16 +29,12 @@ class HabitManager extends Component {
         .then(({token, ...data}) => {
             console.log(data);
             this.props.isUpdated();
-            toast.success("A habit is created!")
+            this.props.toast.success("A habit is created!")
         })
         .catch(err => {
             console.log(err);
-            window.alert(err.error);
+            this.props.toast.error(err.error);
         })
-    }
-
-    isDeleted = () => {
-        this.props.setTrigger(false);
     }
 
 
@@ -65,16 +61,16 @@ class HabitManager extends Component {
             <div className="habitmanager_popup">
             
             <div className= "habitmanager_popup-inner">
-                <Toaster />
+                
                 <div class = "habitmanager_Title">Habit Manager</div>
                 <div class = "habitmanager_div">
                 <table id = "habitmanager_table">
                         {this.state.habits.map((item) => (
                                 <HabitManagerItem
-                                    key={item.id}
+                                    key={item._id}
                                     data = {item}
                                     isUpdated={() => this.props.isUpdated()}
-                                    isDeleted={() => this.isDeleted()}
+                                    toast = {this.props.toast}
                                 >
                                 </HabitManagerItem>
                             ))}
