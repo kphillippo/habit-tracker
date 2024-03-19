@@ -56,7 +56,8 @@ const Signin = ({ isSignedin, toast }) =>{
                         type={"text"} placeholder={'  Username'}
                         name={"username"}
                         value={username}
-                        max={20}
+                        maxlength="20"
+                        oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                         onChange={e => setUsername(e.target.value)}
                         required/>
 
