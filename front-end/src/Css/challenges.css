@@ -16,7 +16,13 @@ body{
     font-size: 2vw;
     border-radius: 15px;
     border: .5px solid grey;
+    transition: font-size 1s,padding 1s;
 
+}
+
+.newChallenge:hover{
+    font-size: 2.5vw;
+    padding: 15px;
 }
 
 .challenge-page{
@@ -69,10 +75,14 @@ body{
     padding-left: 10px;
 }
 
+#Table tr{
+    transition: box-shadow 1s, background-color 1s, height 1s;
+}
+
 #Table tr:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
-    border-radius: 15px;
     background: rgba(196, 211, 171, 49);
+    height: 7vh;
 
 }
 
