@@ -186,17 +186,6 @@ function NavBar({isSignedout, data}) {
                     </NavLink>
                 </NavItem>
 
-                <NavItem>
-                    <NavLink
-                        className = "nav-link"
-                        to="/help"
-                        activeclassname = "active"
-                    >
-                        Help
-                    </NavLink>
-                </NavItem>
-
-
                 <NavItem className="align-right">
                     <IoMdFlame size={30} color="#e57028"></IoMdFlame>
                     <span>{userInfo.Streak && userInfo.Streak}{!userInfo.Streak && 0}</span>
