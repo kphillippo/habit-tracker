@@ -38,7 +38,7 @@ Sprint 1 Deadline: February 23rd (COMPLETE)
 
 Progress Report 1 Due: March 1st (COMPLETE)
 
-Sprint 2 Deadline: March 15th
+Sprint 2 Deadline: March 15th (COMPLETE)
 
 Progress Report 2 Due: April 1st
 

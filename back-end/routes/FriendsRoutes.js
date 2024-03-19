@@ -1,13 +1,29 @@
 const express = require('express')
 
 //controller functions
-const {  } = require('../controllers/FriendsController')
+const { sendFriendRequest, returnFriendsList, returnFriendRequests, acceptFriendRequest, declineFriendRequest, deleteFriend, returnLeaderBoard } = require('../controllers/FriendsController')
 
 const router = express.Router()
 
-//any routes go here
+//send friend request route
+router.post('/sendFriendRequest', sendFriendRequest)
 
+//return freinds list route
+router.post('/returnFriendsList', returnFriendsList)
 
+//return friend requests route
+router.post('/returnFriendRequests', returnFriendRequests)
 
+//accepts a friend request
+router.post('/acceptFriendRequest', acceptFriendRequest)
+
+//declines a friend request
+router.post('/declineFriendRequest', declineFriendRequest)
+
+//deletes a friend
+router.post('/deleteFriend', deleteFriend)
+
+//Returns Leaderboard
+router.post('/returnLeaderBoard', returnLeaderBoard )
 
 module.exports = router

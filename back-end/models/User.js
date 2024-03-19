@@ -29,13 +29,17 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0
     }, 
-    PrivacySettings:{
+    LongestStreak:{
+        type: Number,
+        default: 0
+    }, 
+    Settings:{
         type: mongoose.ObjectId
     },
     ProfilePicture:{
-        data: Buffer,
-        contentType: String
-    }
+        data: Buffer, // Image data as buffer
+        contentType: String // MIME type of the image
+    },
     
 }, { collection: 'User'});
 
@@ -103,7 +107,7 @@ UserSchema.statics.login = async function(Username, Password){
         throw Error('That user does not exist!')
     }
 
-    //chekcs if the password matches the username
+    //checks if the password matches the username
     const match = await bcrypt.compare(Password, user.Password)
 
     if(!match){
@@ -113,12 +117,60 @@ UserSchema.statics.login = async function(Username, Password){
     return user
 }
 
-//statuc get profile info function
+//static get profile info function
 UserSchema.statics.getUserProfileInfo = async function(_id){
     const user = await this.findOne({_id: _id});
 
     return user
 }
+
+//static get user id function
+UserSchema.statics.getUserId = async function(Username){
+    const user = await this.findOne({Username: Username});
+
+    if(!user){
+        
+        throw Error('Username does not exist!')
+    }
+
+    return user._id;
+}
+
+//static updatePassword function
+UserSchema.statics.updatePassword = async function(_id, Password, newPassword){
+
+    //gets the user assosiated to the username
+    const user = await this.findOne({_id});
+
+    //checks if the password matches the _id
+    const match = await bcrypt.compare(Password, user.Password)
+
+    if(!match){
+        throw Error('Incorrect Password!')
+    }
+
+    //chacks if the newPassword is the same as the old one
+    if(Password == newPassword){
+        throw Error('Your new password must be different from your current password!')
+    }
+
+    //checks if the password is good enough
+    if(!validator.isStrongPassword(newPassword)){
+        throw Error('Password must contain a capital, a lowercase, a symbol and 8 characters total!')
+    }
+
+    //encrypts new password with salt, then hashes
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password in the database
+    await this.findByIdAndUpdate(user._id, { Password: hash});
+
+    return user._id;
+}
+
+
+
 
 const UserModel = mongoose.model("User", UserSchema);
 module.exports = UserModel;

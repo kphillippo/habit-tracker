@@ -5,12 +5,13 @@ import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
 
 
-const Signin = ({ isSignedin }) =>{
+const Signin = ({ isSignedin, toast }) =>{
 
     //todo: when the window size is small, the layout is messed up
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     let navigate = useNavigate();
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -30,10 +31,11 @@ const Signin = ({ isSignedin }) =>{
                 sessionStorage.setItem("userEmail", user.Email);
                 isSignedin()
                 navigate('/home');
+                toast.success(`Welcome back ${user.Username}!`);
             })
             .catch(err => {
                 console.log(err);
-                window.alert(err.error);
+                toast.error(err.error);
             })
             
         console.log('Login with:', username, password);
@@ -54,6 +56,7 @@ const Signin = ({ isSignedin }) =>{
                         type={"text"} placeholder={'  Username'}
                         name={"username"}
                         value={username}
+                        max={20}
                         onChange={e => setUsername(e.target.value)}
                         required/>
 
