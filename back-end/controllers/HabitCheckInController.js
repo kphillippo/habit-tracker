@@ -20,7 +20,7 @@ const UpdateHabitCheckIn = async (req, res) => {
             }
         });
         if (!habitCheckIn) {
-            habitCheckIn = await HabitCheckIn.create({HabitID: Parent, Count, CheckInDate: new Date().toISOString()});
+            habitCheckIn = await HabitCheckIn.create({HabitID: Parent, Count, CheckInTime: new Date().toISOString()});
         } else {
             habitCheckIn.Count = Count;
             habitCheckIn.CheckInDate = new Date().toISOString();
@@ -28,6 +28,7 @@ const UpdateHabitCheckIn = async (req, res) => {
         }
         res.status(200).json(habitCheckIn);
     } catch (error) {
+        console.log(error.message);
         res.status(400).json({error: error.message});
     }
 }

@@ -15,3 +15,6 @@ const HabitCheckInSchema = new mongoose.Schema({
         required: true
     }
 }, { collection: 'HabitCheckIn'});
+
+const HabitCheckIn = mongoose.model('HabitCheckIn', HabitCheckInSchema);
+module.exports = HabitCheckIn;
