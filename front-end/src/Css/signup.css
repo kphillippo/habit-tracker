@@ -39,20 +39,6 @@ input::-webkit-inner-spin-button{
     font-family: 'Kotta One', serif;
 }
 
-.v-wrapper{
-    position: relative;
-    top: 25vh;
-    z-index: 0;
-    background: rgba(226, 233, 214, 1);
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
-    border-radius: 15px;
-    padding: 20px 0 0 30px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 20px;
-    width: 500px;
-    height: 400px;
-    text-align: left;
-}
 
 .v-wrapper p h2{
     font-family: 'Kotta One', serif;

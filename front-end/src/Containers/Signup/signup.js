@@ -6,6 +6,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import {NavLink} from "react-router-dom";
 import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
+import Verify from "./verify";
 
 
 const Signup = ({isSignedin, toast}) => {
@@ -16,6 +17,7 @@ const Signup = ({isSignedin, toast}) => {
     const [username, setUsername] = useState('');
     const [password , setPassword] = useState('');
     let navigate = useNavigate();
+
     const handleSubmit = (event) =>{
         event.preventDefault();
         let data = {
@@ -43,6 +45,8 @@ const Signup = ({isSignedin, toast}) => {
         console.log('signed up with:', Fname, Lname, email, username, password);
         
     };
+
+    const [showVerify, setVerify] = useState(false);
 
     return (
         <div className={'SignUp'}>
@@ -96,7 +100,8 @@ const Signup = ({isSignedin, toast}) => {
                                                                     onChange={e => setPassword(e.target.value)}
                                                                     required/>
                     </div>
-                    <button className={"btn"} type={"submit"} onClick={handleSubmit}>Create Account</button>
+                    <button className={"btn"} onClick={() => setVerify(true)}>Create Account</button>
+
                     {/* <Popup
                         className={"popUp"}
                         trigger={<button className={"btn"} type={"submit"}>Create Account</button>}
@@ -140,7 +145,9 @@ const Signup = ({isSignedin, toast}) => {
 
 
                 </form>
+                <Verify show={showVerify} close={() => setVerify(false)} sub={handleSubmit} email={email}/>
             </div>
+
         </div>
     );
 }

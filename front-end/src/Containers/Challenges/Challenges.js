@@ -32,8 +32,6 @@ function Challenges(props){
 
     const [showEdit, setEdit] = useState(false);
 
-
-
     
     return (
         <body>

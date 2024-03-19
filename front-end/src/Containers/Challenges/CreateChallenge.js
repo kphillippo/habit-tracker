@@ -70,11 +70,10 @@ function CreateChallenge(props) {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        className='modal'
       >
             <div id='Mbody'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Challenge</Modal.Title>
+                    <Modal.Title>Edit Challenge</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>
