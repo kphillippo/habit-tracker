@@ -160,16 +160,6 @@ function NavBar({isSignedout, data}) {
                     <NavLink
                         className = "nav-link"
                         activeclassname = "active"
-                        to="/journal"
-                    >
-                        Journal
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className = "nav-link"
-                        activeclassname = "active"
                         to="/challenges"
                     >
                         Challenges

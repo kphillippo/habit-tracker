@@ -11,7 +11,6 @@ import Stats from "./Containers/Stats/Stats.js"
 import Challenges from "./Containers/Challenges/Challenges.js"
 import Help from "./Containers/Help/Help.js"
 import Leaderboard from "./Containers/Leaderboard/Leaderboard.js"
-import Journal from "./Containers/Journal/Journal.js"
 import Dailies from "./Containers/Dailies/Dailies.js"
 import {apiRequest }from './utils/reqTool.js';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -63,7 +62,6 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home data={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/dailies" element={<Dailies user={{userName, userToken, userStreak}} toast={toast}/>} />
-          <Route path="/journal" element={<Journal user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/challenges" element={<Challenges user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/leaderboard" element={<Leaderboard user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/stats" element={<Stats user={{userName, userToken, userStreak}} toast={toast}/>} />
