@@ -34,13 +34,13 @@ export default class HabitItem extends Component {
     
     handleCheckBoxClick(event){
         this.setState({ Status: event.target.checked });
-        //todo: send POST request to check in the habit
+        //todo: send POST request to check-in the habit
     }
 
     componentDidUpdate(prevProps) {
         // Compare the current props with the previous ones
         if (this.props.data !== prevProps.data) {
-          // Perform the state update based on the new props
+          // reset the state based on the new props
           this.setState({
             Title: this.props.data.Title,
             Streak: this.props.data.Streak,
