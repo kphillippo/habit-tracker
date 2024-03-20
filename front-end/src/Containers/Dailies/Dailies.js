@@ -5,8 +5,6 @@ import { FaRegCalendar } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import HabitItem from "./HabitItem";
 import TodoItem from "./TodoItem";
-import mockHabits from "../../mock/habits.json";
-import mockTodos from "../../mock/todos.json"
 import { useNavigate } from "react-router-dom";
 import NewToDoPopup from "./NewTodoPopup";
 import HabitManager from "./HabitManager";
@@ -88,7 +86,7 @@ useEffect(() => {
     getHabits();
   }
   else{
-    navigate("/home")
+    navigate("/signin")
   }
 }, [updateTrigger, userToken])
 
