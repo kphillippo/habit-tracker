@@ -1,7 +1,7 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 const { app } = require('../index'); // Import your express app instance
-const Freinds = require('../models/Friends'); // Import your schema
+const Friends = require('../models/Friends'); // Import your schema
 
 // MongoDB connection string
 const serverLink = `mongodb+srv://${process.env.DBUSER}:${process.env.PASSWORD}@cluster.rbzvfkr.mongodb.net/Habit_Tracker`;
@@ -16,7 +16,7 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-describe('Freinds API', () => {
+describe('Friends API', () => {
 
     //Successfully sends a friend request
     test('Send Friend Request', async () => {
@@ -201,7 +201,7 @@ describe('Freinds API', () => {
         });
     
 
-    //Delete Freind
+    //Delete Friend
     test('Delete Friend', async () => {
 
         //test data
@@ -219,7 +219,7 @@ describe('Freinds API', () => {
         expect(response.status).toBe(200); // Assuming successful user creation returns status 200
     });
 
-    //Fail to Delete Freind, invalid input
+    //Fail to Delete Friend, invalid input
     test('Fail to Delete Friend, invalid input', async () => {
 
         //test data
@@ -237,7 +237,7 @@ describe('Freinds API', () => {
         expect(response.status).toBe(400); // Assuming successful user creation returns status 200
     });
 
-    //Decline Freind Request (creates a friend request first)
+    //Decline Friend Request (creates a friend request first)
     test('Decline Friend Request', async () => {
 
         //test data
@@ -267,7 +267,7 @@ describe('Freinds API', () => {
         expect(response2.status).toBe(200); // Assuming successful user creation returns status 200
     });
 
-    //Fail to Decline Freind Request, other errors
+    //Fail to Decline Friend Request, other errors
     test('Fail to Decline Friend Request, other errors', async () => {
 
         //test data2

@@ -7,7 +7,7 @@ const sendFriendRequest = async (req, res) => {
     try{
         const {User, FriendsWith} = req.body
   
-        //takes the username and returns an _id for the freind
+        //takes the username and returns an _id for the friend
         FriendsWithUsername = await UserModel.getUserId(FriendsWith);
 
         //trys to send friend request
@@ -132,7 +132,7 @@ const deleteFriend = async (req, res) => {
         //returns friends list
         const request = await Friend.deleteFriendRecord(User_id, Friend_id);
 
-        res.status(200).json("Friend Removed From Freinds List!")
+        res.status(200).json("Friend Removed From Friends List!")
     }catch(error){
         res.status(400).json({error: error.message})
     }
