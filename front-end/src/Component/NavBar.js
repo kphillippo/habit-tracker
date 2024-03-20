@@ -160,16 +160,6 @@ function NavBar({isSignedout, data}) {
                     <NavLink
                         className = "nav-link"
                         activeclassname = "active"
-                        to="/journal"
-                    >
-                        Journal
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className = "nav-link"
-                        activeclassname = "active"
                         to="/challenges"
                     >
                         Challenges
@@ -195,17 +185,6 @@ function NavBar({isSignedout, data}) {
                         My Stats
                     </NavLink>
                 </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className = "nav-link"
-                        to="/help"
-                        activeclassname = "active"
-                    >
-                        Help
-                    </NavLink>
-                </NavItem>
-
 
                 <NavItem className="align-right">
                     <IoMdFlame size={30} color="#e57028"></IoMdFlame>

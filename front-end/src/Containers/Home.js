@@ -33,7 +33,7 @@ function Home(props) {
     }
     //Generates random motivational quote 
     //Returns html with quote
-    function generateQoute() {
+    function generateQuote() {
         let quoteList = [
             <><div>"The only way to do great work is to love what you do." - Steve Jobs</div></>,
             <><div>"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt</div></>,
@@ -134,7 +134,7 @@ function Home(props) {
         <div className="main-container">
             <div className="message">
             {generateMessage()}
-            {generateQoute()}
+            {generateQuote()}
             </div>
             <div className="windowGallery">
                 <div className="windowLine">
