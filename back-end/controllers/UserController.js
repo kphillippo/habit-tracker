@@ -76,26 +76,30 @@ const getUserProfileInfo = async (req, res) => {
     const userFriends = await Friends.findFriends(Owner);
 
     // Extract the _id of each friend
-    const friendIds = userFriends.map(friend => friend.FriendsWith);
+const friendIds = userFriends.map(friend => friend.FriendsWith);
 
-    // Retrieve the username, firstName, LastName, Email and Streak of each friend based on their _id
-    const friendData = await User.aggregate([
-      { $match: { _id: { $in: friendIds } } },
-      { $project: { _id: 1, Username: 1, Streak: 1, FirstName: 1, LastName: 1, Email: 1 } }
-    ]);
+// Retrieve the username, firstName, LastName, Email, and Streak of each friend based on their _id
+const friendData = await User.aggregate([
+  { $match: { _id: { $in: friendIds } } },
+  { $project: { _id: 1, Username: 1, Streak: 1, FirstName: 1, LastName: 1, Email: 1 } }
+]);
 
-    // Map friend data to friend objects
-    const populatedFriends = userFriends.map(friend => {
-      const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
-      return {
-         // returns all properties of the friend object we want
-        Username: friendInfo, Streak: friendInfo, FirstName: friendInfo, LastName: friendInfo, Email: friendInfo
-      };
-    });
+// Map friend data to friend objects
+const populatedFriends = userFriends.map(friend => {
+  const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
+  return {
+    // Include specific properties from the friendInfo object
+    id: friendInfo._id, Username: friendInfo.Username, Streak: friendInfo.Streak, FirstName: friendInfo.FirstName, LastName: friendInfo.LastName, Email: friendInfo.Email
+  };
+});
 
     // Respond with user information and populated friends' data
     const Email = userInfo.Email;
-    res.status(200).json({ Email, userFriends: populatedFriends });
+    const FirstName = userInfo.FirstName;
+    const LastName = userInfo.LastName;
+    const Username = userInfo.Username;
+
+    res.status(200).json({ Email, FirstName, LastName, Username, userFriends: populatedFriends });
   } catch (error) {
       res.status(400).json({error: error.message});
   }
