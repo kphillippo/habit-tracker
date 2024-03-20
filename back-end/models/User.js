@@ -32,14 +32,14 @@ const UserSchema = new mongoose.Schema({
     LongestStreak:{
         type: Number,
         default: 0
-    }, 
+    },
     Settings:{
         type: mongoose.ObjectId
     },
     ProfilePicture:{
         data: Buffer, // Image data as buffer
         contentType: String // MIME type of the image
-    },
+    }
     
 }, { collection: 'User'});
 
@@ -129,10 +129,8 @@ UserSchema.statics.getUserId = async function(Username){
     const user = await this.findOne({Username: Username});
 
     if(!user){
-        
         throw Error('Username does not exist!')
     }
-
     return user._id;
 }
 
