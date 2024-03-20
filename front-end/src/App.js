@@ -68,7 +68,7 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/stats" element={<Stats user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/help" element={<Help />} />
-          <Route path="/profile" element={<Profile data={{userName, userToken}} toast={toast}/>} />
+          <Route path="/profile" element={<Profile userinfoUpdated={() => setisUpdated(true)} data={{userName, userToken}} toast={toast}/>} />
           <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)} toast={toast}/>} />
           <Route path="/signup" element={<Signup isSignedin={() => setisUpdated(true)} toast={toast}/>} />
           <Route path="/" element={<Navigate replace to="/home" />} />
