@@ -17,6 +17,7 @@ class DeletePopup extends Component {
         }
     }
 
+    //when the user click yes
     handleYesClick(){
         if(this.props.type === "habit"){
             this.props.deleteHabit(true);
@@ -28,7 +29,7 @@ class DeletePopup extends Component {
         }
     }
 
-
+    //when the user click yes
     handleNoClick(){
         if(this.props.type === "habit"){
             this.props.deleteHabit(false);
