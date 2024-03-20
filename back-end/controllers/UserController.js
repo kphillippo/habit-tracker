@@ -11,7 +11,6 @@ const createToken = (_id) => {
 //login user
 const loginUser = async (req, res) => {
 const {Username, Password} = req.body
-
   try{
     //trys to login user
     const user = await User.login(Username, Password)
@@ -34,9 +33,9 @@ const {Username, Password} = req.body
 
 //signup user
 const signupUser = async (req, res) => {
-  const {FirstName, LastName, Email, Username, Password, Streak} = req.body
-
   try{
+    const {FirstName, LastName, Email, Username, Password, Streak} = req.body
+
     //trys to sign up user
     const user = await User.signup(FirstName, LastName, Email, Username, Password)
 
@@ -68,7 +67,6 @@ const deleteUserByUsername = async (req, res) => {
 //Controller function to get User Info for the Profile Page
 const getUserProfileInfo = async (req, res) => {
   try {
-    
     const Owner = req.query.user_id;
 
     // Retrieve user information
@@ -78,32 +76,30 @@ const getUserProfileInfo = async (req, res) => {
     const userFriends = await Friends.findFriends(Owner);
 
     // Extract the _id of each friend
-    const friendIds = userFriends.map(friend => friend.FriendsWith);
+const friendIds = userFriends.map(friend => friend.FriendsWith);
 
-    // Retrieve the username and Streak of each friend based on their _id
-    const friendData = await User.aggregate([
-      { $match: { _id: { $in: friendIds } } },
-      { $project: { _id: 1, Username: 1, Streak: 1 } }
-    ]);
+// Retrieve the username, firstName, LastName, Email, and Streak of each friend based on their _id
+const friendData = await User.aggregate([
+  { $match: { _id: { $in: friendIds } } },
+  { $project: { _id: 1, Username: 1, Streak: 1, FirstName: 1, LastName: 1, Email: 1 } }
+]);
 
-    // Map friend data to friend objects
-    const populatedFriends = userFriends.map(friend => {
-      const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
-      return {
-         // Include all existing properties of the friend object
-        ...friend.toObject(),
-
-        // Assign the Username property from friendInfo if available, otherwise null
-        username: friendInfo ? friendInfo.Username : null,
-
-        // Assign the Streak property from friendInfo if available, otherwise null
-        Streak: friendInfo ? friendInfo.Streak : null
-      };
-    });
+// Map friend data to friend objects
+const populatedFriends = userFriends.map(friend => {
+  const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
+  return {
+    // Include specific properties from the friendInfo object
+    id: friendInfo._id, Username: friendInfo.Username, Streak: friendInfo.Streak, FirstName: friendInfo.FirstName, LastName: friendInfo.LastName, Email: friendInfo.Email
+  };
+});
 
     // Respond with user information and populated friends' data
     const Email = userInfo.Email;
-    res.status(200).json({ Email, userFriends: populatedFriends });
+    const FirstName = userInfo.FirstName;
+    const LastName = userInfo.LastName;
+    const Username = userInfo.Username;
+
+    res.status(200).json({ Email, FirstName, LastName, Username, userFriends: populatedFriends });
   } catch (error) {
       res.status(400).json({error: error.message});
   }
@@ -111,37 +107,33 @@ const getUserProfileInfo = async (req, res) => {
 
 //edits user information (later we will have to make them verify thier email before it updates)
 const updateUserInfo = async (req, res) => {
-  
-  const { _id, FirstName, LastName, Email, Username } = req.body;
+    const { _id, FirstName, LastName, Email, Username } = req.body;
 
-  // Check if the provided email already exists in the database
-  const existingEmailUser = await User.findOne({ Email });
-  if (existingEmailUser && existingEmailUser._id.toString() !== _id) {
-    return res.status(400).json({ success: false, error: 'Email already in use!' });
-  }
+    // Check if the provided email already exists in the database
+    const existingEmailUser = await User.findOne({ Email });
+    if (existingEmailUser && existingEmailUser._id.toString() !== _id) {
+      return res.status(400).json({ success: false, error: 'Email already in use!' });
+    }
 
-  // Check if the provided username already exists in the database
-  const existingUsernameUser = await User.findOne({ Username });
-  if (existingUsernameUser && existingUsernameUser._id.toString() !== _id) {
-    return res.status(400).json({ success: false, error: 'Username already exists!' });
-  }
+    // Check if the provided username already exists in the database
+    const existingUsernameUser = await User.findOne({ Username });
+    if (existingUsernameUser && existingUsernameUser._id.toString() !== _id) {
+      return res.status(400).json({ success: false, error: 'Username already exists!' });
+    }
 
-  const updatedFields = {FirstName, LastName, Email, Username};
+    const updatedFields = {FirstName, LastName, Email, Username};
 
-  // Call the static method defined in the User schema to update the user's record by username
-  const updateResult = await User.findOneAndUpdate( {_id: _id}, { $set: updatedFields }, { new: true });
+    // Call the static method defined in the User schema to update the user's record by username
+    const updateResult = await User.findOneAndUpdate( {_id: _id}, { $set: updatedFields }, { new: true });
 
-  // the user's record was updated successfully
-  res.status(200).json({ message: 'User record updated successfully!', success: true});
+    // the user's record was updated successfully
+    res.status(200).json({ message: 'User record updated successfully!', success: true});
 }
 
 //updates password
 const updatePassword = async (req, res) => {
   try {
-  
     const { _id, Password, newPassword } = req.body;
-
-    
 
     // Call the static method defined in the User schema to update the user's record by username
     const updateResult = await User.updatePassword( _id, Password, newPassword );
