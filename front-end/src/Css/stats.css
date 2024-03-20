@@ -1,0 +1,53 @@
+.parent{
+    font-family: 'Kotta One', serif;
+}
+
+.my-stats{
+    box-sizing: border-box;
+    position: absolute;
+    width: 91vw;
+    height: 30.75vw;
+    left: 5vw;
+    top: 114px;
+    background: #E2E9D6;
+    box-shadow: 0px 1px 1px 2.5px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5vw;
+}
+
+.quick-insights{
+    box-sizing: border-box;
+    position: absolute;
+    width: 51.5vw;
+    height: 27vw;
+    left: 38vw;
+    top: 1.75vw;
+    background: #C4D3AB;
+    border: 0.5px solid;
+    border-radius: 5px;
+    box-shadow: 0vw 1.5px 0.5px 0.5px rgba(0, 0, 0, 0.25);
+}
+
+.my-stats h1{
+    margin-top: 36px;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000000;
+}
+
+.quick-insights .wrapper h1{
+    position: absolute;
+    width: 296.75vw;
+    height: 39vw;
+    left: 550.75vw;
+    top: 148.25vw;
+
+    font-family: 'Kotta One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 75vw;
+    line-height: 39vw;
+    text-align: center;
+
+    color: #000000;
+} 
