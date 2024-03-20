@@ -9,9 +9,7 @@ import Signup from "./Containers/Signup/signup.js"
 import Profile from "./Containers/Profile/profile.js"
 import Stats from "./Containers/Stats/Stats.js"
 import Challenges from "./Containers/Challenges/Challenges.js"
-import Help from "./Containers/Help/Help.js"
 import Leaderboard from "./Containers/Leaderboard/Leaderboard.js"
-import Journal from "./Containers/Journal/Journal.js"
 import Dailies from "./Containers/Dailies/Dailies.js"
 import {apiRequest }from './utils/reqTool.js';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -63,12 +61,10 @@ function App() {
         <Routes>
           <Route path="/home" element={<Home data={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/dailies" element={<Dailies user={{userName, userToken, userStreak}} toast={toast}/>} />
-          <Route path="/journal" element={<Journal user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/challenges" element={<Challenges user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/leaderboard" element={<Leaderboard user={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/stats" element={<Stats user={{userName, userToken, userStreak}} toast={toast}/>} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/profile" element={<Profile userinfoUpdated={() => setisUpdated(true)} data={{userName, userToken}} toast={toast}/>} />
+          <Route path="/profile" element={<Profile data={{userName, userToken}} toast={toast}/>} />
           <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)} toast={toast}/>} />
           <Route path="/signup" element={<Signup isSignedin={() => setisUpdated(true)} toast={toast}/>} />
           <Route path="/" element={<Navigate replace to="/home" />} />
