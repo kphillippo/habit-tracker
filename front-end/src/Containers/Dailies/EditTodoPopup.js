@@ -68,8 +68,8 @@ class EditToDoPopup extends Component {
                             onChange={this.handleChange}
                             
                         >
-                            <option value="Do not Repeat">Do not Repeat</option>
-                            <option value="Notify Me">Notify Me</option>
+                            <option value="false">Do not Repeat</option>
+                            <option value="true">Notify Me</option>
                         </select>
 
                         <label className="edittodo_frequency_label" htmlFor="edittodo_frequecny_input">Remind:</label>
@@ -79,8 +79,8 @@ class EditToDoPopup extends Component {
                                 defaultValue={this.state.Remind}
                                 onChange={this.handleChange}
                         >
-                            <option value="noRemind">Do not Remind</option>
-                            <option value="Remind">Remind Me</option>
+                            <option value="false">Do not Remind</option>
+                            <option value="true">Remind Me</option>
                         </select>
                         <label className="edittodo_status_label" htmlFor="edittodo_status_input">Status:</label>
                         <select id="edittodo_status_input"
