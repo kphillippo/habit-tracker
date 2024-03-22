@@ -19,6 +19,7 @@ const userRoutes = require('./routes/UserRoutes.js');
 const habitRoutes = require('./routes/HabitRoutes.js');
 const todoRoutes = require('./routes/TodoRoutes.js');
 const friendsRoutes = require('./routes/FriendsRoutes.js');
+const habitCheckInRoutes = require('./routes/HabitCheckInRoutes.js');
 
 /*
 //variables for image
@@ -37,6 +38,7 @@ app.use('/api/user', userRoutes)
 app.use('/api/habit', habitRoutes)
 app.use('/api/todo', todoRoutes)
 app.use('/api/friends', friendsRoutes)
+app.use('/api/habitCheckIn', habitCheckInRoutes)
 
 mongoose.connect(serverLink);
 
@@ -92,7 +94,6 @@ app.post('/', upload.single('image'), (req, res, next) => {
 });
 */
 
- 
 //if testing it doesnt open the port
 if (process.env.NODE_ENV !== 'test') {
     //listening function

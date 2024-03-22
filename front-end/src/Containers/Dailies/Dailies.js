@@ -5,8 +5,6 @@ import { FaRegCalendar } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import HabitItem from "./HabitItem";
 import TodoItem from "./TodoItem";
-import mockHabits from "../../mock/habits.json";
-import mockTodos from "../../mock/todos.json"
 import { useNavigate } from "react-router-dom";
 import NewToDoPopup from "./NewTodoPopup";
 import HabitManager from "./HabitManager";
@@ -15,6 +13,8 @@ import {apiRequest} from "../../utils/reqTool"
 function Dailies(props){
 
   let navigate = useNavigate()
+
+  //states:
   const [updateTrigger, setUpdateTrigger] = useState(0);
   const[newToDoPopup,setNewToDoPopup] = useState(false);
   const[habitManager,setHabitManager] = useState(false);
@@ -46,10 +46,11 @@ function getHabits(){
     })
     .catch(err => {
         console.log(err);
-        toast.alert(err.error);
+        toast.error(err.error);
     })
 }
 
+//get todo list from backend
 function getTodos(){
   console.log("get todos in the front-end")
     apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
@@ -85,7 +86,7 @@ useEffect(() => {
     getHabits();
   }
   else{
-    navigate("/home")
+    navigate("/signin")
   }
 }, [updateTrigger, userToken])
 
@@ -136,13 +137,13 @@ useEffect(() => {
         
         </div>
         <div className="TODO_bar">
-        <input className="type-new" placeholder="Type new to do item here" type="text"/>
+        <input className="type-new" placeholder="Add new to do item here" type="text"/>
         <button className="plus" onClick ={() => setNewToDoPopup(true)} >< FaPlus size = "2vw"></FaPlus></button>
         </div>
     </div>
       <div className="my-habits">My Habits</div>
       <div className="to-do-list">To Do List</div>
-      <div className = "date_container">
+      {/* <div className = "date_container">
       <div className="january">January</div>
       <div className="calendar_container">
         <div className="calendar"><FaRegCalendar color="#000000" size = "3.5vw"></FaRegCalendar>
@@ -150,7 +151,7 @@ useEffect(() => {
     </div>
       <button className="Up">^</button>
       <button className="Down">^</button>
-      </div>
+      </div> */}
               
       <NewToDoPopup toast = {toast} trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
       <HabitManager toast = {toast} trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>

@@ -63,12 +63,11 @@ const deleteToDo = async (req, res) => {
         const UserId = new ObjectId(user_id);
         const ToDoId = new ObjectId(todo_id);
         const tempToDo = await ToDo.findOneAndDelete({ _id: ToDoId, Owner: UserId });
-        if (tempToDo) {
-            return res.status(200).send({message: tempToDo.message});
+        if (!tempToDo) {
+            throw new Error("ToDo not found");
         }
-        throw new Error("ToDo not found");
+        return res.status(200).send({message: tempToDo.message});
     } catch (error) {
-        console.log(error)
         res.status(400).json({ error: error.message });
     }
 }
