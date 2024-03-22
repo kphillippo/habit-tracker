@@ -24,6 +24,9 @@ class EditToDoPopup extends Component {
         if(this.state.Title === ""){
             this.props.toast.error("All fields are required!")
         }
+        else if(this.state.Title.length >= 20){
+            this.props.toast.error("The name is too long!")
+        }
         else{
             this.props.updateTodo(this.state);
             this.props.setTrigger();
