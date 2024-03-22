@@ -11,7 +11,7 @@ input::-webkit-inner-spin-button{
 }
 
 .SignUp{
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100vw;
@@ -20,8 +20,9 @@ input::-webkit-inner-spin-button{
 }
 
 .SignUp .wrapper{
-    margin: auto;
-    height: 50vh;
+    position: relative;
+    top: 10vh;
+    height: fit-content;
     padding-top: 40px;
 }
 
@@ -34,7 +35,7 @@ input::-webkit-inner-spin-button{
 .signup-Top{
     position: relative;
     margin-left: auto;
-    top: 18vh;
+    top: 5vh;
     text-align: center;
     font-family: 'Kotta One', serif;
 }
@@ -86,6 +87,13 @@ input:invalid{
 
 input:valid{
     border-color: green;
+}
+
+.CheckList{
+    position: relative;
+    left: 35%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 

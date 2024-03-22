@@ -7,6 +7,9 @@ import {NavLink} from "react-router-dom";
 import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
 import Verify from "./verify";
+import PasswordChecklist from "react-password-checklist"
+import {Icon} from 'react-icons-kit';
+import {eyeOff, eye} from 'react-icons-kit/feather';
 
 
 const Signup = ({isSignedin, toast}) => {
@@ -16,6 +19,8 @@ const Signup = ({isSignedin, toast}) => {
     const [Lname, setLname] = useState('');
     const [username, setUsername] = useState('');
     const [password , setPassword] = useState('');
+    const [type, setType] = useState('password');
+    const [icon, setIcon] = useState(eyeOff);
     let navigate = useNavigate();
 
     const handleSubmit = (event) =>{
@@ -45,6 +50,16 @@ const Signup = ({isSignedin, toast}) => {
         console.log('signed up with:', Fname, Lname, email, username, password);
         
     };
+
+    const handleToggle = () => {
+        if (type==='password'){
+           setIcon(eye);
+           setType('text')
+        } else {
+           setIcon(eyeOff)
+           setType('password')
+        }
+     }
 
     const [showVerify, setVerify] = useState(false);
 
@@ -91,61 +106,31 @@ const Signup = ({isSignedin, toast}) => {
                                                                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                                                                              onChange={e => setUsername(e.target.value)}
                                                                              required/>
+                                             
                     </div>
 
                     <div className={'inputBox'}>
-                        <FaLock className="icon"/> Password: <input type={"password"}
+                        <FaLock className="icon"/> Password: <input type={type}
                                                                     placeholder={'  Password'}
                                                                     name={"password"}
                                                                     value={password}
                                                                     onChange={e => setPassword(e.target.value)}
+                                                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$"
                                                                     required/>
+                        <div className='Icon'> 
+                                <Icon class="absolute mr-10" icon={icon} size={25} onClick={handleToggle}/>
+                            </div>                                            
                     </div>
+
                     <button className={"btn"} onClick={() => setVerify(true)}>Create Account</button>
-
-                    {/* <Popup
-                        className={"popUp"}
-                        trigger={<button className={"btn"} type={"submit"}>Create Account</button>}
-                        position={"top center"}  offsetY={150}
-                        closeOnDocumentClick
-                    >
-                        <div className={'v-wrapper'}>
-                            <p>Enter the verification code sent to your email.<br/>
-                            The code was sent to <span id={"person-email"}>v</span></p>
-                            <p><h2>VERIFICATION CODE:</h2></p>
-
-                            <form action={""}>
-                                <div className={"flex-container"}>
-                                    <div className={'flexInput'}>
-                                        <input type={"number"} required/>
-                                    </div>
-
-                                    <div className={'flexInput'}>
-                                        <input type={"number"} required/>
-                                    </div>
-
-                                    <div className={'flexInput'}>
-                                        <input type={"number"} required/>
-                                    </div>
-
-                                    <div className={'flexInput'}>
-                                        <input type={"number"} required/>
-                                    </div>
-
-                                    <div className={'flexInput'}>
-                                        <input type={"number"} required/>
-                                    </div>
-                                </div>
-
-                                <button className={"btn"} type={"submit"}>Verify</button>
-
-                            </form>
-
-                        </div>
-                    </Popup> */}
-
-
                 </form>
+                <div className="CheckList">
+                    <PasswordChecklist
+                            rules={["minLength","specialChar","number","capital","lowercase"]}
+                            minLength={8}
+                            value={password}
+                    />
+                </div>
                 <Verify show={showVerify} close={() => setVerify(false)} sub={handleSubmit} email={email}/>
             </div>
 

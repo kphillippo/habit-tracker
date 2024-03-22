@@ -3,6 +3,8 @@ import '../../Css/signin.css';
 import { FaRegUserCircle, FaLock } from "react-icons/fa";
 import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
+import {Icon} from 'react-icons-kit';
+import {eyeOff, eye} from 'react-icons-kit/feather';
 
 
 const Signin = ({ isSignedin, toast }) =>{
@@ -10,6 +12,9 @@ const Signin = ({ isSignedin, toast }) =>{
     //todo: when the window size is small, the layout is messed up
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [type, setType] = useState('password');
+    const [icon, setIcon] = useState(eyeOff);
+
     let navigate = useNavigate();
 
 
@@ -41,6 +46,16 @@ const Signin = ({ isSignedin, toast }) =>{
         console.log('Login with:', username, password);
     };
 
+    const handleToggle = () => {
+        if (type==='password'){
+           setIcon(eye);
+           setType('text')
+        } else {
+           setIcon(eyeOff)
+           setType('password')
+        }
+    }
+
     return (
         <div className={'LoginForm'}>
             <div className={'Top'}>
@@ -65,12 +80,16 @@ const Signin = ({ isSignedin, toast }) =>{
                     <div className={'inputBox'}>
                         <FaLock className="icon"/>     Password:
                         <input
-                            type={"password"} placeholder={'  Password'}
-                            name={"password"}
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            required/>
-
+                                type={type} placeholder={'  Password'}
+                                name={"password"}
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$'
+                                required/>
+                                
+                            <div className='Icon'> 
+                                <Icon class="absolute mr-10" icon={icon} size={25} onClick={handleToggle}/>
+                            </div>
                     </div>
 
                     <button type={"submit"}>Login</button>
