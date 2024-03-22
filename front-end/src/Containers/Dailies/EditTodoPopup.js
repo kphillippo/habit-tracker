@@ -21,8 +21,13 @@ class EditToDoPopup extends Component {
     }
 
     handleSave(){
-        this.props.updateTodo(this.state);
-        this.props.setTrigger();
+        if(this.state.Title === ""){
+            this.props.toast.error("All fields are required!")
+        }
+        else{
+            this.props.updateTodo(this.state);
+            this.props.setTrigger();
+        }
     }
 
     handleChange= (event) => {

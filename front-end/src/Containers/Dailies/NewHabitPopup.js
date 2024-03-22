@@ -19,8 +19,14 @@ class NewHabitPopup extends Component {
     }
 
     handleSave(){
-        this.props.createHabit(this.state)
-        this.props.setTrigger(false)
+        if(!this.state.Title || !this.state.Goal){
+            this.props.toast.error("All fields are required!")
+        }
+        else{
+            this.props.createHabit(this.state)
+            this.props.setTrigger(false)
+        }
+        
     }
 
     handleChange= (event) => {

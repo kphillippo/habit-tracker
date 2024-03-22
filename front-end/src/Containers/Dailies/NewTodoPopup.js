@@ -19,8 +19,15 @@ class NewToDoPopup extends Component {
     }
 
     handleSave(){
-        this.props.createTodo(this.state);
-        this.props.isUpdated();
+        if(this.state.Title === ""){
+            this.props.toast.error("All fields are required!")
+        }
+        else{
+            this.props.createTodo(this.state);
+            this.props.isUpdated();
+            this.props.setTrigger(false)
+        }
+        
     }
 
     handleChange= (event) => {
@@ -97,7 +104,7 @@ class NewToDoPopup extends Component {
                         </select>
                     </div>
                     <button className="edittodo_close" onClick={() =>  {this.props.setTrigger(false)}}>X</button>
-                    <button className="edittodo_savesubmit" onClick={() => {this.handleSave(); this.props.setTrigger(false)}}>Save & Close</button>
+                    <button className="edittodo_savesubmit" onClick={() => {this.handleSave(); }}>Save & Close</button>
                 </div>
             </div>
         ) : null;
