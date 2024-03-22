@@ -31,6 +31,7 @@ function Profile(props) {
         try {
             const response = await apiRequest("POST", "user/userProfileInfo?user_id=" + sessionStorage.getItem("userId"))
             const data = await response;
+            console.log(data)
             setFullInfo(data);
         } catch (err) {
             console.error("Failed to fetch user info:", err);
@@ -102,7 +103,7 @@ function Profile(props) {
         for (let i = 0; i < fullInfo.userFriends.length; i++) {
             friendsList[i] = (
                 <tr key={fullInfo.userFriends[i]._id} className="friend">
-                    <td style={{ width: '10%' }}>&nbsp;&nbsp;{fullInfo.userFriends[i].username}</td>
+                    <td style={{ width: '10%' }}>&nbsp;&nbsp;{fullInfo.userFriends[i].Username}</td>
                     <td style={{ float: 'right' }}><IoMdFlame color={flameColor} size={40}></IoMdFlame></td>
                     <td style={{ width: '18%' }}>{fullInfo.userFriends[i].Streak}</td>
                     <td id="viewProfile" onClick={() => setViewFriendPopup(fullInfo.userFriends[i])}>View Profile</td>
