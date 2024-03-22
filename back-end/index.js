@@ -92,7 +92,6 @@ app.post('/', upload.single('image'), (req, res, next) => {
 });
 */
 
- 
 //if testing it doesnt open the port
 if (process.env.NODE_ENV !== 'test') {
     //listening function

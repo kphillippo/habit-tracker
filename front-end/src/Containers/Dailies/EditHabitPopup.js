@@ -20,8 +20,17 @@ class EditHabitPopup extends Component {
     }
 
     handleSave(){
-        this.props.updateHabit(this.state)
-        this.props.setTrigger(false)
+        if(!this.state.Title || !this.state.Goal){
+            this.props.toast.error("All fields are required!")
+        }
+        else if(this.state.Title.length >= 20){
+            this.props.toast.error("The name is too long!")
+        }
+        else{
+            this.props.updateHabit(this.state)
+            this.props.setTrigger(false)
+        }
+
     }
 
     handleChange= (event) => {
