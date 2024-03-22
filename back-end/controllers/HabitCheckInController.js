@@ -34,19 +34,24 @@ const UpdateHabitCheckIn = async (req, res) => {
 }
 
 const GetHabitCheckIns = async (req, res) => {
+    console.log(req.query)
     let Parent = req.query.habit_id;
-    Parent = new ObjectId(Parent);
+    console.log(`Parent: ${Parent}`)
     try {
-        const habit = await Habit.find({_id: Parent});
+        const habit = await Habit.findOne({_id: Parent});
+        console.log(habit);
         if (!habit) {
             throw new Error('Habit doesn\'t exist!');
         }
-        const habitCheckIns = await HabitCheckIn.findOne({HabitID: Parent});
-        if (!habitCheckIns) {
+        const habitCheckIns = await HabitCheckIn.find({HabitID: Parent});
+        console.log(`HabitID: ${Parent}`);
+        console.log(`Found check-ins: ${habitCheckIns.length}`);
+        if (!habitCheckIns || habitCheckIns.length === 0) {
             throw new Error('No check-ins for this habit!');
         }
         res.status(200).json(habitCheckIns);
     } catch (error) {
+        console.log(error.message)
         res.status(400).json({error: error.message});
     }
 }
