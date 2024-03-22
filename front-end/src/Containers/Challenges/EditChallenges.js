@@ -92,6 +92,33 @@ function EditChallenges(props){
                             required/>
                         </div>
                     </form>
+                    <p>Participants: </p>
+
+                  <div className='FriendsTable'>
+                  <table id="Table">
+                      <tbody id="TableBody">
+                        
+                        <tr className="Trow">
+                            <td width="100%" id="challenge" >Friend 1 </td>
+                        </tr>
+                        <tr className="Trow">
+                            <td width="100%" id="challenge" >Friend 2 </td>
+                        </tr>
+                        <tr className="Trow">
+                            <td width="100%" id="challenge" >Friend 3 </td>
+                        </tr>
+                        <tr className="Trow">
+                            <td width="100%" id="challenge" >Friend 4 </td>
+                        </tr>
+                        <tr className="Trow">
+                            <td width="100%" id="challenge" >Friend 5 </td>
+                        </tr>
+                        <tr className="Trow">
+                            <td width="100%" id="challenge" >Friend 6 </td>
+                        </tr>
+                      </tbody>
+                </table>
+                  </div>
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={props.close}>

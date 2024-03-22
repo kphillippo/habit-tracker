@@ -37,8 +37,8 @@ function Leaderboard(props){
                         <tbody>
                             <tr>
                                 <td width="20%"> <Bs1CircleFill id="placement" color="gold"/></td>
-                                <td width="60%"> You</td>
-                                <td width="20%"> <ImFire color="orange"></ImFire> {currentStreak}</td>
+                                <td width="60%"> Freind 3</td>
+                                <td width="20%"> <ImFire color="orange"></ImFire> 24</td>
                             </tr>
                             <tr>
                                 <td> <Bs2CircleFill id="placement" color="silver"/></td>
@@ -52,12 +52,19 @@ function Leaderboard(props){
                             </tr>
                             <tr>
                                 <td> 4 </td>
-                                <td> Friend 3</td>
+                                <td> Friend 4</td>
                                 <td> <ImFire color="orange"></ImFire> 12</td>
                             </tr>
+
                             <tr>
                                 <td> 5 </td>
-                                <td> Friend 4</td>
+                                <td> You</td>
+                                <td> <ImFire color="orange"></ImFire> {currentStreak}</td>
+                            </tr>
+
+                            <tr>
+                                <td> 6 </td>
+                                <td> Friend 5</td>
                                 <td> <ImFire color="orange"></ImFire> 2</td>
                             </tr>
                         </tbody>

@@ -20,8 +20,10 @@ function CreateChallenge(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
   const postInfo = () => {
-    
+
     setShow(false);
 
 

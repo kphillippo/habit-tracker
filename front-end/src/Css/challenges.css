@@ -78,7 +78,7 @@ body{
     transition: box-shadow 1s, background-color 1s, height 1s;
 }
 
-#Table tr:hover{
+.Lcontent #Table tr:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
     background: rgba(196, 211, 171, 49);
     height: 6vh;
@@ -123,3 +123,14 @@ body{
 Lcontent{
     overflow-y: scroll;
 }
+
+.FriendsTable{
+    height: 25vh;
+    overflow-y: scroll;
+    color: black;
+    margin-left: 3vw;
+    background-color: white;
+    border-radius: 10px;
+}
+
+

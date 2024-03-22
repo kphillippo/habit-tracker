@@ -53,7 +53,7 @@ function Challenges(props){
                 <table id="Table">
                     <tbody id="TableBody">
                     <tr className="Trow" onClick={() => setEdit(true)}>
-                        <td width="50%" id="challenge">Exercise 30 minutes</td>
+                        <td width="50%" id="challenge" >Exercise 30 minutes </td>
                         <td width="20%"><ImFire color='#e57028'></ImFire> {currentStreak} </td>
                         <td width="25%">You</td>
                         <td width="5%"><LuPencil id="pencil"></LuPencil></td>
