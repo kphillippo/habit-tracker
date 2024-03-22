@@ -137,13 +137,13 @@ useEffect(() => {
         
         </div>
         <div className="TODO_bar">
-        <input className="type-new" placeholder="Type new to do item here" type="text"/>
+        <input className="type-new" placeholder="Add new to do item here" type="text"/>
         <button className="plus" onClick ={() => setNewToDoPopup(true)} >< FaPlus size = "2vw"></FaPlus></button>
         </div>
     </div>
       <div className="my-habits">My Habits</div>
       <div className="to-do-list">To Do List</div>
-      <div className = "date_container">
+      {/* <div className = "date_container">
       <div className="january">January</div>
       <div className="calendar_container">
         <div className="calendar"><FaRegCalendar color="#000000" size = "3.5vw"></FaRegCalendar>
@@ -151,7 +151,7 @@ useEffect(() => {
     </div>
       <button className="Up">^</button>
       <button className="Down">^</button>
-      </div>
+      </div> */}
               
       <NewToDoPopup toast = {toast} trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
       <HabitManager toast = {toast} trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>

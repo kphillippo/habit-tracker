@@ -81,7 +81,7 @@ class HabitManager extends Component {
                     <button class = "habitmanager_Add_New_Habit" onClick={this.toggleNewHabit}>Add New Habit</button>
             </div>
         </div>
-        {newHabit && <NewHabitPopup data={this.state} trigger={newHabit} setTrigger={this.toggleNewHabit} createHabit={this.createHabit} />}
+        {newHabit && <NewHabitPopup toast = {this.props.toast} data={this.state} trigger={newHabit} setTrigger={this.toggleNewHabit} createHabit={this.createHabit} />}
         </>
         ) : null;
     }

@@ -94,7 +94,7 @@ export default class TodoItem extends Component {
                 <td><button onClick={this.toggleEditTodo} className = "btn_edit2"><LuPencil id ="edit" size="2.5vw"color="#000000"></LuPencil></button></td>
                 <td><button className = "btn_delete" onClick={this.toggleDeleteTodo}><IoTrashOutline id ="delete" size="2.5vw" color="#000000"></IoTrashOutline></button></td>
             </tr>
-            {editTodo && <EditToDoPopup data={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} updateTodo={(data) => this.updateTodo(data)} />}
+            {editTodo && <EditToDoPopup toast = {this.props.toast} data={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} updateTodo={(data) => this.updateTodo(data)} />}
             {deleteTodo && <DeletePopup type={"todo"} data={this.state} trigger={deleteTodo} setTrigger={this.toggleDeleteTodo} deleteTodo={this.deleteTodo}></DeletePopup>}
             </>
         )
