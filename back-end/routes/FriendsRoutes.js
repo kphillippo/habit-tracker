@@ -8,7 +8,7 @@ const router = express.Router()
 //send friend request route
 router.post('/sendFriendRequest', sendFriendRequest)
 
-//return freinds list route
+//return friends list route
 router.post('/returnFriendsList', returnFriendsList)
 
 //return friend requests route

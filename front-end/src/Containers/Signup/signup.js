@@ -45,7 +45,7 @@ const Signup = ({isSignedin, toast}) => {
             })
             .catch(err => {
                 console.log(err);
-                toast.alert(err.error);
+                toast.error(err.error);
             })
         console.log('signed up with:', Fname, Lname, email, username, password);
         

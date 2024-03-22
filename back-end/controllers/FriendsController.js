@@ -1,13 +1,17 @@
 const Friend = require('../models/Friends');
 const UserModel = require('../models/User');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 //send friend request
 const sendFriendRequest = async (req, res) => {
-    const {User, FriendsWith} = req.body
-  
     try{
+        const {User, FriendsWith} = req.body
+  
+        //takes the username and returns an _id for the friend
+        FriendsWithUsername = await UserModel.getUserId(FriendsWith);
+
         //trys to send friend request
-        const request = await Friend.sendFriendRequest(User, FriendsWith)
+        const request = await Friend.sendFriendRequest(User, FriendsWithUsername)
     
         res.status(200).json(request)
     }catch(error){
@@ -17,17 +21,20 @@ const sendFriendRequest = async (req, res) => {
 
 //returns friends list
 const returnFriendsList = async (req, res) => {
-    const {User} = req.body
+    try{
+        const {User} = req.body
 
-    //returns friends list
-    const request = await Friend.findFriends(User);
+        //returns friends list
+        const request = await Friend.findFriends(User);
 
-    res.status(200).json(request)
+        res.status(200).json(request)
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
 }
 
 //returns leaderboard
 const returnLeaderBoard = async (req, res) => {
-    
     try{
         const {User} = req.body
 
@@ -42,8 +49,8 @@ const returnLeaderBoard = async (req, res) => {
 
         // Retrieve the username and Streak of each friend based on their _id
         const friendData = await UserModel.aggregate([
-        { $match: { _id: { $in: friendIds } } },
-        { $project: { _id: 1, Username: 1, Streak: 1 } }
+            { $match: { _id: { $in: friendIds } } },
+            { $project: { _id: 1, Username: 1, Streak: 1 } }
         ]);
 
         // Map friend data to friend objects
@@ -52,11 +59,8 @@ const returnLeaderBoard = async (req, res) => {
             // Exclude specified fields
             const { _id, User, RequestPending, Requester, Requestee, ...rest } = friend.toObject();
             return {
-                ...rest,
-                // Assign the Username property from friendInfo if available, otherwise null
-                username: friendInfo ? friendInfo.Username : null,
-                // Assign the Streak property from friendInfo if available, otherwise null
-                Streak: friendInfo ? friendInfo.Streak : null
+                Username: friendInfo.Username,
+                Streak: friendInfo.Streak
             };
         });
 
@@ -78,41 +82,60 @@ const returnLeaderBoard = async (req, res) => {
 
 //returns friend requests
 const returnFriendRequests = async (req, res) => {
-    const {User} = req.body
-    //returns friends list
-    const request = await Friend.findFriendRequests(User);
+    try{
+        const {User} = req.body
+        //returns friends list
+        const request = await Friend.findFriendRequests(User);
 
-    res.status(200).json(request)
+        res.status(200).json(request)
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
 }
 
 //accepts a friend request
 const acceptFriendRequest = async (req, res) => {
-    const {User, FriendsWith} = req.body
-  
-    //returns friends list
-    const request = await Friend.acceptFriendRequest(User, FriendsWith);
+    try{
+        const {User, FriendsWith} = req.body
+    
+        //returns friends list
+        const request = await Friend.acceptFriendRequest(User, FriendsWith);
 
-    res.status(200).json("Friend Request Accepted!")
+        res.status(200).json("Friend Request Accepted!")
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
 }
 
 //declines a friend request
 const declineFriendRequest = async (req, res) => {
-    const {User, FriendsWith} = req.body
-  
-    //returns friends list
-    const request = await Friend.deleteFriendRecord(User, FriendsWith);
+    try{
+        const {User, FriendsWith} = req.body
+    
+        //returns friends list
+        const request = await Friend.deleteFriendRecord(User, FriendsWith);
 
-    res.status(200).json("Friend Request Declined!")
+        res.status(200).json("Friend Request Declined!")
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
 }
 
 //declines a friend request
 const deleteFriend = async (req, res) => {
-    const {User, FriendsWith} = req.body
-  
-    //returns friends list
-    const request = await Friend.deleteFriendRecord(User, FriendsWith);
+    try{
+        const {User, FriendsWith} = req.body
+    
+        const User_id = new ObjectId(User);
+        const Friend_id = new ObjectId(FriendsWith);
 
-    res.status(200).json("Friend Removed From Freinds List!")
+        //returns friends list
+        const request = await Friend.deleteFriendRecord(User_id, Friend_id);
+
+        res.status(200).json("Friend Removed From Friends List!")
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
 }
 
 module.exports = {sendFriendRequest, returnFriendsList, returnFriendRequests, acceptFriendRequest, declineFriendRequest, deleteFriend, returnLeaderBoard}
