@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DatePicker from "react-datepicker"
 
 class NewToDoPopup extends Component {
     constructor(props) {
@@ -18,8 +19,18 @@ class NewToDoPopup extends Component {
     }
 
     handleSave(){
-        this.props.createTodo(this.state);
-        this.props.isUpdated();
+        if(this.state.Title === ""){
+            this.props.toast.error("All fields are required!")
+        }
+        else if(this.state.Title.length >= 20){
+            this.props.toast.error("The name is too long!")
+        }
+        else{
+            this.props.createTodo(this.state);
+            this.props.isUpdated();
+            this.props.setTrigger(false)
+        }
+        
     }
 
     handleChange= (event) => {
@@ -53,11 +64,12 @@ class NewToDoPopup extends Component {
                         />
 
                         <label className="edittodo_timer_label" htmlFor="edittodo_timer_input">Date:</label>
-                        <input  id="edittodo_timer_input" 
-                                type="text" 
-                                name="Date"
-                                value={this.state.Date.toISOString().split('T')[0]}
-                                onChange={this.handleChange}
+                        <DatePicker 
+                            selected={this.state.Date} 
+                            onChange={date => this.setState({Date: date})} 
+                            dateFormat="dd/MM/yyyy"
+                            showYearDropdown
+                            scrollableMonthYearDropdown
                         />
 
                         <label className="edittodo_counter_label" htmlFor="edittodo_counter_input">Repeat:</label>
@@ -95,7 +107,7 @@ class NewToDoPopup extends Component {
                         </select>
                     </div>
                     <button className="edittodo_close" onClick={() =>  {this.props.setTrigger(false)}}>X</button>
-                    <button className="edittodo_savesubmit" onClick={() => {this.handleSave(); this.props.setTrigger(false)}}>Save & Close</button>
+                    <button className="edittodo_savesubmit" onClick={() => {this.handleSave(); }}>Save & Close</button>
                 </div>
             </div>
         ) : null;

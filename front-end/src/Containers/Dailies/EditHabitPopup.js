@@ -20,8 +20,17 @@ class EditHabitPopup extends Component {
     }
 
     handleSave(){
-        this.props.updateHabit(this.state)
-        this.props.setTrigger(false)
+        if(!this.state.Title || !this.state.Goal){
+            this.props.toast.error("All fields are required!")
+        }
+        else if(this.state.Title.length >= 20){
+            this.props.toast.error("The name is too long!")
+        }
+        else{
+            this.props.updateHabit(this.state)
+            this.props.setTrigger(false)
+        }
+
     }
 
     handleChange= (event) => {
@@ -43,7 +52,7 @@ class EditHabitPopup extends Component {
         return trigger ? (
             <div className="newhabit_popup">
                 <div className= "edithabit_popup-inner">
-                    <div class = "newhabit_Title">Add New Habit</div>
+                    <div class = "newhabit_Title">Edit {Title}</div>
                     <div class = "newhabit_columns">
                         <label class = "newhabit_name_label" for = "name_input">Name:</label>
                         <div class="timer_input_wrapper">

@@ -5,8 +5,6 @@ import { FaRegCalendar } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 import HabitItem from "./HabitItem";
 import TodoItem from "./TodoItem";
-import mockHabits from "../../mock/habits.json";
-import mockTodos from "../../mock/todos.json"
 import { useNavigate } from "react-router-dom";
 import NewToDoPopup from "./NewTodoPopup";
 import HabitManager from "./HabitManager";
@@ -15,15 +13,20 @@ import {apiRequest} from "../../utils/reqTool"
 function Dailies(props){
 
   let navigate = useNavigate()
+
+  //states:
   const [updateTrigger, setUpdateTrigger] = useState(0);
   const[newToDoPopup,setNewToDoPopup] = useState(false);
   const[habitManager,setHabitManager] = useState(false);
   const[habits, setHabits] = useState();
   const[todos, setTodos] = useState();
+  const toast = props.toast;
+  const [userToken, setUserToken] = useState(props.user.userToken);
 
   //check if the user is signed in
   function isSignIn(){
-    if(!props.user.userToken){
+    console.log("check signin")
+    if(!sessionStorage.getItem("userToken")){
         navigate("/signin")
         return false;
     }
@@ -32,7 +35,7 @@ function Dailies(props){
 
   const triggerDataRefresh = () => {
     setUpdateTrigger(currentValue => currentValue + 1);
-};
+  };
 
 //get habits list from backend
 function getHabits(){
@@ -43,10 +46,11 @@ function getHabits(){
     })
     .catch(err => {
         console.log(err);
-        window.alert(err.error);
+        toast.error(err.error);
     })
 }
 
+//get todo list from backend
 function getTodos(){
   console.log("get todos in the front-end")
     apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
@@ -56,7 +60,7 @@ function getTodos(){
     })
     .catch(err => {
         console.log(err);
-        window.alert(err.error);
+        toast.error(err.error);
     })
 }
 
@@ -66,11 +70,12 @@ function createTodo(data){
         apiRequest("POST", "todo/createTodo", data)
         .then(({token, ...data}) => {
             console.log(data);
+            toast.success("create a new todo!")
             triggerDataRefresh()
         })
         .catch(err => {
             console.log(err);
-            window.alert(err.error);
+            toast.error(err.error);
         })
 }
 
@@ -83,7 +88,7 @@ useEffect(() => {
   else{
     navigate("/signin")
   }
-}, [updateTrigger])
+}, [updateTrigger, userToken])
 
   return (
   <body>
@@ -104,8 +109,9 @@ useEffect(() => {
                         <table id = "table2">
                             {habits && habits.map((item) => (
                                 <HabitItem
-                                    key={item.id}
+                                    key={item._id}
                                     data = {item}
+                                    toast = {toast}
                                 >
                                 </HabitItem>
                             ))}
@@ -119,9 +125,10 @@ useEffect(() => {
           <table id = "table3">
             {todos && todos.map((item => (
                 <TodoItem
-                    key={item.id}
+                    key={item._id}
                     data={item}
                     isUpdated={() => triggerDataRefresh()}
+                    toast = {toast}
                 >
                 </TodoItem>
             )))}
@@ -130,13 +137,13 @@ useEffect(() => {
         
         </div>
         <div className="TODO_bar">
-        <input className="type-new" placeholder="Type new to do item here" type="text"/>
+        <input className="type-new" placeholder="Add new to do item here" type="text"/>
         <button className="plus" onClick ={() => setNewToDoPopup(true)} >< FaPlus size = "2vw"></FaPlus></button>
         </div>
     </div>
       <div className="my-habits">My Habits</div>
       <div className="to-do-list">To Do List</div>
-      <div className = "date_container">
+      {/* <div className = "date_container">
       <div className="january">January</div>
       <div className="calendar_container">
         <div className="calendar"><FaRegCalendar color="#000000" size = "3.5vw"></FaRegCalendar>
@@ -144,10 +151,10 @@ useEffect(() => {
     </div>
       <button className="Up">^</button>
       <button className="Down">^</button>
-      </div>
+      </div> */}
               
-      <NewToDoPopup trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
-      <HabitManager trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
+      <NewToDoPopup toast = {toast} trigger = {newToDoPopup} setTrigger = {setNewToDoPopup} isUpdated={() => triggerDataRefresh()} createTodo={(data) => createTodo(data)}/>
+      <HabitManager toast = {toast} trigger = {habitManager} setTrigger = {setHabitManager} isUpdated={() => triggerDataRefresh()} habits={habits}></HabitManager>
     </div>
 </body>
     );

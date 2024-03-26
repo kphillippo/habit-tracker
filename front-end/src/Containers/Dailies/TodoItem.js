@@ -47,10 +47,11 @@ export default class TodoItem extends Component {
         apiRequest("POST", `todo/updateTodo`, data)
         .then(() => {
             this.props.isUpdated()
+            this.props.toast.success("The todo is updated!")
         })
         .catch(err => {
             console.log(err);
-            window.alert(err);
+            this.props.toast.error(err);
         })
       }
     
@@ -59,10 +60,11 @@ export default class TodoItem extends Component {
             apiRequest("DELETE", `todo/deleteTodo?user_id=${this.state.UserId}&todo_id=${this.state.ToDoId}`)
                 .then(() => {
                     this.props.isUpdated()
+                    this.props.toast.success("The todo is deleted!")
                 })
                 .catch(err => {
                     console.log(err);
-                    window.alert(err);
+                    this.props.toast.error(err);
                 })
         }
       }
@@ -71,7 +73,10 @@ export default class TodoItem extends Component {
             if (prevProps.data!== this.props.data ) {
                 // Perform the state update based on the new props
                 this.setState({
-                    Title: this.props.data.Title
+                    Title: this.props.data.Title,
+                    Date: this.props.data.Date,
+                    Remind: this.props.data.Remind,
+                    Repeat: this.props.data.Repeat,
                 });
             }
         }
@@ -89,7 +94,7 @@ export default class TodoItem extends Component {
                 <td><button onClick={this.toggleEditTodo} className = "btn_edit2"><LuPencil id ="edit" size="2.5vw"color="#000000"></LuPencil></button></td>
                 <td><button className = "btn_delete" onClick={this.toggleDeleteTodo}><IoTrashOutline id ="delete" size="2.5vw" color="#000000"></IoTrashOutline></button></td>
             </tr>
-            {editTodo && <EditToDoPopup data={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} updateTodo={(data) => this.updateTodo(data)} />}
+            {editTodo && <EditToDoPopup toast = {this.props.toast} data={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} updateTodo={(data) => this.updateTodo(data)} />}
             {deleteTodo && <DeletePopup type={"todo"} data={this.state} trigger={deleteTodo} setTrigger={this.toggleDeleteTodo} deleteTodo={this.deleteTodo}></DeletePopup>}
             </>
         )

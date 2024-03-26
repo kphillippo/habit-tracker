@@ -1,0 +1,97 @@
+.mainFrame {
+    font-family: 'Kotta One', serif;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    padding-left: 2.3%;
+    padding-top: 2%;
+    transform: translate(-50%, -50%);
+    width: 38%;
+    height: 21%;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, .30);
+    background: #E2E9D6;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.innerFrame {
+    background: white;
+    width: 95%;
+    height: 90%;
+    border-radius: 1vw;
+}
+
+.bg_blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(196, 211, 171, 0.49);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.popup_close {
+    position: absolute;
+    top: 5%;
+    left: 85%;
+    width: 8%;
+    height: 17%;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color: #fff;
+    background: #92B27A;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.30);
+    border: #111;
+    border-style: solid;
+    border-width: 0.0001vw;
+    border-radius: 1vw;
+}
+
+.updateInput {
+    margin-top: 10px;
+}
+
+#done:hover {
+    cursor: pointer;
+}
+
+.friendInput {
+    margin-top: 10px;
+}
+
+.request {
+    background: rgba(146, 178, 122, 1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    color: white;
+    font-size: 90%;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.answer {
+    background: rgba(146, 178, 122, 1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    color: white;
+    font-size: 90%;
+    padding: 5px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.friendInfo {
+    font-size: 80%;
+    width: 100%;
+}
+
+.friendInfo td {
+    border-bottom: 0.5px solid #000;
+    width: 33%;
+}

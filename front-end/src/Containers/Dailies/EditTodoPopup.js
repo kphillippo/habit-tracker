@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import DatePicker from "react-datepicker"
+
 
 class EditToDoPopup extends Component {
     constructor(props) {
@@ -19,8 +21,16 @@ class EditToDoPopup extends Component {
     }
 
     handleSave(){
-        this.props.updateTodo(this.state);
-        this.props.setTrigger();
+        if(this.state.Title === ""){
+            this.props.toast.error("All fields are required!")
+        }
+        else if(this.state.Title.length >= 20){
+            this.props.toast.error("The name is too long!")
+        }
+        else{
+            this.props.updateTodo(this.state);
+            this.props.setTrigger();
+        }
     }
 
     handleChange= (event) => {
@@ -29,6 +39,8 @@ class EditToDoPopup extends Component {
             [name]: value
         });
     }
+
+    
 
     render() {
         const { trigger } = this.state;
@@ -47,11 +59,12 @@ class EditToDoPopup extends Component {
                         />
 
                         <label className="edittodo_timer_label" htmlFor="edittodo_timer_input">Date:</label>
-                        <input  id="edittodo_timer_input" 
-                                type="text" 
-                                name="Date"
-                                value={this.state.Date.split('T')[0]}
-                                onChange={this.handleChange}
+                        <DatePicker 
+                            selected={this.state.Date} 
+                            onChange={date => this.setState({Date: date})} 
+                            dateFormat="dd/MM/yyyy"
+                            showYearDropdown
+                            scrollableMonthYearDropdown
                         />
 
                         <label className="edittodo_counter_label" htmlFor="edittodo_counter_input">Repeat:</label>
@@ -63,8 +76,8 @@ class EditToDoPopup extends Component {
                             onChange={this.handleChange}
                             
                         >
-                            <option value="Do not Repeat">Do not Repeat</option>
-                            <option value="Notify Me">Notify Me</option>
+                            <option value="false">Do not Repeat</option>
+                            <option value="true">Notify Me</option>
                         </select>
 
                         <label className="edittodo_frequency_label" htmlFor="edittodo_frequecny_input">Remind:</label>
@@ -74,8 +87,8 @@ class EditToDoPopup extends Component {
                                 defaultValue={this.state.Remind}
                                 onChange={this.handleChange}
                         >
-                            <option value="noRemind">Do not Remind</option>
-                            <option value="Remind">Remind Me</option>
+                            <option value="false">Do not Remind</option>
+                            <option value="true">Remind Me</option>
                         </select>
                         <label className="edittodo_status_label" htmlFor="edittodo_status_input">Status:</label>
                         <select id="edittodo_status_input"

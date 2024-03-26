@@ -29,7 +29,11 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0
     }, 
-    PrivacySettings:{
+    LongestStreak:{
+        type: Number,
+        default: 0
+    },
+    Settings:{
         type: mongoose.ObjectId
     },
     ProfilePicture:{
@@ -125,10 +129,8 @@ UserSchema.statics.getUserId = async function(Username){
     const user = await this.findOne({Username: Username});
 
     if(!user){
-        
         throw Error('Username does not exist!')
     }
-
     return user._id;
 }
 
