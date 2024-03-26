@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Css/challenges.css";
 import ReactDOM from "react-dom/client";
-import { ImFire } from "react-icons/im";
+import { IoMdFlame } from "react-icons/io";
 import { LuPencil } from "react-icons/lu";
 import CreateChallenge from "./CreateChallenge";
 import EditChallenges from "./EditChallenges";
@@ -54,19 +54,19 @@ function Challenges(props){
                     <tbody id="TableBody">
                     <tr className="Trow" onClick={() => setEdit(true)}>
                         <td width="50%" id="challenge" >Exercise 30 minutes </td>
-                        <td width="20%"><ImFire color='#e57028'></ImFire> {currentStreak} </td>
+                        <td width="20%"><IoMdFlame color='#e57028'></IoMdFlame> {currentStreak} </td>
                         <td width="25%">You</td>
                         <td width="5%"><LuPencil id="pencil"></LuPencil></td>
                     </tr>
                     <tr className="Trow">
                         <td id="challenge">Exercise 30 minutes</td>
-                        <td><ImFire color='#e57028'></ImFire> 21</td>
+                        <td><IoMdFlame color='#e57028'></IoMdFlame> 21</td>
                         <td>You</td>
                         <td><LuPencil id="pencil"></LuPencil></td>
                     </tr>
                     <tr className="Trow">
                         <td id="challenge">Exercise 30 minutes</td>
-                        <td><ImFire color='#e57028'></ImFire> 21</td>
+                        <td><IoMdFlame color='#e57028'></IoMdFlame> 21</td>
                         <td>You</td>
                         <td><LuPencil id="pencil"></LuPencil></td>
                     </tr>

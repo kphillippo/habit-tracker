@@ -3,7 +3,7 @@ import { render } from 'react-dom'; // Import the render function
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "../../Css/challenges.css";
-import { ImFire } from "react-icons/im";
+import { IoMdFlame } from "react-icons/io";
 
 function EditChallenges(props){
     
@@ -36,7 +36,7 @@ function EditChallenges(props){
 
     // Define and render fire icon into correct position
     var cell2 = row.insertCell(1);
-    const icon = <ImFire color='#e57028' /> 
+    const icon = <IoMdFlame color='#e57028' /> 
     render(icon, cell2);
     cell2.innerHTML += currentStreak;
 
@@ -50,7 +50,7 @@ function EditChallenges(props){
 
     /*document.getElementById("TableBody").innerHTML += <tr className="Trow">
                                                         <td width="50%" id="challenge">{Cname}</td>
-                                                        <td width="20%"><ImFire color='#e57028'></ImFire> 21</td>
+                                                        <td width="20%"><IoMdFlame color='#e57028'></IoMdFlame> 21</td>
                                                         <td width="25%">You</td>
                                                         <td width="5%"><LuPencil id="pencil"></LuPencil></td>
                                                      </tr>*/

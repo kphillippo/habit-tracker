@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Css/Leaderboard.css";
 import { GiTrophy } from "react-icons/gi";
-import { ImFire } from "react-icons/im";
+import { IoMdFlame } from "react-icons/io";
 import { Bs1CircleFill, Bs2CircleFill, Bs3CircleFill } from "react-icons/bs";
 
 import {LuPencil} from "react-icons/lu";
@@ -38,34 +38,34 @@ function Leaderboard(props){
                             <tr>
                                 <td width="20%"> <Bs1CircleFill id="placement" color="gold"/></td>
                                 <td width="60%"> Freind 3</td>
-                                <td width="20%"> <ImFire color="orange"></ImFire> 24</td>
+                                <td width="20%"> <IoMdFlame color="orange"></IoMdFlame> 24</td>
                             </tr>
                             <tr>
                                 <td> <Bs2CircleFill id="placement" color="silver"/></td>
                                 <td> Friend 1</td>
-                                <td> <ImFire color="orange"></ImFire> 21</td>
+                                <td> <IoMdFlame color="orange"></IoMdFlame> 21</td>
                             </tr>
                             <tr>
                                 <td> <Bs3CircleFill id="placement" color="brown"/> </td>
                                 <td> Friend 2</td>
-                                <td> <ImFire color="orange"></ImFire> 17</td>
+                                <td> <IoMdFlame color="orange"></IoMdFlame> 17</td>
                             </tr>
                             <tr>
                                 <td> 4 </td>
                                 <td> Friend 4</td>
-                                <td> <ImFire color="orange"></ImFire> 12</td>
+                                <td> <IoMdFlame color="orange"></IoMdFlame> 12</td>
                             </tr>
 
                             <tr>
                                 <td> 5 </td>
                                 <td> You</td>
-                                <td> <ImFire color="orange"></ImFire> {currentStreak}</td>
+                                <td> <IoMdFlame color="orange"></IoMdFlame> {currentStreak}</td>
                             </tr>
 
                             <tr>
                                 <td> 6 </td>
                                 <td> Friend 5</td>
-                                <td> <ImFire color="orange"></ImFire> 2</td>
+                                <td> <IoMdFlame color="orange"></IoMdFlame> 2</td>
                             </tr>
                         </tbody>
                     </table>
