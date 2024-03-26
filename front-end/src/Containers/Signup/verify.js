@@ -13,17 +13,18 @@ function Verify(props){
     const [Imp5, setInp5] = useState('');
 
     const inputs = [Imp1, Imp2, Imp3, Imp4, Imp5];
-    const code = ["1", "2", "3", "4", "5"];
+    //const code = ["1", "2", "3", "4", "5"];
     
     const verif =(event) =>{
-        event.preventDefault();
+        //event.preventDefault();
+        console.log("Code sent to verify.js is", props.code);
         props.close();
         
         var i;
         var bool;
 
         for(i=0; i<inputs.length; i++){
-            if(inputs[i] == code[i]){
+            if(inputs[i] == props.code[i]){
                 bool = true;
             }else{
                 bool = false;
@@ -33,7 +34,7 @@ function Verify(props){
 
         if(bool){ 
             console.log("Verification Complete!");
-            //props.sub();
+            props.sub(event);
         }
         else{   console.log("Could not verify.")}
 

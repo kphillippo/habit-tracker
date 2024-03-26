@@ -17,13 +17,15 @@ input::-webkit-inner-spin-button{
     width: 100vw;
     height: 100vh;
     z-index: 0;
+    overflow-x: hidden;
 }
 
 .SignUp .wrapper{
     position: relative;
-    top: 10vh;
+    top: 5vh;
     height: fit-content;
     padding-top: 40px;
+
 }
 
 .SignUp button{
@@ -35,7 +37,7 @@ input::-webkit-inner-spin-button{
 .signup-Top{
     position: relative;
     margin-left: auto;
-    top: 5vh;
+    top: 2vh;
     text-align: center;
     font-family: 'Kotta One', serif;
 }
