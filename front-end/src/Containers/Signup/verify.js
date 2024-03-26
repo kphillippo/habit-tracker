@@ -38,27 +38,6 @@ function Verify(props){
         }
         else{   console.log("Could not verify.")}
 
-        /*if(inputs[0] == "1"){ 
-            console.log("Input 1 done") 
-
-            if(inputs[1] == "2"){ 
-                console.log("Input 2 done") 
-                
-                if(inputs[2] == "3"){ 
-                    console.log("Input 3 done") 
-                    
-                    if(inputs[3] == "4"){ 
-                        console.log("Input 4 done") 
-                        
-                        if(inputs[4] == "5"){ 
-                            console.log("Verification Complete") 
-                            
-                            
-                        }else   console.log("Could not complete")
-                    }else   console.log("Could not complete")
-                }else   console.log("Could not complete")
-            }else   console.log("Could not complete")
-        }else   console.log("Could not complete")*/
     }
 
     return (
