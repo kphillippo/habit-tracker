@@ -20,6 +20,7 @@ const habitRoutes = require('./routes/HabitRoutes.js');
 const todoRoutes = require('./routes/TodoRoutes.js');
 const friendsRoutes = require('./routes/FriendsRoutes.js');
 const habitCheckInRoutes = require('./routes/HabitCheckInRoutes.js');
+const verificationRoute = require('./routes/VerificationRoutes.js');
 
 /*
 //variables for image
@@ -39,6 +40,7 @@ app.use('/api/habit', habitRoutes)
 app.use('/api/todo', todoRoutes)
 app.use('/api/friends', friendsRoutes)
 app.use('/api/habitCheckIn', habitCheckInRoutes)
+app.use('/api/verificartion', verificationRoute)
 
 mongoose.connect(serverLink);
 
