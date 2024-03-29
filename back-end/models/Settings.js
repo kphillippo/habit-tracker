@@ -60,12 +60,7 @@ SettingsSchema.statics.getSettings = async function(User) {
 SettingsSchema.statics.setSettings = async function(User, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FrindRequestEmails, GroupChallangeEmails, MainColor, FontSize) {
     //ensures the user has settings
     const user = await this.findOne({User});
-
-    if (!user) {
-        throw new Error('User not found');
-    }
-
-
+    
     const updatedFields = {DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FrindRequestEmails, GroupChallangeEmails, MainColor, FontSize};
 
     await this.findByIdAndUpdate(user._id, { $set: updatedFields }, { new: true });
