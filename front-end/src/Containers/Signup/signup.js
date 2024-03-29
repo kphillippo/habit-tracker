@@ -79,7 +79,7 @@ const Signup = ({isSignedin, toast}) => {
                 "subject": "Test Test Testing",
                 "text": "Welcome to HabitConnect, here is your verification code: " + inf
             }
-            apiRequest("POST", "verificartion/sendEmail", info)
+            apiRequest("POST", "verification/sendEmail", info)
                 .then(({token, ...user}) => {
                     toast.success(`Email has been sent to ${user.Email}!`)
                 })
