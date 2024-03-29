@@ -3,7 +3,7 @@ text{
 }
 
 .LoginForm{
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100vw;
@@ -14,9 +14,9 @@ text{
 .wrapper{
     position: relative;
     width: 45vw;
-    height: 50vh;
+    height: fit-content;
+    top: 10vh;
     margin: auto;
-    top: 20%;
     background: rgba(226, 233, 214, 1);
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
     border-radius: 15px;
@@ -56,12 +56,26 @@ text{
 
 }
 
+.inputBox .Icon{
+    position: absolute;
+    top: 0;
+    right: -20%;
 
+}
 
 .inputBox input::placeholder{
     color: rgba(165, 165, 165, 1);
     padding-left: 10px;
     font-family: 'Kotta One', serif;
+}
+
+
+input:invalid{
+    border-color: red;
+}
+
+input:valid{
+    border-color: green;
 }
 
 .LoginForm .inputBox .icon{
@@ -104,7 +118,7 @@ text{
 
 .LoginForm .Top{
     position: relative;
-    top: 12vh;
+    top: 2vh;
     left:0;
     margin: 10px 5px 30px;
     font-family: 'Kotta One', serif;

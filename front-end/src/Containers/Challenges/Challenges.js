@@ -1,16 +1,19 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Css/challenges.css";
 import ReactDOM from "react-dom/client";
-import { ImFire } from "react-icons/im";
+import { IoMdFlame } from "react-icons/io";
 import { LuPencil } from "react-icons/lu";
-
+import CreateChallenge from "./CreateChallenge";
+import EditChallenges from "./EditChallenges";
+//import EditChallenges from "./EditChallenges";
 
 
 function Challenges(props){
 
-    let navigate = useNavigate()
+    let navigate = useNavigate();
+    let name = props.user.userName;
 
     function isSignIn(){
         if(!props.user.userToken){
@@ -21,10 +24,18 @@ function Challenges(props){
     useEffect(() => {
         isSignIn();
     })
+
+    let currentStreak = props.user.userStreak;
+    if(currentStreak == "undefined"){
+        currentStreak = 0;
+    }
+
+    const [showEdit, setEdit] = useState(false);
+
     
     return (
         <body>
-        <button className="newChallenge"> Create New Challenge</button>    
+        <CreateChallenge data={{currentStreak, name}} />
         <div className="challenge-page">
             <div id="TableHead">
                 <table>
@@ -40,22 +51,22 @@ function Challenges(props){
             </div>
             <div className="Lcontent">
                 <table id="Table">
-                    <tbody>
-                    <tr className="Trow">
-                        <td width="50%" id="challenge">Exercise 30 minutes</td>
-                        <td width="20%"><ImFire color='#e57028'></ImFire> 21</td>
+                    <tbody id="TableBody">
+                    <tr className="Trow" onClick={() => setEdit(true)}>
+                        <td width="50%" id="challenge" >Exercise 30 minutes </td>
+                        <td width="20%"><IoMdFlame color='#e57028'></IoMdFlame> {currentStreak} </td>
                         <td width="25%">You</td>
                         <td width="5%"><LuPencil id="pencil"></LuPencil></td>
                     </tr>
                     <tr className="Trow">
                         <td id="challenge">Exercise 30 minutes</td>
-                        <td><ImFire color='#e57028'></ImFire> 21</td>
+                        <td><IoMdFlame color='#e57028'></IoMdFlame> 21</td>
                         <td>You</td>
                         <td><LuPencil id="pencil"></LuPencil></td>
                     </tr>
                     <tr className="Trow">
                         <td id="challenge">Exercise 30 minutes</td>
-                        <td><ImFire color='#e57028'></ImFire> 21</td>
+                        <td><IoMdFlame color='#e57028'></IoMdFlame> 21</td>
                         <td>You</td>
                         <td><LuPencil id="pencil"></LuPencil></td>
                     </tr>
@@ -63,7 +74,11 @@ function Challenges(props){
                 </table>
             </div>
         </div>
+        <EditChallenges show={showEdit} close={() => setEdit(false)} currentStreak = {currentStreak}/>
+
         </body>
+
+        
 
     );
 }
