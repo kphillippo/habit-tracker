@@ -16,5 +16,15 @@ const HabitCheckInSchema = new mongoose.Schema({
     }
 }, { collection: 'HabitCheckIn'});
 
+HabitCheckInSchema.statics.findForDate = async function(HabitID, date) {
+    return await this.find({
+        HabitID: HabitID,
+        CheckInTime: {
+            $gte: new Date(new Date(date).setHours(0,0,0)),
+            $lt: new Date(new Date(date).setHours(23, 59, 59))
+        }
+    });
+}
+
 const HabitCheckIn = mongoose.model('HabitCheckIn', HabitCheckInSchema);
 module.exports = HabitCheckIn;

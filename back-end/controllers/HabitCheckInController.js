@@ -56,4 +56,21 @@ const GetHabitCheckIns = async (req, res) => {
     }
 }
 
+const GetCheckInByDate = async (req, res) => {
+    let Parent = req.query.habit_id;
+    let Date = req.query.date;
+    Parent = new ObjectId(Parent);
+    try {
+        let habit = Habit.findOne({_id: Parent});
+        if (!habit) {
+            throw new Error('Habit doesn\'t exist!');
+        }
+        let habitCheckIns = await HabitCheckIn.findForDate(Parent, Date);
+        return res.status(200).json(habitCheckIns);
+    } catch (error) {
+        console.log(error.message)
+        res.status(400).json({error: error.message});
+    }
+}
+
 module.exports = { UpdateHabitCheckIn, GetHabitCheckIns };
