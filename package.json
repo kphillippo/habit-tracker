@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kphillippo/habit-tracker/issues"
   },
-  "homepage": "https://github.com/kphillippo/habit-tracker#readme"
+  "homepage": "https://github.com/kphillippo/habit-tracker#readme",
+  "dependencies": {
+    "nodemailer": "^6.9.13"
+  }
 }
