@@ -41,6 +41,8 @@ app.use('/api/habit', habitRoutes)
 app.use('/api/todo', todoRoutes)
 app.use('/api/friends', friendsRoutes)
 app.use('/api/habitCheckIn', habitCheckInRoutes)
+app.use('/api/verificationRoute', verificationRoute)
+app.use('/api/SettingsRoutes', SettingsRoutes)
 
 mongoose.connect(serverLink);
 
