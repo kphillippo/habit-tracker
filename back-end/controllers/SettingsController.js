@@ -1,6 +1,6 @@
 const Settings = require('../models/Settings');
 
-//toggle display profile to freinds
+//toggle display profile to friends
 const getSettings = async (req, res) => {
     try{
       const Owner = req.query.user_id;
@@ -18,25 +18,25 @@ const getSettings = async (req, res) => {
         const AllowEmails = user.AllowEmails
         const HabitEmails = user.HabitEmails
         const ToDoEmails = user.ToDoEmails
-        const FrindRequestEmails = user.FrindRequestEmails
+        const FriendRequestEmails = user.FriendRequestEmails
         const GroupChallangeEmails = user.GroupChallangeEmails
         const MainColor = user.MainColor
         const FontSize = user.FontSize
 
-      res.status(200).json({userID, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FrindRequestEmails, GroupChallangeEmails, MainColor, FontSize})
+      res.status(200).json({userID, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FriendRequestEmails, GroupChallangeEmails, MainColor, FontSize})
     }catch(error){
       res.status(400).json({error: error.message})
     }
 }
 
 
-//toggle display profile to freinds
+//toggle display profile to friends
 const setSettings = async (req, res) => {
     try{
-        const {User, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FrindRequestEmails, GroupChallangeEmails, MainColor, FontSize} = req.body
+        const {User, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FriendRequestEmails, GroupChallangeEmails, MainColor, FontSize} = req.body
       
         //gets the user's settings
-        const user = await Settings.setSettings(User, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FrindRequestEmails, GroupChallangeEmails, MainColor, FontSize)
+        const user = await Settings.setSettings(User, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FriendRequestEmails, GroupChallangeEmails, MainColor, FontSize)
 
       res.status(200).json({})
     }catch(error){

@@ -32,7 +32,7 @@ const SettingsSchema = new mongoose.Schema({
     ToDoEmails:{
         type: Boolean,
     },
-    FrindRequestEmails:{
+    FriendRequestEmails:{
         type: Boolean,
     },
     GroupChallangeEmails:{
@@ -48,7 +48,7 @@ const SettingsSchema = new mongoose.Schema({
 
 //sets the settings for the user when they first sign up
 SettingsSchema.statics.onSignupSettings = async function(User) {
-     await this.create({User, DisplayProfileToFriends: false, DisplayName:false, DisplayEmail: false, DisplayPhoto: false, DisplayStreaks: false, DisplayStats: false, AllowEmails: true, HabitEmails: true, ToDoEmails: true, FrindRequestEmails: true, GroupChallangeEmails: true, MainColor: 0, FontSize: 1});
+     await this.create({User, DisplayProfileToFriends: false, DisplayName:false, DisplayEmail: false, DisplayPhoto: false, DisplayStreaks: false, DisplayStats: false, AllowEmails: true, HabitEmails: true, ToDoEmails: true, FriendRequestEmails: true, GroupChallangeEmails: true, MainColor: 0, FontSize: 1});
 }
 
 //gets a user's settings
@@ -57,11 +57,11 @@ SettingsSchema.statics.getSettings = async function(User) {
 }
 
 //sets a user's settings
-SettingsSchema.statics.setSettings = async function(User, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FrindRequestEmails, GroupChallangeEmails, MainColor, FontSize) {
+SettingsSchema.statics.setSettings = async function(User, DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FriendRequestEmails, GroupChallangeEmails, MainColor, FontSize) {
     //ensures the user has settings
     const user = await this.findOne({User});
     
-    const updatedFields = {DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FrindRequestEmails, GroupChallangeEmails, MainColor, FontSize};
+    const updatedFields = {DisplayProfileToFriends, DisplayName, DisplayEmail, DisplayPhoto, DisplayStreaks, DisplayStats, AllowEmails, HabitEmails, ToDoEmails, FriendRequestEmails, GroupChallangeEmails, MainColor, FontSize};
 
     await this.findByIdAndUpdate(user._id, { $set: updatedFields }, { new: true });
 }

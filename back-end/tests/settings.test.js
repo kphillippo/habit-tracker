@@ -53,7 +53,7 @@ describe('Settings API', () => {
             AllowEmails: true,
             HabitEmails: true,
             ToDoEmails: true,
-            FrindRequestEmails: true,
+            FriendRequestEmails: true,
             GroupChallangeEmails: true,
             MainColor: 0,
             FontSize: 1
@@ -82,7 +82,7 @@ describe('Settings API', () => {
             AllowEmails: true,
             HabitEmails: true,
             ToDoEmails: true,
-            FrindRequestEmails: true,
+            FriendRequestEmails: true,
             GroupChallangeEmails: true,
             MainColor: 0,
             FontSize: 1
