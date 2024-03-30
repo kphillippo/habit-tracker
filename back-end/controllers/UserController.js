@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const Friends = require('../models/Friends');
+const Settings = require('../models/Settings');
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
@@ -38,6 +39,9 @@ const signupUser = async (req, res) => {
 
     //trys to sign up user
     const user = await User.signup(FirstName, LastName, Email, Username, Password)
+
+    //adds settings to user with defult values
+    await Settings.onSignupSettings(user._id)
 
     //create a token
     const token = createToken(user._id)
