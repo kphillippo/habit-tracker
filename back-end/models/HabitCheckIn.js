@@ -26,5 +26,24 @@ HabitCheckInSchema.statics.findForDate = async function(HabitID, date) {
     });
 }
 
+HabitCheckInSchema.post('save', async function(doc, next) {
+    const Habit = require('./Habit');
+    const habit = await Habit.findById(doc.HabitID);
+    let dayBefore = new Date(doc.CheckInTime.getTime());
+    dayBefore.setDate(dayBefore.getDate() - 1);
+    if (habit.lastCheckIn === undefined || habit.lastCheckIn === null) {
+        habit.Streak = 1;
+    } else {
+        if (habit.lastCheckIn.toDateString() === dayBefore.toDateString()) {
+            habit.Streak += 1;
+        } else {
+            habit.Streak = 1;
+        }
+    }
+    habit.set("LastCheckIn", doc.CheckInTime);
+    await habit.save();
+    next();
+});
+
 const HabitCheckIn = mongoose.model('HabitCheckIn', HabitCheckInSchema);
 module.exports = HabitCheckIn;

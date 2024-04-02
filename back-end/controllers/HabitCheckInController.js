@@ -73,4 +73,4 @@ const GetCheckInByDate = async (req, res) => {
     }
 }
 
-module.exports = { UpdateHabitCheckIn, GetHabitCheckIns };
+module.exports = { UpdateHabitCheckIn, GetHabitCheckIns, GetCheckInByDate };
