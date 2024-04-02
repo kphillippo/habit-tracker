@@ -34,10 +34,12 @@ HabitCheckInSchema.post('save', async function(doc, next) {
     if (habit.lastCheckIn === undefined || habit.lastCheckIn === null) {
         habit.Streak = 1;
     } else {
-        if (habit.lastCheckIn.toDateString() === dayBefore.toDateString()) {
-            habit.Streak += 1;
-        } else {
-            habit.Streak = 1;
+        if (habit.lastCheckIn.toDateString() !== (new Date()).toDateString()) {
+            if (habit.lastCheckIn.toDateString() === dayBefore.toDateString()) {
+                habit.Streak += 1;
+            } else {
+                habit.Streak = 1;
+            }
         }
     }
     habit.set("LastCheckIn", doc.CheckInTime);
