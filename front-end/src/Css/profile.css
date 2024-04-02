@@ -1,3 +1,8 @@
+:root {
+    --light-green-color: #c4d3ad; 
+    --lighter-green-color: #E2E9D6; 
+    --dark-green-color: #92B27A; 
+}
 .main-container{
     font-family: 'Kotta One', serif;
 }
@@ -8,8 +13,11 @@
 }
 .profilePic{
     width: 25%;
-    margin-right: 12%;
+    margin-right: 55px;
     color: grey;
+}
+.profilePic:hover{
+    cursor: pointer;
 }
 .profileInfo{
     font-size: 200%;
@@ -52,4 +60,42 @@
 .friend{
     font-size: 90%;
     border-bottom: 0.5px solid #000; 
+}
+#viewProfile:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.deleteFriend:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.profile tr:hover{
+    background-color: var(--lighter-green-color);
+    cursor: pointer;
+}
+.friendsForm tr:hover{
+    background-color: var(--light-green-color);
+}
+@media (max-width: 780px) {
+    .profile{
+        width: 542px;
+    }
+    .profilePic{
+        width: 135px;
+    }
+    .profileInfo{
+        width: 377px;
+    }
+    .profileInfo td{
+        width: 33%;
+    }
+    .friendsForm{
+        width: 697px;
+    }
+    .addFriendsButton{
+        padding: 0.5%;
+    }
+    .friendsList{
+        width:685px;
+    }
 }

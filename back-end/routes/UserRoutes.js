@@ -1,14 +1,26 @@
 const express = require('express')
 
-//controller funstions
-const { signupUser, loginUser } = require('../controllers/UserController')
+//controller functions
+const { signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword} = require('../controllers/UserController')
 
 const router = express.Router()
+
+//delete route
+router.post('/delete', deleteUserByUsername)
 
 //login route
 router.post('/login', loginUser)
 
 //signup route
 router.post('/signup', signupUser)
+
+//userProfileInfoRoute
+router.post('/userProfileInfo', getUserProfileInfo)
+
+//updateUserInfoRoute
+router.post('/updateUserInfo', updateUserInfo)
+
+//updatePassword
+router.post('/updatePassword', updatePassword)
 
 module.exports = router

@@ -3,14 +3,20 @@ import '../../Css/signin.css';
 import { FaRegUserCircle, FaLock } from "react-icons/fa";
 import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
+import {Icon} from 'react-icons-kit';
+import {eyeOff, eye} from 'react-icons-kit/feather';
 
 
-const Signin = ({ isSignedin }) =>{
+const Signin = ({ isSignedin, toast }) =>{
 
     //todo: when the window size is small, the layout is messed up
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [type, setType] = useState('password');
+    const [icon, setIcon] = useState(eyeOff);
+
     let navigate = useNavigate();
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -26,16 +32,29 @@ const Signin = ({ isSignedin }) =>{
                 sessionStorage.setItem("userStreak", user.Streak);
                 sessionStorage.setItem("userFirstName", user.FirstName);
                 sessionStorage.setItem("userLastName", user.LastName);
+                sessionStorage.setItem("userId", user._id);
+                sessionStorage.setItem("userEmail", user.Email);
                 isSignedin()
                 navigate('/home');
+                toast.success(`Welcome back ${user.Username}!`);
             })
             .catch(err => {
                 console.log(err);
-                window.alert(err.error);
+                toast.error(err.error);
             })
             
         console.log('Login with:', username, password);
     };
+
+    const handleToggle = () => {
+        if (type==='password'){
+           setIcon(eye);
+           setType('text')
+        } else {
+           setIcon(eyeOff)
+           setType('password')
+        }
+    }
 
     return (
         <div className={'LoginForm'}>
@@ -52,6 +71,8 @@ const Signin = ({ isSignedin }) =>{
                         type={"text"} placeholder={'  Username'}
                         name={"username"}
                         value={username}
+                        maxlength="20"
+                        oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                         onChange={e => setUsername(e.target.value)}
                         required/>
 
@@ -59,12 +80,16 @@ const Signin = ({ isSignedin }) =>{
                     <div className={'inputBox'}>
                         <FaLock className="icon"/>     Password:
                         <input
-                            type={"password"} placeholder={'  Password'}
-                            name={"password"}
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            required/>
-
+                                type={type} placeholder={'  Password'}
+                                name={"password"}
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$'
+                                required/>
+                                
+                            <div className='Icon'> 
+                                <Icon class="absolute mr-10" icon={icon} size={25} onClick={handleToggle}/>
+                            </div>
                     </div>
 
                     <button type={"submit"}>Login</button>

@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Krona+One:wght@400&display=swap");
+
+body{
+    overflow: hidden;
+    font-family: 'Kotta One', serif;
+}
+
+.newChallenge{
+    padding: 10px;
+    color: white;
+    background: #93b27d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+    margin-left: 40%;
+    margin-top: 30px;
+    font-size: 2vw;
+    border-radius: 15px;
+    border: .5px solid grey;
+    transition: font-size 1s,padding 1s;
+}
+
+.newChallenge:hover{
+    font-size: 2.5vw;
+    padding: 15px;
+}
+
+.challenge-page{
+    width: 50vw;
+    height: 50vh;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+    background: rgba(226, 233, 214);
+    position: absolute;
+    position: absolute;
+    left: 25%;
+    margin-top: 20px;
+    padding: 10px 10px 0 10px;
+}
+
+.challenge-page  table{
+    width: 100%;
+    padding-left: 10px;
+}
+
+#TableHead{
+    border-radius: 15px;
+    background-color: #92B27A;
+    font-size: 1.5vw;
+    height: 6vh;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+    text-align: start;
+    vertical-align: middle;
+}
+
+#TableHead td{
+    padding-top:2%;
+    padding-bottom:2%;
+}
+
+#Table{
+    border-collapse: collapse;
+    width:98%;
+    font-size: 1.2vw;
+    margin-left:2%;
+    margin-top: 3%;
+    border-radius: 15px;
+}
+
+#Table td{
+    border-top: 0.01vh solid #000;
+    border-bottom: 0.01vh solid #000;
+    padding-top:2%;
+    padding-bottom:2%;
+    padding-left: 10px;
+}
+
+#Table tr{
+    transition: box-shadow 1s, background-color 1s, height 1s;
+}
+
+.Lcontent #Table tr:hover{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+    background: rgba(196, 211, 171, 49);
+    height: 6vh;
+
+}
+
+#pencil{
+    display: none;
+}
+
+
+#Mbody{
+    background: rgba(226, 233, 214, 1);
+    font-family: 'Kotta One', serif;
+    border-radius: 15ps;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+    color: red;
+}
+
+.input{
+    position: relative;
+    width: 70%;
+    height: 45px;
+    border: transparent;
+    margin: 10px 20px 15px 40px;
+    color: rgb(09,0,0);
+}
+
+.input input{
+    position: absolute;
+    bottom: 10px;
+    left: 25%;
+    width: 100%;
+    height: 45px;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 7px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    padding-left: 10px;
+}
+
+Lcontent{
+    overflow-y: scroll;
+}
+
+.FriendsTable{
+    height: 25vh;
+    overflow-y: scroll;
+    color: black;
+    margin-left: 3vw;
+    background-color: white;
+    border-radius: 10px;
+}
+
+

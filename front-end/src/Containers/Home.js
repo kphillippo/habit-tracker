@@ -33,7 +33,7 @@ function Home(props) {
     }
     //Generates random motivational quote 
     //Returns html with quote
-    function generateQoute() {
+    function generateQuote() {
         let quoteList = [
             <><div>"The only way to do great work is to love what you do." - Steve Jobs</div></>,
             <><div>"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt</div></>,
@@ -52,7 +52,7 @@ function Home(props) {
     //Returns html with window
     function generateStreakWindow() {
         if (userStatus) {
-            let flameColor = "#4e5445";
+            let flameColor = "#c0c6b7";
             let message = <>You've been consistent for {currentStreak} days!<br></br>Extend your streak now!</>
             if (streakActive) {
                 flameColor = "#e57028";
@@ -134,7 +134,7 @@ function Home(props) {
         <div className="main-container">
             <div className="message">
             {generateMessage()}
-            {generateQoute()}
+            {generateQuote()}
             </div>
             <div className="windowGallery">
                 <div className="windowLine">

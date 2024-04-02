@@ -18,7 +18,9 @@ function NavBar({isSignedout, data}) {
     // console.log(data);
     let navigate = useNavigate();
 
-    const PopupContent = ({ close }) => (
+
+    //user icon popup
+    const UserMenuPopupContent = ({ close }) => (
         <div className="user-icon-popup">
             <Nav>
             <NavItem><NavLink className='nav-link' activeclassname='active' to="/profile">Profile</NavLink></NavItem>
@@ -30,6 +32,7 @@ function NavBar({isSignedout, data}) {
                         console.log('Logging out...');
                         sessionStorage.clear()
                         isSignedout()
+                        window.location.reload();
                         navigate('/home');
                         close();
                         }}
@@ -51,8 +54,48 @@ function NavBar({isSignedout, data}) {
             mouseLeaveDelay={300}
             arrow={false}
           >
-            {close => <PopupContent close={close} />}
+            {close => <UserMenuPopupContent close={close} />}
           </Popup>
+        </NavItem>
+      );
+
+      //notification popup
+
+      const NotificationPopupContent = ({ close }) => (
+        <div className="notification-popup">
+            <Nav>
+            <NavItem><NavLink className='nav-link' activeclassname='active' to="/profile">Profile</NavLink></NavItem>
+                <NavItem><NavLink className='nav-link' activeclassname='active' to="/setting">Settings</NavLink></NavItem>
+                
+                <NavItem><NavLink  className='nav-link' activeclassname='active'
+                onClick={() => {
+                    // Implement your log-out logic here
+                        console.log('Logging out...');
+                        sessionStorage.clear()
+                        navigate('/home');
+                        close();
+                        }}
+                >Sign-out</NavLink></NavItem>
+                
+            </Nav>
+          
+        </div>
+      );
+
+      const NotificationIconWithPopup = ({ userInfo }) => (
+        <NavItem>
+            <Popup 
+                trigger={<span className="notification-icon"><IoNotifications size={30} color="#4e5445"></IoNotifications></span>}
+                position="bottom left"
+                on="click"
+                closeOnDocumentClick
+                mouseLeaveDelay={300}
+                arrow={false}
+            >
+                {close => <NotificationPopupContent close={close} />}
+            </Popup>
+            
+            <span>0</span>
         </NavItem>
       );
     
@@ -61,14 +104,12 @@ function NavBar({isSignedout, data}) {
             <Nav className="navbar-top row-12">
                 <NavItem className="row-6">
                     <span className="title">HabitConnect</span>
-                    <span>your path to a better you!</span>
+                    <span>Connect! Commit! Change!</span>
                 </NavItem>
 
                 <NavItem className="align-right">
                     {isLogin &&
                         <UserIconWithPopup userInfo={userInfo}></UserIconWithPopup>
-
-
                     }
 
                     {!isLogin &&
@@ -119,16 +160,6 @@ function NavBar({isSignedout, data}) {
                     <NavLink
                         className = "nav-link"
                         activeclassname = "active"
-                        to="/journal"
-                    >
-                        Journal
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink
-                        className = "nav-link"
-                        activeclassname = "active"
                         to="/challenges"
                     >
                         Challenges
@@ -155,25 +186,13 @@ function NavBar({isSignedout, data}) {
                     </NavLink>
                 </NavItem>
 
-                <NavItem>
-                    <NavLink
-                        className = "nav-link"
-                        to="/help"
-                        activeclassname = "active"
-                    >
-                        Help
-                    </NavLink>
-                </NavItem>
-
-
                 <NavItem className="align-right">
                     <IoMdFlame size={30} color="#e57028"></IoMdFlame>
                     <span>{userInfo.Streak && userInfo.Streak}{!userInfo.Streak && 0}</span>
                 </NavItem>
-
-                <NavItem>
-                    <IoNotifications size={30} color="#4e5445"></IoNotifications>
-                    <span>0</span>
+                
+                <NavItem className="">
+                <NotificationIconWithPopup userInfo={userInfo}></NotificationIconWithPopup>
                 </NavItem>
 
 

@@ -37,6 +37,7 @@ export function apiRequest(method,path,data){
         .then(res => {
             return resolve(res.data)
         }).catch(err => {
+            let errorMessage;
             if (err.response) {
                 // Reject with the entire response or a specific message, depending on your needs
                 reject(err.response.data || err.response.statusText);
