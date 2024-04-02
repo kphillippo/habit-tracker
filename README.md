@@ -40,7 +40,7 @@ Progress Report 1 Due: March 1st (COMPLETE)
 
 Sprint 2 Deadline: March 15th (COMPLETE)
 
-Progress Report 2 Due: April 1st
+Progress Report 2 Due: April 1st (COMPLETE)
 
 Sprint 3 Deadline (Final Product): April 12th 
 
