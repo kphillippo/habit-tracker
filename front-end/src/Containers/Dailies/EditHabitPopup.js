@@ -52,7 +52,7 @@ class EditHabitPopup extends Component {
         return trigger ? (
             <div className="newhabit_popup">
                 <div className= "edithabit_popup-inner">
-                    <div class = "newhabit_Title">Add New Habit</div>
+                    <div class = "newhabit_Title">Edit {Title}</div>
                     <div class = "newhabit_columns">
                         <label class = "newhabit_name_label" for = "name_input">Name:</label>
                         <div class="timer_input_wrapper">

@@ -31,6 +31,7 @@ function Profile(props) {
         try {
             const response = await apiRequest("POST", "user/userProfileInfo?user_id=" + sessionStorage.getItem("userId"))
             const data = await response;
+            console.log(data)
             setFullInfo(data);
         } catch (err) {
             console.error("Failed to fetch user info:", err);
@@ -63,27 +64,27 @@ function Profile(props) {
                     </div>
                     <table className="profileInfo">
                         <tbody>
-                            <tr onClick={() => setUpdateUserPopUp("FirstName")}>
+                            <tr key={"FirstName"} onClick={() => setUpdateUserPopUp("FirstName")}>
                                 <td>FirstName:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userFirstName")}</td>
                                 <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
                             </tr>
-                            <tr onClick={() => setUpdateUserPopUp("LastName")}>
+                            <tr key={"LastName"} onClick={() => setUpdateUserPopUp("LastName")}>
                                 <td>LastName:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userLastName")}</td>
                                 <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
                             </tr>
-                            <tr onClick={() => setUpdateUserPopUp("Email")}>
+                            <tr key={"Email"} onClick={() => setUpdateUserPopUp("Email")}>
                                 <td>Email:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userEmail")}</td>
                                 <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
                             </tr>
-                            <tr onClick={() => setUpdateUserPopUp("Username")}>
+                            <tr key={"Username"} onClick={() => setUpdateUserPopUp("Username")}>
                                 <td>Username:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userName")}</td>
                                 <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
                             </tr>
-                            <tr onClick={() => setUpdateUserPopUp("Password")}>
+                            <tr key={"Password"} onClick={() => setUpdateUserPopUp("Password")}>
                                 <td>Password:</td>
                                 <td>&nbsp;&nbsp;**********</td>
                                 <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
@@ -101,8 +102,8 @@ function Profile(props) {
         let flameColor = "#e57028";
         for (let i = 0; i < fullInfo.userFriends.length; i++) {
             friendsList[i] = (
-                <tr key={fullInfo.userFriends[i]._id} className="friend">
-                    <td style={{ width: '10%' }}>&nbsp;&nbsp;{fullInfo.userFriends[i].username}</td>
+                <tr key={i} className="friend">
+                    <td style={{ width: '10%' }}>&nbsp;&nbsp;{fullInfo.userFriends[i].Username}</td>
                     <td style={{ float: 'right' }}><IoMdFlame color={flameColor} size={40}></IoMdFlame></td>
                     <td style={{ width: '18%' }}>{fullInfo.userFriends[i].Streak}</td>
                     <td id="viewProfile" onClick={() => setViewFriendPopup(fullInfo.userFriends[i])}>View Profile</td>

@@ -51,7 +51,7 @@ describe('ToDo API', () => {
       expect(response.status).toBe(200);
       await request(app)
           .delete('/api/todo/deleteTodo')
-          .send({ UserId: userID, ToDoId: response.body._id });
+          .query({ user_id: userID, todo_id: response.body._id });
     });
     test('Create new ToDo with invalid Owner', async () => {
       let response = await request(app)
@@ -73,7 +73,7 @@ describe('ToDo API', () => {
     test('Delete ToDo with invalid Id', async () => {
       let response = await request(app)
           .delete('/api/todo/deleteTodo')
-          .send({ UserId: userID, ToDoId: 'abcabcabcabcabcabcabcabc'});
+          .query({ user_id: userID, todo_id: 'abcabcabcabcabcabcabcabc'});
       expect(response.status).toBe(400);
     });
   });

@@ -41,7 +41,7 @@ describe('Habit Check In API', () => {
     expect(res.statusCode).toBe(200);
   });
   test('Successfully create and update a habit check in', async () => {
-const res = await request(app)
+    const res = await request(app)
       .post('/api/habitCheckIn/updateHabitCheckIn')
       .send({ HabitID: habit._id, Count: 5 });
     await HabitCheckIn.findOneAndDelete({HabitID: habit._id, Count: 5});

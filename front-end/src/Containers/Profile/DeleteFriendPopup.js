@@ -10,12 +10,7 @@ function DeleteFriendPopup({ onClose, friend, toast }) {
   //Sends api request to delete friend from user's frinend list and closes popup automatically
   function deleteFriend() {
     //sendAPI request to delete a friend from user's friends list
-    const dataObj = {
-      User: sessionStorage.getItem("userId"),
-      FriendsWith: friend._id
-    };
-    const data = JSON.stringify(dataObj);
-    console.log(data);
+    const data = {"User": sessionStorage.getItem("userId"),"FriendsWith": friend.id};
     apiRequest("POST", "Friends/deleteFriend", data)
       .then(({ token, ...data }) => {
         console.log(data);
