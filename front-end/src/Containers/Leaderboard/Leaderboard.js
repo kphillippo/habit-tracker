@@ -7,8 +7,6 @@ import { GiTrophy } from "react-icons/gi";
 import { IoMdFlame } from "react-icons/io";
 import { Bs1CircleFill, Bs2CircleFill, Bs3CircleFill } from "react-icons/bs";
 
-import {LuPencil} from "react-icons/lu";
-
 
 function Leaderboard(props){
 
@@ -25,13 +23,13 @@ function Leaderboard(props){
     const getFriends = async () => {
         try {
 
-            let info = {
-                "User": sessionStorage.getItem("userId")
+            let info = {                                    // Defines info to be sent into apiRequest
+                "User": sessionStorage.getItem("userId")    
             }
             
-            const response = await apiRequest("POST", "friends/returnLeaderBoard", info)
-            const data = await response;
-            setleaderBoardInfo(data);
+            const response = await apiRequest("POST", "friends/returnLeaderBoard", info)    // Sets response to await response of apiRequest
+            const data = await response;                                                    //  sets constant data to await response
+            setleaderBoardInfo(data);                                                       // set Leaderboard info to data
         } catch (err) {
             console.error("Failed to fetch user info:", err);
         } finally {
@@ -40,7 +38,7 @@ function Leaderboard(props){
         
     };
 
-    function isSignIn(){
+    function isSignIn(){        // Checks if the user is signed in
         if(!sessionStorage.getItem("userToken")){
             //navigate("/signin")
             return false
@@ -50,34 +48,34 @@ function Leaderboard(props){
     }
 
     useEffect(() => {
-        if(isSignIn()) {
+        if(isSignIn()) {        // If user is signed in, the getFriends
             getFriends()
         }
-        else{
+        else{                   // Otherwise go to signin page
             navigate("/signin")
         }
         
     });
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>;   // Shows loading screen if information is still loading
     }
-    if (!leaderBoardInfo) {
+    if (!leaderBoardInfo) {             // Shows Error message if there is an error loading user leaderboard information
         return <div>Error loading user information.</div>;
     }
 
     function generateLeaderBoard() {
-        let friendsList = [];
-        let dd1 = <Bs1CircleFill id="placement" color={"gold"}/>
+        let friendsList = [];                                           // Initialize friends list information as an array
+        let dd1 = <Bs1CircleFill id="placement" color={"gold"}/>        // Places placement icons in variables
         let dd2 = <Bs2CircleFill id="placement" color={"silver"}/>
         let dd3 = <Bs3CircleFill id="placement" color={"brown"}/>
         
-        for (let i = 0; i < leaderBoardInfo.length; i++) {
-            if(leaderBoardInfo[i].Username == null) {leaderBoardInfo[i].Username = userInfo.userName}
-            if(i >= 0 && i <= 2){
-                let placement;
+        for (let i = 0; i < leaderBoardInfo.length; i++) {              // Loop through the leangth of the leaderboard information returned
+            if(leaderBoardInfo[i].Username == null) {leaderBoardInfo[i].Username = userInfo.userName}   // Temporary patch. Just to initialize user's username
+            if(i >= 0 && i <= 2){   // If position is top 3
+                let placement;      // Define placement Icon 
                 
-                switch (i){
+                switch (i){         // Checks what position in leaderboard this person is. and initialize placement variable based on that
                     case 0:
                         placement = dd1
                     break;
@@ -88,6 +86,7 @@ function Leaderboard(props){
                         placement = dd3
                     break;
                 }
+                // Add row with friend info into friends list array
                 friendsList[i] = (
                     <tr key={i}>
                         <td width="20%"> {placement}</td>
@@ -96,6 +95,7 @@ function Leaderboard(props){
                     </tr>
                 );
             }
+            // If friend us not top 3, then add regular placement
             else{
                 friendsList[i] = (
                     <tr key={i}>
@@ -114,7 +114,7 @@ function Leaderboard(props){
                     <div className="tbl">
                         <table id="Table">
                             <tbody>
-                                {friendsList}
+                                {friendsList}  
                             </tbody>
                         </table>
                     </div>
