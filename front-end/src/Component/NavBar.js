@@ -188,7 +188,7 @@ function NavBar({isSignedout, data}) {
 
                 <NavItem className="align-right">
                     <IoMdFlame size={30} color="#e57028"></IoMdFlame>
-                    <span>{userInfo.Streak && userInfo.Streak}{!userInfo.Streak && 0}</span>
+                    <span>{userInfo.userStreak}</span>
                 </NavItem>
                 
                 <NavItem className="">
