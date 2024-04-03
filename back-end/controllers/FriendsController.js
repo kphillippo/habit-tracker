@@ -66,7 +66,7 @@ const returnLeaderBoard = async (req, res) => {
 
         // Add current user information to the populatedFriends array
         populatedFriends.unshift({
-            username: userInfo.Username,
+            Username: userInfo.Username,
             Streak: userInfo.Streak
             // Add other fields of the current user if needed
         });
