@@ -17,13 +17,14 @@ class HabitManager extends Component {
         this.createHabit = this.createHabit.bind(this);
     }
 
+    //trigger for new habit popup
     toggleNewHabit = () => {
         this.setState(prevState => ({ newHabit: !prevState.newHabit }));
     }
 
     createHabit(data){
         data.Goal = Number(data.Goal);
-        console.log(data)
+        // console.log(data)
         
         apiRequest("POST", "habit/createHabit", data)
         .then(({token, ...data}) => {
@@ -38,6 +39,9 @@ class HabitManager extends Component {
     }
 
 
+    //hook in the react
+    //it will be called everytime the component/state in the component is updated
+    //api from react
     componentDidUpdate(prevProps) {
     // Only update state if the trigger prop has changed
         if (prevProps.trigger !== this.props.trigger) {

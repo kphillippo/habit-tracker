@@ -15,7 +15,9 @@ export default class HabitItem extends Component {
             Goal: props.data.Goal,
             Current: 0,
             Status: false,
-            editHabit: false
+            editHabit: false,
+            Disable: false,
+            Date: new Date()
         }
         this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
         this.handleGoalBtnClick = this.handleGoalBtnClick.bind(this);
@@ -51,13 +53,14 @@ export default class HabitItem extends Component {
       }
 
     render(){
+        console.log(this.props);
         const { Status, Title, editHabit} = this.state;
         const deletedStyle = Status ? { textDecoration: 'line-through' } : {};
         const flameColor = Status?"#e57028":"#c0c6b7";
         const fontColor = Status?"#000000":"#c0c6b7";
         return(
             <tr>
-            <td className = "check"width = "5%"><input type = "checkbox" id="habit" name="habit" onClick={this.handleCheckBoxClick}></input></td>
+            <td className = "check"width = "5%"><input type = "checkbox" id="habit" name="habit" onClick={this.handleCheckBoxClick} disabled={this.state.Disable}></input></td>
             <td className = "habit" width = "53%" style={deletedStyle}> {Title}</td>
             <td width = "2%"><IoMdFlame id ="flame" color={flameColor} size = "3.5vw"></IoMdFlame></td>
             <td width = "12.5%" style={{ color: fontColor }}>{this.state.Streak}</td>
