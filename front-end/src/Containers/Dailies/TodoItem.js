@@ -19,7 +19,8 @@ export default class TodoItem extends Component {
             Remind:props.data.Remind,
             Repeat:props.data.Repeat,
             UserId:sessionStorage.getItem("userId"),
-            ToDoId:props.data._id
+            ToDoId:props.data._id,
+            Disable: false
         }
         this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
         this.toggleEditTodo = this.toggleEditTodo.bind(this);
@@ -30,6 +31,16 @@ export default class TodoItem extends Component {
     
 
     handleCheckBoxClick(event){
+        // apiRequest("POST", "habit/createHabit", data)
+        // .then(({token, ...data}) => {
+        //     console.log(data);
+        //     this.props.isUpdated();
+        //     this.props.toast.success("A habit is created!")
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        //     this.props.toast.error(err.error);
+        // })
         this.setState({ Status: event.target.checked });
     }
 
@@ -88,8 +99,8 @@ export default class TodoItem extends Component {
         return(
             <>
             <tr>
-                {this.state.Status === true && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick} defaultChecked></input><label for = "todo" style={deletedStyle}> {this.state.Title}</label></td>}
-                {this.state.Status === false && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick}></input><label for = "todo"> {this.state.Title}</label></td>}
+                {this.state.Status === true && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick} defaultChecked disabled={this.state.Disable}></input><label for = "todo" style={deletedStyle}> {this.state.Title}</label></td>}
+                {this.state.Status === false && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick} disabled={this.state.Disable}></input><label for = "todo"> {this.state.Title}</label></td>}
                 
                 <td><button onClick={this.toggleEditTodo} className = "btn_edit2"><LuPencil id ="edit" size="2.5vw"color="#000000"></LuPencil></button></td>
                 <td><button className = "btn_delete" onClick={this.toggleDeleteTodo}><IoTrashOutline id ="delete" size="2.5vw" color="#000000"></IoTrashOutline></button></td>

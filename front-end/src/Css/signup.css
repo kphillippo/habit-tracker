@@ -11,18 +11,21 @@ input::-webkit-inner-spin-button{
 }
 
 .SignUp{
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     z-index: 0;
+    overflow-x: hidden;
 }
 
 .SignUp .wrapper{
-    margin: auto;
-    height: 50vh;
+    position: relative;
+    top: 5vh;
+    height: fit-content;
     padding-top: 40px;
+
 }
 
 .SignUp button{
@@ -34,25 +37,11 @@ input::-webkit-inner-spin-button{
 .signup-Top{
     position: relative;
     margin-left: auto;
-    top: 18vh;
+    top: 2vh;
     text-align: center;
     font-family: 'Kotta One', serif;
 }
 
-.v-wrapper{
-    position: relative;
-    top: 25vh;
-    z-index: 0;
-    background: rgba(226, 233, 214, 1);
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
-    border-radius: 15px;
-    padding: 20px 0 0 30px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 20px;
-    width: 500px;
-    height: 400px;
-    text-align: left;
-}
 
 .v-wrapper p h2{
     font-family: 'Kotta One', serif;
@@ -64,7 +53,7 @@ input::-webkit-inner-spin-button{
     height: 45px;
     padding: 10px;
     margin: 0 5px 0;
-    color: red;
+    color: black;
     border: 0 transparent;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 3px 5px 0 rgba(0,0,0,0.2);
     border-radius: 10px;
@@ -92,7 +81,21 @@ input::-webkit-inner-spin-button{
     margin-left: auto;
     margin-right: auto;
 
+}
 
+input:invalid{
+    border-color: red;
+}
+
+input:valid{
+    border-color: green;
+}
+
+.CheckList{
+    position: relative;
+    left: 35%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 

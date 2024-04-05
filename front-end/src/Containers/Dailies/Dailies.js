@@ -11,6 +11,9 @@ import HabitManager from "./HabitManager";
 import {apiRequest} from "../../utils/reqTool"
 
 function Dailies(props){
+  
+  //functional component
+  //class component
 
   let navigate = useNavigate()
 
@@ -41,7 +44,7 @@ function Dailies(props){
 function getHabits(){
     apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
     .then(res => {
-        console.log(res);
+        
         setHabits(res);
     })
     .catch(err => {
@@ -55,7 +58,7 @@ function getTodos(){
   console.log("get todos in the front-end")
     apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
     .then(res => {
-        console.log(res);
+        
         setTodos(res);
     })
     .catch(err => {
@@ -65,11 +68,11 @@ function getTodos(){
 }
 
 function createTodo(data){
-        console.log(data)
+        
         data.Date = new Date(data.Date);
         apiRequest("POST", "todo/createTodo", data)
         .then(({token, ...data}) => {
-            console.log(data);
+            
             toast.success("create a new todo!")
             triggerDataRefresh()
         })

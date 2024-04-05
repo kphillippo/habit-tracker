@@ -52,7 +52,6 @@ const updateToDo = async (req, res) => {
         }
         throw new Error("ToDo could not be updated.");
     } catch (error) {
-        console.log(error)
         res.status(400).json({ error: error.message });
     }
 }
