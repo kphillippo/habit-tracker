@@ -1,14 +1,39 @@
-import React from "react";
 import "./Settings.css";
+import React,{useState} from "react";
+
+function DiscardPopup(props){ 
+
+    return (props.trigger) ? ( 
+
+        <div className="delete_popup"> 
+
+            <div className= "delete_popup-inner"> 
+
+                <div class = "delete_Title">Are you Sure you want to Discard</div>
+                <div class = "delete_Title2">any unsaved changes?</div> 
+
+                <div><button class = "delete_no" onClick={() => props.setTrigger(false)}>Cancel</button></div>
+                <div><button class = "delete_yes">Yes</button></div>
+
+                {props.children} 
+
+            </div> 
+
+        </div>  
+
+    ) : ""; 
+
+} 
 
 function Settings(){
+    const[buttonPopup,setButtonPopup] = useState(false);
 
     return (
         <body>
     <div class = "setting_container">
        <div class = "button_container">
        <button class = "save">Save</button>
-       <button class = "discard">Discard</button>
+       <button class = "discard" onClick ={() => setButtonPopup(true)}>Discard</button>
        </div> 
        <div class = "privacy_container">
            <div class = "Privacy">Privacy</div>
@@ -128,8 +153,8 @@ function Settings(){
         </div>
        </div>
    </div>
+   <DiscardPopup trigger ={buttonPopup} setTrigger = {setButtonPopup}/>
 </body>
-
     );
  };
 export default Settings;

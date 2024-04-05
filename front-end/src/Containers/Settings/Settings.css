@@ -29,7 +29,7 @@ body{
     border:#111;
     border-style:solid;
     border-width: 0.0001vw;
-    border-radius: 1.5vw;
+    border-radius: 0.6vw;
     cursor: pointer;
 }
 .discard{
@@ -47,7 +47,7 @@ body{
     border:#111;
     border-style:solid;
     border-width: 0.0001vw;
-    border-radius: 1.5vw;
+    border-radius: 0.6vw;
     cursor: pointer;
 }
 .privacy_container{
@@ -268,6 +268,73 @@ body{
     left:92%;
     top:23%;
 }
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 .style_container{
     position: absolute;
     top: 141vh;
@@ -362,4 +429,164 @@ body{
     width:10vw;
     height:7vh;
 }
+.delete_popup{ 
+
+    position: fixed; 
+
+    top: 0; 
+
+    left: 0; 
+
+    width:100%; 
+
+    height:100vh; 
+
+    background-color: var(--color-darkgreen); 
+
+    display:flex; 
+
+    justify-content: center; 
+
+    align-items: center; 
+
+  } 
+
+ 
+
+  .delete_popup-inner{ 
+
+    position:fixed; 
+
+    top: 60%; 
+
+    left: 50%;  
+
+    transform:translate(-50%,-50%); 
+
+    width: 38%; 
+
+    height: 50%; 
+
+    box-shadow: 0 5px 30px rgba(0,0,0,.30); 
+
+    background:#E2E9D6; 
+
+    border-radius: 10px; 
+
+  } 
+
+  .delete_Title { 
+
+    position: absolute;
+
+    left:2.5%;
+
+    font-weight: 500; 
+
+    font-size: 2.5vw; 
+
+    color:#333; 
+
+    font-family: Kotta One; 
+
+  } 
+  .delete_Title2 { 
+    position: absolute;
+
+    padding-top:4%;
+
+    top: 30%;
+
+    left:20%;
+
+    font-weight: 500; 
+
+    font-size: 2.5vw; 
+
+    color:#333; 
+
+    font-family: Kotta One; 
+
+  } 
+
+
+  .delete_no{ 
+
+    position: absolute; 
+
+    top: 70%; 
+
+    left: 60%; 
+
+    width: 30%; 
+
+    height: 20%; 
+
+    font-size: 1.5vw; 
+
+    font-family: Kotta One; 
+
+    border: 0; 
+
+    text-align: center; 
+
+    color:#fff; 
+
+    background:#92B27A; 
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30); 
+
+    border:#111; 
+
+    border-style:solid; 
+
+    border-width: 0.1vw; 
+
+    border-radius: 1.5vw; 
+
+  } 
+  .delete_no:hover{
+    background-color: #C4D3AB;
+  }
+  .delete_yes:hover{
+    background-color: #C4D3AB;
+  }
+
+   
+
+  .delete_yes{ 
+
+    position: absolute; 
+
+    top: 70%; 
+
+    left: 10%; 
+
+    width: 30%; 
+
+    height: 20%; 
+
+    font-size: 1.5vw; 
+
+    font-family: Kotta One; 
+
+    border: 0; 
+
+    text-align: center; 
+
+    color:#fff; 
+
+    background:#92B27A; 
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30); 
+
+    border:#111; 
+
+    border-style:solid; 
+
+    border-width: 0.1vw; 
+
+    border-radius: 1.5vw; 
+
+  } 
 
