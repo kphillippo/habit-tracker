@@ -20,8 +20,8 @@ HabitCheckInSchema.statics.findForDate = async function(HabitID, date) {
     return await this.find({
         HabitID: HabitID,
         CheckInTime: {
-            $gte: new Date(new Date(date).setHours(0,0,0)),
-            $lt: new Date(new Date(date).setHours(23, 59, 59))
+            $gte: new Date(new Date(date).setUTCHours(0,0,0)),
+            $lt: new Date(new Date(date).setUTCHours(23, 59, 59))
         }
     });
 }

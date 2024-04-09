@@ -47,4 +47,16 @@ const deleteHabit = async (req, res) => {
     }
 }
 
-module.exports = {getHabits, createHabit, updateHabit, deleteHabit}
+const getHabitsCompletedOnDate = async (req, res) => {
+    const {user_id, date} = req.query;
+    try {
+        const User_id = new ObjectId(user_id);
+        const thisDate = new Date(date);
+        const habits = await Habit.getCompletedHabitsForDate(User_id, thisDate);
+        res.status(200).json(habits);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+module.exports = {getHabits, createHabit, updateHabit, deleteHabit, getHabitsCompletedOnDate}
