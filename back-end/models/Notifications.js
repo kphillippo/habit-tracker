@@ -9,7 +9,7 @@ const NotificationsSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    Type:{
+    Type:{ //types: Friend Request, you have been unfriended, To do notification, Habit notification
         type: String,
         required: true
     },
