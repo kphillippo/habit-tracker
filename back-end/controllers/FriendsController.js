@@ -1,18 +1,40 @@
 const Friend = require('../models/Friends');
 const UserModel = require('../models/User');
+const NotificationsModel = require('../models/Notifications');
+const SettingsModel = require('../models/Settings');
 const ObjectId = require('mongoose').Types.ObjectId;
+const axios = require('axios');
 
 //send friend request
 const sendFriendRequest = async (req, res) => {
     try{
-        const {User, FriendsWith} = req.body
+        const {User, FriendsWith} = req.body //user id , and  friend's username
   
         //takes the username and returns an _id for the friend
         FriendsWithUsername = await UserModel.getUserId(FriendsWith);
 
         //trys to send friend request
-        const request = await Friend.sendFriendRequest(User, FriendsWithUsername)
-    
+        const request = await Friend.sendFriendRequest(User, FriendsWithUsername);
+
+        const title = "Friend Request";
+        const message = FriendsWith + "sent you a friend request!";
+
+        //if friend request sent, then adds to recipient's notifications
+        const sendNotification = await NotificationsModel.sendNotification(User, FriendsWithUsername, title, message);
+
+        //if friend has friend request emails enabled, then emails the friend
+        const settings = await Settings.getSettings(FriendsWithUsername). FriendRequestEmails;
+        if(settings){
+            const friendsEmail = await UserModel.getUserProfileInfo(FriendsWithUsername).Email;
+
+            const emailInfo = {
+                to: friendsEmail,
+                subject: "Habbit Connect - " + + "you have recieved a friend request!",
+                text: message
+            }
+            await axios.post('http://localhost:8080/api/verification/sendEmail', emailInfo);
+        }
+
         res.status(200).json(request)
     }catch(error){
         res.status(400).json({error: error.message})
@@ -96,10 +118,23 @@ const returnFriendRequests = async (req, res) => {
 //accepts a friend request
 const acceptFriendRequest = async (req, res) => {
     try{
-        const {User, FriendsWith} = req.body
+        const {User, FriendsWith, notificationID} = req.body
     
-        //returns friends list
+        //accepts friend request
         const request = await Friend.acceptFriendRequest(User, FriendsWith);
+
+        //removed the notification from the notification table
+        const acceptFriendRequest = await NotificationsModel. deleteNotification(notificationID);  
+
+        //gets the username of the accepter of the friend request
+        const usersName = await UserModel.getUserProfileInfo(User).Username;
+
+        //makes title and message for notification to be sent to sender of friend request
+        const title = "Friend Request Accepted"
+        const message = username + " has accepted your friend request!"
+
+        //sends notification to the sender of the friend request that the friend request has been accepted
+        const sendNotification = await NotificationsModel.sendNotification( FriendsWith, User, title, message);
 
         res.status(200).json("Friend Request Accepted!")
     }catch(error){
@@ -110,10 +145,23 @@ const acceptFriendRequest = async (req, res) => {
 //declines a friend request
 const declineFriendRequest = async (req, res) => {
     try{
-        const {User, FriendsWith} = req.body
+        const {User, FriendsWith, notificationID} = req.body
     
-        //returns friends list
+        //deleted friend request record
         const request = await Friend.deleteFriendRecord(User, FriendsWith);
+
+        //removed the notification from the notification table
+        const acceptFriendRequest = await NotificationsModel. deleteNotification(notificationID);  
+
+        //gets the username of the accepter of the friend request
+        const usersName = await UserModel.getUserProfileInfo(User).Username;
+
+        //makes title and message for notification to be sent to sender of friend request
+        const title = "Friend Request Declined"
+        const message = username + " has declined your friend request!"
+
+        //sends notification to the sender of the friend request that the friend request has been accepted
+        const sendNotification = await NotificationsModel.sendNotification( FriendsWith, User, title, message);
 
         res.status(200).json("Friend Request Declined!")
     }catch(error){
@@ -121,7 +169,7 @@ const declineFriendRequest = async (req, res) => {
     }
 }
 
-//declines a friend request
+//deletes a friend 
 const deleteFriend = async (req, res) => {
     try{
         const {User, FriendsWith} = req.body
@@ -129,8 +177,13 @@ const deleteFriend = async (req, res) => {
         const User_id = new ObjectId(User);
         const Friend_id = new ObjectId(FriendsWith);
 
-        //returns friends list
+        //deletes friend record
         const request = await Friend.deleteFriendRecord(User_id, Friend_id);
+
+        
+
+        //sends a notifiaction to the recipient
+
 
         res.status(200).json("Friend Removed From Friends List!")
     }catch(error){

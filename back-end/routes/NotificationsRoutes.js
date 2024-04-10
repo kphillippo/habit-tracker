@@ -1,13 +1,17 @@
 const express = require('express')
 
 //controller functions
-const {  } = require('../controllers/NotificationsController')
+const { returnNotifications, deleteNotification,  numOfNotifications } = require('../controllers/NotificationsController')
 
 const router = express.Router()
 
-//any routes go here
+//returns all the notifications
+router.post('/returnNotifications', returnNotifications)
 
+//returns the number of notifications a user has
+router.post('/numOfNotifications', numOfNotifications)
 
-
+//deletes a notificaion
+router.post('/deleteNotification', deleteNotification)
 
 module.exports = router
