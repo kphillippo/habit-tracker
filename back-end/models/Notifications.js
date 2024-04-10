@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const NotificationsSchema = new mongoose.Schema({
-    User_ID:{
+    User:{
         type: mongoose.ObjectId,
         required: true
     },
@@ -51,11 +51,9 @@ NotificationsSchema.statics.findNotifications = async function(User) {
 }
 
 //sends a notification to a user
-NotificationsSchema.statics.sendNotification = async function(User, FriendsWith, title, message) {
+NotificationsSchema.statics.sendNotification = async function(User, title, message) {
 
-    const request = await this.create({User: User, FriendsWith: FriendsWith, Title: title, Message: message});
-
-    return await this.countDocuments(notifications);
+    return await this.create({User: User, Title: title, Message: message});
 }
 
 //removes a notification record

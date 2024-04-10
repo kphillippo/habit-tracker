@@ -11,31 +11,39 @@ const sendFriendRequest = async (req, res) => {
         const {User, FriendsWith} = req.body //user id , and  friend's username
   
         //takes the username and returns an _id for the friend
-        FriendsWithUsername = await UserModel.getUserId(FriendsWith);
+        const FriendsWithUsername = await UserModel.getUserId(FriendsWith);
+
+        //gets the username of the sender
+        const userInfo = await UserModel.getUserProfileInfo(User);
+        const username = userInfo.Username;
 
         //trys to send friend request
         const request = await Friend.sendFriendRequest(User, FriendsWithUsername);
 
         const title = "Friend Request";
-        const message = FriendsWith + "sent you a friend request!";
+        const message = username + " sent you a friend request!";
 
         //if friend request sent, then adds to recipient's notifications
-        const sendNotification = await NotificationsModel.sendNotification(User, FriendsWithUsername, title, message);
+        const sendNotification = await NotificationsModel.sendNotification(FriendsWithUsername, title, message);
 
         //if friend has friend request emails enabled, then emails the friend
-        const settings = await Settings.getSettings(FriendsWithUsername). FriendRequestEmails;
-        if(settings){
-            const friendsEmail = await UserModel.getUserProfileInfo(FriendsWithUsername).Email;
+        const settings = await SettingsModel.getSettings(FriendsWithUsername);
+        const friendEmailEnabled = settings.FriendRequestEmails;
+        
+        if(friendEmailEnabled){
+            const friend = await UserModel.getUserProfileInfo(FriendsWithUsername);
+            const friendsEmail = friend.Email;
+            const friendname = friend.FirstName;
 
             const emailInfo = {
                 to: friendsEmail,
-                subject: "Habbit Connect - " + + "you have recieved a friend request!",
+                subject: "Habbit Connect - " + friendname + " you have recieved a friend request!",
                 text: message
             }
-            await axios.post('http://localhost:8080/api/verification/sendEmail', emailInfo);
+            await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
         }
 
-        res.status(200).json(request)
+        res.status(200).json({request, sendNotification})
     }catch(error){
         res.status(400).json({error: error.message})
     }
