@@ -30,36 +30,53 @@ const {Username, Password} = req.body
     const _id = user._id
 
     //checks how many habits and doto's the user has left to do today
-    const numHabitsLeft = Habits.getNumUncompletedHabitsToday(_id);
-    const numTodosLeft = Habits.getNumUncompletedTodosToday(_id);
+    const numHabitsLeft = await Habits.getNumUncompletedHabitsToday(_id);
+    const numTodosLeft = await Todos.getNumUncompletedTodosToday(_id);
+
+    console.log("numhabits: ",numHabitsLeft);
+    console.log("numtodos: ",numTodosLeft);
 
     //message variables
     const habitTitle = "You Have Habits To Do"
     const todoTitle = "You Have ToDos To Do"
-    const habitMessage = "You have " + numHabitsLeft + " habits left to do today!"
-    const todoMessage = "You have " + numHabitsLeft + " todos left to do today!"
+
+    //changes wording of message if there is only one habit to be not plural
+    let habitMessage;
+    if(numHabitsLeft === 1){
+      habitMessage = "You have " + numHabitsLeft + " habit left to do today!"
+    }else{
+      habitMessage = "You have " + numHabitsLeft + " habits left to do today!"
+    }
+
+    //changes wording of message if there is only one todo to be not plural
+    let todoMessage;
+    if(numTodosLeft === 1){
+      todoMessage = "You have " + numTodosLeft + " todo left to do today!"
+    }else{
+      todoMessage = "You have " + numTodosLeft + " todos left to do today!"
+    }
 
     //checks if ther user already has a notification for todos and habits
-    const habitNotificationExist = Notifications.lookForRecord(_id, habitTitle); 
-    const todoNotificationExist = Notifications.lookForRecord(_id, todoTitle); 
+    const habitNotificationExist = await Notifications.lookForRecord(_id, habitTitle); 
+    const todoNotificationExist = await Notifications.lookForRecord(_id, todoTitle); 
+
+    console.log("habitNotificationExist: ",habitNotificationExist);
+    console.log("todoNotificationExist: ",todoNotificationExist);
     
     //if the number is greater then 1 and the user doesnt already have a notification for it, then it makes a notification, if there is a notification, it updates the numbers
-    if (numHabitsLeft > 1){
-      if(!habitNotificationExist || habitNotificationExist.length === 0){
+    if (numHabitsLeft >= 1){
+      if(habitNotificationExist === 0){
         const sendNotification = await Notifications.sendNotification( _id, habitTitle, habitMessage);
       }else{
-        const habitId = habitNotificationExist._id
-        const updateNotification = await Notifications.updateNotification(habitId, habitMessage);
+        const updateNotification = await Notifications.updateNotification(_id, habitTitle, habitMessage);
       }
     }
 
-    if (numTodosLeft > 1)
-    {
-      if(!todoNotificationExist || todoNotificationExist.length === 0){
+    if (numTodosLeft >= 1){
+      if(todoNotificationExist === 0){
         const sendNotification = await Notifications.sendNotification( _id, todoTitle, todoMessage);
       }else{
-        const todoId = todoNotificationExist._id
-        const updateNotification = await Notifications.updateNotification(todoId, todoMessage);
+        const updateNotification = await Notifications.updateNotification(_id, todoTitle, todoMessage);
       }
     }
 

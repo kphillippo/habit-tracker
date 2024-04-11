@@ -61,17 +61,17 @@ NotificationsSchema.statics.deleteNotification = async function(_id) {
 }
 
 //looks for a record that matches the title for a user
-NotificationsSchema.statics.lookForRecord = async function(_id, name) {
+NotificationsSchema.statics.lookForRecord = async function(UserId, title) {
 
-    const existingRecord = await this.find({ _id: _id , Title: name});
+    const existingRecord = await this.countDocuments({ User: UserId, Title: title});
 
     return existingRecord;
 }
 
 //updates a record
-NotificationsSchema.statics.lookForRecord = async function(NotificationId, message) {
+NotificationsSchema.statics.updateNotification = async function(UserId, title, message) {
 
-    const existingRecord = await this.find({ _id: NotificationId});
+    const existingRecord = await this.findOne({ User: UserId, Title: title});
 
     existingRecord.Message = message;
     await existingRecord.save();

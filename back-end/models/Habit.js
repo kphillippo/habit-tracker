@@ -85,12 +85,12 @@ HabitSchema.statics.getCompletedHabitsForDate = async function(UserID, thisDate)
 
 //returns the number of userhabits that have not been done yet today
 HabitSchema.statics.getNumUncompletedHabitsToday = async function(UserID) {
+    const today = new Date();
+    const truncatedDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-    const date = new Date();
+    const numUsersHabits = await this.countDocuments({ Owner: UserID, LastCheckIn: { $ne: truncatedDate } });
 
-    const numUsersHabits = await this.countDocuments({ Owner: UserID, LastCheckIn: { $ne: date } });
-
-    return numUsersHabits
+    return numUsersHabits;
 }
 
 const HabitModel = mongoose.model("Habit", HabitSchema);
