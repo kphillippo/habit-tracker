@@ -5,6 +5,7 @@ const Notifications = require('../models/Notifications');
 const returnNotifications = async (req, res) => {
     try{
         const {User} = req.body
+        console.log(User);
 
         //returns notification list
         const request = await Notifications.findNotifications(User);
@@ -35,7 +36,7 @@ const numOfNotifications = async (req, res) => {
         const {User} = req.body
 
         //returns notification list
-        const request = await Notifications.findNotifications(User);
+        const request = await Notifications.findNumNotifications(User);
 
         res.status(200).json(request)
     }catch(error){

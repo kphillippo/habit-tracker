@@ -26,23 +26,21 @@ const NotificationsSchema = new mongoose.Schema({
 //finds all notifications requests to a particualr user
 NotificationsSchema.statics.findNotifications = async function(User) {
 
-    //gets all notifications before updating
-    const notifications = { User: User };
-
     //get notifications of with title todo and habbit
     const habits = { User: User, Name: "You Have Habits to do today!", Viewed: false };
     const todos = { User: User, Name: "You Have ToDos to do today!", Viewed: false };
 
     //updates the todo and habit notifications to be viewed after checking notifiations
-    const update = { $set: { Viewed: viewedValue} };
+    const update = { $set: { Viewed: true} };
     await this.updateMany(habits, update);
     await this.updateMany(todos, update);
 
-    return await this.find(notifications);
+    //gets all notifications
+    return await this.find({ User: User });
 }
 
 //return the number of notifications
-NotificationsSchema.statics.findNotifications = async function(User) {
+NotificationsSchema.statics.findNumNotifications = async function(User) {
 
     //gets all notifications
     const notifications = { User: User };
