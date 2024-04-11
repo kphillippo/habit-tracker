@@ -42,11 +42,15 @@ Sprint 2 Deadline: March 15th (COMPLETE)
 
 Progress Report 2 Due: April 1st (COMPLETE)
 
-Sprint 3 Deadline (Final Product): April 12th 
+Sprint 3 Deadline: April 12th 
+
+Development Completion Deadline: April 19th
+
+Final Presentation: April 23rd (2:00pm)
+
+Sprint 4 Deadline: April 27th
 
 Final Report Due: April 28th
-
-Final Presentation: April 22nd - April 30th (official date TBD)
 
 ## License
 
