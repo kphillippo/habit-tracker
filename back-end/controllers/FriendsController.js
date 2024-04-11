@@ -110,19 +110,6 @@ const returnLeaderBoard = async (req, res) => {
     }
 }
 
-//returns friend requests
-const returnFriendRequests = async (req, res) => {
-    try{
-        const {User} = req.body
-        //returns friends list
-        const request = await Friend.findFriendRequests(User);
-
-        res.status(200).json(request)
-    }catch(error){
-        res.status(400).json({error: error.message})
-    }
-}
-
 //accepts a friend request
 const acceptFriendRequest = async (req, res) => {
     try{
@@ -199,4 +186,4 @@ const deleteFriend = async (req, res) => {
     }
 }
 
-module.exports = {sendFriendRequest, returnFriendsList, returnFriendRequests, acceptFriendRequest, declineFriendRequest, deleteFriend, returnLeaderBoard}
+module.exports = {sendFriendRequest, returnFriendsList, acceptFriendRequest, declineFriendRequest, deleteFriend, returnLeaderBoard}

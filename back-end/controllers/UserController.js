@@ -33,9 +33,6 @@ const {Username, Password} = req.body
     const numHabitsLeft = await Habits.getNumUncompletedHabitsToday(_id);
     const numTodosLeft = await Todos.getNumUncompletedTodosToday(_id);
 
-    console.log("numhabits: ",numHabitsLeft);
-    console.log("numtodos: ",numTodosLeft);
-
     //message variables
     const habitTitle = "You Have Habits To Do"
     const todoTitle = "You Have ToDos To Do"
@@ -59,9 +56,6 @@ const {Username, Password} = req.body
     //checks if ther user already has a notification for todos and habits
     const habitNotificationExist = await Notifications.lookForRecord(_id, habitTitle); 
     const todoNotificationExist = await Notifications.lookForRecord(_id, todoTitle); 
-
-    console.log("habitNotificationExist: ",habitNotificationExist);
-    console.log("todoNotificationExist: ",todoNotificationExist);
     
     //if the number is greater then 1 and the user doesnt already have a notification for it, then it makes a notification, if there is a notification, it updates the numbers
     if (numHabitsLeft >= 1){
