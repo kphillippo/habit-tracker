@@ -18,7 +18,7 @@ export default class HabitManagerItem extends Component {
             Status: false,
             editHabit: false,
             Owner: sessionStorage.getItem("userId"),
-            HabitID: props.data._id,
+            HabitID: props.data.habitID,
             habit: props.data,
             deleteHabit: false
         }
