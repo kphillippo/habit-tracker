@@ -179,34 +179,6 @@ const declineFriendRequest = async (req, res) => {
         //removed the notification from the notification table
         const acceptFriendRequest = await NotificationsModel. deleteNotification(notificationID);  
 
-        //gets the username of the accepter of the friend request
-        const userInfo= await UserModel.getUserProfileInfo(User)
-        const usersName = userInfo.Username;
-
-        //makes title and message for notification to be sent to sender of friend request
-        const title = "Friend Request Declined"
-        const message = usersName + " has declined your friend request!"
-
-        //sends notification to the sender of the friend request that the friend request has been accepted
-        const sendNotification = await NotificationsModel.sendNotification( FriendsWith, title, message);
-
-        //if the sender has emails enabled for friend requests then it sends an email
-        const settings = await SettingsModel.getSettings(FriendsWith);
-        const friendEmailEnabled = settings.FriendRequestEmails;
-        
-        if(friendEmailEnabled){
-            const friend = await UserModel.getUserProfileInfo(FriendsWith);
-            const friendsEmail = friend.Email;
-            const friendname = friend.FirstName;
-
-            const emailInfo = {
-                to: friendsEmail,
-                subject: "Habbit Connect - " + friendname + " Friend Request Declined",
-                text: message
-            }
-            await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
-        }
-
         res.status(200).json("Friend Request Declined!")
     }catch(error){
         res.status(400).json({error: error.message})
