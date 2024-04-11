@@ -63,23 +63,16 @@ HabitSchema.statics.deleteHabit = async function(HabitID, UserID) {
 HabitSchema.statics.getCompletedHabitsForDate = async function(UserID, thisDate) {
     const habits = await this.find({Owner: UserID});
     const habitIds = habits.map(habit => habit._id.toString());
-    console.log(habitIds);
-    console.log(thisDate);
-    console.log(new Date(new Date(thisDate).setUTCHours(0, 0, 0, 0)));
-    console.log(new Date(new Date(thisDate).setUTCHours(23, 59, 59, 999)));
     const habitCheckIns = await HabitCheckInModel.find({
-        //HabitID: {$in: habitIds},
+        HabitID: {$in: habitIds},
         CheckInTime: {
             $gte: new Date(new Date(thisDate).setUTCHours(0, 0, 0, 0)),
             $lt: new Date(new Date(thisDate).setUTCHours(23, 59, 59, 999))
         }
     });
-
-    console.log(habitCheckIns);
     const mapping = habits.map(habit => {
         return {habitID: habit._id, hasCheckIn: habitCheckIns.some(habitCheckIn => habitCheckIn.HabitID.equals(habit._id))};
     });
-    //console.log(mapping)
     return mapping;
 }
 
