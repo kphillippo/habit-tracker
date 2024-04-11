@@ -77,7 +77,7 @@ HabitSchema.statics.getCompletedHabitsForDate = async function(UserID, thisDate)
 
     console.log(habitCheckIns);
     const mapping = habits.map(habit => {
-        return {habitID: habit._id, hasCheckIn: habitCheckIns.some(habitCheckIn => habitCheckIn.HabitID.equals(habit._id))};
+        return {habitID: habit._id, Owner: habit.Owner, Title: habit.Title, Streak: habit.Streak, MeasurementType: habit.MeasurementType, Goal: habit.Goal, Status: habitCheckIns.some(habitCheckIn => habitCheckIn.HabitID.equals(habit._id))};
     });
     //console.log(mapping)
     return mapping;
