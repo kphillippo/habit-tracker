@@ -129,20 +129,41 @@ const acceptFriendRequest = async (req, res) => {
         const {User, FriendsWith, notificationID} = req.body
     
         //accepts friend request
-        const request = await Friend.acceptFriendRequest(User, FriendsWith);
+        const request = await Friend.acceptFriendRequest(User, FriendsWith, notificationID);
 
         //removed the notification from the notification table
         const acceptFriendRequest = await NotificationsModel. deleteNotification(notificationID);  
 
         //gets the username of the accepter of the friend request
-        const usersName = await UserModel.getUserProfileInfo(User).Username;
+        const userInfo= await UserModel.getUserProfileInfo(User)
+        const usersName = userInfo.Username;
 
         //makes title and message for notification to be sent to sender of friend request
         const title = "Friend Request Accepted"
-        const message = username + " has accepted your friend request!"
+        const message = usersName + " has accepted your friend request!"
 
         //sends notification to the sender of the friend request that the friend request has been accepted
-        const sendNotification = await NotificationsModel.sendNotification( FriendsWith, User, title, message);
+        const sendNotification = await NotificationsModel.sendNotification( FriendsWith, title, message);
+
+        //if the sender has emails enabled for friend requests then it sends an email
+        const settings = await SettingsModel.getSettings(FriendsWith);
+        const friendEmailEnabled = settings.FriendRequestEmails;
+        
+        if(friendEmailEnabled){
+            const friend = await UserModel.getUserProfileInfo(FriendsWith);
+            const friendsEmail = friend.Email;
+            const friendname = friend.FirstName;
+
+            const emailInfo = {
+                to: friendsEmail,
+                subject: "Habbit Connect - " + friendname + " Friend Request Accepted",
+                text: message
+            }
+            await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
+        }
+
+        //deletes the friend request from the notification table
+        await NotificationsModel.deleteNotification(notificationID);
 
         res.status(200).json("Friend Request Accepted!")
     }catch(error){
