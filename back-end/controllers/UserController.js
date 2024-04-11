@@ -1,6 +1,9 @@
 const User = require('../models/User')
 const Friends = require('../models/Friends');
 const Settings = require('../models/Settings');
+const Todos = require('../models/ToDo');
+const Habits = require('../models/Habit');
+const Notifications = require('../models/Notifications');
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
@@ -25,6 +28,40 @@ const {Username, Password} = req.body
     const Email = user.Email
     const Streak = user.Streak
     const _id = user._id
+
+    //checks how many habits and doto's the user has left to do today
+    const numHabitsLeft = Habits.getNumUncompletedHabitsToday(_id);
+    const numTodosLeft = Habits.getNumUncompletedTodosToday(_id);
+
+    //message variables
+    const habitTitle = "You Have Habits To Do"
+    const todoTitle = "You Have ToDos To Do"
+    const habitMessage = "You have " + numHabitsLeft + " habits left to do today!"
+    const todoMessage = "You have " + numHabitsLeft + " todos left to do today!"
+
+    //checks if ther user already has a notification for todos and habits
+    const habitNotificationExist = Notifications.lookForRecord(_id, habitTitle); 
+    const todoNotificationExist = Notifications.lookForRecord(_id, todoTitle); 
+    
+    //if the number is greater then 1 and the user doesnt already have a notification for it, then it makes a notification, if there is a notification, it updates the numbers
+    if (numHabitsLeft > 1){
+      if(!habitNotificationExist || habitNotificationExist.length === 0){
+        const sendNotification = await Notifications.sendNotification( _id, habitTitle, habitMessage);
+      }else{
+        const habitId = habitNotificationExist._id
+        const updateNotification = await Notifications.updateNotification(habitId, habitMessage);
+      }
+    }
+
+    if (numTodosLeft > 1)
+    {
+      if(!todoNotificationExist || todoNotificationExist.length === 0){
+        const sendNotification = await Notifications.sendNotification( _id, todoTitle, todoMessage);
+      }else{
+        const todoId = todoNotificationExist._id
+        const updateNotification = await Notifications.updateNotification(todoId, todoMessage);
+      }
+    }
 
     res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email})
   }catch(error){

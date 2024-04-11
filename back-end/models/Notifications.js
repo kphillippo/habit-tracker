@@ -57,11 +57,27 @@ NotificationsSchema.statics.sendNotification = async function(User, title, messa
 //removes a notification record
 NotificationsSchema.statics.deleteNotification = async function(_id) {
 
-    //deletes the records
     const existingRecord = await this.findOneAndDelete({ _id: _id });
 }
 
+//looks for a record that matches the title for a user
+NotificationsSchema.statics.lookForRecord = async function(_id, name) {
 
+    const existingRecord = await this.find({ _id: _id , Title: name});
+
+    return existingRecord;
+}
+
+//updates a record
+NotificationsSchema.statics.lookForRecord = async function(NotificationId, message) {
+
+    const existingRecord = await this.find({ _id: NotificationId});
+
+    existingRecord.Message = message;
+    await existingRecord.save();
+
+    return existingRecord;
+}
 
 const NotificationsModel = mongoose.model("Notifications", NotificationsSchema);
 module.exports = NotificationsModel;

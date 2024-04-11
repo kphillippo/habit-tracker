@@ -27,4 +27,15 @@ const ToDoSchema = new mongoose.Schema({
     }
 }, {collection: 'ToDo'});
 
-module.exports = mongoose.model('ToDo', ToDoSchema);
+//returns the number of todo's that have not been done yet today
+ToDoSchema.statics.getNumUncompletedTodosToday = async function(UserID) {
+
+    const date = new Date();
+
+    const numUsersTodos = await this.countDocuments({ Owner: UserID, date: date, Status: false});
+
+    return numUsersTodos
+}
+
+const TodoModel = mongoose.model('ToDo', ToDoSchema);
+module.exports = TodoModel;
