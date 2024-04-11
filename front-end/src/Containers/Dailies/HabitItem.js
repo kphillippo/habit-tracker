@@ -87,11 +87,11 @@ export default class HabitItem extends Component {
     handleCheckBoxClick(event){
         this.setState({ Status: event.target.checked, Streak: this.state.Streak + 1});
         //todo: send POST request to check-in the habit
-        console.log(this.state)
+        console.log(this.state);
         apiRequest("POST", "habitCheckIn/updateHabitCheckIn", this.state)
                     .then(({data}) => {
                         console.log(data);
-                        this.props.toast.success("You just finished a habit!")
+                        this.props.toast.success("You just finished a habit!");
                     })
                     .catch(err => {
                         console.log(err);
