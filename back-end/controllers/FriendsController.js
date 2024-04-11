@@ -221,34 +221,6 @@ const deleteFriend = async (req, res) => {
         //deletes friend record
         const request = await Friend.deleteFriendRecord(User, FriendsWith);
 
-        //gets the username of the one deleting the friend
-        const userInfo= await UserModel.getUserProfileInfo(User);
-        const usersName = userInfo.Username;
-
-        //makes title and message for notification to be sent to sender of friend request
-        const title = "You have been Unfriended"
-        const message = usersName + " has unfriended you!"
-
-        //sends a notification to the one being removed
-        const sendNotification = await NotificationsModel.sendNotification( FriendsWith, title, message);
-
-        //if the sender has emails enabled for friend requests then it sends an email
-        const settings = await SettingsModel.getSettings(FriendsWith);
-        const friendEmailEnabled = settings.FriendRequestEmails;
-
-        if(friendEmailEnabled){
-            const friend = await UserModel.getUserProfileInfo(FriendsWith);
-            const friendsEmail = friend.Email;
-            const friendname = friend.FirstName;
-
-            const emailInfo = {
-                to: friendsEmail,
-                subject: "Habbit Connect - " + friendname + " you have been unfriended!",
-                text: message
-            }
-            await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
-        }
-
         res.status(200).json("Friend Removed From Friends List!")
     }catch(error){
         res.status(400).json({error: error.message})
