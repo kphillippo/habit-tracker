@@ -48,7 +48,7 @@ Development Completion Deadline: April 19th
 
 Final Presentation: April 23rd (2:00pm)
 
-Sprint 4 Deadline: April 27th
+Sprint 4 Deadline: April 26th
 
 Final Report Due: April 28th
 
