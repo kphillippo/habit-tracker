@@ -76,5 +76,10 @@ HabitSchema.statics.getCompletedHabitsForDate = async function(UserID, thisDate)
     return mapping;
 }
 
+HabitSchema.post('remove', async function(doc, next) {
+    await HabitCheckInModel.deleteMany({HabitID: doc._id});
+    next();
+});
+
 const HabitModel = mongoose.model("Habit", HabitSchema);
 module.exports = HabitModel;
