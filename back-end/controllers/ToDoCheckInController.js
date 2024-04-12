@@ -1,4 +1,5 @@
 const ToDoCheckIn = require('../models/ToDoCheckIn');
+const ToDo = require('../models/ToDo');
 
 //controller functions go here
 const getCheckIns = async (req, res) => {
@@ -30,4 +31,20 @@ const updateCheckIn = async (req, res) => {
     }
 }
 
-module.exports = { getCheckIns, updateCheckIn };
+const getTodayStatus = async (req, res) => {
+    const ToDoID = req.query.todo_id;
+    try {
+        let result = false;
+        const checkIn = await ToDoCheckIn.findOne({ToDoID: ToDoID, CheckInTime: {$gte: new Date(new Date().setUTCHours(0,0,0,0)), $lt: (new Date().setUTCHours(23,59,59,999))}}, {},{sort: {CheckInTime: desc}});
+        if (!checkIn) {
+            result = false;
+        } else {
+            result = checkIn.Status;
+        }
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+module.exports = { getCheckIns, updateCheckIn , getTodayStatus};
