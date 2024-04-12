@@ -14,3 +14,5 @@ const ToDoCheckInSchema = new mongoose.Schema({
         required: true
     }
 }, { collection: 'ToDoCheckIn'});
+
+module.exports = mongoose.model('ToDoCheckIn', ToDoCheckInSchema);
