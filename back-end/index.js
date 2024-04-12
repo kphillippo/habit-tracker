@@ -22,6 +22,7 @@ const friendsRoutes = require('./routes/FriendsRoutes.js');
 const habitCheckInRoutes = require('./routes/HabitCheckInRoutes.js');
 const verificationRoutes = require('./routes/VerificationRoutes.js');
 const SettingsRoutes = require('./routes/SettingsRoutes.js');
+const StatisticsRoutes = require('./routes/StatisticsRoutes.js');
 
 /*
 //variables for image
@@ -43,6 +44,7 @@ app.use('/api/friends', friendsRoutes)
 app.use('/api/habitCheckIn', habitCheckInRoutes)
 app.use('/api/verification', verificationRoutes)
 app.use('/api/Settings', SettingsRoutes)
+app.use('/api/stats', StatisticsRoutes)
 
 mongoose.connect(serverLink);
 
