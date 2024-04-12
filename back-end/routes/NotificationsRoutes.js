@@ -1,7 +1,7 @@
 const express = require('express')
 
 //controller functions
-const { returnNotifications, deleteNotification,  numOfNotifications } = require('../controllers/NotificationsController')
+const { returnNotifications, deleteNotification,  numOfNotifications, deleteNotifications } = require('../controllers/NotificationsController')
 
 const router = express.Router()
 
@@ -13,5 +13,8 @@ router.post('/numOfNotifications', numOfNotifications)
 
 //deletes a notificaion
 router.post('/deleteNotification', deleteNotification)
+
+//deletes a notificaion
+router.post('/deleteNotifications', deleteNotifications)
 
 module.exports = router

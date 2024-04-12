@@ -18,16 +18,12 @@ const returnNotifications = async (req, res) => {
 
 //deletes a notification
 const deleteNotification = async (req, res) => {
-    try{
-        const {notificationID} = req.body
+    const {notificationID} = req.body
 
-        //returns notification list
-        const request = await Notifications.deleteNotification(notificationID);
+    //returns notification list
+    const request = await Notifications.deleteNotification(notificationID);
 
-        res.status(200).json(request)
-    }catch(error){
-        res.status(400).json({error: error.message})
-    }
+    res.status(200).json(request)
 }
 
 //returns the number of notifications a user has (maybe to display somewhere)
@@ -44,4 +40,14 @@ const numOfNotifications = async (req, res) => {
     }
 }
 
-module.exports = { returnNotifications, deleteNotification,  numOfNotifications }
+//deletes all the notifications for a user, used for testing
+const deleteNotifications = async (req, res) => {
+    const {User} = req.body
+
+    //returns notification list
+    const request = await Notifications.deleteNotifications(User);
+
+    res.status(200).json(request)
+}
+
+module.exports = { returnNotifications, deleteNotification,  numOfNotifications, deleteNotifications }

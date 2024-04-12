@@ -23,10 +23,10 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-            User: '65f690238d4313103042bbe7',
-            FriendsWith: 'testfriends2'
+                User: '661702c98e0ec2f952ebd9bc',
+                FriendsWith: 'bob'
             };
-
+            
             //send friend request
             const response = await request(app)
             .post('/api/friends/sendFriendRequest')
@@ -41,8 +41,8 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-            User: '65f690238d4313103042bbe7',
-            FriendsWith: 'testfriends2'
+                User: '661702c98e0ec2f952ebd9bc',
+                FriendsWith: 'bob'
             };
 
             //send friend request
@@ -60,8 +60,8 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-            User: '65f6902c8d4313103042bbeb',
-            FriendsWith: 'testfriends1'
+                User: '661835d04bafa58fb7908dbf',
+                FriendsWith: 'dogLover'
             };
 
             //send friend request
@@ -81,8 +81,8 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-                User: '65f6902c8d4313103042bbeb',
-                FriendsWith: '65f690238d4313103042bbe7'
+                User: '661835d04bafa58fb7908dbf',
+                FriendsWith: '661702c98e0ec2f952ebd9bc'
             };
 
             //send friend request
@@ -92,6 +92,25 @@ describe('Friends API', () => {
             .set('Accept', 'application/json');
 
             expect(response.status).toBe(200); // Assuming successful user creation returns status 200
+
+            //deletes the notifications that were created
+            const testData1 = {
+                User: "661835d04bafa58fb7908dbf"
+            }
+
+            //get notifications num of request
+            const response1 = await request(app)
+            .post('/api/notifications/deleteNotifications')
+            .send(testData1)
+
+            const testData2 = {
+                User: "661702c98e0ec2f952ebd9bc"
+            }
+
+            //get notifications num of request
+            const response2 = await request(app)
+            .post('/api/notifications/deleteNotifications')
+            .send(testData2)
         });
 
         //fail to accept Friend Request, input error
@@ -99,7 +118,7 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-                User: '65f6902c8d43131030',
+                User: '65f6902c8d431310',
                 FriendsWith: '65f690238d431310'
             };
 
@@ -155,8 +174,8 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-                User: '65f6902c8d4313103042bbeb',
-                FriendsWith: 'testfriends1'
+                User: '661835d04bafa58fb7908dbf',
+                FriendsWith: 'dogLover'
             };
 
             //send friend request
@@ -174,8 +193,8 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-                User: '65f6902c8d4313103042bbeb',
-                FriendsWith: 'testfriends2'
+                User: '661702c98e0ec2f952ebd9bc',
+                FriendsWith: 'dogLover'
             };
 
             //send friend request
@@ -194,7 +213,25 @@ describe('Friends API', () => {
             //test data
             const testData = {
             User: '65f6902c8d43131030',
-            FriendsWith: 'testfriends'
+            FriendsWith: 'dogLover'
+            };
+    
+            //send friend request
+            const response = await request(app)
+            .post('/api/friends/sendFriendRequest')
+            .send(testData)
+            .set('Accept', 'application/json');
+    
+            expect(response.status).toBe(400); // Assuming successful user creation returns status 400
+        });
+
+        //Fail to send a friend request, other errors(most liekelt input error)
+        test('Fail to Send Friend Request, username Doesnt exist', async () => {
+
+            //test data
+            const testData = {
+            User: '65f6902c8d43131030',
+            FriendsWith: 'dogLove'
             };
     
             //send friend request
@@ -213,8 +250,8 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-                User: '65f6902c8d4313103042bbeb',
-                FriendsWith: '65f690238d4313103042bbe7'
+                User: '661702c98e0ec2f952ebd9bc',
+                FriendsWith: '661835d04bafa58fb7908dbf'
             };
 
             //send friend request
@@ -251,8 +288,8 @@ describe('Friends API', () => {
 
             //test data
             const testData = {
-                User: '65f690238d4313103042bbe7',
-                FriendsWith: '65f6902c8d4313103042bbeb'
+                User: '661835d04bafa58fb7908dbf',
+                FriendsWith: 'dogLover'
             };
         
             //send friend request
@@ -263,8 +300,8 @@ describe('Friends API', () => {
 
             //test data2
             const testData2 = {
-                User: '65f6902c8d4313103042bbeb',
-                FriendsWith: '65f690238d4313103042bbe7'
+                User: '661702c98e0ec2f952ebd9bc',
+                FriendsWith: '661835d04bafa58fb7908dbf'
             };
 
             //decline friend request

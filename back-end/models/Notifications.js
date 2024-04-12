@@ -79,5 +79,11 @@ NotificationsSchema.statics.updateNotification = async function(UserId, title, m
     return existingRecord;
 }
 
+//deletes all the notifications for a user, used for testing
+NotificationsSchema.statics.deleteNotifications = async function(Userid) {
+
+    const existingRecord = await this.deleteMany({User: Userid });
+}
+
 const NotificationsModel = mongoose.model("Notifications", NotificationsSchema);
 module.exports = NotificationsModel;
