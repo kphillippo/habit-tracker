@@ -10,6 +10,7 @@ import Verify from "./verify";
 import PasswordChecklist from "react-password-checklist"
 import {Icon} from 'react-icons-kit';
 import {eyeOff, eye} from 'react-icons-kit/feather';
+import {sendMail} from './sendEmail'
 
 
 const Signup = ({isSignedin, toast}) => {
@@ -54,8 +55,7 @@ const Signup = ({isSignedin, toast}) => {
                 console.log(err);
                 toast.error(err.error);
             })
-        console.log('signed up with:', Fname, Lname, email, username, password);
-        
+        console.log('signed up with:', Fname, Lname, email, username, password);        
     };
 
     function getCode(){
