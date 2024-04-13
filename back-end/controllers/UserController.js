@@ -129,22 +129,22 @@ const getUserProfileInfo = async (req, res) => {
     const userFriends = await Friends.findFriends(Owner);
 
     // Extract the _id of each friend
-const friendIds = userFriends.map(friend => friend.FriendsWith);
+    const friendIds = userFriends.map(friend => friend.FriendsWith);
 
-// Retrieve the username, firstName, LastName, Email, and Streak of each friend based on their _id
-const friendData = await User.aggregate([
-  { $match: { _id: { $in: friendIds } } },
-  { $project: { _id: 1, Username: 1, Streak: 1, FirstName: 1, LastName: 1, Email: 1 } }
-]);
+    // Retrieve the username, firstName, LastName, Email, and Streak of each friend based on their _id
+    const friendData = await User.aggregate([
+      { $match: { _id: { $in: friendIds } } },
+      { $project: { _id: 1, Username: 1, Streak: 1, FirstName: 1, LastName: 1, Email: 1 } }
+    ]);
 
-// Map friend data to friend objects
-const populatedFriends = userFriends.map(friend => {
-  const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
-  return {
-    // Include specific properties from the friendInfo object
-    id: friendInfo._id, Username: friendInfo.Username, Streak: friendInfo.Streak, FirstName: friendInfo.FirstName, LastName: friendInfo.LastName, Email: friendInfo.Email
-  };
-});
+    // Map friend data to friend objects
+    const populatedFriends = userFriends.map(friend => {
+      const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
+      return {
+        // Include specific properties from the friendInfo object
+        id: friendInfo._id, Username: friendInfo.Username, Streak: friendInfo.Streak, FirstName: friendInfo.FirstName, LastName: friendInfo.LastName, Email: friendInfo.Email
+      };
+    }).sort((a, b) => a.Username.localeCompare(b.Username));
 
     // Respond with user information and populated friends' data
     const Email = userInfo.Email;
@@ -155,7 +155,7 @@ const populatedFriends = userFriends.map(friend => {
 
     res.status(200).json({ Email, FirstName, LastName, Username, userFriends: populatedFriends, ProfilePic });
   } catch (error) {
-      res.status(400).json({error: error.message});
+    res.status(400).json({error: error.message});
   }
 }
 
