@@ -151,8 +151,9 @@ const populatedFriends = userFriends.map(friend => {
     const FirstName = userInfo.FirstName;
     const LastName = userInfo.LastName;
     const Username = userInfo.Username;
+    const ProfilePic = userInfo.ProfilePicture;
 
-    res.status(200).json({ Email, FirstName, LastName, Username, userFriends: populatedFriends });
+    res.status(200).json({ Email, FirstName, LastName, Username, userFriends: populatedFriends, ProfilePic });
   } catch (error) {
       res.status(400).json({error: error.message});
   }

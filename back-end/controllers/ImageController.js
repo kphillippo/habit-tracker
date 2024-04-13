@@ -1,18 +1,42 @@
 const path = require('path');
 const Image = require('../models/image.js');
+const User = require('../models/User');
 
 
 exports.uploadImage = async (req, res) => {
   try {
     const { originalname, filename, path } = req.file;
-    const { userId } = req.body; 
+    const { userId } = req.body;
+
+    // Check if there's already an image record for the user ID
+    const existingImage = await Image.findOne({ userId });
+
+    // If an image record exists, delete it
+    if (existingImage) {
+      await Image.findByIdAndDelete(existingImage._id);
+    }
+
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Create a new image record with the uploaded image data
     const image = new Image({
       originalname,
       filename,
       path,
       userId,
     });
+
+    // Save the image
     await image.save();
+
+    // Update the user's profile picture field with the ID of the uploaded image
+    user.ProfilePicture = image._id;
+    await user.save();
+
     res.status(201).json({ message: 'Image uploaded successfully' });
   } catch (error) {
     console.error(error);
