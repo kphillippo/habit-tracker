@@ -121,7 +121,7 @@ describe('Notifications API', () => {
 
             //make a habit
             const testData1 = {
-                Owner: "66187e90c4d578963180023b",
+                Owner: "6619d49947ae9b77d3b79196",
                 Title: "Test1",
                 MeasurementType: "2",
                 Goal: "30"
@@ -133,7 +133,7 @@ describe('Notifications API', () => {
 
             //make a todo
             const testData2 = {
-                Owner: "66187e90c4d578963180023b",
+                Owner: "6619d49947ae9b77d3b79196",
                 Title: "Test1",
                 Date: Date.now(),
                 Repeat: false,
@@ -160,12 +160,12 @@ describe('Notifications API', () => {
             //delete created habits
             await request(app)
             .delete('/api/habit/deleteHabit')
-            .query({ user_id: "66187e90c4d578963180023b", habit_id: response1.body._id });
+            .query({ user_id: "6619d49947ae9b77d3b79196", habit_id: response1.body._id });
 
             //delete creates todos
             await request(app)
             .delete('/api/todo/deleteTodo')
-            .query({ user_id: "66187e90c4d578963180023b", todo_id: response2.body._id });
+            .query({ user_id: "6619d49947ae9b77d3b79196", todo_id: response2.body._id });
 
         });
 
@@ -174,7 +174,7 @@ describe('Notifications API', () => {
 
             //make a habit
             const testData1 = {
-                Owner: "66187e90c4d578963180023b",
+                Owner: "6619d49947ae9b77d3b79196",
                 Title: "Test1",
                 MeasurementType: "2",
                 Goal: "30"
@@ -186,7 +186,7 @@ describe('Notifications API', () => {
 
             //make a todo
             const testData2 = {
-                Owner: "66187e90c4d578963180023b",
+                Owner: "6619d49947ae9b77d3b79196",
                 Title: "Test1",
                 Date: Date.now(),
                 Repeat: false,
@@ -199,7 +199,7 @@ describe('Notifications API', () => {
 
             //make a habit
             const testData4 = {
-                Owner: "66187e90c4d578963180023b",
+                Owner: "6619d49947ae9b77d3b79196",
                 Title: "Test1",
                 MeasurementType: "2",
                 Goal: "30"
@@ -211,7 +211,7 @@ describe('Notifications API', () => {
 
             //make a todo
             const testData5 = {
-                Owner: "66187e90c4d578963180023b",
+                Owner: "6619d49947ae9b77d3b79196",
                 Title: "Test1",
                 Date: Date.now(),
                 Repeat: false,
@@ -238,24 +238,24 @@ describe('Notifications API', () => {
             //delete created habits
             await request(app)
             .delete('/api/habit/deleteHabit')
-            .query({ user_id: "66187e90c4d578963180023b", habit_id: response1.body._id });
+            .query({ user_id: "6619d49947ae9b77d3b79196", habit_id: response1.body._id });
 
             await request(app)
             .delete('/api/habit/deleteHabit')
-            .query({ user_id: "66187e90c4d578963180023b", habit_id: response4.body._id });
+            .query({ user_id: "6619d49947ae9b77d3b79196", habit_id: response4.body._id });
 
             //delete creates todos
             await request(app)
             .delete('/api/todo/deleteTodo')
-            .query({ user_id: "66187e90c4d578963180023b", todo_id: response2.body._id });
+            .query({ user_id: "6619d49947ae9b77d3b79196", todo_id: response2.body._id });
 
             await request(app)
             .delete('/api/todo/deleteTodo')
-            .query({ user_id: "66187e90c4d578963180023b", todo_id: response5.body._id });
+            .query({ user_id: "6619d49947ae9b77d3b79196", todo_id: response5.body._id });
             
             //deletes the notifications that were created
             const testData6 = {
-                User: "66187e90c4d578963180023b"
+                User: "6619d49947ae9b77d3b79196"
             }
 
             //get notifications num of request
