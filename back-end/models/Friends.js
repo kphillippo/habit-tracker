@@ -39,11 +39,6 @@ FriendsSchema.statics.acceptFriendRequest = async function(User, FriendsWith) {
     return existingRecord, existingRecord2;
 }
 
-//finds all friend requests to a particualr user
-FriendsSchema.statics.findFriendRequests = async function(User) {
-    return await this.find({ User: User, RequestPending: true, Requestee: User });
-}
-
 //finds friends who are in the table whos request pending status is false
 FriendsSchema.statics.findFriends = async function(User) {
     return await this.find({ User: User, RequestPending: false });
