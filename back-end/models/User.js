@@ -36,10 +36,10 @@ const UserSchema = new mongoose.Schema({
     Settings:{
         type: mongoose.ObjectId
     },
-    ProfilePicture:{
-        data: Buffer, // Image data as buffer
-        contentType: String // MIME type of the image
-    }
+    ProfilePicture: { // sets a default profile picture
+        type: mongoose.Schema.Types.ObjectId,
+        default: "6619d83e68a4e0f4626e0874" 
+      }
     
 }, { collection: 'User'});
 

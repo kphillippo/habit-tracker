@@ -1,6 +1,9 @@
 const User = require('../models/User')
 const Friends = require('../models/Friends');
 const Settings = require('../models/Settings');
+const Todos = require('../models/ToDo');
+const Habits = require('../models/Habit');
+const Notifications = require('../models/Notifications');
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 
@@ -25,6 +28,51 @@ const {Username, Password} = req.body
     const Email = user.Email
     const Streak = user.Streak
     const _id = user._id
+
+    //checks how many habits and doto's the user has left to do today
+    const numHabitsLeft = await Habits.getNumUncompletedHabitsToday(_id);
+    const numTodosLeft = await Todos.getNumUncompletedTodosToday(_id);
+
+    //message variables
+    const habitTitle = "You Have Habits To Do"
+    const todoTitle = "You Have ToDos To Do"
+
+    //changes wording of message if there is only one habit to be not plural
+    let habitMessage;
+    if(numHabitsLeft === 1){
+      habitMessage = "You have " + numHabitsLeft + " habit left to do today!"
+    }else{
+      habitMessage = "You have " + numHabitsLeft + " habits left to do today!"
+    }
+
+    //changes wording of message if there is only one todo to be not plural
+    let todoMessage;
+    if(numTodosLeft === 1){
+      todoMessage = "You have " + numTodosLeft + " todo left to do today!"
+    }else{
+      todoMessage = "You have " + numTodosLeft + " todos left to do today!"
+    }
+
+    //checks if ther user already has a notification for todos and habits
+    const habitNotificationExist = await Notifications.lookForRecord(_id, habitTitle); 
+    const todoNotificationExist = await Notifications.lookForRecord(_id, todoTitle); 
+    
+    //if the number is greater then 1 and the user doesnt already have a notification for it, then it makes a notification, if there is a notification, it updates the numbers
+    if (numHabitsLeft >= 1){
+      if(habitNotificationExist === 0){
+        const sendNotification = await Notifications.sendNotification( _id, habitTitle, habitMessage);
+      }else{
+        const updateNotification = await Notifications.updateNotification(_id, habitTitle, habitMessage);
+      }
+    }
+
+    if (numTodosLeft >= 1){
+      if(todoNotificationExist === 0){
+        const sendNotification = await Notifications.sendNotification( _id, todoTitle, todoMessage);
+      }else{
+        const updateNotification = await Notifications.updateNotification(_id, todoTitle, todoMessage);
+      }
+    }
 
     res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email})
   }catch(error){
@@ -81,32 +129,33 @@ const getUserProfileInfo = async (req, res) => {
     const userFriends = await Friends.findFriends(Owner);
 
     // Extract the _id of each friend
-const friendIds = userFriends.map(friend => friend.FriendsWith);
+    const friendIds = userFriends.map(friend => friend.FriendsWith);
 
-// Retrieve the username, firstName, LastName, Email, and Streak of each friend based on their _id
-const friendData = await User.aggregate([
-  { $match: { _id: { $in: friendIds } } },
-  { $project: { _id: 1, Username: 1, Streak: 1, FirstName: 1, LastName: 1, Email: 1 } }
-]);
+    // Retrieve the username, firstName, LastName, Email, and Streak of each friend based on their _id
+    const friendData = await User.aggregate([
+      { $match: { _id: { $in: friendIds } } },
+      { $project: { _id: 1, Username: 1, Streak: 1, FirstName: 1, LastName: 1, Email: 1 } }
+    ]);
 
-// Map friend data to friend objects
-const populatedFriends = userFriends.map(friend => {
-  const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
-  return {
-    // Include specific properties from the friendInfo object
-    id: friendInfo._id, Username: friendInfo.Username, Streak: friendInfo.Streak, FirstName: friendInfo.FirstName, LastName: friendInfo.LastName, Email: friendInfo.Email
-  };
-});
+    // Map friend data to friend objects
+    const populatedFriends = userFriends.map(friend => {
+      const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
+      return {
+        // Include specific properties from the friendInfo object
+        id: friendInfo._id, Username: friendInfo.Username, Streak: friendInfo.Streak, FirstName: friendInfo.FirstName, LastName: friendInfo.LastName, Email: friendInfo.Email
+      };
+    }).sort((a, b) => a.Username.localeCompare(b.Username));
 
     // Respond with user information and populated friends' data
     const Email = userInfo.Email;
     const FirstName = userInfo.FirstName;
     const LastName = userInfo.LastName;
     const Username = userInfo.Username;
+    const ProfilePic = userInfo.ProfilePicture;
 
-    res.status(200).json({ Email, FirstName, LastName, Username, userFriends: populatedFriends });
+    res.status(200).json({ Email, FirstName, LastName, Username, userFriends: populatedFriends, ProfilePic });
   } catch (error) {
-      res.status(400).json({error: error.message});
+    res.status(400).json({error: error.message});
   }
 }
 
