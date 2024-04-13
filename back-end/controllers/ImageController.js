@@ -59,18 +59,3 @@ exports.getImage = async (req, res) => {
       res.status(500).json({ message: 'Failed to fetch image' });
     }
   };
-
-  exports.getImagesByUser = async (req, res) => {
-    try {
-      const userId = req.params.userId; // Assuming userId is passed as a URL parameter
-      const images = await Image.find({ userId: userId });
-      if (images.length === 0) {
-        return res.status(404).send('No images found for the user');
-      }
-      // Return the images array or any processing you want to do with the images
-      res.status(200).json(images);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Failed to fetch images' });
-    }
-  };
