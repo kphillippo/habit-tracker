@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
     },
     ProfilePicture: { // sets a default profile picture
         type: mongoose.Schema.Types.ObjectId,
-        default: "6619d02c80cc38c04123696b" // Use a string representation of ObjectId
+        default: "6619d83e68a4e0f4626e0874" 
       }
     
 }, { collection: 'User'});
