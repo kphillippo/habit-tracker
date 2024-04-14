@@ -125,5 +125,32 @@ GroupHabitSchema.statics.deleteGroupHabit = async function(GroupHabitID) {
 }
 
 
+//removes a user from a group habit(when the user deletes the group habit)
+GroupHabitSchema.statics.removeUser = async function(User_id, GroupHabitID) {
+
+    //gets the group habit
+    const groupHabit = await this.findById(GroupHabitID);
+
+    //gets the index of the Memebers array that the user id is in
+    const memberIndex = groupHabit.Members.findIndex(member => member.equals(User_id));
+
+    //removes the users id from the members array
+    groupHabit.Members.splice(memberIndex, 1);
+
+    //removes the number in the streak array at the index we got from the members array
+    groupHabit.Streak.splice(memberIndex, 1);
+
+    // Save the updated group habit
+    await groupHabit.save();
+}
+
+//find the group habit by the id
+GroupHabitSchema.statics.findById = async function(GroupHabitID) {
+    //find the group habit by its unique ID
+    const groupHabit = await this.findOne({ _id: GroupHabitID });
+
+    return groupHabit;
+}
+
 const GroupHabitModel = mongoose.model("GroupHabit", GroupHabitSchema);
 module.exports = GroupHabitModel;
