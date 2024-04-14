@@ -38,8 +38,7 @@
     position: absolute;
     top: 5%;
     left: 85%;
-    width: 8%;
-    height: 17%;
+    width: 28px;
     font-size: 1.5vw;
     font-family: Kotta One;
     border: 0;
@@ -94,4 +93,21 @@
 .friendInfo td {
     border-bottom: 0.5px solid #000;
     width: 33%;
+}
+
+.submit{
+    background: rgba(146, 178, 122, 1);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
+    border-radius: 15px;
+    padding: 0.5%;
+    color: white;
+    font-size: 90%;
+}
+.CheckList{
+    float: left;
+    position: relative;
+    left: 35%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: none;
 }

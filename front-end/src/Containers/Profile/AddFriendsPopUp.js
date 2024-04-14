@@ -18,7 +18,7 @@ function AddFriendsPopUp({ onClose }) {
           <center><div className="Title"> 
             Add Friends 
           </div>
-          Enter frined's email: <input type="text" className="friendInput"></input><br></br>
+          Enter friend's email: <input type="text" className="friendInput"></input><br></br>
           <button className="request" onClick={sendFriendRequest}>Send request</button>
           </center>
           <button className="popup_close" onClick={onClose}>X</button>
