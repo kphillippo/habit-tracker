@@ -84,6 +84,13 @@ const timesHabitCompletedLast30Days = async (req, res) => {
             }
         });
 
+        const checkInsWithGoals = await Promise.all(checkIns.map(async (checkIn) => {
+            const habit = await Habit.findById(checkIn.HabitID);
+            return { checkIn, goal: habit.Goal };
+        }));
+
+        const completedCheckIns = checkInsWithGoals.filter(({ checkIn, goal }) => checkIn.Count >= goal);
+
 
         //return the number of completed days / 30
     } catch (error) {
