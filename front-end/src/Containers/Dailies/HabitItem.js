@@ -4,20 +4,21 @@ import { IoMdFlame } from "react-icons/io";
 
 import { FaPlusCircle } from "react-icons/fa";
 import { FaCirclePlay, FaCirclePause } from "react-icons/fa6";
+import { apiRequest } from "../../utils/reqTool";
 
 export default class HabitItem extends Component {
     constructor(props){
         super(props);
         this.TimerID = null;
         this.state = {
+            HabitID: props.data.habitID,
             Title:props.data.Title,
             Streak:props.data.Streak,
             MeasurementType: props.data.MeasurementType,
             Goal: props.data.Goal,
-            Current: 0,
-            Status: false,
+            Count: 0,
+            Status: props.data.Status,
             editHabit: false,
-            Disable: false,
             Date: new Date(),
             Timer: false
         }
@@ -26,35 +27,55 @@ export default class HabitItem extends Component {
     }
 
     handleGoalBtnClick(){
-        if(this.state.MeasurementType === 2){
-            this.setState({
-                Current: this.state.Current + 1
-            })
-            if(this.state.Current === this.state.Goal-1){
-                this.setState({Status: true, Streak: this.state.Streak + 1, Disable: true})
-                //todo: send a POST request to update habit
+        if(!this.state.Status){
+            if(this.state.MeasurementType === 2){
+                this.setState({
+                    Count: this.state.Count + 1
+                })
+                if(this.state.Count === this.state.Goal-1){
+                    this.setState({Status: true, Streak: this.state.Streak + 1})
+                    //todo: send a POST request to update habit
+                    console.log(this.state);
+                    apiRequest("POST", "habitCheckIn/updateHabitCheckIn", this.state)
+                    .then(({data}) => {
+                        console.log(data);
+                        this.props.toast.success("You just finished a habit!")
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        this.props.toast.error(err.error);
+                    })
+                }
+            }
+            else if(this.state.MeasurementType === 1){
+                if(this.state.Timer === false){
+                    if (this.timerID !== null) clearInterval(this.timerID);
+                    this.setState({Timer: true})
+                    this.TimerID  = setInterval(() => {
+                        if(this.state.Count === this.state.Goal){
+                            this.setState({Status: true, Streak: this.state.Streak + 1});
+                            this.handlePauseBtnClick(this.TimerID);
+                            apiRequest("POST", "habitCheckIn/updateHabitCheckIn", this.state)
+                            .then(({token, ...data}) => {
+                                console.log(data);
+                                this.props.toast.success("You just finished a habit!")
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                this.props.toast.error(err.error);
+                            })
+                        }
+                        this.setState({Count: this.state.Count+1});
+                            
+                    }, 1000);
+                }
+                else{
+                    this.handlePauseBtnClick(this.TimerID);
+                    this.setState({Timer: false})
+                }
+                
             }
         }
-        else if(this.state.MeasurementType === 1){
-            if(this.state.Timer === false){
-                if (this.timerID !== null) clearInterval(this.timerID);
-                this.setState({Timer: true})
-                this.TimerID  = setInterval(() => {
-                    if(this.state.Current === this.state.Goal){
-                        this.setState({Status: true, Streak: this.state.Streak + 1, Disable: true});
-                        this.handlePauseBtnClick(this.TimerID);
-                    }
-                    this.setState({Current: this.state.Current+1});
-                        
-                }, 1000);
-            }
-            else{
-                this.handlePauseBtnClick(this.TimerID);
-                this.setState({Timer: false})
-            }
-            
-        }
-        
         
     }
 
@@ -64,8 +85,18 @@ export default class HabitItem extends Component {
 
     
     handleCheckBoxClick(event){
-        this.setState({ Status: event.target.checked, Streak: this.state.Streak + 1, Disable: true });
+        this.setState({ Status: event.target.checked, Streak: this.state.Streak + 1});
         //todo: send POST request to check-in the habit
+        console.log(this.state);
+        apiRequest("POST", "habitCheckIn/updateHabitCheckIn", this.state)
+                    .then(({data}) => {
+                        console.log(data);
+                        this.props.toast.success("You just finished a habit!");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        this.props.toast.error(err.error);
+                    })
     }
 
     componentWillUnmount() {
@@ -86,20 +117,20 @@ export default class HabitItem extends Component {
       }
 
     render(){
-        console.log(this.props);
-        const { Status, Title, editHabit, MeasurementType, Goal, Current} = this.state;
+        console.log(this.props)
+        const { Status, Title, editHabit, MeasurementType, Goal, Count} = this.state;
         const deletedStyle = Status ? { textDecoration: 'line-through' } : {};
         const flameColor = Status?"#e57028":"#c0c6b7";
         const fontColor = Status?"#000000":"#c0c6b7";
         const goal = MeasurementType === 2?Goal:`${Goal<60?0:Math.floor(Goal/60)}:${Goal%60<10?0:""}${Goal%60}`
-        let current = MeasurementType === 2?Current:`${Current<60?0:Math.floor(Current/60)}:${Current%60<10?0:""}${Current%60}`
+        let count = MeasurementType === 2?Count:`${Count<60?0:Math.floor(Count/60)}:${Count%60<10?0:""}${Count%60}`
         return(
             <tr>
-            <td className = "check"width = "5%"><input type = "checkbox" id="habit" name="habit" onClick={this.handleCheckBoxClick} disabled={this.state.Disable} checked={this.state.Status}></input></td>
+            <td className = "check"width = "5%"><input type = "checkbox" id="habit" name="habit" onClick={this.handleCheckBoxClick} disabled={this.state.Status} checked={this.state.Status}></input></td>
             <td className = "habit" width = "53%" style={deletedStyle}> {Title}</td>
             <td width = "2%"><IoMdFlame id ="flame" color={flameColor} size = "3.5vw"></IoMdFlame></td>
             <td width = "12.5%" style={{ color: fontColor }}>{this.state.Streak}</td>
-            <td className = "amount" width = "20.5%">{current}/{goal}</td>
+            <td className = "amount" width = "20.5%">{count}/{goal}</td>
             <td width = "2%">
                 <button className = "btn_counter" onClick={this.handleGoalBtnClick}>
                     {this.state.MeasurementType === 2 && <FaPlusCircle  color="#92B27A" size = "2.5vw"></FaPlusCircle>}

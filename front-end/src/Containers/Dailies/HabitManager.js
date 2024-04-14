@@ -71,7 +71,7 @@ class HabitManager extends Component {
                 <table id = "habitmanager_table">
                         {this.state.habits.map((item) => (
                                 <HabitManagerItem
-                                    key={item._id}
+                                    key={item.habitID}
                                     data = {item}
                                     isUpdated={() => this.props.isUpdated()}
                                     toast = {this.props.toast}

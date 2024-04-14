@@ -22,15 +22,11 @@ const friendsRoutes = require('./routes/FriendsRoutes.js');
 const habitCheckInRoutes = require('./routes/HabitCheckInRoutes.js');
 const verificationRoutes = require('./routes/VerificationRoutes.js');
 const SettingsRoutes = require('./routes/SettingsRoutes.js');
+const StatisticsRoutes = require('./routes/StatisticsRoutes.js');
+const notificationsRoutes = require('./routes/NotificationsRoutes.js');
+const imageRoutes = require('./routes/ImageRoutes.js');
+const groupHabitRoutes = require('./routes/GroupHabitRoutes.js');
 
-/*
-//variables for image
-const bodyParser = require('body-parser');
-const fs = require('fs');
-var path = require('path');
-app.set("view engine", "ejs");
-require('dotenv').config();
-*/
 
 app.use(express.json());
 app.use(cors());
@@ -43,60 +39,12 @@ app.use('/api/friends', friendsRoutes)
 app.use('/api/habitCheckIn', habitCheckInRoutes)
 app.use('/api/verification', verificationRoutes)
 app.use('/api/Settings', SettingsRoutes)
+app.use('/api/stats', StatisticsRoutes)
+app.use('/api/notifications', notificationsRoutes)
+app.use('/api/images', imageRoutes);
+app.use('/api/groupHabit', groupHabitRoutes);
 
 mongoose.connect(serverLink);
-
-/*
-//Upload Image code starts here
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
- 
-var multer = require('multer');
- 
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-});
- 
-var upload = multer({ storage: storage });
- 
-//get request for image
-app.get('/', (req, res) => {
-    UserModel.find({})
-    .then((data, err)=>{
-        if(err){
-            console.log(err);
-        }
-        res.render('imagepage',{items: data})
-    })
-});
- 
-//post request for image
-app.post('/', upload.single('image'), (req, res, next) => {
- 
-    var obj = {
-        Username: req.body.Username,
-        ProfilePicture: {
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-            contentType: 'image/png'
-        }
-    }
-    imgSchema.create(obj)
-    .then ((err, item) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            // item.save();
-            res.redirect('/');
-        }
-    });
-});
-*/
 
 //if testing it doesnt open the port
 if (process.env.NODE_ENV !== 'test') {

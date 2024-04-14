@@ -1,18 +1,22 @@
 # HabitConnect
 
-Introducing HabitConnect, an innovative online platform serving as a personal growth coach, designed to cultivate positive habits and monitor individual progress. It empowers users to establish and pursue personal development goals, including reminders, daily streaks, motivational quotes, and engaging group challenges, ensuring users stay motivated and on course.
+Introducing HabitConnect, an online platform serving as a personal growth coach, designed to cultivate positive habits and monitor individual progress. It empowers users to establish and pursue personal development goals, including daily streaks, reminders, motivational quotes, and engaging group challenges, ensuring users stay motivated and on course.
 
-The application prioritizes accessibility and user-friendliness, offering the option to create an account linked to an email for personalized tracking or allowing users to explore the app as guests. Logging achievements is seamless, with visual representations enhancing user comprehension. For those seeking a competitive edge, participation in challenges against allows users to gauge their progress against others.
+The application prioritizes user-friendliness and ease-of-use. It offers the option to create an account linked to an email for personalized tracking and use from any device. Logging habit and to-do completion is seamless, with a comprehensive statistics page to track personal progress. For those seeking a competitive edge, creation and participation in group challenges allows users to gauge their progress against others and encourage their friends to extend their streak!
 
-Operating under Agile principles, the project, led by a team of 7—including the Product Owner, Project Manager, Scrum Master, and the development team, will closely collaborate with stakeholders to ensure flexibility and adaptability. This is a culminating project for the COSC 4P02 course at Brock University.
+Operating under Agile software development principles, the project, led by a team of 7—including the Scrum Master, Product Owner, Project Manager, and the development team, will closely collaborate with stakeholders to ensure all user requirements are achieved in their entirety by project deadlines. This is a culminating project for the COSC 4P02 course at Brock University.
 
-## Product Backlog/Sprint Backlog
+## Installation Guide
 
-[User Story and Task Management Using Jira](https://habittracker.atlassian.net/jira/software/projects/SCRUM/boards/1) 
+[Installation Guide on Google Drive](https://docs.google.com/document/d/1pIUTatyo50p0aSejOFXUSQuKknQcqNFVl3Ovi5vCy50/edit?usp=sharing)
 
-## Webpage Design
+HabitConnect is not currently publicly hosted. This installation guide was created to lead the user through the collection of the source code from GitHub, installation of all required dependencies, and our recommended method of running the website locally from the user’s local system.
 
-[Webpage Design Using Figma](https://www.figma.com/file/g4kPNHlQEehR718MbzswRJ/Design?type=design&node-id=0%3A1&mode=design&t=GJo5eAb9d65voeO9-1)
+## User Manual
+
+[User Manual on Google Drive](https://docs.google.com/document/d/11T6s2-Pi2661DUy8lCETxUTxCmdHXfjJZsUfINopark/edit?usp=sharing) 
+
+This user manual has been created to give a comprehensive overview of the HabitConnect website, for both first time users, and experienced users who have questions about functionalities of the site. The document provides a brief introduction to HabitConnect, including the project objectives, along with a description of how to get started on the site. It continues, providing an outline of the functionalities of pages available to the user, information on account management, a troubleshooting FAQ, and finally information on how to contact the developers regarding updates and feedback for the website. 
 
 ## Team Members
 
@@ -26,9 +30,17 @@ Operating under Agile principles, the project, led by a team of 7—including th
 | Robert Pierik   | Back-End Lead   | 6773832    | rp19dq@brocku.ca | genious97       |
 | Lysa Hannes     | Back-End Lead   | 6695100    | lh18wt@brocku.ca | LysaHannes      |
 
+## Product Backlog/Sprint Backlog
+
+[User Story and Task Management Using Jira](https://habittracker.atlassian.net/jira/software/projects/SCRUM/boards/1) 
+
+## Webpage Design
+
+[Webpage Design Using Figma](https://www.figma.com/file/g4kPNHlQEehR718MbzswRJ/Design?type=design&node-id=0%3A1&mode=design&t=GJo5eAb9d65voeO9-1)
+
 ## Project Objective
 
-Addressing the growing prevalence of unhealthy lifestyles, there is an increasing need for a shift towards healthier habits. While many aspire to improve their lifestyles, the challenge lies in taking action amid busy schedules or forgetfulness. This project aims to provide a tool functioning as a method of monitoring their daily habits, facilitating the process of cultivating healthier routines. The primary objective is to serve as a self-reflection tool, accommodating commitments ranging from small tasks like making the bed daily to more significant ones such as frequenting the gym. Additional goals include recording daily habits, tracking progress, sending reminders, fostering friendly competition through leaderboards, and promoting long-term goals. The significance of a habit tracker lies in enhancing self-awareness, promoting accountability, offering motivation through progress visualization, and contributing to efficient time management for a more organized and productive lifestyle.
+Addressing the growing prevalence of unhealthy lifestyles, there is an increasing need for a shift towards healthier habits. While many aspire to improve their lifestyles, the challenge lies in taking action amid busy schedules or forgetfulness. This project aims to provide a tool to monitor their daily habits, facilitating the process of creating and maintaining healthier routines. The primary objective is to serve as a self-reflection tool, accommodating any commitments provided by the user. Examples range from small tasks like making the bed daily to more significant ones such as frequenting the gym. Additional goals include recording daily habits, tracking progress, reminder notifications, fostering friendly competition through leaderboards, and promoting long-term goals. The significance of a habit tracker lies in enhancing self-awareness, promoting accountability, offering motivation through progress visualization, and contributing to efficient time management for a more organized and productive lifestyle.
 
 ## Timeline
 
@@ -42,11 +54,15 @@ Sprint 2 Deadline: March 15th (COMPLETE)
 
 Progress Report 2 Due: April 1st (COMPLETE)
 
-Sprint 3 Deadline (Final Product): April 12th 
+Sprint 3 Deadline: April 12th 
+
+Development Completion Deadline: April 19th
+
+Final Presentation: April 23rd (2:00pm)
+
+Sprint 4 Deadline: April 26th
 
 Final Report Due: April 28th
-
-Final Presentation: April 22nd - April 30th (official date TBD)
 
 ## License
 

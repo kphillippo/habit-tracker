@@ -6,6 +6,7 @@ import "../../Css/Leaderboard.css";
 import { GiTrophy } from "react-icons/gi";
 import { IoMdFlame } from "react-icons/io";
 import { Bs1CircleFill, Bs2CircleFill, Bs3CircleFill } from "react-icons/bs";
+import { handleMail } from "../Signup/sendEmail";   // Inport function from other class 
 
 
 function Leaderboard(props){
@@ -25,8 +26,7 @@ function Leaderboard(props){
 
             let info = {                                    // Defines info to be sent into apiRequest
                 "User": sessionStorage.getItem("userId")    
-            }
-            
+            }           
             const response = await apiRequest("POST", "friends/returnLeaderBoard", info)    // Sets response to await response of apiRequest
             const data = await response;                                                    //  sets constant data to await response
             setleaderBoardInfo(data);                                                       // set Leaderboard info to data
@@ -34,13 +34,11 @@ function Leaderboard(props){
             console.error("Failed to fetch user info:", err);
         } finally {
             setIsLoading(false);
-        }
-        
+        }       
     };
 
     function isSignIn(){        // Checks if the user is signed in
         if(!sessionStorage.getItem("userToken")){
-            //navigate("/signin")
             return false
         }
         return true;
@@ -62,6 +60,12 @@ function Leaderboard(props){
     }
     if (!leaderBoardInfo) {             // Shows Error message if there is an error loading user leaderboard information
         return <div>Error loading user information.</div>;
+    }
+
+    // Method to implement handleMail function from sendEmail class
+    const sendMail = (event) => {   
+        event.preventDefault();
+        handleMail("odkn289@gmail.com", "TEST TEST TESTING", "Welcome to our web page", props.toast, null);
     }
 
     function generateLeaderBoard() {
@@ -120,6 +124,7 @@ function Leaderboard(props){
                     </div>
                 </div>
             </div>
+            <button onClick={sendMail}> Send Email</button> 
         </body>
         </>;
     }
@@ -127,8 +132,7 @@ function Leaderboard(props){
     return (
         <body>
             {userInfo.userToken && generateLeaderBoard()}
-        </body>
-        
+        </body>        
     );
 };
 export default Leaderboard;

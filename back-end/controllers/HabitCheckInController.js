@@ -16,6 +16,7 @@ const UpdateHabitCheckIn = async (req, res) => {
     const {HabitID, Count} = req.body;
     let Parent = HabitID;
     Parent = new ObjectId(Parent);
+    console.log(Parent)
     try {
         const habit = await Habit.findOne({_id: Parent});
         if (!habit) {
