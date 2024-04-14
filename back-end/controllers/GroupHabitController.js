@@ -1,6 +1,7 @@
 const GroupHabit = require('../models/GroupHabit');
 const Habit = require('../models/Habit');
 const ObjectId = require('mongoose').Types.ObjectId;
+const UserModel = require('../models/User');
 
 
 //creates a group habit
@@ -36,8 +37,41 @@ const returnGroupHabits = async (req, res) => {
 
 //Return all information for a group habit
 const returnGroupHabitInfo = async (req, res) => {
+    const {GroupHabitID} = req.body;
+    try {
+        //gets the grouphabit
+        const habit = await GroupHabit.findById(GroupHabitID);
 
+        //gets the userName of the owner
+        const Owner = await UserModel.findById(habit.Owner)
+        const OwnerUsername = Owner.Username
 
+        //gets names of members in a list
+        const memberNames = [];
+        for (const memberId of habit.Members) {
+            const member = await UserModel.findById(memberId);
+            if (member) {
+                memberNames.push(member.Username);
+            }
+        }
+
+        //gets Streak list
+        const Streaks = habit.Streak
+
+        //Gets Title
+        const Title = habit.Title
+
+        //gets Goal
+        const Goal = habit.Goal
+
+        //Gets Measurement type
+        const MeasurementType = habit.MeasurementType
+
+        //returns everything
+        res.status(200).json({ Title, Goal, MeasurementType, OwnerUsername, memberNames, Streaks});
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
 }
 
 //edits a group habit
@@ -97,7 +131,7 @@ const deleteGroupHabit = async (req, res) => {
 const leaveGroupHabit = async (req, res) => {
     const {GroupHabitID, UserID} = req.body;
     try {
-        const habit = await Habit.findById(GroupHabitID);
+        const habit = await GroupHabit.findById(GroupHabitID);
 
         //remove the user from the group habit arrays
         await GroupHabit.removeUser(UserID, habit.GroupHabitID);
@@ -105,9 +139,10 @@ const leaveGroupHabit = async (req, res) => {
         //delete the habit for the user
         await Habit.deleteHabit(Habit_id, UserID);
 
+        res.status(200).json("Successfully Left Group Challange!");
     } catch (error) {
         res.status(400).json({error: error.message});
     }
 }
 
-module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit, deleteGroupHabit, leaveGroupHabit }
+module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit, deleteGroupHabit, leaveGroupHabit, returnGroupHabitInfo }
