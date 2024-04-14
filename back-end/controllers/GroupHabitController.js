@@ -24,11 +24,15 @@ const createGroupHabit = async (req, res) => {
     }
 }
 
-//return all group habits that a user or thier friends have created
+//return all group habits 
 const returnGroupHabits = async (req, res) => {
-    const {User, Title, MeasurementType, Goal} = req.body;
+    const {UserID} = req.body;
     try {
-        const habit = await GroupHabit.editHabit(user_id, Title, MeasurementType, Goal);
+        //find all group habits
+        const groupHabits = await GroupHabit.find();
+
+        //return the array of group habits
+        res.status(200).json(groupHabits);
 
     } catch (error) {
         res.status(400).json({error: error.message});
@@ -145,4 +149,4 @@ const leaveGroupHabit = async (req, res) => {
     }
 }
 
-module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit, deleteGroupHabit, leaveGroupHabit, returnGroupHabitInfo }
+module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit, deleteGroupHabit, leaveGroupHabit, returnGroupHabitInfo, returnGroupHabits }
