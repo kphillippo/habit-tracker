@@ -35,6 +35,10 @@ const returnGroupHabits = async (req, res) => {
 }
 
 //Return all information for a group habit
+const returnGroupHabitInfo = async (req, res) => {
+
+
+}
 
 //edits a group habit
 const editGroupHabit = async (req, res) => {
@@ -89,4 +93,21 @@ const deleteGroupHabit = async (req, res) => {
     }
 }
 
-module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit, deleteGroupHabit }
+//delete a group habit for a user from the group habit page
+const leaveGroupHabit = async (req, res) => {
+    const {GroupHabitID, UserID} = req.body;
+    try {
+        const habit = await Habit.findById(GroupHabitID);
+
+        //remove the user from the group habit arrays
+        await GroupHabit.removeUser(UserID, habit.GroupHabitID);
+
+        //delete the habit for the user
+        await Habit.deleteHabit(Habit_id, UserID);
+
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit, deleteGroupHabit, leaveGroupHabit }
