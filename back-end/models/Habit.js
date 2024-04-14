@@ -103,5 +103,17 @@ HabitSchema.statics.getNumUncompletedHabitsToday = async function(UserID) {
     return numUsersHabits;
 }
 
+//updates every habit with a specific group id
+HabitSchema.statics.updateHabitsWithId = async function(GroupHabitID, Title, MeasurementType, Goal) {
+    try {
+        // Update all records that have an ID associated with them
+        const result = await this.updateMany({ GroupHabitID: { $in: GroupHabitID } }, { Title, MeasurementType, Goal });
+
+        return result;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 const HabitModel = mongoose.model("Habit", HabitSchema);
 module.exports = HabitModel;

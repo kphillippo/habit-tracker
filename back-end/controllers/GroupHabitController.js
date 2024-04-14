@@ -37,8 +37,11 @@ const returnGroupHabits = async (req, res) => {
 const editGroupHabit = async (req, res) => {
     const {GroupHabitID, Title, MeasurementType, Goal} = req.body;
     try {
-        //updates habit
+        //updates group habit
         const habit = await GroupHabit.editHabit(GroupHabitID, Title, MeasurementType, Goal);
+
+        //updates the habit record for everyone 
+        await Habit.updateHabitsWithId(GroupHabitID, Title, MeasurementType, Goal);
 
         res.status(200).json(habit);
     } catch (error) {
@@ -46,4 +49,24 @@ const editGroupHabit = async (req, res) => {
     }
 }
 
-module.exports = { createGroupHabit, editGroupHabit }
+//joins a group habit
+const joinGroupHabit = async (req, res) => {
+    const {GroupHabitID, UserID} = req.body;
+    try {
+        //adds your id to the group habit
+        const habit = await GroupHabit.joinHabit(GroupHabitID, UserID);
+
+        //create the habit record with the grouphabit id 
+        const id = habit._id
+        const Title = habit.Title
+        const MeasurementType = habit.MeasurementType
+        const Goal = habit.Goal
+        await Habit.createGroupHabit(UserID, Title, MeasurementType, Goal, id);
+
+        res.status(200).json("Joined successfully!");
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit }

@@ -95,6 +95,26 @@ GroupHabitSchema.statics.streakLost = async function(GroupHabitID, UserID) {
     }
 }
 
+//adds user id and sets streak to 0
+GroupHabitSchema.statics.joinHabit = async function(GroupHabitID, UserID) {
+    try {
+        // Find the group habit from the GroupHabit ID
+        const groupHabit = await this.findById(GroupHabitID);
+
+        // Push the new member to the Members array
+        groupHabit.Members.push(UserID);
+
+        // Push the new members streak of default 0 to the Streaks array
+        groupHabit.Streak.push(0);
+
+        // Save the updated group habit
+        await groupHabit.save();
+        return groupHabit;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 
 const GroupHabitModel = mongoose.model("GroupHabit", GroupHabitSchema);
 module.exports = GroupHabitModel;
