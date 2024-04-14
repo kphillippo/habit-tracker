@@ -26,11 +26,23 @@ const HabitSchema = new mongoose.Schema({
     Goal: {
         type: Number,
         required: true
+    },
+    GroupHabitID: {
+        type: mongoose.ObjectId,
     }
 }, { collection: 'Habit'});
 
 HabitSchema.statics.findHabits = async function(Owner) {
     return await this.find({Owner: Owner});
+}
+
+HabitSchema.statics.createGroupHabit = async function(Owner, Title, MeasurementType, Goal, GroupHabitID) {
+    const user = await UserModel.findById(Owner);
+    if (!user) {
+        throw Error('User does not exist!');
+    }
+    const habit = this.create({Owner, Title, MeasurementType, Goal, GroupHabitID});
+    return habit;
 }
 
 HabitSchema.statics.createHabit = async function(Owner, Title, MeasurementType, Goal) {

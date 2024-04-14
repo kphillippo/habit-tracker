@@ -1,13 +1,11 @@
 const express = require('express')
 
 //controller functions
-const {  } = require('../controllers/GroupHabitController')
+const { createGroupHabit, editGroupHabit } = require('../controllers/GroupHabitController')
 
 const router = express.Router()
 
-//any routes go here
-
-
-
+router.post('/createGroupHabit', createGroupHabit)
+router.post('/editGroupHabit', editGroupHabit)
 
 module.exports = router

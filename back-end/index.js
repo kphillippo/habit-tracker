@@ -25,6 +25,7 @@ const SettingsRoutes = require('./routes/SettingsRoutes.js');
 const StatisticsRoutes = require('./routes/StatisticsRoutes.js');
 const notificationsRoutes = require('./routes/NotificationsRoutes.js');
 const imageRoutes = require('./routes/ImageRoutes.js');
+const groupHabitRoutes = require('./routes/GroupHabitRoutes.js');
 
 
 app.use(express.json());
@@ -41,6 +42,7 @@ app.use('/api/Settings', SettingsRoutes)
 app.use('/api/stats', StatisticsRoutes)
 app.use('/api/notifications', notificationsRoutes)
 app.use('/api/images', imageRoutes);
+app.use('/api/groupHabit', groupHabitRoutes);
 
 mongoose.connect(serverLink);
 
