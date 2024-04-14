@@ -23,6 +23,7 @@ const createGroupHabit = async (req, res) => {
     }
 }
 
+//return all group habits that a user or thier friends have created
 const returnGroupHabits = async (req, res) => {
     const {User, Title, MeasurementType, Goal} = req.body;
     try {
@@ -32,6 +33,8 @@ const returnGroupHabits = async (req, res) => {
         res.status(400).json({error: error.message});
     }
 }
+
+//Return all information for a group habit
 
 //edits a group habit
 const editGroupHabit = async (req, res) => {
@@ -69,4 +72,21 @@ const joinGroupHabit = async (req, res) => {
     }
 }
 
-module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit }
+//delete a group habit
+const deleteGroupHabit = async (req, res) => {
+
+    const {GroupHabitID} = req.body;
+    try {
+        //delete the habit for everyone who has the group habit id habit
+        await Habit.massDelete(GroupHabitID);
+
+        //delete the record of the grouphabit
+        await GroupHabit.deleteGroupHabit(GroupHabitID);
+
+        res.status(200).json("Deleted successfully!");   
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+module.exports = { createGroupHabit, editGroupHabit, joinGroupHabit, deleteGroupHabit }

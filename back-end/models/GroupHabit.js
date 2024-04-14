@@ -115,6 +115,15 @@ GroupHabitSchema.statics.joinHabit = async function(GroupHabitID, UserID) {
     }
 }
 
+//deletes a group habit
+GroupHabitSchema.statics.deleteGroupHabit = async function(GroupHabitID) {
+    try {
+        await this.deleteOne({ _id: GroupHabitID });
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 
 const GroupHabitModel = mongoose.model("GroupHabit", GroupHabitSchema);
 module.exports = GroupHabitModel;

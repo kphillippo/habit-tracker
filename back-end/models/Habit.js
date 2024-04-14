@@ -115,5 +115,15 @@ HabitSchema.statics.updateHabitsWithId = async function(GroupHabitID, Title, Mea
     }
 }
 
+//mass deletes all habits with a specific GroupHabitID
+HabitSchema.statics.massDelete = async function(GroupHabitID) {
+    try {
+        // Update all records that have an ID associated with them
+        await this.deleteMany({ GroupHabitID: { $in: GroupHabitID } });
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 const HabitModel = mongoose.model("Habit", HabitSchema);
 module.exports = HabitModel;
