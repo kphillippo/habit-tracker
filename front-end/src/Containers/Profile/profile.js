@@ -31,7 +31,6 @@ function Profile(props) {
         try {
             const response = await apiRequest("POST", "user/userProfileInfo?user_id=" + sessionStorage.getItem("userId"))
             const data = await response;
-            console.log(data)
             setFullInfo(data);
         } catch (err) {
             console.error("Failed to fetch user info:", err);
@@ -54,7 +53,8 @@ function Profile(props) {
     //Returns html for form with user information
     function generateUserProfile() {
         let penColor = "#A3A3A3";
-        let pictureDefault = <><CgProfile size={200} id="profilePictureIcon"></CgProfile></>;
+        let imgSource = sessionStorage.getItem("userPic");
+        let pictureDefault = <img src={imgSource}></img>;
         return <>
             <center>
                 <div className="profile">
@@ -135,7 +135,7 @@ function Profile(props) {
 
             <div>
                 {showViewFriendPopup !== "" && <ViewFriendPopup onClose={() => setViewFriendPopup("")} friend={showViewFriendPopup} />}
-                {showAddFriendsPopUp && <AddFriendsPopUp onClose={() => setAddFriendsShowPopUp(false)} />}
+                {showAddFriendsPopUp && <AddFriendsPopUp onClose={() => setAddFriendsShowPopUp(false)} toast={toast} />}
                 {showUpdateUserPopUp !== "" && <UpdateUserPopUp onClose={() => setUpdateUserPopUp("")} fieldToUpdate={showUpdateUserPopUp} toast={toast} refreshFunction={() => props.userinfoUpdated()}/>}
                 {showDeleteFriendPopup !== "" && <DeleteFriendPopup onClose={() => {setDeleteFriendPopup("");setFriendlistChanged(true);}} friend={showDeleteFriendPopup} toast={toast}/>}
             </div>

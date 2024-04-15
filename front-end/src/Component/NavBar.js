@@ -7,10 +7,13 @@ import { IoNotifications } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import Popup from "reactjs-popup";
 import { useNavigate } from "react-router-dom";
+import { apiRequest } from "../utils/reqTool";
 
 function NavBar({isSignedout, data}) {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
+
+    const [pictureUpdated, setPictureUpdated] = useState(false);
     
     const userInfo = data;
     // const isLogin = true;
@@ -18,6 +21,17 @@ function NavBar({isSignedout, data}) {
     // console.log(data);
     let navigate = useNavigate();
 
+    const fetchUserInfo = async () => {
+        try {
+            const response = await apiRequest("POST", "user/userProfileInfo?user_id=" + sessionStorage.getItem("userId"))
+            const data = await response;
+            sessionStorage.setItem("userPic", "http://localhost:8081/api/images/"+data.ProfilePic);
+            setPictureUpdated(true);
+        } catch (err) {
+            console.error("Failed to fetch user info:", err);
+        } 
+    };
+    fetchUserInfo();
 
     //user icon popup
     const UserMenuPopupContent = ({ close }) => (
@@ -47,7 +61,9 @@ function NavBar({isSignedout, data}) {
         <NavItem>
           Welcome back {userInfo.userName}!
           <Popup 
-            trigger={<span className="user-icon"><FaRegUserCircle size={30} color="#292d32"/></span>}
+            trigger={<span className="user-icon">
+                {sessionStorage.getItem("userPic") ? <img src={sessionStorage.getItem("userPic")} style={{width: "30px", height: "30px"}}></img> : <FaRegUserCircle size={30} color="#292d32"/> }
+                </span>}
             position="bottom center"
             on="click"
             closeOnDocumentClick

@@ -57,7 +57,6 @@ function App() {
     return response.json();
   })
   .then(function(data) {
-    console.log(data);
     let random = Math.floor(Math.random() * data.length);
     sessionStorage.setItem("quote", '"'+ data[random]["text"]+'"'+" = "+data[random]["author"].split(',')[0].trim());
   });

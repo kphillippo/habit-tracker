@@ -6,7 +6,7 @@ import PasswordChecklist from "react-password-checklist";
 import React, { useState } from "react";
 import { Icon } from 'react-icons-kit';
 import { eyeOff, eye } from 'react-icons-kit/feather';
-import {sendMail} from '../Signup/sendEmail';
+import { sendMail } from '../Signup/sendEmail';
 import Verify from "../Signup/verify";
 
 /**
@@ -63,13 +63,13 @@ function UpdateUserPopUp({ onClose, fieldToUpdate, toast, refreshFunction }) {
         toast.success(fieldToUpdate + " was updated!");
         sessionStorage.setItem(infoType, newInfo);
         refreshFunction();
+        //Close the popup
+        onClose();
       })
       .catch(err => {
         console.log(err);
         toast.error(err.error);
       })
-    //Close the popup
-    onClose();
   }
 
   //Verify email before updating
@@ -120,13 +120,14 @@ function UpdateUserPopUp({ onClose, fieldToUpdate, toast, refreshFunction }) {
         console.log(data);
         toast.success(fieldToUpdate + " was updated!");
         refreshFunction();
+        //Close the popup
+        onClose();
       })
       .catch(err => {
         console.log(err);
         toast.error(err.error);
       })
-    //Close the popup
-    onClose();
+
   }
   const handleToggle = (event) => {
     event.preventDefault();
@@ -138,17 +139,52 @@ function UpdateUserPopUp({ onClose, fieldToUpdate, toast, refreshFunction }) {
       setType('password')
     }
   };
+  //Seperate function for updating profile picture that requires file selection
+  const updatePic = (event) => {
+    const file = event.target.files[0];
+    if (!file) {
+      toast.error('No file selected.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('userId', sessionStorage.getItem("userId"));
+    formData.append('image', file);
+
+    apiRequest("POST", "images/upload", formData)
+      .then(({ token, ...data }) => {
+        console.log(data.message);
+        toast.success(fieldToUpdate + " was updated!"); 
+        sessionStorage.setItem("userPic", "http://localhost:8081/api/images/"+data.image);
+        refreshFunction(); 
+        onClose(); 
+      })
+      .catch(err => {
+        console.log(err);
+        toast.error(err.error);
+      });
+  };
+  const handleIconClick = () => {
+    document.getElementById("fileUpload").click();
+  };
   //Generates input area based on which field to update
   function generateUpdateInput() {
     if (fieldToUpdate === "Pic")
       return <>
-        <TiUpload size={45} color="black" id="done" onClick={updateFiled}></TiUpload>
+        <TiUpload size={45} color="black" id="done" onClick={handleIconClick}>
+        </TiUpload>
+        <input
+          id="fileUpload"
+          type="file"
+          style={{ display: 'none' }}
+          onChange={updatePic}
+        />
       </>
-    if(fieldToUpdate === "Email")
-    return <>
-      New {fieldToUpdate}: <input id="newValue" type="text" className="updateInput"></input>
-      <CiCircleCheck size={35} color="green" id="done" onClick={handleMail}></CiCircleCheck>
-    </>
+    if (fieldToUpdate === "Email")
+      return <>
+        New {fieldToUpdate}: <input id="newValue" type="text" className="updateInput"></input>
+        <CiCircleCheck size={35} color="green" id="done" onClick={handleMail}></CiCircleCheck>
+      </>
     if (fieldToUpdate === "Password")
       return <>
         Old {fieldToUpdate}: <input id="oldValue" type={type} className="updateInput" required></input><br></br>
@@ -201,7 +237,7 @@ function UpdateUserPopUp({ onClose, fieldToUpdate, toast, refreshFunction }) {
           <button className="popup_close" onClick={onClose}>X</button>
         </div>
       </div>
-      <Verify show={showVerify} close={() => setVerify(false)} sub={updateFiled} code ={code} email={email}/>
+      <Verify show={showVerify} close={() => setVerify(false)} sub={updateFiled} code={code} email={email} />
     </div>
   );
 }
