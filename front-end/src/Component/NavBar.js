@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {Nav, NavItem} from "reactstrap"
 import { NavLink } from "react-router-dom";
 import { IoMdFlame } from "react-icons/io";
@@ -8,12 +8,14 @@ import { FaRegUserCircle } from "react-icons/fa";
 import Popup from "reactjs-popup";
 import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../utils/reqTool";
+import NotificationPopup from './NotificationPopup'; 
 
 function NavBar({isSignedout, data}) {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
 
-    const [pictureUpdated, setPictureUpdated] = useState(false);
+    const [notiificationPopup, setNotiificationPopup] = useState(false);
+    const [numNotifications, setNumNotifications] = useState(0);
     
     const userInfo = data;
     // const isLogin = true;
@@ -26,12 +28,21 @@ function NavBar({isSignedout, data}) {
             const response = await apiRequest("POST", "user/userProfileInfo?user_id=" + sessionStorage.getItem("userId"))
             const data = await response;
             sessionStorage.setItem("userPic", "http://localhost:8081/api/images/"+data.ProfilePic);
-            setPictureUpdated(true);
         } catch (err) {
             console.error("Failed to fetch user info:", err);
         } 
+        try {
+            const userdata = {
+                User: sessionStorage.getItem("userId")
+            }
+            const response = await apiRequest("POST", "notifications/numOfNotifications", userdata)
+            const data = await response;
+            setNumNotifications(data)
+        } catch (err) {
+            console.error("Failed to get notification number:", err);
+        }
     };
-    fetchUserInfo();
+   if(sessionStorage.getItem("userToken")) fetchUserInfo();
 
     //user icon popup
     const UserMenuPopupContent = ({ close }) => (
@@ -62,7 +73,7 @@ function NavBar({isSignedout, data}) {
           Welcome back {userInfo.userName}!
           <Popup 
             trigger={<span className="user-icon">
-                {sessionStorage.getItem("userPic") ? <img src={sessionStorage.getItem("userPic")} style={{width: "30px", height: "30px"}}></img> : <FaRegUserCircle size={30} color="#292d32"/> }
+                {sessionStorage.getItem("userPic") ? <img src={sessionStorage.getItem("userPic")} style={{width: "30px", height: "30px"}} alt="profile picture"></img> : <FaRegUserCircle size={30} color="#292d32"/> }
                 </span>}
             position="bottom center"
             on="click"
@@ -75,43 +86,12 @@ function NavBar({isSignedout, data}) {
         </NavItem>
       );
 
-      //notification popup
-
-      const NotificationPopupContent = ({ close }) => (
-        <div className="notification-popup">
-            <Nav>
-            <NavItem><NavLink className='nav-link' activeclassname='active' to="/profile">Profile</NavLink></NavItem>
-                <NavItem><NavLink className='nav-link' activeclassname='active' to="/setting">Settings</NavLink></NavItem>
-                
-                <NavItem><NavLink  className='nav-link' activeclassname='active'
-                onClick={() => {
-                    // Implement your log-out logic here
-                        console.log('Logging out...');
-                        sessionStorage.clear()
-                        navigate('/home');
-                        close();
-                        }}
-                >Sign-out</NavLink></NavItem>
-                
-            </Nav>
-          
-        </div>
-      );
 
       const NotificationIconWithPopup = ({ userInfo }) => (
         <NavItem>
-            <Popup 
-                trigger={<span className="notification-icon"><IoNotifications size={30} color="#4e5445"></IoNotifications></span>}
-                position="bottom left"
-                on="click"
-                closeOnDocumentClick
-                mouseLeaveDelay={300}
-                arrow={false}
-            >
-                {close => <NotificationPopupContent close={close} />}
-            </Popup>
-            
-            <span>0</span>
+             <span className="notification-icon" onClick={() => setNotiificationPopup(true)}><IoNotifications size={30} color="#4e5445"></IoNotifications></span>
+            {notiificationPopup && <NotificationPopup onClose={() => setNotiificationPopup(false)}  ></NotificationPopup>}
+            <span>{numNotifications}</span>
         </NavItem>
       );
     
