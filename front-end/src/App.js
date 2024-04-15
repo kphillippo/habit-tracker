@@ -52,7 +52,14 @@ function App() {
 
   }, [isUpdated])
 
-
+  fetch("https://type.fit/api/quotes")
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    let random = Math.floor(Math.random() * data.length);
+    sessionStorage.setItem("quote", '"'+ data[random]["text"]+'"'+" = "+data[random]["author"].split(',')[0].trim());
+  });
 
   return (
     <Router basename={process.env.PUBLIC_URL}>

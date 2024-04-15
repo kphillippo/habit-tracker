@@ -42,8 +42,6 @@ const Signin = ({ isSignedin, toast }) =>{
                 console.log(err);
                 toast.error(err.error);
             })
-            
-        console.log('Login with:', username, password);
     };
 
     const handleToggle = () => {
@@ -60,7 +58,7 @@ const Signin = ({ isSignedin, toast }) =>{
         <div className={'LoginForm'}>
             <div className={'Top'}>
                 <h1>Welcome to HabitConnect!!</h1>
-                <p>"I am a random quote everyday to give you motivation." = Person McPerson</p>
+                <p>{sessionStorage.getItem("quote")}</p>
             </div>
             <div className={'wrapper'}>
                 <form onSubmit={handleSubmit} >
