@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import NewToDoPopup from "./NewTodoPopup";
 import HabitManager from "./HabitManager";
 import {apiRequest} from "../../utils/reqTool"
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function Dailies(props){
   
@@ -25,6 +28,7 @@ function Dailies(props){
   const[todos, setTodos] = useState();
   const toast = props.toast;
   const [userToken, setUserToken] = useState(props.user.userToken);
+  const [date, setDate] = useState(formatDate(new Date()))
 
   //check if the user is signed in
   function isSignIn(){
@@ -63,7 +67,7 @@ function getHabits(){
     //     console.log(err);
     //     toast.error(err.error);
     // })
-    apiRequest("GET", `habit/getHabitsCompletedOnDate?user_id=${sessionStorage.getItem("userId")}&date=${formatDate(new Date())}`)
+    apiRequest("GET", `habit/getHabitsCompletedOnDate?user_id=${sessionStorage.getItem("userId")}&date=${date}`)
     .then(res => {
       setHabits(res);
   })
@@ -121,7 +125,7 @@ useEffect(() => {
                     <div id = "div1">
                     <table id = "table1">
                       <tr>
-                      <td width = "50%">Habit</td>
+                      <td width = "50%">Habit <DatePicker selected={new Date(date)} onChange={(newDate) => setDate(formatDate(newDate))} /></td>
                       <td width = "22.5%">Streak</td>
                       <td width = "22.5%">Goal</td>
                       <td width = "5%"><button onClick={() => setHabitManager(true)} className = "btn_cog"><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
