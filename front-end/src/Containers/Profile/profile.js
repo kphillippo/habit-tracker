@@ -65,34 +65,36 @@ function Profile(props) {
                 <div className="profile">
                     <div className="profilePic" onClick={() => setUpdateUserPopUp("Pic")}>
                         {pictureDefault}
+                        <div class = "editprofile">
                         Edit profile <br></br> picture
+                        </div>
                     </div>
                     <table className="profileInfo">
                         <tbody>
-                            <tr key={"FirstName"} onClick={() => setUpdateUserPopUp("FirstName")}>
+                            <tr key={"FirstName"} onClick={() => setViewFriendPopup(true)}>
                                 <td>FirstName:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userFirstName")}</td>
-                                <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                                <td><FaPencil size="2vw" color={penColor} id="pen"></FaPencil></td>
                             </tr>
                             <tr key={"LastName"} onClick={() => setUpdateUserPopUp("LastName")}>
                                 <td>LastName:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userLastName")}</td>
-                                <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                                <td><FaPencil size="2vw" color={penColor} id="pen"></FaPencil></td>
                             </tr>
                             <tr key={"Email"} onClick={() => setUpdateUserPopUp("Email")}>
                                 <td>Email:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userEmail")}</td>
-                                <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                                <td><FaPencil size="2vw" color={penColor} id="pen"></FaPencil></td>
                             </tr>
                             <tr key={"Username"} onClick={() => setUpdateUserPopUp("Username")}>
                                 <td>Username:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userName")}</td>
-                                <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                                <td><FaPencil size="2vw" color={penColor} id="pen"></FaPencil></td>
                             </tr>
                             <tr key={"Password"} onClick={() => setUpdateUserPopUp("Password")}>
                                 <td>Password:</td>
                                 <td>&nbsp;&nbsp;**********</td>
-                                <td><FaPencil size={25} color={penColor} id="pen"></FaPencil></td>
+                                <td><FaPencil size="2vw" color={penColor} id="pen"></FaPencil></td>
                             </tr>
                         </tbody>
                     </table>
@@ -121,7 +123,7 @@ function Profile(props) {
             <center>
                 <div className="friendsForm">
                     <div className="myFriendsTitle">My Friends</div>
-                    <button className="addFriendsButton" onClick={() => setAddFriendsShowPopUp(true)}>Add Friends +</button>
+                    <button className="addFriendsButton" onClick={() => setDeleteFriendPopup(true)}>Add Friends +</button>
                     <table className="friendsList">
                         <tbody>
                             {friendsList}
@@ -134,9 +136,9 @@ function Profile(props) {
 
     return (
         <div className="main-container">
-
-            {userInfo.userToken && generateUserProfile()}
-            {userInfo.userToken && generateFriendsList()}
+            {/* userInfo.userToken &&  */}
+            {generateUserProfile()}
+            {generateFriendsList()}
 
             <div>
                 {showViewFriendPopup !== "" && <ViewFriendPopup onClose={() => setViewFriendPopup("")} friend={showViewFriendPopup} />}

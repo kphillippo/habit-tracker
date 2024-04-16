@@ -27,7 +27,7 @@ function AddFriendsPopUp({ onClose, toast }) {
   }
   return (
     <div className="bg_blur">
-      <div style={{ height: '22%' }} className="mainFrame">
+      <div style={{ height: '40%' }} className="mainFrame">
         <div className="innerFrame">
           <center><div className="Title"> 
             Add Friends 
