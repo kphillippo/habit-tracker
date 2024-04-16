@@ -13,14 +13,18 @@
 }
 .profilePic{
     width: 25%;
+    height: 25%;
     margin-right: 55px;
     color: grey;
 }
 .profilePic:hover{
     cursor: pointer;
 }
+.editprofile{
+    font-size: 2vw;
+}
 .profileInfo{
-    font-size: 200%;
+    font-size: 2.6vw;
     width: 100%;
 }
 .profileInfo td{
@@ -34,13 +38,15 @@
     background: rgba(226, 233, 214, 1);
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
     border-radius: 15px;
-    width: 90%;
+    width: 90vw;
     margin-top: 5%;
-    font-size: 200%;
     padding: 0.8%;
 }
 .myFriendsTitle{
+    position:relative;
+    top:1.25vh;
     float: left;
+    font-size: 3vw;
 }
 .addFriendsButton{
     float: right;
@@ -49,7 +55,9 @@
     border-radius: 15px;
     padding: 0.5%;
     color: white;
-    font-size: 90%;
+    font-size: 2vw;
+    width: 17vw;
+    height: 10vh;
 }
 .friendsList{
     margin-top: 5%;
@@ -98,4 +106,7 @@
     .friendsList{
         width:685px;
     }
+}
+img{
+    width: 120%;
 }

@@ -3,10 +3,20 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const Habit = require('../models/Habit');
 
 //controller functions go here
+/**
+ * Updates or creates a new habit check-in.
+ * @async
+ * @function UpdateHabitCheckIn
+ * @param {Object} req.body - The request body.
+ * @param {string} req.body.HabitID - The ID of the habit.
+ * @param {number} req.body.Count - The count of the habit check-in.
+ * @returns {Promise<void>} - Sends a response containing the check-in json or error message.
+ */
 const UpdateHabitCheckIn = async (req, res) => {
     const {HabitID, Count} = req.body;
     let Parent = HabitID;
     Parent = new ObjectId(Parent);
+    console.log(Parent)
     try {
         const habit = await Habit.findOne({_id: Parent});
         if (!habit) {
@@ -33,6 +43,14 @@ const UpdateHabitCheckIn = async (req, res) => {
     }
 }
 
+/**
+ * Gets all check-ins for a habit.
+ * @async
+ * @function GetHabitCheckIns
+ * @param {Object} req.query - The request query.
+ * @param {string} req.query.habit_id - The ID of the habit.
+ * @returns {Promise<void>} - Sends a response containing check-in json or error message.
+ */
 const GetHabitCheckIns = async (req, res) => {
     console.log(req.query)
     let Parent = req.query.habit_id;
@@ -56,4 +74,30 @@ const GetHabitCheckIns = async (req, res) => {
     }
 }
 
-module.exports = { UpdateHabitCheckIn, GetHabitCheckIns };
+/**
+ * Gets a habit check-in by date.
+ * @async
+ * @function GetCheckInByDate
+ * @param {Object} req.query - The request query.
+ * @param {string} req.query.habit_id - The ID of the habit.
+ * @param {string} req.query.date - The date of the check-in.
+ * @returns {Promise<void>} - Sends a response containing check-in's matching that date, or an error message.
+ */
+const GetCheckInByDate = async (req, res) => {
+    let Parent = req.query.habit_id;
+    let Date = req.query.date;
+    Parent = new ObjectId(Parent);
+    try {
+        let habit = Habit.findOne({_id: Parent});
+        if (!habit) {
+            throw new Error('Habit doesn\'t exist!');
+        }
+        let habitCheckIns = await HabitCheckIn.findForDate(Parent, Date);
+        return res.status(200).json(habitCheckIns);
+    } catch (error) {
+        console.log(error.message)
+        res.status(400).json({error: error.message});
+    }
+}
+
+module.exports = { UpdateHabitCheckIn, GetHabitCheckIns, GetCheckInByDate };

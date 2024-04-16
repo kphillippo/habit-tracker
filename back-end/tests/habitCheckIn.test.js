@@ -14,6 +14,7 @@ const { app } = require('../index'); // Import your express app instance
 const User = require('../models/User'); // Import your schema
 const Habit = require('../models/Habit'); // Import your schema
 const HabitCheckIn = require('../models/HabitCheckIn'); // Import your schema
+const ObjectId = require('mongoose').Types.ObjectId;
 
 // MongoDB connection string
 const serverLink = `mongodb+srv://${process.env.DBUSER}:${process.env.PASSWORD}@cluster.rbzvfkr.mongodb.net/Habit_Tracker`;
@@ -28,7 +29,7 @@ beforeAll(async () => {
 
 // Disconnect from the MongoDB database after running tests
 afterAll(async () => {
-  await Habit.findByIdAndDelete(habit._id);
+  await Habit.findByIdAndDelete(new ObjectId(habit._id));
   await mongoose.connection.close();
 });
 
@@ -37,14 +38,25 @@ describe('Habit Check In API', () => {
     const res = await request(app)
       .post('/api/habitCheckIn/updateHabitCheckIn')
       .send({ HabitID: habit._id, Count: 5 });
-    await HabitCheckIn.findOneAndDelete({HabitID: habit._id, Count: 5});
+    await HabitCheckIn.findOneAndDelete({HabitID: new ObjectId(habit._id), Count: 5});
     expect(res.statusCode).toBe(200);
   });
-  test('Successfully create and update a habit check in', async () => {
+  test('Successfully update a check in that has already been created', async () => {
     const res = await request(app)
       .post('/api/habitCheckIn/updateHabitCheckIn')
       .send({ HabitID: habit._id, Count: 5 });
-    await HabitCheckIn.findOneAndDelete({HabitID: habit._id, Count: 5});
-    expect(res.statusCode).toBe(200);
+    const res2 = await request(app)
+      .post('/api/habitCheckIn/updateHabitCheckIn')
+      .send({ HabitID: habit._id, Count: 10 });
+    await HabitCheckIn.findOneAndDelete({HabitID: new ObjectId(habit._id), Count: 10});
+    expect(res2.statusCode).toBe(200);
+  });
+  test('Check that LastCheckIn is updated in Habit model', async () => {
+    const res = await request(app)
+        .post('/api/habitCheckIn/updateHabitCheckIn')
+        .send({ HabitID: habit._id, Count: 5 });
+    await HabitCheckIn.findOneAndDelete({HabitID: habit._id});
+    const habit2 = await Habit.findById(habit._id);
+    expect(habit2.LastCheckIn).not.toBe(undefined);
   });
 });

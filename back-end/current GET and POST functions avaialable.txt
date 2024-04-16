@@ -12,6 +12,10 @@ Get a user's habits     http://localhost:8081/api/habit/getHabits?user_id={userI
 Update a habit          http://localhost:8081/api/habit/updateHabit
 Add new habit           http://localhost:8081/api/habit/createHabit
 
+HabitCheckIn:
+Get a habit's check-ins http://localhost:8081/api/habitCheckIn/getHabitCheckIns?habit_id={habitId}
+Update a check-in       http://localhost:8081/api/habitCheckIn/updateHabitCheckIn
+
 Todos:
 Get a user's todos      http://localhost:8081/api/todo/getTodos?user_id={userId}
 Update a todo           http://localhost:8081/api/todo/updateTodo

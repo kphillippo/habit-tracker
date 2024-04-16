@@ -11,6 +11,9 @@ import HabitManager from "./HabitManager";
 import {apiRequest} from "../../utils/reqTool"
 
 function Dailies(props){
+  
+  //functional component
+  //class component
 
   let navigate = useNavigate()
 
@@ -37,17 +40,37 @@ function Dailies(props){
     setUpdateTrigger(currentValue => currentValue + 1);
   };
 
+  //convert the format of date
+  function formatDate(date) {
+    let year = date.getFullYear(); // Gets the year (4 digits)
+    let month = date.getMonth() + 1; // getMonth() returns 0-11, so add 1 to get 1-12
+    let day = date.getDate(); // Gets the day of the month (1-31)
+  
+    // Add leading zero to month and day if necessary
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+  
+    return `${year}-${month}-${day}`;
+  }
+
 //get habits list from backend
 function getHabits(){
-    apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
+    // apiRequest("GET", `habit/getHabits?user_id=${sessionStorage.getItem("userId")}`)
+    // .then(res => {
+    //     setHabits(res);
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    //     toast.error(err.error);
+    // })
+    apiRequest("GET", `habit/getHabitsCompletedOnDate?user_id=${sessionStorage.getItem("userId")}&date=${formatDate(new Date())}`)
     .then(res => {
-        console.log(res);
-        setHabits(res);
-    })
-    .catch(err => {
-        console.log(err);
-        toast.error(err.error);
-    })
+      setHabits(res);
+  })
+  .catch(err => {
+      console.log(err);
+      toast.error(err.error);
+  })
 }
 
 //get todo list from backend
@@ -55,7 +78,7 @@ function getTodos(){
   console.log("get todos in the front-end")
     apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
     .then(res => {
-        console.log(res);
+        
         setTodos(res);
     })
     .catch(err => {
@@ -65,11 +88,11 @@ function getTodos(){
 }
 
 function createTodo(data){
-        console.log(data)
+        
         data.Date = new Date(data.Date);
         apiRequest("POST", "todo/createTodo", data)
         .then(({token, ...data}) => {
-            console.log(data);
+            
             toast.success("create a new todo!")
             triggerDataRefresh()
         })

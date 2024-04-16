@@ -34,15 +34,17 @@
 }
 
 #div1{
-  border-radius: 15.02px;
+  border-radius: 15.07px;
   background-color: #92B27A;
   border: 0.5px solid var(--color-black);
   height:6vh; 
-  width:47.182291666vw;
+  width:100%;
   padding-top:0;
   margin:0;
 }
 #table1{
+  position: absolute;
+  left: 1%;
   font-size: 1.9vw;
   line-height:5vh;
 }
