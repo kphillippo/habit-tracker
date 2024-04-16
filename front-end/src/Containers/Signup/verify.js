@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { render } from 'react-dom'; // Import the render function
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {AutoTabProvider} from 'react-auto-tab'
 
 
 function Verify(props){
@@ -57,54 +58,53 @@ function Verify(props){
             </Modal.Header>
                 <Modal.Body >
                     <div className='v-wrapper'> 
-                        <form>
-                            <div className={"flex-container"}>
-                                <div className={'flexInput'}>
-                                    <input type={"text"} 
-                                        maxlength="1"
-                                        oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                                        value={Imp1} 
-                                        onChange={e => setInp1(e.target.value)}
-                                        required
-                                    />
-                                </div>
+                        <AutoTabProvider className={"flex-container"}>
+                            <input className={'flexInput'} type={"text"} 
+                                maxLength={1}
+                                oninput="this.value=this.value.replace(/[^0-9]/g,'');" 
+                                value={Imp1} 
+                                onChange={e => setInp1(e.target.value)}
+                                onFocus={e => e.target.select()}
+                                tabbable 
+                            required/>
 
-                                <div className={'flexInput'}>
-                                    <input type={"text"} 
+                                <input className={'flexInput'} type={"text"} 
                                         maxLength={1}
                                         oninput="this.value=this.value.replace(/[^0-9]/g,'');" 
                                         value={Imp2} 
-                                        onChange={e => setInp2(e.target.value)} required/>
-                                </div>
+                                        onChange={e => setInp2(e.target.value)}
+                                        onFocus={e => e.target.select()}
+                                        tabbable 
+                                        required/>
 
-                                <div className={'flexInput'}>
-                                    <input type={"text"}
+                                <input className={'flexInput'} type={"text"}
                                         maxLength={1}
                                         oninput="this.value=this.value.replace(/[^0-9]/g,'');" 
                                         value={Imp3} 
                                         onChange={e => setInp3(e.target.value)}
+                                        onFocus={e => e.target.select()}
+                                        tabbable
                                     required/>
-                                </div>
-                                <div className={'flexInput'}>
-                                    <input type={"text"} 
+                                
+                                <input className={'flexInput'} type={"text"} 
                                         maxLength={1}
                                         oninput="this.value=this.value.replace(/[^0-9]/g,'');" 
                                         value={Imp4} 
                                         onChange={e => setInp4(e.target.value)}
+                                        onFocus={e => e.target.select()}
+                                        tabbable
                                     required/>
-                                </div>
 
-                                <div className={'flexInput'}>
-                                    <input type={"text"} 
-                                        maxLength={1}
-                                        oninput="this.value=this.value.replace(/[^0-9]/g,'');" 
-                                        value={Imp5} 
-                                        onChange={e => setInp5(e.target.value)}
-                                    required/>
-                                </div>
-                            </div>
+                                <input className={'flexInput'} type={"text"} 
+                                    maxLength={1}
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" 
+                                    value={Imp5} 
+                                    onChange={e => setInp5(e.target.value)}
+                                    onFocus={e => e.target.select()}
+                                    tabbable
+                                required/>
 
-                        </form>
+                        </AutoTabProvider>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
