@@ -17,7 +17,6 @@ function Verify(props){
     
     const verif =(event) =>{
         //event.preventDefault();
-        console.log("Code sent to verify.js is", props.code);
         props.close();
         
         var i;

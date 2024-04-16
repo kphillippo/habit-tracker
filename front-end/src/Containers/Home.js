@@ -8,8 +8,6 @@ import { GoGoal } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 
 function Home(props) {
-    // console.log("Home page props:");
-    // console.log(props);
     const userStatus = props.data.userToken;
     const streakActive = false;
     let currentStreak = props.data.userStreak;
@@ -34,13 +32,7 @@ function Home(props) {
     //Generates random motivational quote 
     //Returns html with quote
     function generateQuote() {
-        let quoteList = [
-            <><div>"The only way to do great work is to love what you do." - Steve Jobs</div></>,
-            <><div>"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt</div></>,
-            <><div>"It does not matter how slowly you go as long as you do not stop." - Confucius</div></>,
-            <><div>"What you get by achieving your goals is not as important as what you become by achieving your goals." - Zig Ziglar</div></>,
-        ];
-        return quoteList[Math.floor(Math.random() * quoteList.length)];
+        return sessionStorage.getItem("quote");
     }
 
     //Handles navigation to other pages
@@ -135,6 +127,7 @@ function Home(props) {
             <div className="message">
             {generateMessage()}
             {generateQuote()}
+            <div id="quote"></div>
             </div>
             <div className="windowGallery">
                 <div className="windowLine">
