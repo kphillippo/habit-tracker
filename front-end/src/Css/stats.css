@@ -1,5 +1,6 @@
 .parent{
     font-family: 'Kotta One', serif;
+    overflow-y: scroll;
 }
 
 .my-stats{
@@ -9,45 +10,175 @@
     height: 30.75vw;
     left: 5vw;
     top: 114px;
-    background: #E2E9D6;
-    box-shadow: 0px 1px 1px 2.5px rgba(0, 0, 0, 0.25);
-    border-radius: 0.5vw;
+    border-radius: 0.6vw;
+    background-color: #E2E9D6;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+    border-width: 0.0001vw;
+    border-style: solid;
+    border: black;
+}
+
+.left{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+.stats_text{
+    position: absolute;
+    top:17.8%;
+    left:10%;
+    width: 80%;
+    text-align: center;
+}
+.stats_title{
+    font-size: 3vw;
+    font-weight: 500;
+}
+.stats_quote{
+    position:absolute;
+    top:175%;
+    font-size: 2.5vw;
+    font-weight: 500;
 }
 
 .quick-insights{
     box-sizing: border-box;
     position: absolute;
-    width: 51.5vw;
-    height: 27vw;
-    left: 38vw;
-    top: 1.75vw;
+    width: 48%;
+    height: 90%;
+    left: 50%;
+    top:5%;
     background: #C4D3AB;
     border: 0.5px solid;
     border-radius: 5px;
     box-shadow: 0vw 1.5px 0.5px 0.5px rgba(0, 0, 0, 0.25);
-}
-
-.my-stats h1{
-    margin-top: 36px;
-    margin-bottom: 0.5rem;
-    font-weight: 400;
-    line-height: 1.2;
-    color: #000000;
-}
-
-.quick-insights .wrapper h1{
-    position: absolute;
-    width: 296.75vw;
-    height: 39vw;
-    left: 550.75vw;
-    top: 148.25vw;
-
-    font-family: 'Kotta One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 75vw;
-    line-height: 39vw;
     text-align: center;
+}
 
-    color: #000000;
-} 
+.quick_title{
+    position: absolute;
+    top:13%;
+    left: 23%;
+    font-size: 3vw;
+    font-weight: 500;
+}
+
+.quick_inner{
+    position:absolute;
+    top:30%;
+    left:15%;
+    font-size: 2vw;
+    font-weight: 500;
+    text-align: left;
+}
+
+.my_analytics{
+    position: absolute;
+    top:100vh;
+    width:100vw;
+}
+.analytics_title{
+    text-align: center;
+    font-size: 3vw;
+    font-weight: 500;
+}
+.graphs{
+    position: absolute;
+    top: 130%;
+    width: 100%;
+    height:300vh;
+}
+
+.graph1{
+    position: absolute;
+    left:10%;
+    width: 40%;
+    height: 30.75vw;
+    border-bottom:0.01vh solid #000;
+    border-right:0.01vh solid #000;
+}
+
+.graph1_title{
+    font-size: 3vw;
+    font-weight: 500;
+}
+
+.graph2{
+    position:absolute;
+    left:50%;
+    top:0%;
+    width: 40%;
+    height: 30.75vw;
+    border-bottom:0.01vh solid #000;
+    border-left:0.01vh solid #000;
+}
+.graph2_title{
+    font-size: 3vw;
+    font-weight: 500;
+}
+.graph3{
+    position:absolute;
+    top:23.8%;
+    left:10%;
+    width: 40%;
+    height: 30.75vw;
+    border-bottom:0.01vh solid #000;
+    border-right:0.01vh solid #000;
+}
+.graph3_title{
+    font-size: 3vw;
+    font-weight: 500;
+}
+.graph4{
+    position:absolute;
+    top:23.8%;
+    left:50%;
+    width: 40%;
+    height: 30.75vw;
+    border-bottom:0.01vh solid #000;
+    border-left:0.01vh solid #000;
+}
+.graph4_title{
+    font-size: 3vw;
+    font-weight: 500;
+}
+.graph5{
+    position:absolute;
+    top:47.6%;
+    left:10%;
+    width: 40%;
+    height: 30.75vw;
+    border-bottom:0.01vh solid #000;
+    border-right:0.01vh solid #000;
+}
+.graph5_title{
+    font-size: 3vw;
+    font-weight: 500;
+}
+.graph6{
+    position:absolute;
+    top:47.6%;
+    left:50%;
+    width: 40%;
+    height: 30.75vw;
+    border-bottom:0.01vh solid #000;
+    border-left:0.01vh solid #000;
+}
+.graph6_title{
+    font-size: 3vw;
+    font-weight: 500;
+}
+.graph7{
+    position: absolute;
+    top:71.4%;
+    left:30%;
+    width:40%;
+    height: 30.75vw;
+}
+.graph7_title{
+    font-size: 3vw;
+    font-weight: 500;
+}
+
+
+

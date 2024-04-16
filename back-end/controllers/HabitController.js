@@ -1,4 +1,5 @@
 const Habit = require('../models/Habit');
+const GroupHabit = require('../models/GroupHabit');
 const ObjectId = require('mongoose').Types.ObjectId;
 const getHabits = async (req, res) => {
     try {
@@ -35,15 +36,43 @@ const updateHabit = async (req, res) => {
     }
 }
 
+//delete a habit
 const deleteHabit = async (req, res) => {
-    const {user_id, habit_id} = req.query;
+    const { user_id, habit_id } = req.query;
     try {
-        const Habit_id = new ObjectId(habit_id);
+        //convert user_id and habit_id to ObjectId
         const User_id = new ObjectId(user_id);
-        const habit = await Habit.deleteHabit(Habit_id, User_id);
-        res.status(200).json(habit);
+        const Habit_id = new ObjectId(habit_id);
+
+        //get the habit by its ID
+        const habit = await Habit.findById(Habit_id);
+
+        //check if the habit is a group habit
+        if (habit.GroupHabitID) {
+            //get the group habit
+            const groupHabit = await GroupHabit.findById(habit.GroupHabitID);
+
+            if (groupHabit.Owner.equals(User_id)) {
+                //delete the habit for everyone who has the group habit ID
+                await Habit.massDelete(habit.GroupHabitID);
+
+                //delete the record of the group habit
+                await GroupHabit.deleteGroupHabit(habit.GroupHabitID);
+            } else {
+                //remove the user from the group habit arrays
+                await GroupHabit.removeUser(user_id, habit.GroupHabitID);
+
+                //delete the habit for the user
+                await Habit.deleteHabit(Habit_id, User_id);
+            }
+        } else {
+            //delete the habit for the user
+            await Habit.deleteHabit(Habit_id, User_id);
+        }
+
+        res.status(200).json({ message: 'Habit deleted successfully' });
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json({ error: error.message });
     }
 }
 
