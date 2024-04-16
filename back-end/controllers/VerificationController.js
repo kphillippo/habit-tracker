@@ -29,7 +29,7 @@ exports.sendEmail = async (req, res) => {
       from: email, // Sender address
       to: to, // List of recipients
       subject: subject, // Subject line
-      text: text // Plain text body
+      html: text // Plain text body
       // You can also include HTML content by adding: html: '<b>Hello world?</b>'
     });
 

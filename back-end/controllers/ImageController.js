@@ -51,7 +51,7 @@ exports.getImage = async (req, res) => {
         return res.status(404).send('Image not found');
       }
       // Construct absolute path to the image file
-      const imagePath = path.resolve(image.path);
+      const imagePath = path.resolve(image.path).replace(/\\/g, '/');
       res.set('Content-Type', 'image/jpeg');
       res.sendFile(imagePath);
     } catch (error) {
