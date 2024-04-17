@@ -24,6 +24,7 @@ const Signup = ({isSignedin, toast}) => {
     const [type, setType] = useState('password');
     const [icon, setIcon] = useState(eyeOff);
     const [code, setCode] = useState('');
+    const [showthing, setShowThing] = useState('none');
     
     let navigate = useNavigate();
 
@@ -75,6 +76,7 @@ const Signup = ({isSignedin, toast}) => {
         event.preventDefault();
         if(password != passwordAgain){
             toast.error("Passwords do not match");
+            setShowThing('block');
         }else{
             const inf = getCode();
             setVerify(true);
@@ -159,6 +161,10 @@ const Signup = ({isSignedin, toast}) => {
                                                                     name={"password"}
                                                                     value={password}
                                                                     onChange={e => setPassword(e.target.value)}
+                                                                    onFocus={e => {
+                                                                        if(showthing == "block")
+                                                                            setShowThing('none')
+                                                                    }}
                                                                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,16}$"
                                                                     required/>
                         <div className='Icon'> 
@@ -172,6 +178,10 @@ const Signup = ({isSignedin, toast}) => {
                                                                     name={"passwordAgain"}
                                                                     value={passwordAgain}
                                                                     onChange={e => setPasswordAgain(e.target.value)}
+                                                                    onFocus={e => {
+                                                                        if(showthing == "block")
+                                                                            setShowThing('none')
+                                                                    }}
                                                                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,16}$"
                                                                     required/>
                         <div className='Icon'> 
@@ -181,17 +191,18 @@ const Signup = ({isSignedin, toast}) => {
 
                     <button className={"btn"} onClick={handleMail} >Create Account</button>
                 </form>
-                <div className="CheckList">
-                    <PasswordChecklist
-                        rules={["minLength","specialChar","number","capital","lowercase", "match"]}
-                        minLength={8}
-                        value={password}
-                        valueAgain={passwordAgain}
-                    />
-                </div>
+                
                 <Verify show={showVerify} close={() => setVerify(false)} sub={handleSubmit} code ={code} email={email}/>
             </div>
-
+            <div>
+            <PasswordChecklist
+                    style={{display:showthing}}
+                    rules={["minLength","specialChar","number","capital","lowercase", "match"]}
+                    minLength={8}
+                    value={password}
+                    valueAgain={passwordAgain}
+                />
+            </div>                                                         
         </div>
     );
 }
