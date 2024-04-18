@@ -58,7 +58,7 @@ export default class TodoItem extends Component {
         apiRequest("POST", `todo/updateTodo`, data)
         .then(() => {
             this.props.isUpdated()
-            this.props.toast.success("The todo is updated!")
+            this.props.toast.success("The to do is updated!")
         })
         .catch(err => {
             console.log(err);
@@ -71,7 +71,7 @@ export default class TodoItem extends Component {
             apiRequest("DELETE", `todo/deleteTodo?user_id=${this.state.UserId}&todo_id=${this.state.ToDoId}`)
                 .then(() => {
                     this.props.isUpdated()
-                    this.props.toast.success("The todo is deleted!")
+                    this.props.toast.success("The to do is deleted!")
                 })
                 .catch(err => {
                     console.log(err);

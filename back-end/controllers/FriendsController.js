@@ -61,7 +61,7 @@ const sendFriendRequest = async (req, res) => {
 
             const emailInfo = {
                 to: friendsEmail,
-                subject: "Habbit Connect - " + friendname + " you have recieved a friend request!",
+                subject: "HabitConnect: Friend Request Received",
                 text: message
             }
             await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
@@ -194,7 +194,7 @@ const acceptFriendRequest = async (req, res) => {
 
             const emailInfo = {
                 to: friendsEmail,
-                subject: "Habbit Connect - " + friendname + " Friend Request Accepted",
+                subject: "HabitConnect: Friend Request Accepted",
                 text: message
             }
             await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);

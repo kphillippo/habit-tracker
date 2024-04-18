@@ -37,7 +37,7 @@ const {Username, Password} = req.body
 
     //message variables
     const habitTitle = "You Have Habits To Do"
-    const todoTitle = "You Have ToDos To Do"
+    const todoTitle = "You Have To Dos To Do"
 
     //changes wording of message if there is only one habit to be not plural
     let habitMessage;
@@ -50,9 +50,9 @@ const {Username, Password} = req.body
     //changes wording of message if there is only one todo to be not plural
     let todoMessage;
     if(numTodosLeft === 1){
-      todoMessage = "You have " + numTodosLeft + " todo left to do today!"
+      todoMessage = "You have " + numTodosLeft + " to do left to do today!"
     }else{
-      todoMessage = "You have " + numTodosLeft + " todos left to do today!"
+      todoMessage = "You have " + numTodosLeft + " to dos left to do today!"
     }
 
     //checks if ther user already has a notification for todos and habits
@@ -223,7 +223,7 @@ const updateUserInfo = async (req, res) => {
 
       const emailInfo = {
         to: userEmail,
-        subject: "Habbit Connect - " + username + " your username was changed!",
+        subject: "HabitConnect: Username Changed",
         text: message
       }
       await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
@@ -272,7 +272,7 @@ const updatePassword = async (req, res) => {
 
       const emailInfo = {
         to: userEmail,
-        subject: "Habbit Connect - " + username + " your password was changed!",
+        subject: "HabitConnect: Password Changed",
         text: message
       }
       await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);

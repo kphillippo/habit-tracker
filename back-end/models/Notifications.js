@@ -26,9 +26,9 @@ const NotificationsSchema = new mongoose.Schema({
 //finds all notifications requests to a particualr user
 NotificationsSchema.statics.findNotifications = async function(User) {
 
-    //get notifications of with title todo and habbit
+    //get notifications of with title todo and habit
     const habits = { User: User, Name: "You Have Habits to do today!", Viewed: false };
-    const todos = { User: User, Name: "You Have ToDos to do today!", Viewed: false };
+    const todos = { User: User, Name: "You Have To Dos to do today!", Viewed: false };
 
     //updates the todo and habit notifications to be viewed after checking notifiations
     const update = { $set: { Viewed: true} };

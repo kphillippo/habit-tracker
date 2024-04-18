@@ -90,7 +90,7 @@ function Settings(){
                     <div class = "check1"><input type = "checkbox" class = "email_noti_check"></input></div>
                     </div>
                     <div class = "part2">
-                    <div class = "todo_reminders">Todo Reminders:</div>
+                    <div class = "todo_reminders">To Do Reminders:</div>
                     <div class = "check2"><input type = "checkbox" class = "email_noti_check"></input></div>
                     </div>
                     <div class = "part3">
