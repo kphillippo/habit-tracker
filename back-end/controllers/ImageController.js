@@ -37,7 +37,7 @@ exports.uploadImage = async (req, res) => {
     user.ProfilePicture = image._id;
     await user.save();
 
-    res.status(201).json({ message: 'Image uploaded successfully' });
+    res.status(201).json({ message: 'Image uploaded successfully' , image: image._id});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to upload image' });
