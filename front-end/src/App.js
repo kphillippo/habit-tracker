@@ -12,6 +12,7 @@ import Challenges from "./Containers/Challenges/Challenges.js"
 import Leaderboard from "./Containers/Leaderboard/Leaderboard.js"
 import Dailies from "./Containers/Dailies/Dailies.js"
 import Settings from './Containers/Settings/Settings.js';
+import Forgot from './Containers/Signin/Forgot.js';
 import {apiRequest }from './utils/reqTool.js';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -76,6 +77,7 @@ function App() {
           <Route path="/signin" element={<Signin isSignedin={() => setisUpdated(true)} toast={toast}/>} />
           <Route path="/signup" element={<Signup isSignedin={() => setisUpdated(true)} toast={toast}/>} />
           <Route path="/setting" element={<Settings data={{userName, userToken, userStreak}} toast={toast}/>} />
+          <Route path="/forgot" element={<Forgot data={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/" element={<Navigate replace to="/home" />} />
         </Routes>
       </div>

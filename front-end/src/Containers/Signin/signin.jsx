@@ -92,7 +92,7 @@ const Signin = ({ isSignedin, toast }) =>{
 
                     <button type={"submit"}>Login</button>
                     <div className='remember-forget'>
-                        <a href="#"> Forgot password</a>
+                        <a href="/forgot"> Forgot password</a>
                     </div>
 
                     <div className={'register-link'}>
