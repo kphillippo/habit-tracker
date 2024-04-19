@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../Css/home.css"
 import tempStatsImage from './tempStats.png';
 import { IoMdFlame } from "react-icons/io";
 import { BiTask } from "react-icons/bi";
 import { GrAchievement } from "react-icons/gr";
 import { GoGoal } from "react-icons/go";
+import { apiRequest } from "./../utils/reqTool";
 import { useNavigate } from "react-router-dom";
 
 function Home(props) {
+    const [todosNumber, setTodosNumber] = useState(0);
     const userStatus = props.data.userToken;
     const streakActive = false;
     let currentStreak = props.data.userStreak;
-    if(currentStreak == "undefined"){
+    if (currentStreak == "undefined") {
         currentStreak = 0;
     }
     let navigate = useNavigate();//For links on windows to different pages
 
+    if (sessionStorage.getItem("userId")) {
+        apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
+        .then(res => {
+            setTodosNumber(res.length);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
     //Generates a message to welcome user or guest 
     //Returns html with message
     function generateMessage() {
@@ -55,8 +66,8 @@ function Home(props) {
                     <center><div className="StreakNumber">
                         <IoMdFlame size={130} color={flameColor}></IoMdFlame>
                         {currentStreak}</div>
-                        </center>
-                        <center>{message}</center>
+                    </center>
+                    <center>{message}</center>
                 </div>
             </>;
         }
@@ -78,14 +89,13 @@ function Home(props) {
     //Returns html with window
     function generateTasksWindow() {
         if (userStatus) {
-            let tasks = 5;
             return <>
                 <div className='window' id="windowGeneral" onClick={() => handleClick('/dailies')}>
                     <center><div className="StreakNumber" >
                         <BiTask size={130} color="#0E80AC"></BiTask>
-                        {tasks}
+                        {todosNumber}
                     </div></center>
-                    <center>You have {tasks} tasks today!<br></br>
+                    <center>You have {todosNumber} tasks today!<br></br>
                         Finish them now?</center>
                 </div>
             </>;
@@ -116,7 +126,7 @@ function Home(props) {
                     <center>
                         <GoGoal size={130} color="#3ac7a8"></GoGoal>
                     </center>
-                    <center>Feelig adventurous today? Try out new challenges!</center>
+                    <center>Feeling adventurous today? Try out new challenges!</center>
                 </div>
             </>;
         }
@@ -125,9 +135,9 @@ function Home(props) {
     return (
         <div className="main-container">
             <div className="message">
-            {generateMessage()}
-            {generateQuote()}
-            <div id="quote"></div>
+                {generateMessage()}
+                {generateQuote()}
+                <div id="quote"></div>
             </div>
             <div className="windowGallery">
                 <div className="windowLine">
