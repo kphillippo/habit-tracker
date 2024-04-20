@@ -1,22 +1,28 @@
-import React, { useEffect } from "react";
 import '../../Css/stats.css';
+import React, { useState, useEffect } from "react"; 
+import { apiRequest } from "../../utils/reqTool";
 import { useNavigate } from "react-router-dom";
 
 function Stats(props){
+    let navigate = useNavigate() 
 
-    let navigate = useNavigate()
+    const [statsInfo, setStatsInfo] = useState(0); 
 
-    function isSignIn(){
-        if(!props.user.userToken){
-            navigate("/signin")
-        }
-    }
+    const [habitsCompleted, setHabitsCompleted] = useState(0); 
 
-    useEffect(() => {
-        isSignIn();
-    })
+    const getHabitsCompleted = async () => {  
 
-    return(
+
+        }; 
+
+        useEffect(() => {
+
+            getHabitsCompleted(); 
+
+        }, []);    
+
+    return (
+        <body>
         <div class ="parent">
             <div className={'my-stats'}>
                 <div class = "left">
@@ -51,18 +57,12 @@ function Stats(props){
                     <div class = "graph4">
                         <div class = "graph4_title">All-Time To Do Completion</div>
                     </div>
-                    <div class = "graph5">
-                        <div class = "graph5_title">Your Top Habits This Month</div>
-                    </div>
-                    <div class = "graph6">
-                        <div class = "graph6_title">Your Top To Dos This Month</div>
-                    </div>
-                    <div class = "graph7">
-                        <div class = "graph7_title">Check-In Time of Day This Month</div>
-                    </div>
                 </div>
             </div>
+
         </div>
+        </body>
     );
 }
+
 export default Stats;

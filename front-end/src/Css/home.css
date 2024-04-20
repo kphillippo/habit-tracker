@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Kotta+One:wght@400&display=swap");
 :root {
     --light-green-color: #c4d3ad; 
     --lighter-green-color: #E2E9D6; 
@@ -56,4 +57,118 @@
 
 .message{
     margin-left: 18px;
+}
+
+.home_guest_login{
+    position: absolute;
+    top:15vh;
+    left:2.5vw;
+    width:95vw;
+    height:75vh;
+    border-bottom:0.01vh solid #000;
+}
+
+.home_title{
+    padding-top:5%;
+    text-align: center;
+    font-family: Kotta One;
+    font-size:3vw;
+}
+.point1{
+    padding-top: 1%;
+    padding-left:34%;
+    font-size:2vw;
+}
+.point2{
+    padding-left:34%;
+    font-size:2vw;
+}
+.point3{
+    padding-left:34%;
+    font-size:2vw;
+}
+.no_account{
+    padding-top:3%;
+    padding-left:33%;
+    font-size:2vw;
+}
+.home_dailies{
+    position: absolute;
+    left:2.5vw;
+    width:95vw;
+    top:95vh;
+    height:70%;
+    border-bottom:0.01vh solid #000;
+}
+.dailies_home_title{
+    padding-top:1%;
+    padding-left:1%;
+    text-align: left;
+    font-size:3vw;
+}
+.dailies_home_desc{
+    padding-top:1%;
+    padding-left:1%;
+    text-align: left;
+    font-size:2.5vw;   
+}
+.challenges_home{
+    position: absolute;
+    top:170vh;
+    left:2.5vw;
+    width:95vw;
+    height:70%;
+    border-bottom:0.01vh solid #000;
+}
+.challenges_home_title{
+    padding-top:1%;
+    padding-right:1%;
+    text-align: right;
+    font-size:3vw;
+}
+.challenges_home_desc{
+    padding-top:1%;
+    padding-right:1%;
+    text-align: right;
+    font-size:2.5vw;
+}
+.leaderboard_home{
+    position: absolute;
+    top:240vh;
+    left:2.5vw;
+    width:95vw;
+    height:70%;
+    border-bottom:0.01vh solid #000;
+}
+.leaderboard_home_title{
+    padding-top:1%;
+    padding-right:1%;
+    text-align: left;
+    font-size:3vw;
+}
+.leaderboard_home_desc{
+    padding-top:1%;
+    padding-right:1%;
+    text-align: left;
+    font-size:2.5vw;
+}
+.stats_home{
+    position: absolute;
+    top:310vh;
+    left:2.5vw;
+    width:95vw;
+    height:70%;
+    border-bottom:0.01vh solid #000;
+}
+.stats_home_title{
+    padding-top:1%;
+    padding-right:1%;
+    text-align: right;
+    font-size:3vw;
+}
+.stats_home_desc{
+    padding-top:1%;
+    padding-right:1%;
+    text-align: right;
+    font-size:2.5vw;
 }

@@ -171,7 +171,7 @@ body{
     border: 0.5px solid var(--color-black);
     box-sizing: border-box;
     width: 94vw;
-    height: 50vh;
+    height: 25vh;
   }
 .Notifications{
     position: relative;
@@ -189,20 +189,27 @@ body{
     left:1%;
     top:5%;
     width:98%;
-    height:73%;
+    height:53%;
 }
 .notifications_row1,
 .notifications_row3{
+    padding-top:0.5%;
     position: relative;
     left: 1%;
     width: 97%;
-    height:30%;
+    height:90%;
     font-weight: 300;
     font-family: Kotta One;
     border-bottom:0.01vh solid #000;
 }
 .notifications_row1{
     font-size: 2.5vw;
+}
+.toggle_1{
+  padding: 1%;
+  position: absolute;
+  left:89%;
+  top:0%;
 }
 .notifications_row3{
     font-size: 2vw;
@@ -337,7 +344,7 @@ body{
   }
 .style_container{
     position: absolute;
-    top: 87vh;
+    top: 116vh;
     left: 1.848958333vw;
     border-radius: 15.02px;
     background-color: #E2E9D6;
@@ -588,5 +595,23 @@ body{
 
     border-radius: 1.5vw; 
 
-  } 
+  }
+  .coming_soon{
+    position: absolute;
+    top: 116vh;
+    left: 1.848958333vw;
+    border-radius: 15.02px;
+    background-color: grey;
+    width: 94vw;
+    height: 35vh;
+    opacity: 75%;
+  }
+  .coming_soon_title{
+    position:absolute;
+    left: 20vw;
+    top: 130vh;
+    font-family: Kotta One;
+    font-size: 5vw;
+  }
+   
 
