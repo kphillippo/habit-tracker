@@ -8,7 +8,7 @@ import { useState } from "react";
  * @param {*} parametersForPopup - function to close popup
  * @returns popup for notficatioins
  */
-function NotificationPopup({ onClose }) {
+function NotificationPopup({ onClose, toast }) {
   const [notifications, setNotifications] = useState(null);
 
   if (sessionStorage.getItem("userId") && !notifications) {
@@ -22,6 +22,42 @@ function NotificationPopup({ onClose }) {
         console.log(err);
       })
   }
+  //Sends API request to Accept/Decline friend request
+  //response -> true/false for Accept/Decline
+  //friend -> username of a user that send friend request
+  function respondFriendrequest(response, friend, nId) {
+    if (response) {//Accept
+      const data = {
+        User: sessionStorage.getItem("userId"),
+        FriendsWithUsername: friend, 
+        notificationID: nId
+      };
+      console.log(data);
+      apiRequest("POST", "friends/acceptFriendRequest", data)
+      .then(({ token, ...data }) => {
+        console.log(data);
+        toast.success("Friend was added successfully!"); 
+      })
+      .catch(err => {
+        toast.error(err.error);
+      })
+    }
+    else {//Decline
+      const data = {
+        User: sessionStorage.getItem("userId"),
+        FriendsWith: friend
+      };
+      apiRequest("POST", "friends/declineFriendRequest", data)
+      .then(({ token, ...data }) => {
+        console.log(data);
+        toast.success("Friend request was declined."); 
+      })
+      .catch(err => {
+        toast.error(err.error);
+      })
+    }
+  }
+
   //generate list of notifications
   function showNotifications() {
     let notificationList = [];
@@ -29,7 +65,11 @@ function NotificationPopup({ onClose }) {
     for (let i = 0; i < Object.values(allNotifications).length; i++) {
       notificationList[i] = (
         <tr key={i} className="notification">
-          <td>&nbsp;&nbsp;{Object.values(allNotifications)[i].Message}</td>
+          <td>&nbsp;&nbsp;{Object.values(allNotifications)[i].Message}
+            {/* Options to respond to notifications */}
+            {Object.values(allNotifications)[i].Title.includes("Friend Request") &&
+              <div style={{ display: "inline-flex" }}>&nbsp;&nbsp;<div onClick={() => respondFriendrequest(true, Object.values(allNotifications)[i].Message.split(' ')[0], Object.values(allNotifications)[i]._id)}>Accept</div>
+                &nbsp;&nbsp;&nbsp;&nbsp;<div onClick={() => respondFriendrequest(false, Object.values(allNotifications)[i].Message.split(' ')[0])}>Decline</div></div>}</td>
         </tr>
       );
     }

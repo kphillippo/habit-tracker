@@ -52,20 +52,20 @@ function App() {
 
   }, [isUpdated])
 
+  //Getting quotes from open API
   fetch("https://type.fit/api/quotes")
   .then(function(response) {
     return response.json();
   })
   .then(function(data) {
     let random = Math.floor(Math.random() * data.length);
-    sessionStorage.setItem("quote", '"'+ data[random]["text"]+'"'+" = "+data[random]["author"].split(',')[0].trim());
   });
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
         <Toaster></Toaster>
-        <NavBar isSignedout={() => setisUpdated(true)} data={{userName, userToken, userStreak}}/>
+        <NavBar isSignedout={() => setisUpdated(true)} data={{userName, userToken, userStreak} } toast={toast}/>
         <Routes>
           <Route path="/home" element={<Home data={{userName, userToken, userStreak}} toast={toast}/>} />
           <Route path="/dailies" element={<Dailies user={{userName, userToken, userStreak}} toast={toast}/>} />

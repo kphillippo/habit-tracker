@@ -123,7 +123,7 @@ function Profile(props) {
             <center>
                 <div className="friendsForm">
                     <div className="myFriendsTitle">My Friends</div>
-                    <button className="addFriendsButton" onClick={() => setDeleteFriendPopup(true)}>Add Friends +</button>
+                    <button className="addFriendsButton" onClick={() => setAddFriendsShowPopUp(true)}>Add Friends +</button>
                     <table className="friendsList">
                         <tbody>
                             {friendsList}

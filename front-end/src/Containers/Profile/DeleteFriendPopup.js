@@ -14,7 +14,7 @@ function DeleteFriendPopup({ onClose, friend, toast }) {
     apiRequest("POST", "Friends/deleteFriend", data)
       .then(({ token, ...data }) => {
         console.log(data);
-        toast.success("Friend was removed successfully!");
+        toast.success("Friend was removed successfully!"); 
       })
       .catch(err => {
         console.log(err);

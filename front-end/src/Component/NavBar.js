@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../utils/reqTool";
 import NotificationPopup from './NotificationPopup'; 
 
-function NavBar({isSignedout, data}) {
+function NavBar({isSignedout, data, toast}) {
     // test data, will be replaced by data from backend in the future
     // will be added to props in the future
 
@@ -90,7 +90,7 @@ function NavBar({isSignedout, data}) {
       const NotificationIconWithPopup = ({ userInfo }) => (
         <NavItem>
              <span className="notification-icon" onClick={() => setNotiificationPopup(true)}><IoNotifications size={30} color="#4e5445"></IoNotifications></span>
-            {notiificationPopup && <NotificationPopup onClose={() => setNotiificationPopup(false)}  ></NotificationPopup>}
+            {notiificationPopup && <NotificationPopup onClose={() => setNotiificationPopup(false)} toast={toast}></NotificationPopup>}
             <span>{numNotifications}</span>
         </NavItem>
       );
