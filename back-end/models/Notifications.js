@@ -21,6 +21,9 @@ const NotificationsSchema = new mongoose.Schema({
         default: false,
         required: true
     },
+    Friend:{
+        type: String
+    }
 }, {collection: 'Notifications'});
 
 //finds all notifications requests to a particualr user
@@ -52,6 +55,12 @@ NotificationsSchema.statics.findNumNotifications = async function(User) {
 NotificationsSchema.statics.sendNotification = async function(User, title, message) {
 
     return await this.create({User: User, Title: title, Message: message});
+}
+
+//sends a notification to a user for friend requests
+NotificationsSchema.statics.sendFriendNotification = async function(User, title, message, friend) {
+
+    return await this.create({User: User, Title: title, Message: message, Friend: friend});
 }
 
 //removes a notification record
