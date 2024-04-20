@@ -47,8 +47,10 @@ const sendFriendRequest = async (req, res) => {
 
         `;
 
+        const message2 = username+ " sent you a friend request!"
+
         //if friend request sent, then adds to recipient's notifications
-        const sendNotification = await NotificationsModel.sendNotification(FriendsWithUsername, title, message);
+        const sendNotification = await NotificationsModel.sendFriendNotification(FriendsWithUsername, title, message2, username);
 
         //if friend has friend request emails enabled, then emails the friend
         const settings = await SettingsModel.getSettings(FriendsWithUsername);
@@ -57,7 +59,7 @@ const sendFriendRequest = async (req, res) => {
         if(friendEmailEnabled){
             const friend = await UserModel.getUserProfileInfo(FriendsWithUsername);
             const friendsEmail = friend.Email;
-            const friendname = friend.FirstName;
+            const friendUsername = friend.FirstName;
 
             const emailInfo = {
                 to: friendsEmail,
@@ -67,7 +69,7 @@ const sendFriendRequest = async (req, res) => {
             await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
         }
 
-        res.status(200).json({request, sendNotification})
+        res.status(200).json("Friend Request Sent!")
     }catch(error){
         res.status(400).json({error: error.message})
     }
@@ -180,8 +182,10 @@ const acceptFriendRequest = async (req, res) => {
         </p>
         `
 
+        const message2 = usersName+ " accepted your friend request!"
+
         //sends notification to the sender of the friend request that the friend request has been accepted
-        const sendNotification = await NotificationsModel.sendNotification( FriendsWith, title, message);
+        const sendNotification = await NotificationsModel.sendFriendNotification( FriendsWith, title, message2, usersName);
 
         //if the sender has emails enabled for friend requests then it sends an email
         const settings = await SettingsModel.getSettings(FriendsWith);
@@ -190,7 +194,6 @@ const acceptFriendRequest = async (req, res) => {
         if(friendEmailEnabled){
             const friend = await UserModel.getUserProfileInfo(FriendsWith);
             const friendsEmail = friend.Email;
-            const friendname = friend.FirstName;
 
             const emailInfo = {
                 to: friendsEmail,

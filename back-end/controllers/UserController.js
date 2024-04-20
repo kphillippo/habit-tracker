@@ -241,42 +241,38 @@ const updatePassword = async (req, res) => {
     // Call the static method defined in the User schema to update the user's record by username
     const updateResult = await User.updatePassword( _id, Password, newPassword );
 
-    //if emails are enabled sends email
-    const settings = await SettingsModel.getSettings(_id);
-    const userSettings = settings.AllowEmails;
+    //messag for email
+    const message = `
+      <p>
+      <span style="color:rgb(56, 118, 29);">
+        <strong>HabitConnect Password Changed</strong>
+      </span>
+      </p>
+      <p>
+        <strong>Your HabitConnect password was changed from your user profile.&nbsp;</strong>
+      </p>
+      <p>
+        <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
+      </p>
+      <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
+      </span>
+      <a target="_blank" href="mailto:habittrackerrr@gmail.com">
+        <span style="color:rgb(17, 85, 204);">here</span>
+      </a>
+      <span style="color:rgb(153, 153, 153);">.
+      </span>
+    `
+    const userInfo = await User.getUserProfileInfo(_id);
+    const userEmail = userInfo.Email;
     
-    if(userSettings){
-      const message = `
-        <p>
-        <span style="color:rgb(56, 118, 29);">
-          <strong>HabitConnect Password Changed</strong>
-        </span>
-        </p>
-        <p>
-          <strong>Your HabitConnect password was changed from your user profile.&nbsp;</strong>
-        </p>
-        <p>
-          <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
-        </p>
-        <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
-        </span>
-        <a target="_blank" href="mailto:habittrackerrr@gmail.com">
-          <span style="color:rgb(17, 85, 204);">here</span>
-        </a>
-        <span style="color:rgb(153, 153, 153);">.
-        </span>
-      `
-      const userInfo = await User.getUserProfileInfo(_id);
-      const userEmail = userInfo.Email;
-      const username = userInfo.FirstName;
-
-      const emailInfo = {
-        to: userEmail,
-        subject: "HabitConnect: Password Changed",
-        text: message
-      }
-      await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
+    //sends email
+    const emailInfo = {
+      to: userEmail,
+      subject: "HabitConnect: Password Changed",
+      text: message
     }
+    await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
+    
 
     // the user's record was updated successfully
     res.status(200).json({ message: 'User password updated successfully!', success: true});
@@ -284,5 +280,68 @@ const updatePassword = async (req, res) => {
     res.status(400).json({error: error.message});
   }
 }
+
+//returns if the email is connected to an acount or not
+const emailExists = async (req, res) => {
+  try {
+    const { Email } = req.body;
+    const doesEmailexist = await User.emailExists(Email);
+
+    res.status(200).json( doesEmailexist );
+  } catch (error) {
+    res.status(400).json({error: error.message});
+  }
+}
+
+//takes in an email and changes the passowrd
+const forgotPassword = async (req, res) => {
+  try {
   
-module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword }
+    const { Email, Password } = req.body;
+
+    // Call the static method defined in the User schema to update the user's record by username
+    const updateResult = await User.updatePasswordFromEmail( Email, Password );
+
+    //gets users profile info
+    const user = await User.returnUserFromEmail(Email);
+    
+   
+    //message for email
+    const message = `
+      <p>
+      <span style="color:rgb(56, 118, 29);">
+        <strong>HabitConnect Password Changed</strong>
+      </span>
+      </p>
+      <p>
+        <strong>Your HabitConnect password was changed from your user profile.&nbsp;</strong>
+      </p>
+      <p>
+        <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
+      </p>
+      <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
+      </span>
+      <a target="_blank" href="mailto:habittrackerrr@gmail.com">
+        <span style="color:rgb(17, 85, 204);">here</span>
+      </a>
+      <span style="color:rgb(153, 153, 153);">.
+      </span>
+    `
+
+    //sends eamail
+    const emailInfo = {
+      to: Email,
+      subject: "HabitConnect: Password Changed",
+      text: message
+    }
+    await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
+    
+
+    // the user's record was updated successfully
+    res.status(200).json({ message: 'User password updated successfully!', success: true});
+
+  } catch (error) {
+    res.status(400).json({error: error.message});
+  }
+}
+module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword, emailExists, forgotPassword }
