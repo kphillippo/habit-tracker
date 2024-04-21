@@ -88,10 +88,6 @@ const {Username, Password} = req.body
     const lastCheckInDayRaw = user.LastDayCheckedIn
     const lastCheckInDay = lastCheckInDayRaw.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
 
-console.log("yesterday", yesterdaysDate)
-console.log("today", todaysDate)
-console.log("lastday", lastCheckInDay)
-
     // resets the streak to 0 if the last day checked in wasnt today or yesterday
     if (!(lastCheckInDay == todaysDate || lastCheckInDay == yesterdaysDate)) {
      //sets streak to 0
@@ -101,7 +97,13 @@ console.log("lastday", lastCheckInDay)
 
     const Streak = user.Streak;
 
-    res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email})
+    let userStreakOn = false;
+    //if the date checked in is the current date it returns true, otherwise it returns false
+    if(todaysDate == lastCheckInDay){
+      userStreakOn = true;
+    }
+
+    res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email, userStreakOn})
   }catch(error){
     res.status(400).json({error: error.message})
   }
