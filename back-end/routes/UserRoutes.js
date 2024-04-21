@@ -1,7 +1,7 @@
 const express = require('express')
 
 //controller functions
-const { signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword, emailExists, forgotPassword} = require('../controllers/UserController')
+const { signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword, emailExists, forgotPassword, getImageFriendsProfile} = require('../controllers/UserController')
 
 const router = express.Router()
 
@@ -28,5 +28,8 @@ router.post('/emailExists', emailExists)
 
 //forgotPassword
 router.post('/forgotPassword', forgotPassword)
+
+//getImageFriendsProfile
+router.post('/getImageFriendsProfile', getImageFriendsProfile)
 
 module.exports = router

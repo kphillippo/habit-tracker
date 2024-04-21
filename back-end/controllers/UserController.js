@@ -140,13 +140,41 @@ const getUserProfileInfo = async (req, res) => {
     ]);
 
     // Map friend data to friend objects
-    const populatedFriends = userFriends.map(friend => {
+    const populatedFriends = await Promise.all(userFriends.map(async (friend) => {
       const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
+      const friendSettings = await SettingsModel.getSettings(friendInfo._id);
+
+      //variables that will change for output depending on the friend's profile picture settings
+      let friendFirstName = " "
+      let friendLastName = " "
+      let friendEmail = " "
+      let friendStreaks = " "
+
+      if (friendSettings.DisplayProfileToFriends) {
+        if (friendSettings.DisplayName) {
+          friendFirstName = friendInfo.FirstName;
+          friendLastName = friendInfo.LastName;
+        }
+        if (friendSettings.DisplayEmail) {
+          friendEmail = friendInfo.Email;
+        }
+        if (friendSettings.DisplayStreaks) {
+          friendStreaks = friendInfo.Streak;
+        }
+        
+      }
+    
+      console.log('Friend Info:', friendInfo);
+      console.log('Friend Settings:', friendSettings);
+
       return {
         // Include specific properties from the friendInfo object
-        id: friendInfo._id, Username: friendInfo.Username, Streak: friendInfo.Streak, FirstName: friendInfo.FirstName, LastName: friendInfo.LastName, Email: friendInfo.Email
-      };
-    }).sort((a, b) => a.Username.localeCompare(b.Username));
+        id: friendInfo._id, Username: friendInfo.Username, Streak: friendStreaks, FirstName: friendFirstName, LastName: friendLastName, Email: friendEmail
+      }
+    }));
+
+    // Sort the populatedFriends array
+    populatedFriends.sort((a, b) => a.Username.localeCompare(b.Username));
 
     // Respond with user information and populated friends' data
     const Email = userInfo.Email;
