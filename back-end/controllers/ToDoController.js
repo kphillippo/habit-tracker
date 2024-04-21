@@ -41,7 +41,7 @@ const updateToDo = async (req, res) => {
             throw new Error("User not found");
         }
         if (!await ToDo.findById(ToDoId)) {
-            throw new Error("ToDo not found");
+            throw new Error("To Do not found");
         }
         if (!await ToDo.find({ _id: ToDoId, Owner: UserId })) {
             throw new Error("You do not own this ToDo");
@@ -50,7 +50,7 @@ const updateToDo = async (req, res) => {
         if (tempToDo) {
             return res.status(200).json(tempToDo);
         }
-        throw new Error("ToDo could not be updated.");
+        throw new Error("To Do could not be updated.");
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -63,7 +63,7 @@ const deleteToDo = async (req, res) => {
         const ToDoId = new ObjectId(todo_id);
         const tempToDo = await ToDo.findOneAndDelete({ _id: ToDoId, Owner: UserId });
         if (!tempToDo) {
-            throw new Error("ToDo not found");
+            throw new Error("To Do not found");
         }
         return res.status(200).send({message: tempToDo.message});
     } catch (error) {

@@ -20,6 +20,7 @@ const habitRoutes = require('./routes/HabitRoutes.js');
 const todoRoutes = require('./routes/TodoRoutes.js');
 const friendsRoutes = require('./routes/FriendsRoutes.js');
 const habitCheckInRoutes = require('./routes/HabitCheckInRoutes.js');
+const todoCheckInRoutes = require('./routes/ToDoCheckInRoutes.js');
 const verificationRoutes = require('./routes/VerificationRoutes.js');
 const SettingsRoutes = require('./routes/SettingsRoutes.js');
 const StatisticsRoutes = require('./routes/StatisticsRoutes.js');
@@ -37,6 +38,7 @@ app.use('/api/habit', habitRoutes)
 app.use('/api/todo', todoRoutes)
 app.use('/api/friends', friendsRoutes)
 app.use('/api/habitCheckIn', habitCheckInRoutes)
+app.use('/api/todoCheckIn', todoCheckInRoutes)
 app.use('/api/verification', verificationRoutes)
 app.use('/api/Settings', SettingsRoutes)
 app.use('/api/stats', StatisticsRoutes)

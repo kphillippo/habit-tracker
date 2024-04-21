@@ -21,10 +21,36 @@ const sendFriendRequest = async (req, res) => {
         const request = await Friend.sendFriendRequest(User, FriendsWithUsername);
 
         const title = "Friend Request";
-        const message = username + " sent you a friend request!";
+        const message = `
+                    <p>
+            <span style="color:rgb(56, 118, 29);">
+                <strong>HabitConnect Friend Request Received</strong>
+            </span>
+            </p>
+            <p>
+            <strong>You’ve received a friend request from user 
+            </strong>
+            <span style="text-decoration:underline;">
+                <strong>`+ username +`.</strong>
+            </span>
+            </p>
+            <p>Login and click on your notifications to respond!</p>
+            <p>
+                <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
+            </p>
+            <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
+            </span>
+            <a target="_blank" href="mailto:habittrackerrr@gmail.com">
+            <span style="color:rgb(17, 85, 204);">here</span>
+            </a>
+            <span style="color:rgb(153, 153, 153);">.</span>
+
+        `;
+
+        const message2 = username+ " sent you a friend request!"
 
         //if friend request sent, then adds to recipient's notifications
-        const sendNotification = await NotificationsModel.sendNotification(FriendsWithUsername, title, message);
+        const sendNotification = await NotificationsModel.sendFriendNotification(FriendsWithUsername, title, message2, username);
 
         //if friend has friend request emails enabled, then emails the friend
         const settings = await SettingsModel.getSettings(FriendsWithUsername);
@@ -33,17 +59,17 @@ const sendFriendRequest = async (req, res) => {
         if(friendEmailEnabled){
             const friend = await UserModel.getUserProfileInfo(FriendsWithUsername);
             const friendsEmail = friend.Email;
-            const friendname = friend.FirstName;
+            const friendUsername = friend.FirstName;
 
             const emailInfo = {
                 to: friendsEmail,
-                subject: "Habbit Connect - " + friendname + " you have recieved a friend request!",
+                subject: "HabitConnect: Friend Request Received",
                 text: message
             }
             await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);
         }
 
-        res.status(200).json({request, sendNotification})
+        res.status(200).json("Friend Request Sent!")
     }catch(error){
         res.status(400).json({error: error.message})
     }
@@ -113,7 +139,9 @@ const returnLeaderBoard = async (req, res) => {
 //accepts a friend request
 const acceptFriendRequest = async (req, res) => {
     try{
-        const {User, FriendsWith, notificationID} = req.body
+        const {User, FriendsWithUsername, notificationID} = req.body
+
+        const FriendsWith = await UserModel.getUserId(FriendsWithUsername);
     
         //accepts friend request
         const request = await Friend.acceptFriendRequest(User, FriendsWith, notificationID); 
@@ -124,10 +152,40 @@ const acceptFriendRequest = async (req, res) => {
 
         //makes title and message for notification to be sent to sender of friend request
         const title = "Friend Request Accepted"
-        const message = usersName + " has accepted your friend request!"
+        const message = `
+        <p>
+        <span style="color:#38761d;">
+            <strong>HabitConnect Friend Request Accepted</strong>
+        </span>
+        </p>
+        <p>
+        <strong>User
+        </strong>
+        <span style="text-decoration:underline;">
+            <strong>`+ usersName +`</strong>
+        </span>
+        <strong>
+            accepted your friend request.</strong>
+        </p>
+        <p>Login to view their profile!</p>
+        <p>
+            <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
+        </p>
+        <p>
+        <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
+        </span>
+        <a target="_blank" href="mailto:habittrackerrr@gmail.com">
+            <span style="color:rgb(17, 85, 204);">here</span>
+        </a>
+        <span style="color:rgb(153, 153, 153);">.
+        </span>
+        </p>
+        `
+
+        const message2 = usersName+ " accepted your friend request!"
 
         //sends notification to the sender of the friend request that the friend request has been accepted
-        const sendNotification = await NotificationsModel.sendNotification( FriendsWith, title, message);
+        const sendNotification = await NotificationsModel.sendFriendNotification( FriendsWith, title, message2, usersName);
 
         //if the sender has emails enabled for friend requests then it sends an email
         const settings = await SettingsModel.getSettings(FriendsWith);
@@ -136,11 +194,10 @@ const acceptFriendRequest = async (req, res) => {
         if(friendEmailEnabled){
             const friend = await UserModel.getUserProfileInfo(FriendsWith);
             const friendsEmail = friend.Email;
-            const friendname = friend.FirstName;
 
             const emailInfo = {
                 to: friendsEmail,
-                subject: "Habbit Connect - " + friendname + " Friend Request Accepted",
+                subject: "HabitConnect: Friend Request Accepted",
                 text: message
             }
             await axios.post('http://localhost:8081/api/verification/sendEmail', emailInfo);

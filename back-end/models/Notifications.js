@@ -21,14 +21,17 @@ const NotificationsSchema = new mongoose.Schema({
         default: false,
         required: true
     },
+    Friend:{
+        type: String
+    }
 }, {collection: 'Notifications'});
 
 //finds all notifications requests to a particualr user
 NotificationsSchema.statics.findNotifications = async function(User) {
 
-    //get notifications of with title todo and habbit
+    //get notifications of with title todo and habit
     const habits = { User: User, Name: "You Have Habits to do today!", Viewed: false };
-    const todos = { User: User, Name: "You Have ToDos to do today!", Viewed: false };
+    const todos = { User: User, Name: "You Have To Dos to do today!", Viewed: false };
 
     //updates the todo and habit notifications to be viewed after checking notifiations
     const update = { $set: { Viewed: true} };
@@ -52,6 +55,12 @@ NotificationsSchema.statics.findNumNotifications = async function(User) {
 NotificationsSchema.statics.sendNotification = async function(User, title, message) {
 
     return await this.create({User: User, Title: title, Message: message});
+}
+
+//sends a notification to a user for friend requests
+NotificationsSchema.statics.sendFriendNotification = async function(User, title, message, friend) {
+
+    return await this.create({User: User, Title: title, Message: message, Friend: friend});
 }
 
 //removes a notification record

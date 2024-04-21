@@ -75,7 +75,7 @@ function getHabits(){
 
 //get todo list from backend
 function getTodos(){
-  console.log("get todos in the front-end")
+  console.log("get to dos in the front-end")
     apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
     .then(res => {
         
