@@ -205,8 +205,8 @@ function Settings({props,toast}) {
       return trigger ? ( 
         <div className="delete_popup"> 
           <div className="delete_popup-inner"> 
-            <div className="delete_Title">Are you Sure you want to Discard</div> 
-            <div className="delete_Title2">any unsaved changes?</div> 
+            <div className="delete_Title">Are you sure you want to discard</div> 
+            <div className="delete_Title2">your unsaved changes?</div> 
             <div> 
               <button className="delete_no" onClick={() => setTrigger(false)}> 
                 Cancel 
