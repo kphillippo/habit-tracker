@@ -28,7 +28,6 @@ const {Username, Password} = req.body
     const FirstName = user.FirstName
     const LastName = user.LastName
     const Email = user.Email
-    const Streak = user.Streak
     const _id = user._id
 
     //checks how many habits and doto's the user has left to do today
@@ -75,6 +74,32 @@ const {Username, Password} = req.body
         const updateNotification = await Notifications.updateNotification(_id, todoTitle, todoMessage);
       }
     }
+
+    // Get today's date
+    const today = new Date();
+    const todaysDate = today.toISOString().split('T')[0]; // Format today's date in YYYY-MM-DD format
+
+    // Subtract one day to get yesterday's date
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    const yesterdaysDate = yesterday.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+
+    //last checked in day
+    const lastCheckInDayRaw = user.LastDayCheckedIn
+    const lastCheckInDay = lastCheckInDayRaw.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+
+console.log("yesterday", yesterdaysDate)
+console.log("today", todaysDate)
+console.log("lastday", lastCheckInDay)
+
+    // resets the streak to 0 if the last day checked in wasnt today or yesterday
+    if (!(lastCheckInDay == todaysDate || lastCheckInDay == yesterdaysDate)) {
+     //sets streak to 0
+     user.Streak = 0;
+     await user.save();
+    }
+
+    const Streak = user.Streak;
 
     res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email})
   }catch(error){
@@ -140,13 +165,38 @@ const getUserProfileInfo = async (req, res) => {
     ]);
 
     // Map friend data to friend objects
-    const populatedFriends = userFriends.map(friend => {
+    const populatedFriends = await Promise.all(userFriends.map(async (friend) => {
       const friendInfo = friendData.find(data => data._id.toString() === friend.FriendsWith.toString());
+      const friendSettings = await SettingsModel.getSettings(friendInfo._id);
+
+      //variables that will change for output depending on the friend's profile picture settings
+      let friendFirstName = " "
+      let friendLastName = " "
+      let friendEmail = " "
+      let friendStreaks = " "
+
+      if (friendSettings.DisplayProfileToFriends) {
+        if (friendSettings.DisplayName) {
+          friendFirstName = friendInfo.FirstName;
+          friendLastName = friendInfo.LastName;
+        }
+        if (friendSettings.DisplayEmail) {
+          friendEmail = friendInfo.Email;
+        }
+        if (friendSettings.DisplayStreaks) {
+          friendStreaks = friendInfo.Streak;
+        }
+        
+      }
+
       return {
         // Include specific properties from the friendInfo object
-        id: friendInfo._id, Username: friendInfo.Username, Streak: friendInfo.Streak, FirstName: friendInfo.FirstName, LastName: friendInfo.LastName, Email: friendInfo.Email
-      };
-    }).sort((a, b) => a.Username.localeCompare(b.Username));
+        id: friendInfo._id, Username: friendInfo.Username, Streak: friendStreaks, FirstName: friendFirstName, LastName: friendLastName, Email: friendEmail
+      }
+    }));
+
+    // Sort the populatedFriends array
+    populatedFriends.sort((a, b) => a.Username.localeCompare(b.Username));
 
     // Respond with user information and populated friends' data
     const Email = userInfo.Email;
@@ -344,4 +394,27 @@ const forgotPassword = async (req, res) => {
     res.status(400).json({error: error.message});
   }
 }
-module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword, emailExists, forgotPassword }
+
+//returns a user's streak
+const returnStreak = async (req, res) => {
+  try {
+
+    const { userId } = req.body;
+
+    //gets the user's streak
+    const user = await User.getUserProfileInfo(userId)
+    const streak = user.Streak
+
+    //if the current streak is longer then the longest streak, it updates the user's longest streak
+    const longestStreak = user.LongestStreak
+    if(streak > longestStreak){
+      await User.updateLongestStreak(userId, streak)
+    }
+
+    res.status(200).json({ Streak: streak});
+
+  } catch (error) {
+    res.status(400).json({error: error.message});
+  }
+}
+module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword, emailExists, forgotPassword, returnStreak }
