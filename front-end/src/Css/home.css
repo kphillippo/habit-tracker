@@ -61,10 +61,10 @@
 
 .home_guest_login{
     position: absolute;
-    top:15vh;
+    top:5em;
     left:2.5vw;
     width:95vw;
-    height:75vh;
+    height:25em;
     border-bottom:0.01vh solid #000;
 }
 
@@ -72,103 +72,107 @@
     padding-top:5%;
     text-align: center;
     font-family: Kotta One;
-    font-size:3vw;
+    font-size:250%;
 }
 .point1{
     padding-top: 1%;
-    padding-left:34%;
-    font-size:2vw;
+    padding-left:24%;
+    padding-right:24%;
+    font-size:150%;
 }
 .point2{
-    padding-left:34%;
-    font-size:2vw;
+    padding-left:24%;
+    padding-right:24%;
+    font-size:150%;
 }
 .point3{
-    padding-left:34%;
-    font-size:2vw;
+    padding-left:24%;
+    padding-right:24%;
+    font-size:150%;
 }
 .no_account{
-    padding-top:3%;
-    padding-left:33%;
-    font-size:2vw;
+    padding-top: 1%;
+    text-align: center;
+    font-family: Kotta One;
+    font-size:150%;
 }
 .home_dailies{
     position: absolute;
     left:2.5vw;
     width:95vw;
-    top:95vh;
-    height:70%;
+    top:30em;
+    height:25em;
     border-bottom:0.01vh solid #000;
 }
 .dailies_home_title{
     padding-top:1%;
     padding-left:1%;
     text-align: left;
-    font-size:3vw;
+    font-size:250%;
 }
 .dailies_home_desc{
     padding-top:1%;
     padding-left:1%;
     text-align: left;
-    font-size:2.5vw;   
+    font-size:150%;   
 }
 .challenges_home{
     position: absolute;
-    top:170vh;
     left:2.5vw;
     width:95vw;
-    height:70%;
+    top:55em;
+    height:25em;
     border-bottom:0.01vh solid #000;
 }
 .challenges_home_title{
     padding-top:1%;
     padding-right:1%;
     text-align: right;
-    font-size:3vw;
+    font-size:250%;
 }
 .challenges_home_desc{
     padding-top:1%;
     padding-right:1%;
     text-align: right;
-    font-size:2.5vw;
+    font-size:150%;
 }
 .leaderboard_home{
     position: absolute;
-    top:240vh;
     left:2.5vw;
     width:95vw;
-    height:70%;
+    top:80em;
+    height:25em;
     border-bottom:0.01vh solid #000;
 }
 .leaderboard_home_title{
     padding-top:1%;
     padding-right:1%;
     text-align: left;
-    font-size:3vw;
+    font-size:250%;
 }
 .leaderboard_home_desc{
     padding-top:1%;
     padding-right:1%;
     text-align: left;
-    font-size:2.5vw;
+    font-size:150%;
 }
 .stats_home{
     position: absolute;
-    top:310vh;
     left:2.5vw;
     width:95vw;
-    height:70%;
+    top:105em;
+    height:25em;
     border-bottom:0.01vh solid #000;
 }
 .stats_home_title{
     padding-top:1%;
     padding-right:1%;
     text-align: right;
-    font-size:3vw;
+    font-size:250%;
 }
 .stats_home_desc{
     padding-top:1%;
     padding-right:1%;
     text-align: right;
-    font-size:2.5vw;
+    font-size:150%;
 }
