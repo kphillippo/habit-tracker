@@ -42,7 +42,7 @@ function Challenges(props){
                     <tbody>
                     <tr>
                         <td width="5%"></td>
-                        <td width="45%" id="challenge"> Challenges</td>
+                        <td width="45%" id="challenge"> Challenges ✰</td>
                         <td width="20%"> My Streak</td>
                         <td width="30%"> Creator</td>
                     </tr>

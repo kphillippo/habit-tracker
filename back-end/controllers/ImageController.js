@@ -1,6 +1,7 @@
 const path = require('path');
 const Image = require('../models/image.js');
 const User = require('../models/User');
+const SettingsModel = require('../models/Settings.js');
 
 
 exports.uploadImage = async (req, res) => {
@@ -44,18 +45,59 @@ exports.uploadImage = async (req, res) => {
   }
 };
 
-exports.getImage = async (req, res) => {
-    try {
-      const image = await Image.findById(req.params.id);
-      if (!image) {
-        return res.status(404).send('Image not found');
+//if isForFriend is true then this is displaying for a friend, otherwise its displaying for the user
+exports.getImageNew = async (req, res) => {
+  try {
+      // Assuming req.params.id is the userId and req.query.displayProfilePic is the boolean parameter
+      const { userId, isForFriend } = req.body;
+
+      // Fetch the user based on the userId
+      const user = await User.findById(userId);
+      if (!user) {
+          return res.status(404).send('User not found');
       }
-      // Construct absolute path to the image file
-      const imagePath = path.resolve(image.path).replace(/\\/g, '/');
+
+      //defaults to the default profile pic
+      let profilePicture = await Image.findById("66242c3261e6aa7c8c94428d");
+
+      //checks if this request if for a fiend or for the user
+      if (isForFriend) {
+        const settings = await SettingsModel.getSettings(userId)
+
+        //if settings are enabled it displays the real profile
+        if(settings.DisplayPhoto){
+          profilePicture = await Image.findById(user.ProfilePicture);
+        }
+      }else{
+        profilePicture = await Image.findById(user.ProfilePicture);
+      }
+
+      if (!profilePicture) {
+        return res.status(404).send('Profile picture not found');
+      }
+
+      // Construct absolute path to the profile picture file
+      const imagePath = path.resolve(profilePicture.path).replace(/\\/g, '/');
       res.set('Content-Type', 'image/jpeg');
       res.sendFile(imagePath);
-    } catch (error) {
+  } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Failed to fetch image' });
+  }
+};
+
+exports.getImage = async (req, res) => {
+  try {
+    const image = await Image.findById(req.params.id);
+    if (!image) {
+      return res.status(404).send('Image not found');
     }
-  };
+    // Construct absolute path to the image file
+    const imagePath = path.resolve(image.path).replace(/\\/g, '/');
+    res.set('Content-Type', 'image/jpeg');
+    res.sendFile(imagePath);
+  } catch (error) {
+    console.error(error);
+      res.status(500).json({ message: 'Failed to fetch image' });
+    }
+};
