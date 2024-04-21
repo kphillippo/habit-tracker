@@ -6,7 +6,6 @@ import "../../Css/Leaderboard.css";
 import { GiTrophy } from "react-icons/gi";
 import { IoMdFlame } from "react-icons/io";
 import { Bs1CircleFill, Bs2CircleFill, Bs3CircleFill } from "react-icons/bs";
-import { handleMail } from "../Signup/sendEmail";   // Inport function from other class 
 
 
 function Leaderboard(props){
@@ -62,12 +61,6 @@ function Leaderboard(props){
         return <div>Error loading user information.</div>;
     }
 
-    // Method to implement handleMail function from sendEmail class
-    const sendMail = (event) => {   
-        event.preventDefault();
-        handleMail("odkn289@gmail.com", "TEST TEST TESTING", "Welcome to our web page", props.toast, null);
-    }
-
     function generateLeaderBoard() {
         let friendsList = [];                                           // Initialize friends list information as an array
         let dd1 = <Bs1CircleFill id="placement" color={"gold"}/>        // Places placement icons in variables
@@ -112,6 +105,7 @@ function Leaderboard(props){
         }
         return <>
         <body>
+            <div className="leaderboard-title">My Leaderboard</div>
             <div className= "leaderboard-page">
                 <div className="innerBoard">
                     <GiTrophy className="GiTrophy"></GiTrophy>
@@ -124,7 +118,6 @@ function Leaderboard(props){
                     </div>
                 </div>
             </div>
-            <button onClick={sendMail}> Send Email</button> 
         </body>
         </>;
     }
