@@ -299,7 +299,7 @@ const updatePassword = async (req, res) => {
       </span>
       </p>
       <p>
-        <strong>Your HabitConnect password was changed from your user profile.&nbsp;</strong>
+        <strong>Your HabitConnect password was changed.&nbsp;</strong>
       </p>
       <p>
         <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
@@ -364,7 +364,7 @@ const forgotPassword = async (req, res) => {
       </span>
       </p>
       <p>
-        <strong>Your HabitConnect password was changed from your user profile.&nbsp;</strong>
+        <strong>Your HabitConnect password was changed.&nbsp;</strong>
       </p>
       <p>
         <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
