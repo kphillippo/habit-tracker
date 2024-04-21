@@ -215,7 +215,9 @@ const acceptFriendRequest = async (req, res) => {
 //declines a friend request
 const declineFriendRequest = async (req, res) => {
     try{
-        const {User, FriendsWith, notificationID} = req.body
+        const {User, FriendsWithUsername, notificationID} = req.body
+
+        const FriendsWith = await UserModel.getUserId(FriendsWithUsername);
     
         //deleted friend request record
         const request = await Friend.deleteFriendRecord(User, FriendsWith);
