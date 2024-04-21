@@ -13,7 +13,7 @@ const createGroupHabit = async (req, res) => {
         const newTitle = Title + " ✰"
 
         //create the group habit record
-        const habit = await GroupHabit.createHabit(user_id, newTitle, MeasurementType, Goal);
+        const habit = await GroupHabit.createHabit(user_id, Title, MeasurementType, Goal);
         
         //create the habit record with the grouphabit id 
         const id = habit._id
