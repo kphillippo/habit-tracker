@@ -108,7 +108,7 @@ const Signup = ({isSignedin, toast}) => {
             setVerify(true);
             let info = {
                 "to": email,
-                "subject": "Test Test Testing",
+                "subject": "HabitConnect: Account Creation Verification Code",
                 "text": generateHTML()
             }
             apiRequest("POST", "verification/sendEmail", info)

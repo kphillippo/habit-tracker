@@ -101,7 +101,7 @@ function Forgot({data, toast}){
             setVerify(true);
             let info = {
                 "to": email,
-                "subject": "Test Test Testing",
+                "subject": "HabitConnect: Password Reset Request",
                 //"text": "Welcome to HabitConnect, here is your verification code: " + inf,
                 "text": generateHTML()
             }

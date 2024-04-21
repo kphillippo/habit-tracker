@@ -57,7 +57,7 @@ const Signin = ({ isSignedin, toast }) =>{
     return (
         <div className={'LoginForm'}>
             <div className={'Top'}>
-                <h1>Welcome to HabitConnect!!</h1>
+                <h1>Welcome to HabitConnect!</h1>
                 <p>{sessionStorage.getItem("quote")}</p>
             </div>
             <div className={'wrapper'}>
