@@ -194,7 +194,7 @@ const Signup = ({isSignedin, toast}) => {
                 
                 <Verify show={showVerify} close={() => setVerify(false)} sub={handleSubmit} code ={code} email={email}/>
             </div>
-            <div>
+            <div className="checkList">
             <PasswordChecklist
                     style={{display:showthing}}
                     rules={["minLength","specialChar","number","capital","lowercase", "match"]}
