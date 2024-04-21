@@ -1,22 +1,43 @@
-import React, { useEffect } from "react";
 import '../../Css/stats.css';
+import React, { useState, useEffect } from "react"; 
+import { apiRequest } from "../../utils/reqTool";
 import { useNavigate } from "react-router-dom";
 
 function Stats(props){
+    let navigate = useNavigate() 
 
-    let navigate = useNavigate()
+    const [habitsCompleted, setHabitsCompleted] = useState(0); 
+    const [timesHabit, setTimesHabit] = useState(0); 
 
-    function isSignIn(){
-        if(!props.user.userToken){
-            navigate("/signin")
+    const getHabitsCompleted = async () => {   
+        try { 
+            const response = await apiRequest("GET", "stats/habitsCompletedLast30Days?user_id=" + sessionStorage.getItem("userId")) 
+            const data = await response; 
+            console.log(data)
+            setHabitsCompleted(data); 
+        } catch (err) { 
+            console.error("Failed to fetch user info:", err); 
         }
-    }
+    }; 
 
+    const getTimesHabitCompleted = async () => {   
+        try { 
+            const response = await apiRequest("GET", "stats/timesHabitCompletedLast30Days?user_id=" + sessionStorage.getItem("userId")) 
+            const data = await response; 
+            console.log(data);
+            setTimesHabit(data); 
+        } catch (err) { 
+            console.error("Failed to fetch user info:", err); 
+        }
+    }; 
+    
     useEffect(() => {
-        isSignIn();
-    })
+        getHabitsCompleted(); 
+        getTimesHabitCompleted();
+    },[]);    
 
-    return(
+    return (
+        <body>
         <div class ="parent">
             <div className={'my-stats'}>
                 <div class = "left">
@@ -43,26 +64,14 @@ function Stats(props){
                         <div class = "graph1_title">This Month's Habit Completion</div>
                     </div>
                     <div class = "graph2">
-                        <div class = "graph2_title">This Month's To Do Completion</div>
-                    </div>
-                    <div class = "graph3">
-                        <div class = "graph3_title">All-Time Habit Completion</div>
-                    </div>
-                    <div class = "graph4">
-                        <div class = "graph4_title">All-Time To Do Completion</div>
-                    </div>
-                    <div class = "graph5">
-                        <div class = "graph5_title">Your Top Habits This Month</div>
-                    </div>
-                    <div class = "graph6">
-                        <div class = "graph6_title">Your Top To Dos This Month</div>
-                    </div>
-                    <div class = "graph7">
-                        <div class = "graph7_title">Check-In Time of Day This Month</div>
+                        <div class = "graph2_title">All-Time Habit Completion</div>
                     </div>
                 </div>
             </div>
+
         </div>
+        </body>
     );
 }
+
 export default Stats;

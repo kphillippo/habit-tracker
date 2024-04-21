@@ -1,12 +1,14 @@
 import "./Settings.css"; 
-
 import React, { useState, useEffect } from "react"; 
-
 import { apiRequest } from "../../utils/reqTool"; 
-
 import { useRef } from 'react'; 
+import { useNavigate } from "react-router-dom";
 
-function Settings(props) { 
+function Settings({props,toast}) { 
+
+    let navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(true);
 
     //used for discard popup 
   
@@ -19,7 +21,8 @@ function Settings(props) {
     const [displayEmail,setDisplayEmail] = useState(false); 
     const [displayPhoto,setDisplayPhoto] = useState(false); 
     const [displayStreaks,setDisplayStreaks] = useState(false); 
-    const [displayStats,setDisplayStats] = useState(false); 
+    const [displayStats,setDisplayStats] = useState(false);
+    const [friendRequestEmails,setFriendRequestEmails] = useState(false); 
   
     //gets the setting info which is edited whenever someone clicks a checkbox 
   
@@ -37,10 +40,12 @@ function Settings(props) {
     const checkbox4Ref = useRef(null); 
     const checkbox5Ref = useRef(null); 
     const checkbox6Ref = useRef(null); 
-  
+    const checkbox7Ref = useRef(null);
+
     //gets from backend 
   
     const getSettings = async () => { 
+      if(sessionStorage.getItem("userToken")){
       try { 
           const response = await apiRequest("GET", "settings/getSettings?user_id=" + sessionStorage.getItem("userId")) 
           const data = await response; 
@@ -49,15 +54,25 @@ function Settings(props) {
           setSettingsInfo(data); 
       } catch (err) { 
           console.error("Failed to fetch user info:", err); 
+      }finally {
+        setIsLoading(false);
       }
-      }; 
-      useEffect(() => { 
-          getSettings(); 
-        }, []); 
+    }
+      else {
+        navigate('/Signin');
+    }
+  }; 
+      useEffect(() => {
+         getSettings()
+      },[]);
 
+      if (isLoading) {
+        return <div>Loading...</div>;
+    }
       if (!settingsInfo) {
         return <div>Error loading user information.</div>;
       }
+
 
     //updates backend
     //right now when you click the save button there is no feedback/popup, but it does save. If you want to check
@@ -70,13 +85,15 @@ function Settings(props) {
         }) 
         .catch((err) => { 
           console.error("Error saving settings:", err); 
-        }); 
+        });
         defaultSettings.DisplayProfileToFriends = settingsInfo.DisplayProfileToFriends;
         defaultSettings.DisplayName = settingsInfo.DisplayName;
         defaultSettings.DisplayEmail = settingsInfo.DisplayEmail;
         defaultSettings.DisplayPhoto = settingsInfo.DisplayPhoto;
         defaultSettings.DisplayStreaks = settingsInfo.DisplayStreaks;
         defaultSettings.DisplayStats = settingsInfo.DisplayStats;
+        defaultSettings.FriendRequestEmails = settingsInfo.FriendRequestEmails;
+        toast.success(`Settings Saved!`);
     }; 
   
     const handleChange = (key) => { 
@@ -134,13 +151,23 @@ function Settings(props) {
        if(key === "stats"){   
             if(settingsInfo.DisplayStats === false){ 
              settingsInfo.DisplayStats = true; 
-             setDisplayStats(!displayStats); 
+             setFriendRequestEmails(!displayStats); 
             }
             else{ 
             settingsInfo.DisplayStats = false; 
-            setDisplayStats(!displayStats); 
+            setFriendRequestEmails(!displayStats); 
             } 
-       } 
+       }
+       if(key === "friends"){   
+        if(settingsInfo.FriendRequestEmails === false){
+         settingsInfo.FriendRequestEmails = true; 
+         setDisplayStats(!friendRequestEmails); 
+        }
+        else{ 
+        settingsInfo.FriendRequestEmails = false; 
+        setDisplayStats(!friendRequestEmails); 
+        } 
+   }  
     }; 
 
     const discardSettings = () => { 
@@ -168,14 +195,18 @@ function Settings(props) {
           checkbox6Ref.current.click(); 
           settingsInfo.DisplayStats = defaultSettings.DisplayStats; 
       }
+      if(defaultSettings.FriendRequestEmails !== settingsInfo.FriendRequestEmails){ 
+        checkbox7Ref.current.click(); 
+        settingsInfo.FriendRequestEmails = defaultSettings.FriendRequestEmails; 
+    }
     } 
 
     function DiscardPopup({ trigger, setTrigger }) {
       return trigger ? ( 
         <div className="delete_popup"> 
           <div className="delete_popup-inner"> 
-            <div className="delete_Title">Are you Sure you want to Discard</div> 
-            <div className="delete_Title2">any unsaved changes?</div> 
+            <div className="delete_Title">Are you sure you want to discard</div> 
+            <div className="delete_Title2">your unsaved changes?</div> 
             <div> 
               <button className="delete_no" onClick={() => setTrigger(false)}> 
                 Cancel 
@@ -279,6 +310,23 @@ function Settings(props) {
                  </div> 
              </div> 
          </div> 
+         <div class = "notifications_container"> 
+           <div class = "Notifications">Notifications</div> 
+           <div class = "notification_inner"> 
+               <div class = "notifications_row1"> 
+                   <div class = "email_notifications">Friend requests emails</div> 
+                   <div class = "toggle_1"> 
+                    <label class="switch"> 
+                        <input type="checkbox"
+                          ref={checkbox7Ref}
+                          defaultChecked={settingsInfo.FriendRequestEmails}  
+                          onInput = {()=> handleChange("friends")}/> 
+                        <span class="slider"></span> 
+                    </label> 
+                   </div> 
+               </div> 
+           </div>
+       </div> 
          <div class = "style_container"> 
           <div class ="style_title">Style Customization and Accessibility</div> 
           <div class = "style_inner"> 
@@ -301,8 +349,10 @@ function Settings(props) {
                   </div> 
               </div> 
           </div> 
-         </div> 
-     </div> 
+         </div>
+         <div class = "coming_soon"></div>
+         <div class = "coming_soon_title">Coming in a Future Update</div>
+     </div>
           <DiscardPopup trigger ={buttonPopup} setTrigger = {setButtonPopup}/> 
           </body> 
       ); 
