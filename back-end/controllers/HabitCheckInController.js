@@ -1,6 +1,7 @@
 const HabitCheckIn = require('../models/HabitCheckIn');
 const ObjectId = require('mongoose').Types.ObjectId;
 const Habit = require('../models/Habit');
+const UserModel = require('../models/User');
 
 //controller functions go here
 /**
@@ -36,6 +37,32 @@ const UpdateHabitCheckIn = async (req, res) => {
             habitCheckIn.CheckInDate = new Date().toISOString();
             await habitCheckIn.save();
         }
+
+        //gets user
+        const userid = await Habit.returnOwner(HabitID)
+        const user = await UserModel.getUserProfileInfo(userid)
+
+        // Get today's date
+        const today = new Date();
+
+        // Subtract one day to get yesterday's date
+        const today2 = today.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+
+        //last checked in day
+        const lastCheckInDayRaw = user.LastDayCheckedIn
+        const lastCheckInDay = lastCheckInDayRaw.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+
+        //if the user's last check in date is yesterday, update user's streak and update user last check in date variable
+        if(lastCheckInDay != today2){
+
+            //updates user's streak
+            user.Streak++;
+            await user.save();
+
+            //updates user last check in date variable
+            await UserModel.updatelastDayCheckedIn(userid, new Date().toISOString().split('T')[0]);
+        }
+
         res.status(200).json(habitCheckIn);
     } catch (error) {
         console.log(error.message);
