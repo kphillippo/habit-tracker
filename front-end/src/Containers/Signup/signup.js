@@ -72,6 +72,32 @@ const Signup = ({isSignedin, toast}) => {
         return str;
     }
 
+    function generateHTML(){
+        var inf = getCode();
+        const message = `
+        <p>
+        <span style="color:rgb(56, 118, 29);">
+        <strong>Welcome to HabitConnect!&nbsp;</strong>
+        </span>
+        </p>
+        <p>There’s only one step left to create your HabitConnect account. Please enter this verification code in the window where you started creating your account:&nbsp;</p>
+        <p>
+            <strong>`+ inf +`</strong>
+        </p>
+        <p>This code is valid while your HabitConnect window stays open.&nbsp;</p>
+        <p>If you did not request to create a HabitConnect account, ignore this email.</p>
+        <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
+        </span>
+        <a target="_blank" href="mailto:habittrackerrr@gmail.com">
+            <span style="color:rgb(17, 85, 204);">here</span>
+        </a>
+        <span style="color:rgb(153, 153, 153);">.
+        </span>
+        `;
+        return message;
+    }
+    
+
     const handleMail = (event) => {
         event.preventDefault();
         if(password != passwordAgain){
@@ -83,7 +109,7 @@ const Signup = ({isSignedin, toast}) => {
             let info = {
                 "to": email,
                 "subject": "Test Test Testing",
-                "text": "Welcome to HabitConnect, here is your verification code: " + inf
+                "text": generateHTML()
             }
             apiRequest("POST", "verification/sendEmail", info)
                 .then(({token, ...user}) => {
