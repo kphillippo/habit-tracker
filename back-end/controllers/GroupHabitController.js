@@ -10,9 +10,10 @@ const createGroupHabit = async (req, res) => {
     const {Owner, Title, MeasurementType, Goal} = req.body;
     try {
         const user_id = new ObjectId(Owner);
+        const newTitle = Title + " *"
 
         //create the group habit record
-        const habit = await GroupHabit.createHabit(user_id, Title, MeasurementType, Goal);
+        const habit = await GroupHabit.createHabit(user_id, newTitle, MeasurementType, Goal);
         
         //create the habit record with the grouphabit id 
         const id = habit._id
