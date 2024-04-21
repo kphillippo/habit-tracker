@@ -163,9 +163,6 @@ const getUserProfileInfo = async (req, res) => {
         }
         
       }
-    
-      console.log('Friend Info:', friendInfo);
-      console.log('Friend Settings:', friendSettings);
 
       return {
         // Include specific properties from the friendInfo object
