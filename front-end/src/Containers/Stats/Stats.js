@@ -6,20 +6,35 @@ import { useNavigate } from "react-router-dom";
 function Stats(props){
     let navigate = useNavigate() 
 
-    const [statsInfo, setStatsInfo] = useState(0); 
-
     const [habitsCompleted, setHabitsCompleted] = useState(0); 
+    const [timesHabit, setTimesHabit] = useState(0); 
 
-    const getHabitsCompleted = async () => {  
+    const getHabitsCompleted = async () => {   
+        try { 
+            const response = await apiRequest("GET", "stats/habitsCompletedLast30Days?user_id=" + sessionStorage.getItem("userId")) 
+            const data = await response; 
+            console.log(data)
+            setHabitsCompleted(data); 
+        } catch (err) { 
+            console.error("Failed to fetch user info:", err); 
+        }
+    }; 
 
-
-        }; 
-
-        useEffect(() => {
-
-            getHabitsCompleted(); 
-
-        }, []);    
+    const getTimesHabitCompleted = async () => {   
+        try { 
+            const response = await apiRequest("GET", "stats/timesHabitCompletedLast30Days?user_id=" + sessionStorage.getItem("userId")) 
+            const data = await response; 
+            console.log(data);
+            setTimesHabit(data); 
+        } catch (err) { 
+            console.error("Failed to fetch user info:", err); 
+        }
+    }; 
+    
+    useEffect(() => {
+        getHabitsCompleted(); 
+        getTimesHabitCompleted();
+    },[]);    
 
     return (
         <body>
@@ -49,13 +64,7 @@ function Stats(props){
                         <div class = "graph1_title">This Month's Habit Completion</div>
                     </div>
                     <div class = "graph2">
-                        <div class = "graph2_title">This Month's To Do Completion</div>
-                    </div>
-                    <div class = "graph3">
-                        <div class = "graph3_title">All-Time Habit Completion</div>
-                    </div>
-                    <div class = "graph4">
-                        <div class = "graph4_title">All-Time To Do Completion</div>
+                        <div class = "graph2_title">All-Time Habit Completion</div>
                     </div>
                 </div>
             </div>

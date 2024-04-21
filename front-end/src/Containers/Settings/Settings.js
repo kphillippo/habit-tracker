@@ -45,6 +45,7 @@ function Settings({props,toast}) {
     //gets from backend 
   
     const getSettings = async () => { 
+      if(sessionStorage.getItem("userToken")){
       try { 
           const response = await apiRequest("GET", "settings/getSettings?user_id=" + sessionStorage.getItem("userId")) 
           const data = await response; 
@@ -56,30 +57,22 @@ function Settings({props,toast}) {
       }finally {
         setIsLoading(false);
       }
-      }; 
-
-      function isSignIn(){        // Checks if the user is signed in
-        if(!sessionStorage.getItem("userToken")){
-            return false
-        }
-        return true;
     }
-
+      else {
+        navigate('/Signin');
+    }
+  }; 
       useEffect(() => {
-        if(isSignIn()) {        // If user is signed in, the getFriends
-            getSettings()
-        }
-        else{                   // Otherwise go to signin page
-            navigate("/signin")
-        }
-        
-    });
+         getSettings()
+      },[]);
+
       if (isLoading) {
-        return <div>Loading...</div>;   // Shows loading screen if information is still loading
-      }
+        return <div>Loading...</div>;
+    }
       if (!settingsInfo) {
         return <div>Error loading user information.</div>;
       }
+
 
     //updates backend
     //right now when you click the save button there is no feedback/popup, but it does save. If you want to check
@@ -158,11 +151,11 @@ function Settings({props,toast}) {
        if(key === "stats"){   
             if(settingsInfo.DisplayStats === false){ 
              settingsInfo.DisplayStats = true; 
-             setDisplayStats(!displayStats); 
+             setFriendRequestEmails(!displayStats); 
             }
             else{ 
             settingsInfo.DisplayStats = false; 
-            setDisplayStats(!displayStats); 
+            setFriendRequestEmails(!displayStats); 
             } 
        }
        if(key === "friends"){   
