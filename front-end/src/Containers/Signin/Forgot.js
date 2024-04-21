@@ -46,6 +46,25 @@ function Forgot({data, toast}){
         }
     };
 
+    // Function to check if email exists
+    const doesEmailExists = async (event) => {
+        event.preventDefault();
+        try{
+            let info = {
+                "Email": email
+            }
+            const response = await apiRequest("POST", "user/emailExists", info)
+            let data = await response
+            toast(data)
+            // If email exists, send verification code
+            if(data === "Email exists!"){   
+                handleMail(event)
+            }else{toast("Please enter a registered email")}
+        }catch (err) {
+            console.error("Failed to fetch user info:", err);
+        }
+    }
+
     const handleMail = (event) => {
         event.preventDefault();
         const inf = getCode();
@@ -55,9 +74,9 @@ function Forgot({data, toast}){
                 "subject": "Test Test Testing",
                 "text": "Welcome to HabitConnect, here is your verification code: " + inf
             }
-            apiRequest("POST", "verification/sendEmail", info)
+            apiRequest("POST", "verification/sendEmail", info)  // Calls for api to send email with credentials in info
                 .then(({token, ...user}) => {
-                    toast.success(`Email has been sent to ${user.Email}!`)
+                    toast.success(`Email has been sent to `+ email)
                 })
                 .catch(err => {
                     toast.error(err.error);
@@ -65,11 +84,28 @@ function Forgot({data, toast}){
             console.log('Email has been sent to', email);
     }
 
+    // Function to reset user password, by taking in email and new password
+    // This is the function sent to the verify modal to as sub prop
+    const resetPassword = (event) => {
+        event.preventDefault();
+        let info = {
+            "Email": email,
+            "Password": password
+        }
+        apiRequest("POST", "user/forgotPassword", info)
+        .then(({token, ...user}) => {
+            toast.success(`Your password has been reset`)
+        })
+        .catch(err => {
+            toast.error(err.error);
+        })
+    }
+
     return (
         <div className={'LoginForm'}>
 
             <div className={'wrapper'}>
-                <form onSubmit={handleMail} >
+                <form onSubmit={doesEmailExists} >
                     <h1>Enter your email and new password</h1>
                     <div className={'inputBox'}>
                         <FaRegUserCircle className="icon"/> Email:
@@ -95,9 +131,9 @@ function Forgot({data, toast}){
                             </div>                                            
                     </div>
                 
-                    <button type={"submit"} style={{marginBottom : "10px"}}>Submit</button>
+                    <button style={{marginBottom : "10px"}}>Submit</button>
                 </form>
-                <Verify show={showVerify} close={() => setVerify(false)} sub={handleSubmit} code ={code} email={email}/>
+                <Verify show={showVerify} close={() => setVerify(false)} sub={resetPassword} code ={code} email={email}/>
             </div>
         </div>
     );
