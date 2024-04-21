@@ -15,7 +15,7 @@ input::-webkit-inner-spin-button{
     top: 0;
     left: 0;
     width: 100vw;
-    height: 80vh;
+    height: 90vh;
     z-index: 0;
     overflow-x: hidden;
 }
@@ -92,9 +92,16 @@ input:valid{
 
 }
 
-PasswordChecklist{
+.checkList{
+    position: absolute;
     width: fit-content;
-    margin-left: 50%;
+    margin-left: 43%;
+    bottom: 5%;
+    margin-top: 10px;
+    background-color: rgba(226, 233, 214, 1);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2) ;
+
     
 }
 
