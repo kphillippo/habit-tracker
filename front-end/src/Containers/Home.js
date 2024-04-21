@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import "../Css/home.css"
 import tempStatsImage from './tempStats.png';
 import { IoMdFlame } from "react-icons/io";
@@ -7,6 +7,7 @@ import { GrAchievement } from "react-icons/gr";
 import { GoGoal } from "react-icons/go";
 import { apiRequest } from "./../utils/reqTool";
 import { useNavigate } from "react-router-dom";
+
 
 function Home(props) {
     const [todosNumber, setTodosNumber] = useState(0);
@@ -44,6 +45,38 @@ function Home(props) {
     //Returns html with quote
     function generateQuote() {
         return sessionStorage.getItem("quote");
+    }
+
+    function generateGuestHome() {
+        if (!userStatus) {
+            return<>
+            <div class = "guest">
+                <div class = "home_guest_login">
+                <div class = "home_title">Welcome to HabitConnect!</div>
+                <div class = "point1"><ul></ul><li>Build lasting habits with our easy-to-use tracker</li></div>
+                <div class = "point2"><ul></ul><li>Manage your to do list with ease. </li></div>
+                <div class = "point3"><ul></ul><li>Rise in the leader boards, and compete against your friends in challenges!</li></div>
+                <div class = "no_account">Don’t have an account? <a href="http://localhost:3000/signup">Sign up today!</a></div>               
+                </div>
+                <div class = "home_dailies">
+                    <div class = "dailies_home_title">Dailies</div>
+                    <div class = "dailies_home_desc">Create and track your habits and to do list.</div>
+                </div>
+                <div class = "challenges_home">
+                    <div class = "challenges_home_title">Challenges</div>
+                    <div class = "challenges_home_desc">Challenge your friends to keep their streak alive.</div>
+                </div>
+                <div class = "leaderboard_home">
+                    <div class = "leaderboard_home_title">My Leaderboard</div>
+                    <div class = "leaderboard_home_desc">See how you rank along side your friends.</div>
+                </div>
+                <div class = "stats_home">
+                    <div class = "stats_home_title">My Stats</div>
+                    <div class = "stats_home_desc">Monitor your progress with a personalized statistics page.</div>
+                </div>
+            </div>
+            </>;
+        }
     }
 
     //Handles navigation to other pages
@@ -134,10 +167,13 @@ function Home(props) {
 
     return (
         <div className="main-container">
-            <div className="message">
-                {generateMessage()}
-                {generateQuote()}
-                <div id="quote"></div>
+            {/* <div className="message">
+            {generateMessage()}
+            {generateQuote()}
+            <div id="quote"></div>
+            </div> */}
+            <div>
+                {generateGuestHome()}
             </div>
             <div className="windowGallery">
                 <div className="windowLine">
