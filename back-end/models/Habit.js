@@ -125,5 +125,11 @@ HabitSchema.statics.massDelete = async function(GroupHabitID) {
     }
 }
 
+//returns the owner of a habit
+HabitSchema.statics.returnOwner = async function(GroupHabitID) {
+    const habit = await this.findOne({ _id: GroupHabitID});
+    return habit.Owner
+}
+
 const HabitModel = mongoose.model("Habit", HabitSchema);
 module.exports = HabitModel;

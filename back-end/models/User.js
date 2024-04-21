@@ -225,5 +225,10 @@ UserSchema.statics.updateLongestStreak = async function(userId, streak){
     await this.findByIdAndUpdate(userId, { LongestStreak: streak});
 }
 
+//updates the last day checked in
+UserSchema.statics.updatelastDayCheckedIn = async function(userId, newDay){
+    await this.findByIdAndUpdate(userId, { LastDayCheckedIn: newDay});
+}
+
 const UserModel = mongoose.model("User", UserSchema);
 module.exports = UserModel;

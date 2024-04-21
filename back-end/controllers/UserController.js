@@ -28,7 +28,6 @@ const {Username, Password} = req.body
     const FirstName = user.FirstName
     const LastName = user.LastName
     const Email = user.Email
-    const Streak = user.Streak
     const _id = user._id
 
     //checks how many habits and doto's the user has left to do today
@@ -75,6 +74,32 @@ const {Username, Password} = req.body
         const updateNotification = await Notifications.updateNotification(_id, todoTitle, todoMessage);
       }
     }
+
+    // Get today's date
+    const today = new Date();
+    const todaysDate = today.toISOString().split('T')[0]; // Format today's date in YYYY-MM-DD format
+
+    // Subtract one day to get yesterday's date
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    const yesterdaysDate = yesterday.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+
+    //last checked in day
+    const lastCheckInDayRaw = user.LastDayCheckedIn
+    const lastCheckInDay = lastCheckInDayRaw.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+
+console.log("yesterday", yesterdaysDate)
+console.log("today", todaysDate)
+console.log("lastday", lastCheckInDay)
+
+    // resets the streak to 0 if the last day checked in wasnt today or yesterday
+    if (!(lastCheckInDay == todaysDate || lastCheckInDay == yesterdaysDate)) {
+     //sets streak to 0
+     user.Streak = 0;
+     await user.save();
+    }
+
+    const Streak = user.Streak;
 
     res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email})
   }catch(error){
