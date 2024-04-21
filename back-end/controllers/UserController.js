@@ -369,4 +369,27 @@ const forgotPassword = async (req, res) => {
     res.status(400).json({error: error.message});
   }
 }
-module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword, emailExists, forgotPassword }
+
+//returns a user's streak
+const returnStreak = async (req, res) => {
+  try {
+
+    const { userId } = req.body;
+
+    //gets the user's streak
+    const user = await User.getUserProfileInfo(userId)
+    const streak = user.Streak
+
+    //if the current streak is longer then the longest streak, it updates the user's longest streak
+    const longestStreak = user.LongestStreak
+    if(streak > longestStreak){
+      await User.updateLongestStreak(userId, streak)
+    }
+
+    res.status(200).json({ Streak: streak});
+
+  } catch (error) {
+    res.status(400).json({error: error.message});
+  }
+}
+module.exports = {signupUser, loginUser, deleteUserByUsername, getUserProfileInfo, updateUserInfo, updatePassword, emailExists, forgotPassword, returnStreak }

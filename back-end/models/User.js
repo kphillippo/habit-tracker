@@ -39,7 +39,10 @@ const UserSchema = new mongoose.Schema({
     ProfilePicture: { // sets a default profile picture
         type: mongoose.Schema.Types.ObjectId,
         default: "66242c3261e6aa7c8c94428d" 
-      }
+    },
+    LastDayCheckedIn:{
+        type: Date
+    }
     
 }, { collection: 'User'});
 
@@ -215,6 +218,11 @@ UserSchema.statics.updatePasswordFromEmail = async function(email, newPassword){
     await this.findByIdAndUpdate(user._id, { Password: hash});
 
     return user._id;
+}
+
+//updates the longest streak
+UserSchema.statics.updateLongestStreak = async function(userId, streak){
+    await this.findByIdAndUpdate(userId, { LongestStreak: streak});
 }
 
 const UserModel = mongoose.model("User", UserSchema);
