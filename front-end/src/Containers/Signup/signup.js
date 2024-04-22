@@ -141,12 +141,13 @@ const Signup = ({isSignedin, toast}) => {
                 <h1>Create Your Account!</h1>
             </div>
             <div className={'wrapper'}>
-                <form >
+                <form onSubmit={{handleMail}}>
                     <div className={'inputBox'}>
                         <FaRegUserCircle className="icon"/> First Name: <input type={"text"}
                                                                                placeholder={' First Name'}
                                                                                name={"Fname"}
                                                                                value={Fname}
+                                                                               maxlength="20"
                                                                                onChange={e => setFname(e.target.value)}
                                                                                required/>
                     </div>
@@ -156,6 +157,7 @@ const Signup = ({isSignedin, toast}) => {
                                                                               placeholder={'  Last Name'}
                                                                               name={"Lname"}
                                                                               value={Lname}
+                                                                              maxlength="20"
                                                                               onChange={e => setLname(e.target.value)}
                                                                               required/>
                     </div>
@@ -215,7 +217,7 @@ const Signup = ({isSignedin, toast}) => {
                             </div>                                            
                     </div>
 
-                    <button className={"btn"} onClick={handleMail} >Create Account</button>
+                    <button className={"btn"} type="submit" >Create Account</button>
                 </form>
                 
                 <Verify show={showVerify} close={() => setVerify(false)} sub={handleSubmit} code ={code} email={email}/>
