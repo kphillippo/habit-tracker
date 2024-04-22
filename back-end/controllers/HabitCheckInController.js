@@ -48,10 +48,14 @@ const UpdateHabitCheckIn = async (req, res) => {
 
         //last checked in day
         const lastCheckInDayRaw = user.LastDayCheckedIn
-        const lastCheckInDay = lastCheckInDayRaw.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+        let lastCheckInDay;
+        if (lastCheckInDayRaw) {
+            lastCheckInDay = lastCheckInDayRaw.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+        }
+
 
         //if the user's last check in date is yesterday, update user's streak and update user last check in date variable
-        if(lastCheckInDay != today2){
+        if(lastCheckInDay !== today2){
 
             //updates user's streak
             user.Streak++;
