@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 function Home(props) {
     const [todosNumber, setTodosNumber] = useState(0);
+    const [streakN, setstreakN] = useState(0);
     const userStatus = props.data.userToken;
     let currentStreak = sessionStorage.getItem("userStreak");
     const streakActive = currentStreak>0 ? true: false;
@@ -23,6 +24,16 @@ function Home(props) {
         apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
         .then(res => {
             setTodosNumber(res.length);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        const userdata = {
+            userId: sessionStorage.getItem("userId")
+        }
+        apiRequest("POST", "user/returnStreak", userdata)
+        .then(res => {
+            setstreakN(res.Streak);
         })
         .catch(err => {
             console.log(err);
@@ -89,7 +100,7 @@ function Home(props) {
     function generateStreakWindow() {
         if (userStatus) {
             let flameColor = "#c0c6b7";
-            let message = <>You've been consistent for {currentStreak} days!<br></br>Extend your streak now!</>
+            let message = <>You've been consistent for {streakN} days!<br></br>Extend your streak now!</>
             if (streakActive) {
                 flameColor = "#e57028";
                 message = <>Congrats! You extended your streak today!<br></br>Checkout what habits you completed?</>
@@ -112,7 +123,15 @@ function Home(props) {
         if (userStatus) {
             return <>
                 <div className='windowStats' id="windowGeneral" onClick={() => handleClick('/stats')}>
-                    <img src={tempStatsImage} width="100%" alt="stats_display" />
+                <div><center>
+                    <div style={{fontSize: 'larger'}}>My Quick Insights:</div>
+                    <div>
+                        <div><ul></ul><li>Longest streak:</li></div>
+                        <div><ul></ul><li>Current streak:</li></div>
+                        <div><ul></ul><li>Total Habits Completed:</li></div>
+                        <div><ul></ul><li>Total To Do's Completed:</li></div>
+                    </div></center>
+                </div>
                 </div>
             </>;
         }

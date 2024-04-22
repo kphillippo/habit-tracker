@@ -40,6 +40,7 @@ export default class HabitItem extends Component {
                     .then(({data}) => {
                         console.log(data);
                         this.props.toast.success("You just finished a habit!")
+                        window.location.reload(true);
                     })
                     .catch(err => {
                         console.log(err);
@@ -59,6 +60,7 @@ export default class HabitItem extends Component {
                             .then(({token, ...data}) => {
                                 console.log(data);
                                 this.props.toast.success("You just finished a habit!")
+                                window.location.reload(true);
                             })
                             .catch(err => {
                                 console.log(err);
@@ -92,6 +94,7 @@ export default class HabitItem extends Component {
                     .then(({data}) => {
                         console.log(data);
                         this.props.toast.success("You just finished a habit!");
+                        window.location.reload(true);
                     })
                     .catch(err => {
                         console.log(err);
