@@ -117,4 +117,43 @@ const timesToDoCompletedLast30Days = async (req, res) => {
     //return the number of completed days / 30
 }
 
-module.exports = { habitsCompletedLast30Days, todosCompletedLast30Days, timesHabitCompletedLast30Days, timesToDoCompletedLast30Days };
+const timesCompletedByHour = async (req, res) => {
+    try {//get habit
+        const userId = req.query.user_id;
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const habits = await Habit.find({Owner: userId});
+        const habitIds = habits.map(habit => habit._id);
+
+        const today = new Date();
+        today.setUTCHours(23, 59, 59, 999);
+        const thirtyDaysAgo = new Date(new Date().setDate(today.getDate() - 30));
+        thirtyDaysAgo.setUTCHours(0, 0, 0, 0);
+
+        const checkIns = await HabitCheckIn.find({
+            HabitID: {$in: habitIds},
+            CheckInTime: {
+                $gte: thirtyDaysAgo,
+                $lt: today
+            }
+        });
+
+        const checkInsByHour = new Map();
+        checkIns.forEach(checkIn => {
+            const hour = checkIn.CheckInTime.getHours();
+            if (checkInsByHour.has(hour)) {
+                checkInsByHour.set(hour, checkInsByHour.get(hour) + 1);
+            } else {
+                checkInsByHour.set(hour, 1);
+            }
+        });
+
+        res.status(200).json(Object.fromEntries(checkInsByHour));
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+module.exports = { habitsCompletedLast30Days, todosCompletedLast30Days, timesHabitCompletedLast30Days, timesToDoCompletedLast30Days, timesCompletedByHour };

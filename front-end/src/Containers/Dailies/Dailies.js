@@ -121,7 +121,7 @@ useEffect(() => {
                     <div id = "div1">
                     <table id = "table1">
                       <tr>
-                      <td width = "50%">Habit</td>
+                      <td width = "50%">Habit (✰ - Challenge)</td>
                       <td width = "22.5%">Streak</td>
                       <td width = "22.5%">Goal</td>
                       <td width = "5%"><button onClick={() => setHabitManager(true)} className = "btn_cog"><FaCog id = "cog" size = "2.5vw"></FaCog></button></td>
@@ -157,15 +157,11 @@ useEffect(() => {
             )))}
             
         </table>
-        
-        </div>
-        <div className="TODO_bar">
-        <input className="type-new" placeholder="Add new to do item here" type="text"/>
-        <button className="plus" onClick ={() => setNewToDoPopup(true)} >< FaPlus size = "2vw"></FaPlus></button>
         </div>
     </div>
-      <div className="my-habits">My Habits</div>
-      <div className="to-do-list">To Do List</div>
+      <div className="my-habits">My Habits </div>
+      <div className="to-do-list">To Do List <button className="plus" onClick ={() => setNewToDoPopup(true)} >< FaPlus size = "2vw"></FaPlus></button></div>
+      
       {/* <div className = "date_container">
       <div className="january">January</div>
       <div className="calendar_container">

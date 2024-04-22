@@ -88,10 +88,6 @@ const {Username, Password} = req.body
     const lastCheckInDayRaw = user.LastDayCheckedIn
     const lastCheckInDay = lastCheckInDayRaw.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
 
-console.log("yesterday", yesterdaysDate)
-console.log("today", todaysDate)
-console.log("lastday", lastCheckInDay)
-
     // resets the streak to 0 if the last day checked in wasnt today or yesterday
     if (!(lastCheckInDay == todaysDate || lastCheckInDay == yesterdaysDate)) {
      //sets streak to 0
@@ -101,7 +97,13 @@ console.log("lastday", lastCheckInDay)
 
     const Streak = user.Streak;
 
-    res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email})
+    let userStreakOn = false;
+    //if the date checked in is the current date it returns true, otherwise it returns false
+    if(todaysDate == lastCheckInDay){
+      userStreakOn = true;
+    }
+
+    res.status(200).json({_id, Username, token, FirstName, LastName, Streak, Email, userStreakOn})
   }catch(error){
     res.status(400).json({error: error.message})
   }
@@ -299,7 +301,7 @@ const updatePassword = async (req, res) => {
       </span>
       </p>
       <p>
-        <strong>Your HabitConnect password was changed from your user profile.&nbsp;</strong>
+        <strong>Your HabitConnect password was changed.&nbsp;</strong>
       </p>
       <p>
         <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
@@ -364,7 +366,7 @@ const forgotPassword = async (req, res) => {
       </span>
       </p>
       <p>
-        <strong>Your HabitConnect password was changed from your user profile.&nbsp;</strong>
+        <strong>Your HabitConnect password was changed.&nbsp;</strong>
       </p>
       <p>
         <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
@@ -400,6 +402,7 @@ const returnStreak = async (req, res) => {
   try {
 
     const { userId } = req.body;
+    let bool = false;
 
     //gets the user's streak
     const user = await User.getUserProfileInfo(userId)
@@ -411,7 +414,20 @@ const returnStreak = async (req, res) => {
       await User.updateLongestStreak(userId, streak)
     }
 
-    res.status(200).json({ Streak: streak});
+    // Get today's date
+    const today = new Date();
+    const today2 = today.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+
+    //last checked in day
+    const lastCheckInDayRaw = user.LastDayCheckedIn
+    const lastCheckInDay = lastCheckInDayRaw.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
+
+    //if the date checked in is the current date it returns true, otherwise it returns false
+    if(today2 == lastCheckInDay){
+      bool = true;
+    }
+
+    res.status(200).json({ Streak: streak, bool});
 
   } catch (error) {
     res.status(400).json({error: error.message});
