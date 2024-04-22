@@ -48,58 +48,6 @@ app.use('/api/groupHabit', groupHabitRoutes);
 
 mongoose.connect(serverLink);
 
-/*
-//Upload Image code starts here
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
- 
-var multer = require('multer');
- 
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-});
- 
-var upload = multer({ storage: storage });
- 
-//get request for image
-app.get('/', (req, res) => {
-    UserModel.find({})
-    .then((data, err)=>{
-        if(err){
-            console.log(err);
-        }
-        res.render('imagepage',{items: data})
-    })
-});
- 
-//post request for image
-app.post('/', upload.single('image'), (req, res, next) => {
- 
-    var obj = {
-        Username: req.body.Username,
-        ProfilePicture: {
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-            contentType: 'image/png'
-        }
-    }
-    imgSchema.create(obj)
-    .then ((err, item) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            // item.save();
-            res.redirect('/');
-        }
-    });
-});
-
- 
 //if testing it doesnt open the port
 if (process.env.NODE_ENV !== 'test') {
     //listening function
