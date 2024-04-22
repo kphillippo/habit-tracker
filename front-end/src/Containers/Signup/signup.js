@@ -177,6 +177,7 @@ const Signup = ({isSignedin, toast}) => {
                                                                              maxlength="20"
                                                                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                                                                              onChange={e => setUsername(e.target.value)}
+                                                                             max={20}
                                                                              required/>
                                              
                     </div>
