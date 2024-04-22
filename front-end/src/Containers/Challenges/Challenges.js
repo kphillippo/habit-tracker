@@ -54,7 +54,7 @@ function Challenges(props){
         }
         var isJoined = 0;
         for(var inf in members){
-            if(sessionStorage.getItem("userId") == inf){
+            if(props.user.userName === inf){
                 isJoined = 1;
                 break;
             }
@@ -104,7 +104,7 @@ function Challenges(props){
         let challengeList = [];
         for(let i=0; i<challenges.length; i++){
             for(let j = 0; j < challenges[i].Members.length; j++){
-                if(sessionStorage.getItem("userId") == challenges[i].Members[j]){
+                if(props.user.userName === challenges[i].Members[j]){
                     joined = <span> <IoMdFlame color='#e57028'></IoMdFlame>  {challenges[i].Streak[j]} </span>
                 }else {
                     joined = <button className="joinedBtn" onClick={e => JoinChallenge(e, challenges[i]._id, challenges[i].Members)}>Join</button> 

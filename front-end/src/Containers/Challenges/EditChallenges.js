@@ -10,7 +10,7 @@ class EditChallenges extends Component {
             Goal: props.data.Goal,
             Status: false,
             MeasurementType: "1",
-            UserID: sessionStorage.getItem("userId"),
+            UserID: props.data.Owner,
             ChallengeID: props.data.ChallengeID
         };
 
