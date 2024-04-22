@@ -31,17 +31,18 @@ export default class TodoItem extends Component {
     
 
     handleCheckBoxClick(event){
-        // apiRequest("POST", "habit/createHabit", data)
-        // .then(({token, ...data}) => {
-        //     console.log(data);
-        //     this.props.isUpdated();
-        //     this.props.toast.success("A habit is created!")
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        //     this.props.toast.error(err.error);
-        // })
         this.setState({ Status: event.target.checked });
+        //todo: send POST request to check-in the todo
+        console.log(this.state)
+        apiRequest("POST", "todocheckin/updateCheckIn", {"ToDoID":this.state.ToDoId, "status":this.state.Status})
+            .then(({data}) => {
+                console.log(data);
+                this.props.toast.success("You just finished a todo task!");
+            })
+            .catch(err => {
+                console.log(err);
+                this.props.toast.error(err.error);
+            })
     }
 
     toggleEditTodo = () => {
