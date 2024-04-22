@@ -6,6 +6,7 @@ import EditChallenges from "./EditChallenges";
 import ViewChallenge from "./ViewChallenge";
 import {apiRequest} from "../../utils/reqTool"
 import DeleteChallenge from "./DeleteChallenge";
+import { useNavigate } from "react-router-dom";
 
 export default class ChallengeManagerItem extends Component {
     constructor(props){
@@ -19,7 +20,7 @@ export default class ChallengeManagerItem extends Component {
             Status: false,
             editChallenge: false,
             Owner: props.data.Owner,
-            ChallengeID: props.data.challengeID,
+            ChallengeID: props.data._id,
             Members: props.data.Members,
             challenge: props.data,
             deleteChallenge: false,
@@ -38,25 +39,26 @@ export default class ChallengeManagerItem extends Component {
 
     toggleEditChallenge = () => {
         const {Owner } = this.state;
-        if(Owner === sessionStorage.getItem("userId")){
+        if(Owner === sessionStorage.getItem("userName")){
             this.setState(prevState => ({ editChallenge: !prevState.editChallenge }));
         }
         else{
             this.setState(prevState => ({ viewChallenge: !prevState.viewChallenge }));
-        }
-        
+        }   
     }
 
     
     updateChallenge(data){
-        data.Goal = Number(data.Goal);
-        data.Title = String(data.Title);
+        data.Goal = Number(data.Goal)
+        data.MeasurementType = Number(data.MeasurementType)
+        const {ChallengeID, Title, MeasurementType, Goal} = data;
+        console.log(data)
 
         let info = {
-            "GroupHabitID": data.challengeID,
-            "Title" : 'Soo confused',
-            "MeasurementType" : data.MeasurementType,
-            "Goal" : data.Goal
+            "GroupHabitID": ChallengeID,
+            "Title" : Title,
+            "MeasurementType" : MeasurementType,
+            "Goal" : Goal
         }
         
         apiRequest("POST", "groupHabit/editGroupHabit", info)
@@ -70,20 +72,31 @@ export default class ChallengeManagerItem extends Component {
         })
     }
 
+
     deleteChallenge(bool){
         if(bool){
+            const {ChallengeID, Owner} = this.state;
+            console.log(ChallengeID)
             let info = {
-                "GroupHabitID": this.state.ChallengeID
+                "GroupHabitID": ChallengeID,
+                "UserID": Owner
             }
-            apiRequest("DELETE", "groupHabit/deleteGroupHabit", info)
-                .then(() => {
-                    this.props.isUpdated()
-                    this.props.toast.success("The habit is deleted!")
-                })
-                .catch(err => {
-                    console.log(err);
-                    this.props.toast.error(err.error);
-                })
+            
+            let inf = {
+                "GroupHabitID": ChallengeID
+            }
+
+            apiRequest("POST", "groupHabit/deleteGroupHabit", inf)
+            .then(() => {
+                this.props.isUpdated()
+                this.props.toast.success("The habit is deleted!")
+                
+            })
+            .catch(err => {
+                console.log(err);
+                this.props.toast.error(err.error);
+            })
+            
         }
     }
 
@@ -95,19 +108,25 @@ export default class ChallengeManagerItem extends Component {
             Title: this.props.data.Title,
             Streak: this.props.data.Streak,
             MeasurementType: this.props.data.MeasurementType,
-            Goal: this.props.data.Goal
+            Goal: this.props.data.Goal,
+            Members: this.props.data.Members
+
           });
         }
     }
 
     render(){ 
-        const { Status, Title, editChallenge, deleteChallenge, viewChallenge} = this.state;
+        const { Status, Title, editChallenge, deleteChallenge, viewChallenge, Owner} = this.state;
+        let btn;
+        if(sessionStorage.getItem("userName") === Owner){
+            btn = <button onClick={this.toggleDeleteChallenge} class = "managerbtn_delete"><IoTrashOutline id ="delete" size="2.5vw" color="#000000" ></IoTrashOutline></button>
+        }
         return(
             <>
                 <tr>
                     <td class = "todo_item"> {Title}</td>
                     <td><button onClick={this.toggleEditChallenge} class = "managerbtn_edit" > <LuPencil  color="#000000" size = "2.5vw"></LuPencil></button></td>
-                    <td><button onClick={this.toggleDeleteChallenge} class = "managerbtn_delete"><IoTrashOutline id ="delete" size="2.5vw" color="#000000" ></IoTrashOutline></button></td>
+                    <td>{btn}</td>
                 </tr>
                 {viewChallenge && <ViewChallenge toast={this.props.toast} data={this.state} trigger={viewChallenge} setTrigger={this.toggleEditChallenge}/> }
                 {editChallenge && <EditChallenges toast={this.props.toast} data={this.state} trigger={editChallenge} setTrigger={this.toggleEditChallenge} updateChallenge={this.updateChallenge} />}

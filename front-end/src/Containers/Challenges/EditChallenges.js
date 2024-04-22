@@ -9,7 +9,7 @@ class EditChallenges extends Component {
             Streak:0,
             Goal: props.data.Goal,
             Status: false,
-            MeasurementType: "1",
+            MeasurementType: props.data.MeasurementType,
             UserID: props.data.Owner,
             ChallengeID: props.data.ChallengeID
         };

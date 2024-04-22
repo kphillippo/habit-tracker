@@ -70,8 +70,7 @@ class ViewChallenge extends Component {
         return trigger ? <>
             <div className='views'>
                     <div className='viewTop'>
-                        <span>View Challenge</span> 
-                        <button className='viewClose'>&times</button>
+                        <span id='Title'>View Challenge</span> 
                         <div className='inp'>
                             Name:
                             <span className='value'>{Title}</span>
@@ -85,23 +84,35 @@ class ViewChallenge extends Component {
                             <span className='value'>{Owner}</span>
                         </div>
                     </div>   
-                    <div className="Lcontent">
+                    
+                    <div className="Viewcontent">
+                        <div className="TableHead">
+                            <table>
+                                <tr>
+                                    <td width="15%"></td>
+                                    <td width="65%" id="challenge"> Participants</td>
+                                    <td width="20%"> My Streak</td>
+                                </tr>
+                            </table>
+                        </div>
                         <table id="Table">
                             <tbody id="TableBody">
                                 {memberList}
                             </tbody>
                         </table>
                     </div>    
-                    <button class = "newhabit_close" onClick={() => this.props.setTrigger(false)}>X</button>
+                    <button class = "close_btn" onClick={() => this.props.setTrigger(false)}>X</button>
             </div>
         </> : null;
     };
 
     render(){
         return (
-            <body className='views'>
-                {this.generateViewChallenge()}
-            </body>
+            <div className='overlay'>
+                <div className='viewChallengePage'>
+                    {this.generateViewChallenge()}
+                </div>
+            </div>
         );
        }
 }

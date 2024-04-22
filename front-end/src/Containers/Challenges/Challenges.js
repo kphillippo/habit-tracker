@@ -149,10 +149,10 @@ function Challenges(props){
     };
 
     return (
-        <body>
+        <div>
             {generateChallenges()}
             <ChallengeManager toast = {toast} trigger = {challengeManager} setTrigger = {setChallengeManager} isUpdated = {() => triggerDataRefresh()} challenges = {challenges}></ChallengeManager>
-        </body>        
+        </div>        
     );
 }
 
