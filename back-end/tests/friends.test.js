@@ -285,7 +285,7 @@ describe('Friends API', () => {
 
     describe('Decline Friend Request', () => {
         //Decline Friend Request (creates a friend request first)
-        //cant test anymore because we cannot test emails and an email needs to be sent to send a friend request to be declined
+        //cant test anymore because we cannot test emails and an email needs to be sent to send a friend request to be declines
         /*test('Decline Friend Request', async () => {
 
             //test data
