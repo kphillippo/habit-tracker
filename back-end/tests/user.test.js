@@ -308,7 +308,7 @@ describe('User API', () => {
     //test data
     const userData = {
       _id: _id,
-      Password: 'Password!1',
+      Password: 'Password1!',
       newPassword:'Password!2'
     };
 
@@ -324,7 +324,7 @@ describe('User API', () => {
     const userData2 = {
       _id: _id,
       Password: 'Password!2',
-      newPassword:'Password!1'
+      newPassword:'Password1!'
     };
 
     // Call the updateUserInfo static method
@@ -358,8 +358,8 @@ describe('User API', () => {
     //test data
     const userData = {
       _id: _id,
-      Password: 'Password!1',
-      newPassword:'Password!1'
+      Password: 'Password1!',
+      newPassword:'Password1!'
     };
 
     // Call the updateUserInfo static method
