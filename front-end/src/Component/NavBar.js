@@ -184,7 +184,7 @@ function NavBar({isSignedout, data, toast}) {
 
                 <NavItem className="align-right">
                     <IoMdFlame size={30} color="#e57028"></IoMdFlame>
-                    <span>{userInfo.userStreak}</span>
+                    <span>{sessionStorage.getItem("userStreak")}</span>
                 </NavItem>
                 
                 <NavItem className="">

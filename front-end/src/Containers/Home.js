@@ -12,8 +12,8 @@ import { useNavigate } from "react-router-dom";
 function Home(props) {
     const [todosNumber, setTodosNumber] = useState(0);
     const userStatus = props.data.userToken;
-    const streakActive = false;
-    let currentStreak = props.data.userStreak;
+    let currentStreak = sessionStorage.getItem("userStreak");
+    const streakActive = currentStreak>0 ? true: false;
     if (currentStreak == "undefined") {
         currentStreak = 0;
     }
@@ -56,7 +56,7 @@ function Home(props) {
                 <div class = "point1"><ul></ul><li>Build lasting habits with our easy-to-use tracker</li></div>
                 <div class = "point2"><ul></ul><li>Manage your to do list with ease. </li></div>
                 <div class = "point3"><ul></ul><li>Rise in the leader boards, and compete against your friends in challenges!</li></div>
-                <div class = "no_account">Don’t have an account? <a href="http://localhost:3000/signup">Sign up today!</a></div>               
+                <div class = "no_account">Don't have an account? <a href="http://localhost:3000/signup">Sign up today!</a></div>               
                 </div>
                 <div class = "home_dailies">
                     <div class = "dailies_home_title">Dailies</div>

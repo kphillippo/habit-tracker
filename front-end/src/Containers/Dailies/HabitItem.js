@@ -97,6 +97,7 @@ export default class HabitItem extends Component {
                         console.log(err);
                         this.props.toast.error(err.error);
                     })
+
     }
 
     componentWillUnmount() {
