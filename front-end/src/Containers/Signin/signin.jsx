@@ -3,6 +3,8 @@ import '../../Css/signin.css';
 import { FaRegUserCircle, FaLock } from "react-icons/fa";
 import {apiRequest} from "../../utils/reqTool"
 import { useNavigate } from "react-router-dom";
+import {Icon} from 'react-icons-kit';
+import {eyeOff, eye} from 'react-icons-kit/feather';
 
 
 const Signin = ({ isSignedin, toast }) =>{
@@ -10,6 +12,9 @@ const Signin = ({ isSignedin, toast }) =>{
     //todo: when the window size is small, the layout is messed up
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [type, setType] = useState('password');
+    const [icon, setIcon] = useState(eyeOff);
+
     let navigate = useNavigate();
 
 
@@ -37,15 +42,23 @@ const Signin = ({ isSignedin, toast }) =>{
                 console.log(err);
                 toast.error(err.error);
             })
-            
-        console.log('Login with:', username, password);
     };
+
+    const handleToggle = () => {
+        if (type==='password'){
+           setIcon(eye);
+           setType('text')
+        } else {
+           setIcon(eyeOff)
+           setType('password')
+        }
+    }
 
     return (
         <div className={'LoginForm'}>
             <div className={'Top'}>
-                <h1>Welcome to HabitConnect!!</h1>
-                <p>"I am a random quote everyday to give you motivation." = Person McPerson</p>
+                <h1>Welcome to HabitConnect!</h1>
+                <p>{sessionStorage.getItem("quote")}</p>
             </div>
             <div className={'wrapper'}>
                 <form onSubmit={handleSubmit} >
@@ -56,7 +69,8 @@ const Signin = ({ isSignedin, toast }) =>{
                         type={"text"} placeholder={'  Username'}
                         name={"username"}
                         value={username}
-                        max={20}
+                        maxlength="20"
+                        oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                         onChange={e => setUsername(e.target.value)}
                         required/>
 
@@ -64,17 +78,21 @@ const Signin = ({ isSignedin, toast }) =>{
                     <div className={'inputBox'}>
                         <FaLock className="icon"/>     Password:
                         <input
-                            type={"password"} placeholder={'  Password'}
-                            name={"password"}
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            required/>
-
+                                type={type} placeholder={'  Password'}
+                                name={"password"}
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$'
+                                required/>
+                                
+                            <div className='Icon'> 
+                                <Icon class="absolute mr-10" icon={icon} size={25} onClick={handleToggle}/>
+                            </div>
                     </div>
 
                     <button type={"submit"}>Login</button>
                     <div className='remember-forget'>
-                        <a href="#"> Forgot password</a>
+                        <a href="/forgot"> Forgot password</a>
                     </div>
 
                     <div className={'register-link'}>

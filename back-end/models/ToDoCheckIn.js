@@ -5,9 +5,14 @@ const ToDoCheckInSchema = new mongoose.Schema({
         type: mongoose.ObjectId,
         required: true
     },
-    Count:{
-        type: Number,
-        required: true,
-        default: 0
+    Status:{
+        type: Boolean,
+        required: true
+    },
+    CheckInTime: {
+        type: Date,
+        required: true
     }
 }, { collection: 'ToDoCheckIn'});
+
+module.exports = mongoose.model('ToDoCheckIn', ToDoCheckInSchema);

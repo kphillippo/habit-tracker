@@ -1,50 +1,51 @@
-import "../../Css/ViewFriendPopup.css";
-import React, { useState, useEffect } from "react";
-import { apiRequest } from "../../utils/reqTool";
+import React from "react";
+import "../../Css/userProfilePopups.css";
+import { CgProfile } from "react-icons/cg";
+import { IoMdFlame } from "react-icons/io";
 
+/**
+ * 
+ * @param {*} parametersForPopup - function to close popup, friend to view
+ * @returns popup to see friend profile information
+ */
 function ViewFriendPopup({ onClose, friend }) {
-  // const [fullInfoF, setFullInfoF] = useState(null);
-  // const [isLoadingF, setIsLoadingF] = useState(true);
 
-  // useEffect(() => {
-  //   // Function to fetch user info
-  //   const fetchFriendInfo = async () => {
-  //     try {
-  //       // Perform the API request
-  //       const response = await apiRequest("POST", "user/userProfileInfo?user_id=" + sessionStorage.getItem("userId"))
-  //       const data = await response; // Assuming the response is JSON
-
-  //       // Update state with the fetched user info
-  //       setFullInfoF(data);
-  //     } catch (err) {
-  //       console.error("Failed to fetch user info:", err);
-  //       // Optionally handle error state here
-  //     } finally {
-  //       setIsLoadingF(false); // Set loading to false regardless of outcome
-  //     }
-  //   };
-
-  //   fetchFriendInfo(); // Call the fetch function when the component mounts
-  // }, []); // Empty dependency array means this effect runs once on mount
-
-  // if (isLoadingF) {
-  //   return <div>Loading...</div>; // Render loading state
-  // }
-
-  // if (!fullInfoF) {
-  //   return <div>Error loading user information.</div>; // Render error state or alternative content
-  // }
+  function generateFriendProfile() {
+    let flameColor = "#b5b5b5"
+    if (friend.Streak>0) flameColor = "#e57028";
+    let pictureDefault = <><CgProfile size={110} id="friendPictureIcon"></CgProfile></>;
+    return <><div style={{ display: 'inline-flex', marginBottom: '15px' }}>
+      <div className="friendPic">
+        {pictureDefault}
+      </div>
+      <table className="friendInfo">
+        <tbody>
+          <tr key={"FirstName & LastName"} >
+            <td>&nbsp;&nbsp;{friend.FirstName}&nbsp;&nbsp;{friend.LastName}</td>
+          </tr>
+          <tr key={"Username"} >
+            <td>&nbsp;&nbsp;{friend.Username}</td>
+          </tr>
+          <tr key={"Email"} >
+            <td>&nbsp;&nbsp;{friend.Email}</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      Streak:&nbsp;&nbsp;&nbsp;&nbsp; <IoMdFlame color={flameColor} size={40}></IoMdFlame> {friend.Streak}
+    </>
+  }
 
   return (
-    <div className="bg_blurV">
-      <div className="mainFrameV">
-        <div className="innerFrameV">
+    <div className="bg_blur">
+      <div style={{ height: '38%' }} className="mainFrame">
+        <div className="innerFrame">
           <center><div className="Title">
             View Friend Profile<br></br>
-           ID:  {friend}
+            {generateFriendProfile()}
           </div>
           </center>
-          <button className="popup_closeA" onClick={onClose}>X</button>
+          <button className="popup_close" onClick={onClose}>X</button>
         </div>
       </div>
     </div>

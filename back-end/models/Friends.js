@@ -27,8 +27,6 @@ FriendsSchema.statics.deleteFriendRecord = async function(User, FriendsWith) {
     //deletes the records
     const existingRecord = await this.findOneAndDelete({ User: User, FriendsWith: FriendsWith });
     const existingRecord2 = await this.findOneAndDelete({ User: FriendsWith, FriendsWith: User});
-
-    return existingRecord, existingRecord2;
 }
 
 //accepts a friend request
@@ -41,18 +39,8 @@ FriendsSchema.statics.acceptFriendRequest = async function(User, FriendsWith) {
     return existingRecord, existingRecord2;
 }
 
-//finds all friend requests to a particualr user
-FriendsSchema.statics.findFriendRequests = async function(User) {
-    return await this.find({ User: User, RequestPending: true, Requestee: User });
-}
-
 //finds friends who are in the table whos request pending status is false
 FriendsSchema.statics.findFriends = async function(User) {
-    return await this.find({ User: User, RequestPending: false });
-}
-
-//finds friends and adds user and sorts by streak for leaderboard
-FriendsSchema.statics.findLeaderboard = async function(User) {
     return await this.find({ User: User, RequestPending: false });
 }
 

@@ -19,7 +19,8 @@ export default class TodoItem extends Component {
             Remind:props.data.Remind,
             Repeat:props.data.Repeat,
             UserId:sessionStorage.getItem("userId"),
-            ToDoId:props.data._id
+            ToDoId:props.data._id,
+            Disable: false
         }
         this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
         this.toggleEditTodo = this.toggleEditTodo.bind(this);
@@ -30,6 +31,16 @@ export default class TodoItem extends Component {
     
 
     handleCheckBoxClick(event){
+        // apiRequest("POST", "habit/createHabit", data)
+        // .then(({token, ...data}) => {
+        //     console.log(data);
+        //     this.props.isUpdated();
+        //     this.props.toast.success("A habit is created!")
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        //     this.props.toast.error(err.error);
+        // })
         this.setState({ Status: event.target.checked });
     }
 
@@ -47,7 +58,7 @@ export default class TodoItem extends Component {
         apiRequest("POST", `todo/updateTodo`, data)
         .then(() => {
             this.props.isUpdated()
-            this.props.toast.success("The todo is updated!")
+            this.props.toast.success("The to do is updated!")
         })
         .catch(err => {
             console.log(err);
@@ -60,7 +71,7 @@ export default class TodoItem extends Component {
             apiRequest("DELETE", `todo/deleteTodo?user_id=${this.state.UserId}&todo_id=${this.state.ToDoId}`)
                 .then(() => {
                     this.props.isUpdated()
-                    this.props.toast.success("The todo is deleted!")
+                    this.props.toast.success("The to do is deleted!")
                 })
                 .catch(err => {
                     console.log(err);
@@ -88,13 +99,13 @@ export default class TodoItem extends Component {
         return(
             <>
             <tr>
-                {this.state.Status === true && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick} defaultChecked></input><label for = "todo" style={deletedStyle}> {this.state.Title}</label></td>}
-                {this.state.Status === false && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick}></input><label for = "todo"> {this.state.Title}</label></td>}
+                {this.state.Status === true && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick} defaultChecked disabled={this.state.Disable}></input><label for = "todo" style={deletedStyle}> {this.state.Title}</label></td>}
+                {this.state.Status === false && <td><input type = "checkbox" id="todo" name="todo" onClick={this.handleCheckBoxClick} disabled={this.state.Disable}></input><label for = "todo"> {this.state.Title}</label></td>}
                 
                 <td><button onClick={this.toggleEditTodo} className = "btn_edit2"><LuPencil id ="edit" size="2.5vw"color="#000000"></LuPencil></button></td>
                 <td><button className = "btn_delete" onClick={this.toggleDeleteTodo}><IoTrashOutline id ="delete" size="2.5vw" color="#000000"></IoTrashOutline></button></td>
             </tr>
-            {editTodo && <EditToDoPopup data={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} updateTodo={(data) => this.updateTodo(data)} />}
+            {editTodo && <EditToDoPopup toast = {this.props.toast} data={this.state} trigger={editTodo} setTrigger={this.toggleEditTodo} updateTodo={(data) => this.updateTodo(data)} />}
             {deleteTodo && <DeletePopup type={"todo"} data={this.state} trigger={deleteTodo} setTrigger={this.toggleDeleteTodo} deleteTodo={this.deleteTodo}></DeletePopup>}
             </>
         )

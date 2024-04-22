@@ -32,14 +32,17 @@ const UserSchema = new mongoose.Schema({
     LongestStreak:{
         type: Number,
         default: 0
-    }, 
+    },
     Settings:{
         type: mongoose.ObjectId
     },
-    ProfilePicture:{
-        data: Buffer, // Image data as buffer
-        contentType: String // MIME type of the image
+    ProfilePicture: { // sets a default profile picture
+        type: mongoose.Schema.Types.ObjectId,
+        default: "66242c3261e6aa7c8c94428d" 
     },
+    LastDayCheckedIn:{
+        type: Date
+    }
     
 }, { collection: 'User'});
 
@@ -129,11 +132,27 @@ UserSchema.statics.getUserId = async function(Username){
     const user = await this.findOne({Username: Username});
 
     if(!user){
-        
         throw Error('Username does not exist!')
     }
-
     return user._id;
+}
+
+//checks if the email input matches an email that a user has
+UserSchema.statics.emailExists = async function(email){
+    const user = await this.findOne({Email: email});
+
+    if(!user){
+        return "Email does not exist!"
+    }
+    return "Email exists!";
+}
+
+//returns a user from an email
+UserSchema.statics.returnUserFromEmail = async function(email){
+    const user = await this.findOne({Email: email});
+
+    
+    return user;
 }
 
 //static updatePassword function
@@ -149,8 +168,11 @@ UserSchema.statics.updatePassword = async function(_id, Password, newPassword){
         throw Error('Incorrect Password!')
     }
 
-    //chacks if the newPassword is the same as the old one
-    if(Password == newPassword){
+    //checks if the password matches the _id
+    const match2 = await bcrypt.compare(newPassword, user.Password)
+
+    //checks if the newPassword is the same as the old one
+    if(match2){
         throw Error('Your new password must be different from your current password!')
     }
 
@@ -169,8 +191,44 @@ UserSchema.statics.updatePassword = async function(_id, Password, newPassword){
     return user._id;
 }
 
+//static updatePassword function from the email for the forgot password page
+UserSchema.statics.updatePasswordFromEmail = async function(email, newPassword){
 
+    //gets the user assosiated to the username
+    const user = await this.findOne({Email: email});
 
+    //checks if the password matches the old one
+    const match = await bcrypt.compare(newPassword, user.Password)
+
+    //chacks if the newPassword is the same as the old one
+    if( match ){
+        throw Error('Your new password must be different from your current password!')
+    }
+
+    //checks if the password is good enough
+    if(!validator.isStrongPassword(newPassword)){
+        throw Error('Password must contain a capital, a lowercase, a symbol and 8 characters total!')
+    }
+
+    //encrypts new password with salt, then hashes
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password in the database
+    await this.findByIdAndUpdate(user._id, { Password: hash});
+
+    return user._id;
+}
+
+//updates the longest streak
+UserSchema.statics.updateLongestStreak = async function(userId, streak){
+    await this.findByIdAndUpdate(userId, { LongestStreak: streak});
+}
+
+//updates the last day checked in
+UserSchema.statics.updatelastDayCheckedIn = async function(userId, newDay){
+    await this.findByIdAndUpdate(userId, { LastDayCheckedIn: newDay});
+}
 
 const UserModel = mongoose.model("User", UserSchema);
 module.exports = UserModel;

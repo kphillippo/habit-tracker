@@ -19,15 +19,15 @@ const userRoutes = require('./routes/UserRoutes.js');
 const habitRoutes = require('./routes/HabitRoutes.js');
 const todoRoutes = require('./routes/TodoRoutes.js');
 const friendsRoutes = require('./routes/FriendsRoutes.js');
+const habitCheckInRoutes = require('./routes/HabitCheckInRoutes.js');
+const todoCheckInRoutes = require('./routes/ToDoCheckInRoutes.js');
+const verificationRoutes = require('./routes/VerificationRoutes.js');
+const SettingsRoutes = require('./routes/SettingsRoutes.js');
+const StatisticsRoutes = require('./routes/StatisticsRoutes.js');
+const notificationsRoutes = require('./routes/NotificationsRoutes.js');
+const imageRoutes = require('./routes/ImageRoutes.js');
+const groupHabitRoutes = require('./routes/GroupHabitRoutes.js');
 
-/*
-//variables for image
-const bodyParser = require('body-parser');
-const fs = require('fs');
-var path = require('path');
-app.set("view engine", "ejs");
-require('dotenv').config();
-*/
 
 app.use(express.json());
 app.use(cors());
@@ -37,6 +37,14 @@ app.use('/api/user', userRoutes)
 app.use('/api/habit', habitRoutes)
 app.use('/api/todo', todoRoutes)
 app.use('/api/friends', friendsRoutes)
+app.use('/api/habitCheckIn', habitCheckInRoutes)
+app.use('/api/todoCheckIn', todoCheckInRoutes)
+app.use('/api/verification', verificationRoutes)
+app.use('/api/Settings', SettingsRoutes)
+app.use('/api/stats', StatisticsRoutes)
+app.use('/api/notifications', notificationsRoutes)
+app.use('/api/images', imageRoutes);
+app.use('/api/groupHabit', groupHabitRoutes);
 
 mongoose.connect(serverLink);
 

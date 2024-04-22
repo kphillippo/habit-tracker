@@ -39,55 +39,81 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-describe('ToDo API', () => {
+describe('To Do API', () => {
 
 
   //for a test case here's an example to hopefully make it easier when making other test cases (I had to comment it cus it doesn't like the same test running twice for some reason)
   describe('Create ToDo', () => {
-    test('Create new ToDo Successfully', async () => {
+    test('Create new To Do Successfully', async () => {
       let response = await request(app)
-          .post('/api/todo/create')
+          .post('/api/todo/createTodo')
           .send({ Owner: userID, Title: 'test', Date: Date.now(), Repeat: true, Remind: true});
       expect(response.status).toBe(200);
       await request(app)
-          .delete('/api/todo/delete')
-          .send({ UserId: userID, ToDoId: response.body._id });
+          .delete('/api/todo/deleteTodo')
+          .query({ user_id: userID, todo_id: response.body._id });
     });
-    test('Create new ToDo with invalid Owner', async () => {
+    test('Create new To Do with invalid Owner', async () => {
       let response = await request(app)
-          .post('/api/todo/create')
+          .post('/api/todo/createTodo')
           .send({ Owner: '123123123123123123123123', Title: 'test', Date: Date.now(), Repeat: true, Remind: true});
       expect(response.status).toBe(400);
     });
   });
-  describe('Delete ToDo', () => {
-    test('Delete ToDo Successfully', async () => {
+  describe('Update ToDo', () => {
+    test('Update To Do Successfully', async () => {
       let response1 = await request(app)
-          .post('/api/todo/create')
+          .post('/api/todo/createTodo')
           .send({ Owner: userID, Title: 'test', Date: Date.now(), Repeat: true, Remind: true});
       let response2 = await request(app)
-          .delete('/api/todo/delete')
-          .send({UserId: userID, ToDoId: response1.body._id});
+          .post('/api/todo/updateTodo')
+          .send({ ToDoId: response1.body._id, UserId: userID, Title: 'test2', Date: Date.now(), Repeat: true, Remind: true});
+      expect(response2.status).toBe(200);
+      await request(app)
+          .delete('/api/todo/deleteTodo')
+          .query({ user_id: userID, todo_id: response1.body._id });
+    });
+    test('Update To Do with invalid ToDoId', async () => {
+      let response = await request(app)
+          .post('/api/todo/updateTodo')
+          .send({ ToDoId: 'abcabcabcabcabcabcabcabc', UserId: userID, Title: 'test2', Date: Date.now(), Repeat: true, Remind: true});
+      expect(response.status).toBe(400);
+    });
+    test('Update To Do with invalid UserId', async () => {
+      let response = await request(app)
+          .post('/api/todo/updateTodo')
+          .send({ ToDoId: 'abcabcabcabcabcabcabcabc', UserId: 'abcabcabcabcabcabcabcabc', Title: 'test2', Date: Date.now(), Repeat: true, Remind: true});
+      expect(response.status).toBe(400);
+    });
+  });
+  describe('Delete ToDo', () => {
+    test('Delete To Do Successfully', async () => {
+      let response1 = await request(app)
+          .post('/api/todo/createTodo')
+          .send({ Owner: userID, Title: 'test', Date: Date.now(), Repeat: true, Remind: true});
+      let response2 = await request(app)
+          .delete('/api/todo/deleteTodo')
+          .query({user_id: userID, todo_id: response1.body._id});
       expect(response2.status).toBe(200);
     });
-    test('Delete ToDo with invalid Id', async () => {
+    test('Delete To Do with invalid Id', async () => {
       let response = await request(app)
-          .delete('/api/todo/delete')
-          .send({ UserId: userID, ToDoId: 'abcabcabcabcabcabcabcabc'});
+          .delete('/api/todo/deleteTodo')
+          .query({ user_id: userID, todo_id: 'abcabcabcabcabcabcabcabc'});
       expect(response.status).toBe(400);
     });
   });
   describe('Get ToDos', () => {
-    test('Get ToDos Successfully', async () => {
+    test('Get To Dos Successfully', async () => {
       let response = await request(app)
-          .get('/api/todo/get')
-          .query({ UserId: userID });
+          .get('/api/todo/getTodos')
+          .query({ user_id: userID });
       expect(response.status).toBe(200);
     });
-    test('Get ToDos with invalid UserId', async () => {
+    test('Get To Dos with invalid UserId', async () => {
       let response = await request(app)
-          .get('/api/todo/get')
-          .query({ UserId: 'abcabcabcabcabcabcabcabc'});
+          .get('/api/todo/getTodos')
+          .query({ user_id: 'abcabcabcabcabcabcabcabc'});
       expect(response.status).toBe(400);
     });
   });

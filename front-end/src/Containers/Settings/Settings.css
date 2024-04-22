@@ -1,0 +1,540 @@
+@import url("https://fonts.googleapis.com/css2?family=Kotta+One:wght@400&display=swap");
+body{
+    overflow-y: scroll;
+    padding-bottom: 85vw;
+}
+.setting_container{
+    position:absolute;
+    width: 100vw;
+    height: 100vh;
+}
+.button_container{
+    position: absolute;
+    left: 80vw;
+    top:2vh;
+    height:7vh;
+    width:16vw;
+}
+.save{
+    position: relative;
+    left:5%;
+    width:7vw;
+    height:7vh;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 0.6vw;
+    cursor: pointer;
+}
+.discard{
+    position: relative;
+    left:10%;
+    width:7vw;
+    height:7vh;
+    font-size: 1.5vw;
+    font-family: Kotta One;
+    border: 0;
+    text-align: center;
+    color:#fff;
+    background:#92B27A;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30);
+    border:#111;
+    border-style:solid;
+    border-width: 0.0001vw;
+    border-radius: 0.6vw;
+    cursor: pointer;
+}
+.privacy_container{
+  position: absolute;
+  top: 11vh;
+  left: 1.848958333vw;
+  border-radius: 15.02px;
+  background-color: #E2E9D6;
+  box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+  border: 0.5px solid var(--color-black);
+  box-sizing: border-box;
+  width: 94vw;
+  height: 72vh;
+}
+.Privacy{
+    position: relative;
+    top: 3%;
+    left: 1.5%;
+    font-size: 3vw;
+    font-weight: 500;
+    font-family: Kotta One;
+}
+.privacy_inner{
+    position: relative;
+    border: 0.5px solid black;
+    border-radius: 15.02px;
+    background-color: white;
+    left:1%;
+    top:5%;
+    width:98%;
+    height:80%;
+}
+.row1,
+.row2,
+.row3,
+.row4,
+.row5,
+.row6{
+    position: relative;
+    left: 1%;
+    width: 97%;
+    height:16%;
+    font-size: 2.5vw;
+    font-weight: 300;
+    font-family: Kotta One;
+    border-bottom:0.01vh solid #000;
+}
+.friends_profile,
+.display_name,
+.display_email,
+.display_photo,
+.display_streaks,
+.display_stats{
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+.toggle{
+    position: absolute;
+    left:90%;
+    top:0%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 5vw;
+    height: 7vh;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0vh;
+    left: 0vw;
+    right: 0vw;
+    bottom: 0vh;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 1.5vw;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 5vh;
+    width: 2.25vw;
+    left: 0.5vw;
+    bottom: 1vh;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  input:checked + .slider {
+    background-color: green;
+  }
+  input:checked + .slider:before {
+    -webkit-transform: translateX(1.5vw);
+    -ms-transform: translateX(1.5vw);
+    transform: translateX(1.5vw);
+  }
+
+.notifications_container{
+    position: absolute;
+    top: 87vh;
+    left: 1.848958333vw;
+    border-radius: 15.02px;
+    background-color: #E2E9D6;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+    border: 0.5px solid var(--color-black);
+    box-sizing: border-box;
+    width: 94vw;
+    height: 25vh;
+  }
+.Notifications{
+    position: relative;
+    top: 3%;
+    left: 1.5%;
+    font-size: 3vw;
+    font-weight: 500;
+    font-family: Kotta One;
+}
+.notification_inner{
+    position: relative;
+    border: 0.5px solid black;
+    border-radius: 15.02px;
+    background-color: white;
+    left:1%;
+    top:5%;
+    width:98%;
+    height:53%;
+}
+.notifications_row1,
+.notifications_row3{
+    padding-top:0.5%;
+    position: relative;
+    left: 1%;
+    width: 97%;
+    height:90%;
+    font-weight: 300;
+    font-family: Kotta One;
+    border-bottom:0.01vh solid #000;
+}
+.notifications_row1{
+    font-size: 2.5vw;
+}
+.toggle_1{
+  padding: 1%;
+  position: absolute;
+  left:89%;
+  top:0%;
+}
+.notifications_row3{
+    font-size: 2vw;
+}
+.notifications_row2{
+    position: relative;
+    left: 1%;
+    width: 97%;
+    height:30%;
+    font-size: 2.5vw;
+    font-weight: 300;
+    font-family: Kotta One;
+}
+.email_notifications{
+    padding-top:0.5%;
+    padding-bottom:0.5%;
+}
+.allow_emails{
+    padding-top:1%;
+    padding-bottom:1%;
+}
+.habit_reminders{
+    position: absolute;
+    left:0%;
+    padding-top: 1%;
+}
+.email_noti_check{
+    width:3vw;;
+    height:6vh;
+}
+.check1{
+    position:absolute;
+    left:16%;
+    top:23%;
+}
+.todo_reminders{
+    position: absolute;
+    left:21%;
+    padding-top: 1%;
+}
+.check2{
+    position:absolute;
+    left:36%;
+    top:23%;
+}
+.friend_requests{
+    position: absolute;
+    left:41%;
+    padding-top:1%;
+}
+.check3{
+    position:absolute;
+    left:55.5%;
+    top:23%;
+}
+.group_challenges_announcements{
+    position: absolute;
+    left:61%;
+    padding-top:1%;
+}
+.check4{
+    position:absolute;
+    left:92%;
+    top:23%;
+}
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+.style_container{
+    position: absolute;
+    top: 116vh;
+    left: 1.848958333vw;
+    border-radius: 15.02px;
+    background-color: #E2E9D6;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+    border: 0.5px solid var(--color-black);
+    box-sizing: border-box;
+    width: 94vw;
+    height: 35vh;
+  }
+.Style{
+    position: relative;
+    top: 3%;
+    left: 1.5%;
+    font-size: 3vw;
+    font-weight: 500;
+    font-family: Kotta One;
+}
+.style_title{
+    position: relative;
+    top: 3%;
+    left: 1.5%;
+    font-size: 3vw;
+    font-weight: 500;
+    font-family: Kotta One;
+}
+.style_inner{
+    position: relative;
+    border: 0.5px solid black;
+    border-radius: 15.02px;
+    background-color: white;
+    left:1%;
+    top:5%;
+    width:98%;
+    height:65%;
+}
+.style_row1,
+.style_row2{
+    position: relative;
+    left: 1%;
+    width: 97%;
+    height:47%;
+    font-size: 2.5vw;
+    font-weight: 300;
+    font-family: Kotta One;
+    border-bottom:0.01vh solid #000;
+}
+.main_color,.font_size{
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+.color_container{
+    position: absolute;
+    top:15%;
+    left:86.5%;
+    width:14%;
+    height:90%;
+}
+.green,
+.blue, 
+.purple{
+    width:3.1vw;
+    height:7vh;
+    border-width: 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.green{
+    position: absolute;
+    left:0%;
+    background-color: #92B27A;
+}
+.blue{
+    position:absolute;
+    left:30%;
+    background-color: #7A9AB2;
+}
+.purple{
+    position: absolute;
+    left:60%;
+    background-color:#B27A9C;
+}
+.drop_down_div{
+    position: absolute;
+    font-size:2vw;
+    top:15%;
+    left:87%;
+}
+.drop_down{
+    width:10vw;
+    height:7vh;
+}
+.delete_popup{ 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width:100%; 
+    height:100vh; 
+    background-color: var(--color-darkgreen); 
+    display:flex; 
+    justify-content: center; 
+    align-items: center; 
+  } 
+  .delete_popup-inner{ 
+    position:fixed; 
+    top: 60%; 
+    left: 50%;  
+    transform:translate(-50%,-50%); 
+    width: 38%; 
+    height: 50%; 
+    box-shadow: 0 5px 30px rgba(0,0,0,.30); 
+    background:#E2E9D6; 
+    border-radius: 10px; 
+  } 
+  .delete_Title { 
+    position: absolute;
+    left:2.5%;
+    font-weight: 500; 
+    font-size: 2.5vw; 
+    color:#333; 
+    font-family: Kotta One; 
+  }
+  .delete_Title2 {
+    position: absolute;
+    padding-top:4%;
+    top: 30%;
+    left:20%;
+    font-weight: 500; 
+    font-size: 2.5vw; 
+    color:#333; 
+    font-family: Kotta One; 
+  } 
+  .delete_no{ 
+    position: absolute; 
+    top: 70%; 
+    left: 60%; 
+    width: 30%; 
+    height: 20%; 
+    font-size: 1.5vw; 
+    font-family: Kotta One; 
+    border: 0; 
+    text-align: center; 
+    color:#fff; 
+    background:#92B27A; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30); 
+    border:#111; 
+    border-style:solid; 
+    border-width: 0.1vw; 
+    border-radius: 1.5vw; 
+  } 
+  .delete_no:hover{
+    background-color: #C4D3AB;
+  }
+  .delete_yes:hover{
+    background-color: #C4D3AB;
+  }
+  .delete_yes{ 
+    position: absolute; 
+    top: 70%; 
+    left: 10%; 
+    width: 30%; 
+    height: 20%; 
+    font-size: 1.5vw; 
+    font-family: Kotta One; 
+    border: 0; 
+    text-align: center; 
+    color:#fff; 
+    background:#92B27A; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.30); 
+    border:#111; 
+    border-style:solid; 
+    border-width: 0.1vw; 
+    border-radius: 1.5vw; 
+  }
+  .coming_soon{
+    position: absolute;
+    top: 116vh;
+    left: 1.848958333vw;
+    border-radius: 15.02px;
+    background-color: grey;
+    width: 94vw;
+    height: 35vh;
+    opacity: 75%;
+  }
+  .coming_soon_title{
+    position:absolute;
+    left: 20vw;
+    top: 130vh;
+    font-family: Kotta One;
+    font-size: 5vw;
+  }
+   
+
