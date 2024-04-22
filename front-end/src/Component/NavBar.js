@@ -16,6 +16,7 @@ function NavBar({isSignedout, data, toast}) {
 
     const [notiificationPopup, setNotiificationPopup] = useState(false);
     const [numNotifications, setNumNotifications] = useState(0);
+    const [streakN, setstreakN] = useState(0);
     
     const userInfo = data;
     // const isLogin = true;
@@ -40,6 +41,16 @@ function NavBar({isSignedout, data, toast}) {
             setNumNotifications(data)
         } catch (err) {
             console.error("Failed to get notification number:", err);
+        }
+        try {
+            const userdata = {
+                userId: sessionStorage.getItem("userId")
+            }
+            const response = await apiRequest("POST", "user/returnStreak", userdata)
+            const data = await response;
+            setstreakN(data.Streak);
+        } catch (err) {
+            console.error("Failed to get streak number:", err);
         }
     };
    if(sessionStorage.getItem("userToken")) fetchUserInfo();
@@ -184,7 +195,7 @@ function NavBar({isSignedout, data, toast}) {
 
                 <NavItem className="align-right">
                     <IoMdFlame size={30} color="#e57028"></IoMdFlame>
-                    <span>{sessionStorage.getItem("userStreak")}</span>
+                    <span>{streakN}</span>
                 </NavItem>
                 
                 <NavItem className="">
