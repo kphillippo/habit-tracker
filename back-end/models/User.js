@@ -41,7 +41,9 @@ const UserSchema = new mongoose.Schema({
         default: "66242c3261e6aa7c8c94428d" 
     },
     LastDayCheckedIn:{
-        type: Date
+        type: Date,
+        default: "0",
+        required: true
     }
     
 }, { collection: 'User'});
