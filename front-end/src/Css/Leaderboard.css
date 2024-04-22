@@ -7,8 +7,17 @@ body{
     font-family: 'Kotta One', serif;
 }
 
+.leaderboard-title{
+    text-align: center;
+    font-family: 'Kotta One', serif;
+    color: rgb(0,0,0);
+    font-size: 200%;
+    margin-top: 4vw;
+    font-weight: bold;
+}
+
 .leaderboard-page{
-    top: 25%;
+    top: 8%;
     width: 40vw;
     height: 60vh;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
