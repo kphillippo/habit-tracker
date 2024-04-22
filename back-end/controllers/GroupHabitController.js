@@ -30,10 +30,31 @@ const returnGroupHabits = async (req, res) => {
     const {UserID} = req.body;
     try {
         //find all group habits
-        const groupHabits = await GroupHabit.find();
+        let groupHabits = await GroupHabit.find();
+
+        // Map over each group habit to update the owner field
+        const updatedGroupHabits = await Promise.all(groupHabits.map(async (habit) => {
+            // Get the userName of the owner
+            const user = await UserModel.findById(habit.Owner);
+            const ownerUsername = user ? user.Username : null;
+
+            // Get the usernames of the members
+            const memberUsernames = await Promise.all(habit.Members.map(async memberId => {
+                const member = await UserModel.findById(memberId);
+                return member ? member.Username : null;
+            }));
+
+            // Return a new object with the owner and members fields updated
+            return {
+                ...habit.toObject(),
+                Owner: ownerUsername,
+                Members: memberUsernames
+            };
+        }));
+
 
         //return the array of group habits
-        res.status(200).json(groupHabits);
+        res.status(200).json(updatedGroupHabits);
 
     } catch (error) {
         res.status(400).json({error: error.message});

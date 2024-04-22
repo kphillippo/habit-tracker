@@ -13,7 +13,7 @@ exports.uploadImage = async (req, res) => {
     const existingImage = await Image.findOne({ userId });
 
     // If an image record exists, delete it
-    if (existingImage) {
+    if (existingImage._id != "66242c3261e6aa7c8c94428d") {
       await Image.findByIdAndDelete(existingImage._id);
     }
 

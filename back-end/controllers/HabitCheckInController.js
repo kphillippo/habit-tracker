@@ -44,8 +44,6 @@ const UpdateHabitCheckIn = async (req, res) => {
 
         // Get today's date
         const today = new Date();
-
-        // Subtract one day to get yesterday's date
         const today2 = today.toISOString().split('T')[0]; // Format yesterday's date in YYYY-MM-DD format
 
         //last checked in day

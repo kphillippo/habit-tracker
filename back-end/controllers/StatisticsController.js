@@ -2,6 +2,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const Habit = require('../models/Habit');
 const HabitCheckIn = require('../models/HabitCheckIn');
 const User = require('../models/User');
+const Statistics = require('../models/Statistics');
 
 const habitsCompletedLast30Days = async (req, res) => {
     //get list of habits
@@ -117,4 +118,72 @@ const timesToDoCompletedLast30Days = async (req, res) => {
     //return the number of completed days / 30
 }
 
-module.exports = { habitsCompletedLast30Days, todosCompletedLast30Days, timesHabitCompletedLast30Days, timesToDoCompletedLast30Days };
+const timesCompletedByHour = async (req, res) => {
+    try {//get habit
+        const userId = req.query.user_id;
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const habits = await Habit.find({Owner: userId});
+        const habitIds = habits.map(habit => habit._id);
+
+        const today = new Date();
+        today.setUTCHours(23, 59, 59, 999);
+        const thirtyDaysAgo = new Date(new Date().setDate(today.getDate() - 30));
+        thirtyDaysAgo.setUTCHours(0, 0, 0, 0);
+
+        const checkIns = await HabitCheckIn.find({
+            HabitID: {$in: habitIds},
+            CheckInTime: {
+                $gte: thirtyDaysAgo,
+                $lt: today
+            }
+        });
+
+        const checkInsByHour = new Map();
+        checkIns.forEach(checkIn => {
+            const hour = checkIn.CheckInTime.getHours();
+            if (checkInsByHour.has(hour)) {
+                checkInsByHour.set(hour, checkInsByHour.get(hour) + 1);
+            } else {
+                checkInsByHour.set(hour, 1);
+            }
+        });
+
+        res.status(200).json(Object.fromEntries(checkInsByHour));
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+const quickInsights = async (req, res) => {
+    try {
+        const userId = req.query.user_id;
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const current = user.currentStreak;
+        const stats = Statistics.FindOrCreate(userId);
+        const habits = await Habit.find({Owner: userId});
+        const habitIds = habits.map(habit => habit._id);
+        const checkIns = await HabitCheckIn.find({HabitID: {$in: habitIds}});
+        const checkInsWithGoals = await Promise.all(checkIns.map(async (checkIn) => {
+            const habit = await Habit.findById(checkIn.HabitID);
+            return { checkIn, goal: habit.Goal };
+        }));
+        const completedCheckIns = checkInsWithGoals.filter(({ checkIn, goal }) => checkIn.Count >= goal);
+        const totalHabits = completedCheckIns.length;
+        const longestStreak = user.LongestStreak;
+        stats.LongestStreak = longestStreak;
+        stats.AllTimeHabits = total;
+        stats.save();
+        const returns = {CurrentStreak: current, LongestStreak: longestStreak, TotalHabitCompletions: totalHabits}
+        res.status(200).json(returns);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+module.exports = { habitsCompletedLast30Days, todosCompletedLast30Days, timesHabitCompletedLast30Days, timesToDoCompletedLast30Days, timesCompletedByHour, quickInsights };
