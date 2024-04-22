@@ -30,6 +30,7 @@ const Signin = ({ isSignedin, toast }) =>{
                 sessionStorage.setItem("userToken", token);
                 sessionStorage.setItem("userName", user.Username);
                 sessionStorage.setItem("userStreak", user.Streak);
+                sessionStorage.setItem("userStreakOn", false);
                 sessionStorage.setItem("userFirstName", user.FirstName);
                 sessionStorage.setItem("userLastName", user.LastName);
                 sessionStorage.setItem("userId", user._id);
