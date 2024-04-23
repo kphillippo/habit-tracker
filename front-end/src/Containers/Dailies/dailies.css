@@ -27,7 +27,7 @@
   border-radius: 15.02px;
   background-color: var(--color-darkgreen);
   box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
-  border: 0.5px solid var(--color-black);
+  border: 0px solid var(--color-black);
   box-sizing: border-box;
   width: 47.182291666vw;
   height: 72vh;
@@ -36,7 +36,7 @@
 #div1{
   border-radius: 15.07px;
   background-color: #92B27A;
-  border: 0.5px solid var(--color-black);
+  border: 0px solid var(--color-black);
   height:6vh; 
   width:100%;
   padding-top:0;
@@ -153,7 +153,7 @@ input[type=checkbox] {
     border-radius: 15.02px;
     background-color: var(--color-darkgreen);
     box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
-    border: 0.5px solid var(--color-black);
+    border: 0px solid var(--color-black);
     box-sizing: border-box;
     width: 47.18229167%;
     height: 72%;
@@ -739,7 +739,7 @@ input[type=checkbox] {
     overflow:scroll;
     overflow-x: hidden;
     border-radius: 15.02px;
-    border: 0.5px solid var(--color-black);
+    border: 0px solid var(--color-black);
     background-color: white;
     width: 90%;
     height: 73%;
