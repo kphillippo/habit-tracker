@@ -77,9 +77,10 @@ exports.getImageNew = async (req, res) => {
       }
 
       // Construct absolute path to the profile picture file
-      const imagePath = path.resolve(profilePicture.path).replace(/\\/g, '/');
-      res.set('Content-Type', 'image/jpeg');
-      res.sendFile(imagePath);
+      // const imagePath = path.resolve(profilePicture.path).replace(/\\/g, '/');
+      // res.set('Content-Type', 'image/jpeg');
+      // res.sendFile(imagePath);
+      res.send(profilePicture)
   } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Failed to fetch image' });
