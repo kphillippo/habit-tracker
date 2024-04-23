@@ -64,27 +64,27 @@ class ChallengeManager extends Component {
             <>
             <div className="habitmanager_popup">
             
-            <div className= "habitmanager_popup-inner">
-                
-                <div class = "habitmanager_Title">Challenge Manager</div>
-                    <div class = "habitmanager_div">
-                        <table id = "habitmanager_table">
-                                {this.state.challenges.map((item) => (
-                                        <ChallengeManagerItem
-                                            key={item.challengeID}
-                                            data = {item}
-                                            isUpdated={() => this.props.isUpdated()}
-                                            toast = {this.props.toast}
-                                        >
-                                        </ChallengeManagerItem>
-                                    ))}
-                                    
-                        </table>
-                    </div>
-                    <button class = "habitmanager_close" onClick={() => this.props.setTrigger(false)}>X</button>
-                    <button class = "habitmanager_Add_New_Habit" onClick={this.toggleNewChallenge}>Add New Challenge</button>
+                <div className= "habitmanager_popup-inner">
+                    
+                        <div class = "habitmanager_Title">Challenge Manager</div>
+                        <div class = "habitmanager_div">
+                            <table id = "habitmanager_table">
+                                    {this.state.challenges.map((item) => (
+                                            <ChallengeManagerItem
+                                                key={item.challengeID}
+                                                data = {item}
+                                                isUpdated={() => this.props.isUpdated()}
+                                                toast = {this.props.toast}
+                                            >
+                                            </ChallengeManagerItem>
+                                        ))}
+                                        
+                            </table>
+                        </div>
+                        <button class = "habitmanager_close" onClick={() => this.props.setTrigger(false)}>X</button>
+                        <button class = "habitmanager_Add_New_Habit" onClick={this.toggleNewChallenge}>Add New Challenge</button>
+                </div>
             </div>
-        </div>
         {newChallenge && <NewChallengePopup toast = {this.props.toast} data={this.state} trigger={newChallenge} setTrigger={this.toggleNewChallenge} createChallenge={this.createChallenge} />}
         </>
         ) : null;

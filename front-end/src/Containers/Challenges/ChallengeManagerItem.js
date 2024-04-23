@@ -124,9 +124,10 @@ export default class ChallengeManagerItem extends Component {
         return(
             <>
                 <tr>
-                    <td class = "todo_item"> {Title}</td>
-                    <td><button onClick={this.toggleEditChallenge} class = "managerbtn_edit" > <LuPencil  color="#000000" size = "2.5vw"></LuPencil></button></td>
-                    <td>{btn}</td>
+                    <td width="10%"></td>
+                    <td width="60%" class = "todo_item"> {Title}</td>
+                    <td width="15%"><button onClick={this.toggleEditChallenge} class = "managerbtn_edit" > <LuPencil  color="#000000" size = "2.5vw"></LuPencil></button></td>
+                    <td width="15%">{btn}</td>
                 </tr>
                 {viewChallenge && <ViewChallenge toast={this.props.toast} data={this.state} trigger={viewChallenge} setTrigger={this.toggleEditChallenge}/> }
                 {editChallenge && <EditChallenges toast={this.props.toast} data={this.state} trigger={editChallenge} setTrigger={this.toggleEditChallenge} updateChallenge={this.updateChallenge} />}
