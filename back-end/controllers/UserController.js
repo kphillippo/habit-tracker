@@ -259,7 +259,7 @@ const updateUserInfo = async (req, res) => {
           <strong>.</strong>
         </p>
         <p>
-          <strong>GO TO HABITCONNECT</strong>
+          <strong><a href="http://localhost:3000/Signin">GO TO HABITCONNECT</a></strong>
         </p>
         <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
         </span>
