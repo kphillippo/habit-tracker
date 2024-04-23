@@ -20,7 +20,7 @@
     height: 50vh;
     width: 80%;
     position: absolute;
-    background-color:#92B27A;
+    background-color: rgba(226, 233, 214);
     top: 10vh;
     padding: 10px 10px 20px 10px;
     position: absolute;
@@ -29,7 +29,12 @@
 
 .viewTop{
     margin-left: 10%;
-    font-size: 2.5vh;
+    font-size: 2vh;
+    margin-top: 5%;
+}
+
+#Title{
+    font-size: 3vh;
 }
 
 .inp{
@@ -59,17 +64,20 @@
     border-radius: 15.02px;
     border: 0.5px solid var(--color-black);
     background-color: white;
-    width: 90%;
+    width: 85%;
+    height: 45%;
     font-family: Kotta One;
     margin-left: 5%;
+    margin-top: 5%;
     position: absolute;
     z-index: 2;
+    overflow: hidden;
 }
 
 .TableHead{
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    background-color: #92B27A;
+    background-color: rgba(226, 233, 214);
     font-size: 1.2vw;
     height: fit-content;
     width: 100%;
@@ -91,19 +99,16 @@
 
 .close_btn{
     position: absolute;
-    top: 0%;
-    left: 90%;
+    top: 2%;
+    right: 2%;
     width: 10%;
     height: 10%;
     font-size: 1.5vw;
     font-family: Kotta One;
     border: 0;
     text-align: center;
-    color:#fff;
+    color: black;
     background:#92B27A;
     box-shadow: 0 2px 5px rgba(0,0,0,0.30);
-    border:#111;
-    border-style:solid;
-    border-width: 0.0001vw;
     border-radius: 1.5vw;
 }
