@@ -14,120 +14,54 @@ function Stats(props){
 
     let navigate = useNavigate()  
 
- 
-
     const [habitsCompleted, setHabitsCompleted] = useState(0);  
-
     const [timesHabit, setTimesHabit] = useState(0); 
-
     const [quickInsight, setQuickInsight] = useState(0);  
-
     const [timesCompleted, setTimesCompleted] = useState({}); 
-
     const chartRef = useRef({ chart: null }); 
-
- 
-
- 
-
-    // const getHabitsCompleted = async () => {    
-
-    //     try {  
-
-    //         const response = await apiRequest("GET", "stats/habitsCompletedLast30Days?user_id=" + sessionStorage.getItem("userId"))  
-
-    //         const data = await response;  
-
-    //         console.log(data) 
-
-    //         setHabitsCompleted(data);  
-
-    //     } catch (err) {  
-
-    //         console.error("Failed to fetch user info:", err);  
-
-    //     } 
-
-    // }; 
-
- 
-
-     
 
     const getTimesCompletedByHour = async () => {    
 
         try {  
-
             const response = await apiRequest("GET", "stats/timesCompletedByHour?user_id=" + sessionStorage.getItem("userId"))  
-
             const data = await response;  
-
             console.log(data); 
-
             setTimesCompleted(data);  
-
-        } catch (err) {  
-
+        } catch (err) { 
             console.error("Failed to fetch user info:", err);  
-
         } 
-
     }; 
 
     const createGraph = () => { 
 
         const ctx = document.getElementById('myChart').getContext('2d'); 
-
         const labels = Array.from({ length: 24 }, (_, i) => `${i}:00`); // Labels for 24-hour time format 
-
         const data = labels.map(label => timesCompleted[label.split(':')[0]] || 0); // Map data from API response or 0 if not available 
 
         if (chartRef.current && chartRef.current.chart) { 
-
             chartRef.current.chart.destroy(); // Destroy previous chart instance 
-
         } 
 
         chartRef.current.chart = new Chart(ctx, { 
-
             type: 'line', 
-
-            data: { 
-
+            data: {
                 labels: labels, // X-axis labels 
-
                 datasets: [{ 
-
                     label: 'Times Completed', 
-
                     data: data, // Y-axis data 
-
                     borderColor: 'rgb(75, 192, 192)', 
-
                     tension: 0.1 
-
                 }] 
-
             }, 
-
             options: { 
-
                 scales: { 
-
                     y: { 
-
                         beginAtZero: true 
-
                     } 
-
                 } 
             } 
         }); 
     }; 
-
-     
-
-     
 
     const getTimesHabitCompleted = async () => {    
         try {  
@@ -140,8 +74,6 @@ function Stats(props){
         } 
     };  
 
- 
-
     const getQuickInsights = async () => {    
         try {  
             const response = await apiRequest("GET", "stats/quickInsights?user_id=" + sessionStorage.getItem("userId"))  
@@ -153,22 +85,29 @@ function Stats(props){
         } 
     }; 
 
- 
+    function isSignIn(){
+        console.log("check signin")
+        if(!sessionStorage.getItem("userToken")){
+            navigate("/signin")
+            return false;
+        }
+        return true;
+    };
 
-    useEffect(() => { 
-        // getHabitsCompleted(); 
-        getTimesCompletedByHour(); 
-        getTimesHabitCompleted(); 
-        getQuickInsights(); 
-    },[]);  
-
- 
+    useEffect(() => {
+        if(isSignIn()) {        // If user is signed in, the getFriends
+            getTimesCompletedByHour(); 
+            getTimesHabitCompleted(); 
+            getQuickInsights();
+        }
+        else{                   // Otherwise go to signin page
+            navigate("/signin")
+        }
+    },[]); 
 
     useEffect(() => { 
         createGraph(); // Call the function to create the graph when graphData is updated 
     }, [timesCompleted]);    
-
- 
 
     return ( 
         <body> 
