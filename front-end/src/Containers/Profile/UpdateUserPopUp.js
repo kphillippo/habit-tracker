@@ -221,7 +221,7 @@ function UpdateUserPopUp({ onClose, fieldToUpdate, toast, refreshFunction }) {
   }
 
   //Update the size of the popup based on the info being updated
-  let popupH = "19%"
+  let popupH = "24%"
   if (fieldToUpdate === "Password") popupH = "35%"
   let popupW = "38%"
   if (fieldToUpdate === "Password") popupW = "40%"
