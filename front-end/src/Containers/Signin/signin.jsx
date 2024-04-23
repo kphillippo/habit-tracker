@@ -83,7 +83,7 @@ const Signin = ({ isSignedin, toast }) =>{
                                 name={"password"}
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
-                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$'
+                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,16}$'
                                 required/>
                                 
                             <div className='Icon'> 

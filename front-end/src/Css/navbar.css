@@ -102,6 +102,10 @@
   width:13%;
 }
 
+.user-icon{
+  margin-left: 5px;
+}
+
 .user-icon-popup{
   background-color: #c4d3ad;
   border-radius: 10px;
