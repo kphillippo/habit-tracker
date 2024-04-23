@@ -34,7 +34,7 @@ export default class TodoItem extends Component {
         this.setState({ Status: event.target.checked });
         //todo: send POST request to check-in the todo
         console.log(this.state)
-        apiRequest("POST", "todocheckin/updateCheckIn", {"ToDoID":this.state.ToDoId, "status":this.state.Status})
+        apiRequest("POST", "todocheckin/updateCheckIn", {"ToDoID":this.state.ToDoId, "Status":this.state.Status})
             .then(({data}) => {
                 console.log(data);
                 this.props.toast.success("You just finished a todo task!");

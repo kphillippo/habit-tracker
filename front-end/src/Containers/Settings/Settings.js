@@ -350,8 +350,8 @@ function Settings({props,toast}) {
               </div> 
           </div> 
          </div>
-         <div className = "coming_soon"></div>
-         <div className = "coming_soon_title">Coming in a Future Update</div>
+         <div className = "coming_soon"><div className = "coming_soon_title">Coming in a Future Update</div></div>
+         
      </div>
           <DiscardPopup trigger ={buttonPopup} setTrigger = {setButtonPopup}/> 
           </body> 
