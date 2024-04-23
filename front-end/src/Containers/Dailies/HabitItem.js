@@ -40,6 +40,7 @@ export default class HabitItem extends Component {
                     .then(({data}) => {
                         console.log(data);
                         this.props.toast.success("You just finished a habit!")
+                        window.location.reload(true);
                     })
                     .catch(err => {
                         console.log(err);
@@ -59,6 +60,7 @@ export default class HabitItem extends Component {
                             .then(({token, ...data}) => {
                                 console.log(data);
                                 this.props.toast.success("You just finished a habit!")
+                                window.location.reload(true);
                             })
                             .catch(err => {
                                 console.log(err);
@@ -83,20 +85,21 @@ export default class HabitItem extends Component {
         clearInterval(timerID);
     }
 
-    
     handleCheckBoxClick(event){
-        this.setState({ Status: event.target.checked, Streak: this.state.Streak + 1});
+        this.setState({ Count: this.state.Goal, Status: event.target.checked, Streak: this.state.Streak + 1});
         //todo: send POST request to check-in the habit
         console.log(this.state);
         apiRequest("POST", "habitCheckIn/updateHabitCheckIn", this.state)
                     .then(({data}) => {
                         console.log(data);
                         this.props.toast.success("You just finished a habit!");
+                        window.location.reload(true);
                     })
                     .catch(err => {
                         console.log(err);
                         this.props.toast.error(err.error);
                     })
+
     }
 
     componentWillUnmount() {

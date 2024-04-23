@@ -30,6 +30,7 @@ const Signin = ({ isSignedin, toast }) =>{
                 sessionStorage.setItem("userToken", token);
                 sessionStorage.setItem("userName", user.Username);
                 sessionStorage.setItem("userStreak", user.Streak);
+                sessionStorage.setItem("userStreakOn", false);
                 sessionStorage.setItem("userFirstName", user.FirstName);
                 sessionStorage.setItem("userLastName", user.LastName);
                 sessionStorage.setItem("userId", user._id);
@@ -82,7 +83,7 @@ const Signin = ({ isSignedin, toast }) =>{
                                 name={"password"}
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
-                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$'
+                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,16}$'
                                 required/>
                                 
                             <div className='Icon'> 

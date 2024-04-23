@@ -72,6 +72,42 @@ function UpdateUserPopUp({ onClose, fieldToUpdate, toast, refreshFunction }) {
       })
   }
 
+  function generateHTML(){
+    var inf = getCode();
+
+    const message = `
+    <html>
+    <p>
+      <span style="color:rgb(56, 118, 29);">
+        <strong>HabitConnect Email Change Request&nbsp;</strong>
+      </span>
+    </p>
+    <p>
+      <strong>We’ve received a request to change the email for user:
+      </strong>
+      <span style="text-decoration:underline;">
+        <strong>` + sessionStorage.getItem("userName") + `</strong>
+      </span>
+      <strong>.</strong>
+    </p>
+    <p>Please enter this verification code in the window where you made this request to confirm the new email for your account:&nbsp;</p>
+    <p>
+      <strong>` + inf + `</strong>
+    </p>
+    <p>This code is valid while your HabitConnect window stays open.</p>
+    <p>If you did not request to change your email address to this one, ignore this email.</p>
+    <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
+    </span>
+    <a target="_blank" href="mailto:habittrackerrr@gmail.com">
+      <span style="color:rgb(17, 85, 204);">here</span>
+    </a>
+    <span style="color:rgb(153, 153, 153);">.
+    </span>
+    </html>
+    `;
+    return message;
+  }
+
   //Verify email before updating
   const handleMail = (event) => {
     event.preventDefault();
@@ -79,8 +115,8 @@ function UpdateUserPopUp({ onClose, fieldToUpdate, toast, refreshFunction }) {
     setVerify(true);
     let info = {
       "to": document.getElementById("newValue").value,
-      "subject": "Verification Code",
-      "text": "Welcome to HabitConnect, here is your verification code: " + inf
+      "subject": "HabitConnect: Email Change Request",
+      "text": generateHTML()
     }
     console.log(info);
     apiRequest("POST", "verification/sendEmail", info)
@@ -221,7 +257,7 @@ function UpdateUserPopUp({ onClose, fieldToUpdate, toast, refreshFunction }) {
   }
 
   //Update the size of the popup based on the info being updated
-  let popupH = "19%"
+  let popupH = "24%"
   if (fieldToUpdate === "Password") popupH = "35%"
   let popupW = "38%"
   if (fieldToUpdate === "Password") popupW = "40%"

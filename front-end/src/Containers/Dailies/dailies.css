@@ -27,7 +27,7 @@
   border-radius: 15.02px;
   background-color: var(--color-darkgreen);
   box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
-  border: 0.5px solid var(--color-black);
+  border: 0px solid var(--color-black);
   box-sizing: border-box;
   width: 47.182291666vw;
   height: 72vh;
@@ -36,7 +36,7 @@
 #div1{
   border-radius: 15.07px;
   background-color: #92B27A;
-  border: 0.5px solid var(--color-black);
+  border: 0px solid var(--color-black);
   height:6vh; 
   width:100%;
   padding-top:0;
@@ -137,6 +137,7 @@ input[type=checkbox] {
   box-shadow: inset 0 0 5px grey; 
   border:1px solid #000;
   border-radius: 10px;
+  margin-right: 15px;
 }
  
 /* Handle */
@@ -153,7 +154,7 @@ input[type=checkbox] {
     border-radius: 15.02px;
     background-color: var(--color-darkgreen);
     box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
-    border: 0.5px solid var(--color-black);
+    border: 0px solid var(--color-black);
     box-sizing: border-box;
     width: 47.18229167%;
     height: 72%;
@@ -501,13 +502,13 @@ input[type=checkbox] {
     top: 50%;
     left: 50%;
     padding-left: 4%;
-    padding-top:0%;
+    padding-top: 2%;
     transform:translate(-50%,-50%);
     width: 110%;
-    height: 75%;
+    height: 80%;
     box-shadow: 0 5px 30px rgba(0,0,0,.30);
     background:#E2E9D6;
-    border-radius: 10px;
+    border-radius: 1.5vw;
   }
   .edithabit_Title {
     font-weight: 500;
@@ -723,10 +724,10 @@ input[type=checkbox] {
     padding-top:2%;
     transform:translate(-50%,-50%);
     width: 43vw;
-    height: 83vh;
+    height: 65vh;
     box-shadow: 0 5px 30px rgba(0,0,0,.30);
     background:#E2E9D6;
-    border-radius: 10px;
+    border-radius: 1.5vw;
     z-index: 1;
   }
   .habitmanager_Title {
@@ -739,16 +740,17 @@ input[type=checkbox] {
     overflow:scroll;
     overflow-x: hidden;
     border-radius: 15.02px;
-    border: 0.5px solid var(--color-black);
+    border: 0px solid var(--color-black);
     background-color: white;
     width: 90%;
-    height: 73%;
+    height: 70%;
     font-family: Kotta One;
+    margin-top: 3%;
   }
   #habitmanager_table{
   border-collapse: collapse;
   width:98%;
-  font-size: 1.9vw;
+  font-size: 1.3vw;
   align-items: left;
   margin-left:2%;
   margin-top: 3%;
@@ -777,20 +779,18 @@ input[type=checkbox] {
   }
   .habitmanager_close{
     position: absolute;
-    top: 0%;
-    left: 90%;
-    width: 10%;
-    height: 10%;
+    top: 2%;
+    right: 2%;
+    width: 9%;
+    height: 9%;
     font-size: 1.5vw;
     font-family: Kotta One;
     border: 0;
     text-align: center;
-    color:#fff;
+    color: black;
     background:#92B27A;
     box-shadow: 0 2px 5px rgba(0,0,0,0.30);
-    border:#111;
-    border-style:solid;
-    border-width: 0.0001vw;
+    border:0;
     border-radius: 1.5vw;
   }
 
@@ -811,10 +811,8 @@ input[type=checkbox] {
     border-style:solid;
     border-width: 0.1vw;
     border-radius: 1.5vw;
+    margin-top: 2%;
   }
-  
-
-
 
   .newhabit_popup{
     position: fixed;
@@ -834,13 +832,13 @@ input[type=checkbox] {
     top: 50%;
     left: 50%;
     padding-left: 4%;
-    padding-top:0%;
+    padding-top: 1.5vh;
     transform:translate(-50%,-50%);
     width: 50%;
-    height: 75%;
+    height: 60%;
     box-shadow: 0 5px 30px rgba(0,0,0,.30);
     background:#E2E9D6;
-    border-radius: 10px;
+    border-radius: 1.5vw;
   }
   .newhabit_Title {
     font-weight: 500;
@@ -849,37 +847,45 @@ input[type=checkbox] {
     font-family: Kotta One;
   }
   .newhabit_columns{
-    font-family: Overpass;
-    font-size: 2vw;
+    font-family: 'Kotta One', serif;
+    font-size: 1.5vw;
     font-weight: 300;
     gap: 5px;
     display: grid;
     grid-template-columns: 1.3fr 2.7fr;
 
-    padding-top:5%;
+    padding-top:2%;
   }
   .newhabit_name_label,
   .newhabit_timer_label,
   .newhabit_counter_label,
   .newhabit_frequency_label{
     margin-bottom: 2.5vh;
+    margin-top: 2.5vh;
     padding-right: 5%;
   }
   #newhabit_name_input,
   #newhabit_timer_input,
   #newhabit_counter_input,
   #newhabit_frequency_input{
-    height: 7vh;
+    height: 5vh;
   }
   #newhabit_name_input{
-    width:95%;
+    width:90%;
+    padding-left: 1.5vw;
+    border-radius: 1.5vw;
+    border: 0;
   }
   #newhabit_timer_input{
     width:30%;
     text-align: center;
+    border-radius: 1.5vw;
+    border: 0;
   }
   #newhabit_counter_input{
     width:30%;
+    border-radius: 1.5vw;
+    border: 0;
   }
   #newhabit_frequency_input{
     width:95%;
@@ -892,20 +898,18 @@ input[type=checkbox] {
   }
   .newhabit_close{
     position: absolute;
-    top: 0%;
-    left: 90%;
-    width: 10%;
-    height: 10%;
+    top: 2%;
+    right: 2%;
+    width: 8%;
+    height: 8%;
     font-size: 1.5vw;
     font-family: Kotta One;
     border: 0;
     text-align: center;
-    color:#fff;
+    color:black;
     background:#92B27A;
     box-shadow: 0 2px 5px rgba(0,0,0,0.30);
-    border:#111;
-    border-style:solid;
-    border-width: 0.0001vw;
+    border:none;
     border-radius: 1.5vw;
   }
   
