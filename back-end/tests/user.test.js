@@ -437,4 +437,42 @@ describe('Delete User', () => {
     expect(response.body.error).toBe('User not found!'); //expected error message
   });
 })
+
+describe('Check if input email exists for a user', () => {
+  //Check if input email exists for a user
+  test('Check if input email exists for a user', async () => {
+
+    // Call the delete static method
+    const response = await request(app)
+      .post('/api/user/emailExists')
+      .send({ Email: 'lh18wt@brocku.ca'})
+
+    expect(response.status).toBe(200);
+  });
+})
+
+describe('Forgot Password', () => {
+  
+  test('Forgot Password', async () => {
+
+    const response = await request(app)
+      .post('/api/user/forgotPassword')
+      .send({ Email: 'Chocolate@Fudge.com', Password: 'Password2!'})
+
+    expect(response.status).toBe(200);
+  });
+
+  test('Forgot Password', async () => {
+
+    const response = await request(app)
+      .post('/api/user/forgotPassword')
+      .send({ Email: 'Chocolate@Fudge.com', Password: 'Password2!'})
+
+    expect(response.status).toBe(400);
+
+    await request(app)
+      .post('/api/user/forgotPassword')
+      .send({ Email: 'Chocolate@Fudge.com', Password: 'Password1!'})
+  });
+})
 });
