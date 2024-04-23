@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 function Home(props) {
     const [todosNumber, setTodosNumber] = useState(0);
     const [streakN, setstreakN] = useState(0);
+    const [quickInsight, setQuickInsight] = useState(0);
     const userStatus = props.data.userToken;
     let currentStreak = sessionStorage.getItem("userStreak");
     const streakActive = currentStreak>0 ? true: false;
@@ -39,6 +40,19 @@ function Home(props) {
             console.log(err);
         })
     }
+    const getQuickInsights = async () => {    
+        try {  
+            const response = await apiRequest("GET", "stats/quickInsights?user_id=" + sessionStorage.getItem("userId"))  
+            const data = await response;  
+            console.log(data); 
+            setQuickInsight(data);  
+        } catch (err) {  
+            console.error("Failed to fetch user info:", err);  
+        } 
+    };
+    useEffect(() => {  
+        getQuickInsights(); 
+    },[]);
     //Generates a message to welcome user or guest 
     //Returns html with message
     function generateMessage() {
@@ -72,18 +86,22 @@ function Home(props) {
                 <div class = "home_dailies">
                     <div class = "dailies_home_title">Dailies</div>
                     <div class = "dailies_home_desc">Create and track your habits and to do list.</div>
+                    <div class = "dailies_img"></div>
                 </div>
                 <div class = "challenges_home">
                     <div class = "challenges_home_title">Challenges</div>
-                    <div class = "challenges_home_desc">Challenge your friends to keep their streak alive.</div>
+                    <div class = "challenges_home_desc">Challenge your friends to keep <br></br>their streak alive.</div>
+                    <div class = "challenges_img"></div>
                 </div>
                 <div class = "leaderboard_home">
                     <div class = "leaderboard_home_title">My Leaderboard</div>
                     <div class = "leaderboard_home_desc">See how you rank along side your friends.</div>
+                    <div class = "leaderboard_img"></div>
                 </div>
                 <div class = "stats_home">
                     <div class = "stats_home_title">My Stats</div>
-                    <div class = "stats_home_desc">Monitor your progress with a personalized statistics page.</div>
+                    <div class = "stats_home_desc">Monitor your progress with a <br></br> personalized statistics page.</div>
+                    <div class = "stats_img"></div>
                 </div>
             </div>
             </>;
@@ -124,12 +142,12 @@ function Home(props) {
             return <>
                 <div className='windowStats' id="windowGeneral" onClick={() => handleClick('/stats')}>
                 <div><center>
+                    <br></br>
                     <div style={{fontSize: 'larger'}}>My Quick Insights:</div>
                     <div>
-                        <div><ul></ul><li>Longest streak:</li></div>
-                        <div><ul></ul><li>Current streak:</li></div>
-                        <div><ul></ul><li>Total Habits Completed:</li></div>
-                        <div><ul></ul><li>Total To Do's Completed:</li></div>
+                        <div><ul></ul><li>Longest streak: {quickInsight.LongestStreak}</li></div>
+                        <div><ul></ul><li>Current streak: {quickInsight.CurrentStreak}</li></div>
+                        <div><ul></ul><li>Total Habits Completed: {quickInsight.TotalHabitCompletions}</li></div>
                     </div></center>
                 </div>
                 </div>

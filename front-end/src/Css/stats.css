@@ -1,15 +1,19 @@
+.body{
+    padding-bottom:0%;
+}
 .parent{
     font-family: 'Kotta One', serif;
     overflow-y: scroll;
+    height: 180%;
 }
 
 .my-stats{
     box-sizing: border-box;
     position: absolute;
-    width: 91vw;
-    height: 30.75vw;
-    left: 5vw;
-    top: 114px;
+    width: 91%;
+    height: 70%;
+    left: 5%;
+    top:8%;
     border-radius: 0.6vw;
     background-color: #E2E9D6;
     box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
@@ -25,19 +29,19 @@
 }
 .stats_text{
     position: absolute;
-    top:17.8%;
+    top:15%;
     left:10%;
     width: 80%;
     text-align: center;
 }
 .stats_title{
-    font-size: 3vw;
+    font-size: 300%;
     font-weight: 500;
 }
 .stats_quote{
     position:absolute;
     top:175%;
-    font-size: 2.5vw;
+    font-size: 200%;
     font-weight: 500;
 }
 
@@ -58,8 +62,8 @@
 .quick_title{
     position: absolute;
     top:13%;
-    left: 23%;
-    font-size: 3vw;
+    left: 15%;
+    font-size: 300%;
     font-weight: 500;
 }
 
@@ -67,118 +71,49 @@
     position:absolute;
     top:30%;
     left:15%;
-    font-size: 2vw;
+    font-size: 200%;
     font-weight: 500;
     text-align: left;
 }
 
 .my_analytics{
     position: absolute;
-    top:100vh;
-    width:100vw;
+    top:85%;
+    width:100%;
 }
 .analytics_title{
     text-align: center;
-    font-size: 3vw;
+    font-size: 300%;
     font-weight: 500;
 }
 .graphs{
     position: absolute;
     top: 130%;
     width: 100%;
-    height:300vh;
+    height:35em;
 }
 
 .graph1{
     position: absolute;
     left:10%;
-    width: 40%;
-    height: 30.75vw;
-    border-bottom:0.01vh solid #000;
-    border-right:0.01vh solid #000;
+    width: 80%;
+    height: 80%;
 }
 
 .graph1_title{
-    font-size: 3vw;
+    text-align: center;
+    font-size: 300%;
     font-weight: 500;
 }
 
-.graph2{
-    position:absolute;
-    left:50%;
-    top:0%;
-    width: 40%;
-    height: 30.75vw;
-    border-bottom:0.01vh solid #000;
-    border-left:0.01vh solid #000;
-}
-.graph2_title{
-    font-size: 3vw;
-    font-weight: 500;
-}
-.graph3{
-    position:absolute;
-    top:23.8%;
-    left:10%;
-    width: 40%;
-    height: 30.75vw;
-    border-bottom:0.01vh solid #000;
-    border-right:0.01vh solid #000;
-}
-.graph3_title{
-    font-size: 3vw;
-    font-weight: 500;
-}
-.graph4{
-    position:absolute;
-    top:23.8%;
-    left:50%;
-    width: 40%;
-    height: 30.75vw;
-    border-bottom:0.01vh solid #000;
-    border-left:0.01vh solid #000;
-}
-.graph4_title{
-    font-size: 3vw;
-    font-weight: 500;
-}
-.graph5{
-    position:absolute;
-    top:47.6%;
-    left:10%;
-    width: 40%;
-    height: 30.75vw;
-    border-bottom:0.01vh solid #000;
-    border-right:0.01vh solid #000;
-}
-.graph5_title{
-    font-size: 3vw;
-    font-weight: 500;
-}
-.graph6{
-    position:absolute;
-    top:47.6%;
-    left:50%;
-    width: 40%;
-    height: 30.75vw;
-    border-bottom:0.01vh solid #000;
-    border-left:0.01vh solid #000;
-}
-.graph6_title{
-    font-size: 3vw;
-    font-weight: 500;
-}
-.graph7{
+.chart{
     position: absolute;
-    top:71.4%;
-    left:30%;
-    width:40%;
-    height: 30.75vw;
+    left:10%;
+    width: 80%;
+    height: 100%;
 }
-.graph7_title{
-    font-size: 3vw;
-    font-weight: 500;
-}
+
+
 
 
 
