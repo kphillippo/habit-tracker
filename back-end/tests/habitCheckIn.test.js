@@ -24,7 +24,7 @@ let habit;
 // Connect to the MongoDB database before running tests
 beforeAll(async () => {
   await mongoose.connect(serverLink, { useNewUrlParser: true });
-  habit = await Habit.create({ Owner: "60c4a6d3e4d5e0a5e8a1b3e5", Title: "Test Habit", MeasurementType: "1", Goal: 10 });
+  habit = await Habit.create({ Owner: "65f4b32629fe09988206d72a", Title: "Test Habit", MeasurementType: "1", Goal: 10 });
 });
 
 // Disconnect from the MongoDB database after running tests
