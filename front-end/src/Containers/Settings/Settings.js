@@ -222,126 +222,126 @@ function Settings({props,toast}) {
 
     return ( 
           <body> 
-          <div class = "setting_container"> 
-              <div class = "button_container"> 
-              <button class = "save" onClick = {saveSettings}>Save</button> 
-              <button class = "discard" onClick ={() => setButtonPopup(true)}>Discard</button>  
+          <div className = "setting_container"> 
+              <div className = "button_container"> 
+              <button className = "save" onClick = {saveSettings}>Save</button> 
+              <button className = "discard" onClick ={() => setButtonPopup(true)}>Discard</button>  
               </div>  
-              <div class = "privacy_container"> 
-              <div class = "Privacy">Privacy</div> 
-              <div class = "privacy_inner"> 
-                 <div class = "row1"> 
-                     <div class = "friends_profile">Display profile info to friends</div> 
-                     <div class = "toggle"> 
-                      <label class="switch"> 
+              <div className = "privacy_container"> 
+              <div className = "Privacy">Privacy</div> 
+              <div className = "privacy_inner"> 
+                 <div className = "row1"> 
+                     <div className = "friends_profile">Display profile info to friends</div> 
+                     <div className = "toggle"> 
+                      <label className="switch"> 
                           <input type="checkbox" 
                           ref={checkbox1Ref} 
                           defaultChecked = {settingsInfo.DisplayProfileToFriends} 
                           onInput ={() =>  handleChange("display")} 
                           /> 
-                          <span class="slider"></span> 
+                          <span className="slider"></span> 
                       </label> 
                      </div> 
                  </div> 
-                 <div class = "row2"> 
-                     <div class = "display_name">Display name</div> 
-                     <div class = "toggle"> 
-                      <label class="switch"> 
+                 <div className = "row2"> 
+                     <div className = "display_name">Display name</div> 
+                     <div className = "toggle"> 
+                      <label className="switch"> 
                           <input type="checkbox"  
                           ref={checkbox2Ref} 
                           defaultChecked = {settingsInfo.DisplayName} 
                           onInput ={() => handleChange("name")} 
                           /> 
-                          <span class="slider"></span> 
+                          <span className="slider"></span> 
                       </label> 
                      </div> 
                  </div> 
-                 <div class = "row3"> 
-                     <div class = "display_email">Display email</div> 
-                     <div class = "toggle"> 
-                      <label class="switch"> 
+                 <div className = "row3"> 
+                     <div className = "display_email">Display email</div> 
+                     <div className = "toggle"> 
+                      <label className="switch"> 
                           <input type="checkbox"  
                           ref={checkbox3Ref}  
                           defaultChecked= {settingsInfo.DisplayEmail} 
                           onInput ={() => handleChange("email")} 
                           /> 
-                          <span class="slider"></span> 
+                          <span className="slider"></span> 
                       </label> 
                      </div> 
                  </div> 
-                 <div class = "row4"> 
-                     <div class = "display_photo">Display photo</div> 
-                     <div class = "toggle"> 
-                      <label class="switch"> 
+                 <div className = "row4"> 
+                     <div className = "display_photo">Display photo</div> 
+                     <div className = "toggle"> 
+                      <label className="switch"> 
                           <input type="checkbox" 
                           ref={checkbox4Ref} 
                           defaultChecked= {settingsInfo.DisplayPhoto} 
                           onInput ={() => handleChange("photo")} 
                           /> 
-                          <span class="slider"></span> 
+                          <span className="slider"></span> 
                       </label> 
                      </div> 
                  </div> 
-                 <div class = "row5"> 
-                     <div class = "display_streaks">Display streaks</div> 
-                     <div class = "toggle"> 
-                      <label class="switch"> 
+                 <div className = "row5"> 
+                     <div className = "display_streaks">Display streaks</div> 
+                     <div className = "toggle"> 
+                      <label className="switch"> 
                           <input type="checkbox" 
                           ref={checkbox5Ref} 
                           defaultChecked= {settingsInfo.DisplayStreaks} 
                           onInput ={() => handleChange("streaks")}
                           /> 
-                          <span class="slider"></span> 
+                          <span className="slider"></span> 
                       </label> 
                      </div> 
                  </div> 
-                 <div class = "row6"> 
-                     <div class = "display_stats">Display stats</div> 
-                     <div class = "toggle"> 
-                      <label class="switch"> 
+                 <div className = "row6"> 
+                     <div className = "display_stats">Display stats</div> 
+                     <div className = "toggle"> 
+                      <label className="switch"> 
                       <input type="checkbox" 
                           ref={checkbox6Ref} 
                           defaultChecked= {settingsInfo.DisplayStats} 
                           onInput ={() => handleChange("stats")} 
                           /> 
-                          <span class="slider"></span> 
+                          <span className="slider"></span> 
                       </label> 
                      </div> 
                  </div> 
              </div> 
          </div> 
-         <div class = "notifications_container"> 
-           <div class = "Notifications">Notifications</div> 
-           <div class = "notification_inner"> 
-               <div class = "notifications_row1"> 
-                   <div class = "email_notifications">Friend requests emails</div> 
-                   <div class = "toggle_1"> 
-                    <label class="switch"> 
+         <div className = "notifications_container"> 
+           <div className = "Notifications">Notifications</div> 
+           <div className = "notification_inner"> 
+               <div className = "notifications_row1"> 
+                   <div className = "email_notifications">Friend requests emails</div> 
+                   <div className = "toggle_1"> 
+                    <label className="switch"> 
                         <input type="checkbox"
                           ref={checkbox7Ref}
                           defaultChecked={settingsInfo.FriendRequestEmails}  
                           onInput = {()=> handleChange("friends")}/> 
-                        <span class="slider"></span> 
+                        <span className="slider"></span> 
                     </label> 
                    </div> 
                </div> 
            </div>
        </div> 
-         <div class = "style_container"> 
-          <div class ="style_title">Style Customization and Accessibility</div> 
-          <div class = "style_inner"> 
-              <div class = "style_row1"> 
-                  <div class = "main_color">Main color</div> 
-                  <div class = "color_container"> 
-                      <button class = "green"></button> 
-                      <button class = "blue"></button> 
-                      <button class = "purple"></button> 
+         <div className = "style_container"> 
+          <div className ="style_title">Style Customization and Accessibility</div> 
+          <div className = "style_inner"> 
+              <div className = "style_row1"> 
+                  <div className = "main_color">Main color</div> 
+                  <div className = "color_container"> 
+                      <button className = "green"></button> 
+                      <button className = "blue"></button> 
+                      <button className = "purple"></button> 
                   </div> 
               </div> 
-              <div class = "style_row2"> 
-                  <div class = "font_size">Font size</div> 
-                  <div class = "drop_down_div"> 
-                      <select class="drop_down"> 
+              <div className = "style_row2"> 
+                  <div className = "font_size">Font size</div> 
+                  <div className = "drop_down_div"> 
+                      <select className="drop_down"> 
                           <option value = "Large">Large</option> 
                           <option value = "Medium" selected = "selected">Medium</option> 
                           <option value = "Small">Small</option> 
@@ -350,8 +350,8 @@ function Settings({props,toast}) {
               </div> 
           </div> 
          </div>
-         <div class = "coming_soon"></div>
-         <div class = "coming_soon_title">Coming in a Future Update</div>
+         <div className = "coming_soon"></div>
+         <div className = "coming_soon_title">Coming in a Future Update</div>
      </div>
           <DiscardPopup trigger ={buttonPopup} setTrigger = {setButtonPopup}/> 
           </body> 
