@@ -79,18 +79,7 @@ class NewHabitPopup extends Component {
                                 
                             <input id="newhabit_counter_input" type="number" name="Goal" disabled={this.state.MeasurementType !== "2"} onChange={this.handleChange}/>
                             <input type="radio" id="counterOption" name="MeasurementType" value="2" onChange={this.handleOptionChange} checked={this.state.MeasurementType === "2"} />
-                        </div>
-
-                            
-                        <label className = "newhabit_frequency_label"for = "frequency_input">Frequency:</label>
-                        <div className="timer_input_wrapper">
-                            <select id = "newhabit_frequency_input" onChange={this.handleChange}>
-                                <option value = "Daily">Every Day</option>
-                                <option value = "Weekly">Every Week</option>
-                                <option value = "Monthly">Every Month</option>
-                            </select>
-                        </div>
-                            
+                        </div>   
                         
                     </div>
                         <button className = "newhabit_close" onClick={() => this.props.setTrigger(false)}>X</button>
