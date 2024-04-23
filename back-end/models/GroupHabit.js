@@ -157,13 +157,16 @@ GroupHabitSchema.statics.findById = async function(GroupHabitID) {
 GroupHabitSchema.statics.findFriendsHabits = async function(UserID) {
 
     //gets list of you and your friends id's
-    let friends = await FriendsModel.findFriends(UserID).select('FriendsWith');
-    friends.push("yourAdditionalString");
+    const friends = await FriendsModel.findFriends(UserID);
+    const friendUserIDs = friends.map(friend => friend.FriendsWith);
+    friendUserIDs.push(UserID);
 
     //finds all the group habits user and their friends have made
-    const groupHabits = await GroupHabit.find({ Owner: { $in: friends } });
+    const groupHabits = await this.find({ Owner: { $in: friendUserIDs } });
+    console.log(groupHabits)
+    console.log(friendUserIDs)
 
-    return groupHabit;
+    return groupHabits;
 }
 
 const GroupHabitModel = mongoose.model("GroupHabit", GroupHabitSchema);
