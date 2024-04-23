@@ -813,9 +813,6 @@ input[type=checkbox] {
     border-radius: 1.5vw;
     margin-top: 2%;
   }
-  
-
-
 
   .newhabit_popup{
     position: fixed;
@@ -838,7 +835,7 @@ input[type=checkbox] {
     padding-top: 1.5vh;
     transform:translate(-50%,-50%);
     width: 50%;
-    height: 50%;
+    height: 60%;
     box-shadow: 0 5px 30px rgba(0,0,0,.30);
     background:#E2E9D6;
     border-radius: 1.5vw;

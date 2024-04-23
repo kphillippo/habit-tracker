@@ -14,6 +14,7 @@ beforeAll(async () => {
 afterAll(async () => {
   await mongoose.connection.close();
 });
+//cant do anymore cus it times out sometimes
 
 describe('Verification/Email API', () => {
 

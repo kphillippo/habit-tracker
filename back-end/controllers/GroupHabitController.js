@@ -30,7 +30,7 @@ const returnGroupHabits = async (req, res) => {
     const {UserID} = req.body;
     try {
         //find all group habits
-        let groupHabits = await GroupHabit.find();
+        let groupHabits = await GroupHabit.findFriendsHabits(UserID);
 
         // Map over each group habit to update the owner field
         const updatedGroupHabits = await Promise.all(groupHabits.map(async (habit) => {

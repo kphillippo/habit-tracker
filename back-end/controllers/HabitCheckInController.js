@@ -31,7 +31,7 @@ const UpdateHabitCheckIn = async (req, res) => {
             }
         });
         if (!habitCheckIn) {
-            habitCheckIn = await HabitCheckIn.create({HabitID: Parent, Count, CheckInTime: new Date().toISOString()});
+            habitCheckIn = await HabitCheckIn.create({HabitID: Parent, Count: Count, CheckInTime: new Date().toISOString()});
         } else {
             habitCheckIn.Count = Count;
             habitCheckIn.CheckInDate = new Date().toISOString();

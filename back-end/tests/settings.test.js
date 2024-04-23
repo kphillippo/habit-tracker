@@ -23,7 +23,7 @@ describe('Settings API', () => {
 
         //get settings request
         const response = await request(app)
-        .post('/api/settings/getSettings?user_id=66060fc7c794aa2f294f20fa')
+        .get('/api/settings/getSettings?user_id=66060fc7c794aa2f294f20fa')
 
         expect(response.status).toBe(200); // Assuming successful test returns status 200
     });
@@ -33,7 +33,7 @@ describe('Settings API', () => {
 
         //get settings request
         const response = await request(app)
-        .post('/api/settings/getSettings?user_id=66060fc7c794aa2f294p')
+        .get('/api/settings/getSettings?user_id=66060fc7c794aa2f294p')
 
         expect(response.status).toBe(400); // Assuming failed test returns status 400
     });
