@@ -1,4 +1,7 @@
-
+//password and email in env
+const env = process.env.NODE_ENV;
+const email = process.env.EMAIL
+const password = process.env.EMAILPASS
 //sends an email
 const nodemailer = require('nodemailer');
 
@@ -15,18 +18,18 @@ exports.sendEmail = async (req, res) => {
         port: 465,
         secure: true,
         auth: {
-          user: "habittrackerrr@gmail.com",
-          pass: "hdht cazt gwaq qbpe",
+          user: email,
+          pass: password,
         },
     });
     
 
     // Send mail with defined transport object
     const info = await transporter.sendMail({
-      from: 'habittrackerrr@gmail.com', // Sender address
+      from: email, // Sender address
       to: to, // List of recipients
       subject: subject, // Subject line
-      text: text // Plain text body
+      html: text // Plain text body
       // You can also include HTML content by adding: html: '<b>Hello world?</b>'
     });
 

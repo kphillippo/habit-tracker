@@ -6,7 +6,7 @@ const { getSettings, setSettings } = require('../controllers/SettingsController'
 const router = express.Router()
 
 //gets a user's settings
-router.post('/getSettings', getSettings)
+router.get('/getSettings', getSettings)
 
 //sets a user's settings
 router.post('/setSettings', setSettings)

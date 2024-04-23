@@ -30,6 +30,7 @@ const Signin = ({ isSignedin, toast }) =>{
                 sessionStorage.setItem("userToken", token);
                 sessionStorage.setItem("userName", user.Username);
                 sessionStorage.setItem("userStreak", user.Streak);
+                sessionStorage.setItem("userStreakOn", false);
                 sessionStorage.setItem("userFirstName", user.FirstName);
                 sessionStorage.setItem("userLastName", user.LastName);
                 sessionStorage.setItem("userId", user._id);
@@ -42,8 +43,6 @@ const Signin = ({ isSignedin, toast }) =>{
                 console.log(err);
                 toast.error(err.error);
             })
-            
-        console.log('Login with:', username, password);
     };
 
     const handleToggle = () => {
@@ -59,8 +58,8 @@ const Signin = ({ isSignedin, toast }) =>{
     return (
         <div className={'LoginForm'}>
             <div className={'Top'}>
-                <h1>Welcome to HabitConnect!!</h1>
-                <p>"I am a random quote everyday to give you motivation." = Person McPerson</p>
+                <h1>Welcome to HabitConnect!</h1>
+                <p>{sessionStorage.getItem("quote")}</p>
             </div>
             <div className={'wrapper'}>
                 <form onSubmit={handleSubmit} >
@@ -84,7 +83,7 @@ const Signin = ({ isSignedin, toast }) =>{
                                 name={"password"}
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
-                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$'
+                                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,16}$'
                                 required/>
                                 
                             <div className='Icon'> 
@@ -94,7 +93,7 @@ const Signin = ({ isSignedin, toast }) =>{
 
                     <button type={"submit"}>Login</button>
                     <div className='remember-forget'>
-                        <a href="#"> Forgot password</a>
+                        <a href="/forgot"> Forgot password</a>
                     </div>
 
                     <div className={'register-link'}>

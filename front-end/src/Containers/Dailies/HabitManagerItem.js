@@ -18,7 +18,7 @@ export default class HabitManagerItem extends Component {
             Status: false,
             editHabit: false,
             Owner: sessionStorage.getItem("userId"),
-            HabitID: props.data._id,
+            HabitID: props.data.habitID,
             habit: props.data,
             deleteHabit: false
         }
@@ -87,9 +87,9 @@ export default class HabitManagerItem extends Component {
         return(
             <>
                 <tr>
-                    <td class = "todo_item"> {Title}</td>
-                    <td><button onClick={this.toggleEditHabit} class = "managerbtn_edit" > <LuPencil  color="#000000" size = "2.5vw"></LuPencil></button></td>
-                    <td><button onClick={this.toggleDeleteHabit} class = "managerbtn_delete"><IoTrashOutline id ="delete" size="2.5vw" color="#000000" ></IoTrashOutline></button></td>
+                    <td className = "todo_item"> {Title}</td>
+                    <td><button onClick={this.toggleEditHabit} className = "managerbtn_edit" > <LuPencil  color="#000000" size = "2.5vw"></LuPencil></button></td>
+                    <td><button onClick={this.toggleDeleteHabit} className = "managerbtn_delete"><IoTrashOutline id ="delete" size="2.5vw" color="#000000" ></IoTrashOutline></button></td>
                 </tr>
                 {editHabit && <EditHabitPopup toast={this.props.toast} data={this.state} trigger={editHabit} setTrigger={this.toggleEditHabit} updateHabit={this.updateHabit} />}
                 {deleteHabit && <DeletePopup type={"habit"} data={this.state} trigger={deleteHabit} setTrigger={this.toggleDeleteHabit} deleteHabit={this.deleteHabit} />}

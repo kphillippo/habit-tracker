@@ -17,13 +17,14 @@ class HabitManager extends Component {
         this.createHabit = this.createHabit.bind(this);
     }
 
+    //trigger for new habit popup
     toggleNewHabit = () => {
         this.setState(prevState => ({ newHabit: !prevState.newHabit }));
     }
 
     createHabit(data){
         data.Goal = Number(data.Goal);
-        console.log(data)
+        // console.log(data)
         
         apiRequest("POST", "habit/createHabit", data)
         .then(({token, ...data}) => {
@@ -38,6 +39,9 @@ class HabitManager extends Component {
     }
 
 
+    //hook in the react
+    //it will be called everytime the component/state in the component is updated
+    //api from react
     componentDidUpdate(prevProps) {
     // Only update state if the trigger prop has changed
         if (prevProps.trigger !== this.props.trigger) {
@@ -67,7 +71,7 @@ class HabitManager extends Component {
                 <table id = "habitmanager_table">
                         {this.state.habits.map((item) => (
                                 <HabitManagerItem
-                                    key={item._id}
+                                    key={item.habitID}
                                     data = {item}
                                     isUpdated={() => this.props.isUpdated()}
                                     toast = {this.props.toast}
@@ -77,8 +81,8 @@ class HabitManager extends Component {
                             
                 </table>
                 </div>
-                    <button class = "habitmanager_close" onClick={() => this.props.setTrigger(false)}>X</button>
-                    <button class = "habitmanager_Add_New_Habit" onClick={this.toggleNewHabit}>Add New Habit</button>
+                    <button className = "habitmanager_close" onClick={() => this.props.setTrigger(false)}>X</button>
+                    <button className = "habitmanager_Add_New_Habit" onClick={this.toggleNewHabit}>Add New Habit</button>
             </div>
         </div>
         {newHabit && <NewHabitPopup toast = {this.props.toast} data={this.state} trigger={newHabit} setTrigger={this.toggleNewHabit} createHabit={this.createHabit} />}

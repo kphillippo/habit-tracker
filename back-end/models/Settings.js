@@ -7,36 +7,47 @@ const SettingsSchema = new mongoose.Schema({
     },
     DisplayProfileToFriends:{ 
         type: Boolean,
+        default: false,
     },
     DisplayName:{
         type: Boolean,
+        default: false,
     },
     DisplayEmail:{
         type: Boolean,
+        default: false,
     },
     DisplayPhoto:{
         type: Boolean,
+        default: false,
     },
     DisplayStreaks:{
         type: Boolean,
+        default: false,
     },
     DisplayStats:{
         type: Boolean,
+        default: false,
     },
     AllowEmails:{
         type: Boolean,
+        default: false,
     },
     HabitEmails:{
         type: Boolean,
+        default: false,
     },
     ToDoEmails:{
         type: Boolean,
+        default: false,
     },
     FriendRequestEmails:{
         type: Boolean,
+        default: false,
     },
     GroupChallangeEmails:{
         type: Boolean,
+        default: false,
     },
     MainColor:{ //0 = green, 1 = blue, 2 = pink
         type: Number,

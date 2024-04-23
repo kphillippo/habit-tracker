@@ -1,23 +1,58 @@
-import React from "react";
+import React, {useState, useEffect} from 'react';
 import "../Css/home.css"
 import tempStatsImage from './tempStats.png';
 import { IoMdFlame } from "react-icons/io";
 import { BiTask } from "react-icons/bi";
 import { GrAchievement } from "react-icons/gr";
 import { GoGoal } from "react-icons/go";
+import { apiRequest } from "./../utils/reqTool";
 import { useNavigate } from "react-router-dom";
 
+
 function Home(props) {
-    // console.log("Home page props:");
-    // console.log(props);
+    const [todosNumber, setTodosNumber] = useState(0);
+    const [streakN, setstreakN] = useState(0);
+    const [quickInsight, setQuickInsight] = useState(0);
     const userStatus = props.data.userToken;
-    const streakActive = false;
-    let currentStreak = props.data.userStreak;
-    if(currentStreak == "undefined"){
+    let currentStreak = sessionStorage.getItem("userStreak");
+    const streakActive = currentStreak>0 ? true: false;
+    if (currentStreak == "undefined") {
         currentStreak = 0;
     }
     let navigate = useNavigate();//For links on windows to different pages
 
+    if (sessionStorage.getItem("userId")) {
+        apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
+        .then(res => {
+            setTodosNumber(res.length);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        const userdata = {
+            userId: sessionStorage.getItem("userId")
+        }
+        apiRequest("POST", "user/returnStreak", userdata)
+        .then(res => {
+            setstreakN(res.Streak);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+    const getQuickInsights = async () => {    
+        try {  
+            const response = await apiRequest("GET", "stats/quickInsights?user_id=" + sessionStorage.getItem("userId"))  
+            const data = await response;  
+            console.log(data); 
+            setQuickInsight(data);  
+        } catch (err) {  
+            console.error("Failed to fetch user info:", err);  
+        } 
+    };
+    useEffect(() => {  
+        getQuickInsights(); 
+    },[]);
     //Generates a message to welcome user or guest 
     //Returns html with message
     function generateMessage() {
@@ -34,13 +69,43 @@ function Home(props) {
     //Generates random motivational quote 
     //Returns html with quote
     function generateQuote() {
-        let quoteList = [
-            <><div>"The only way to do great work is to love what you do." - Steve Jobs</div></>,
-            <><div>"The future belongs to those who believe in the beauty of their dreams." - Eleanor Roosevelt</div></>,
-            <><div>"It does not matter how slowly you go as long as you do not stop." - Confucius</div></>,
-            <><div>"What you get by achieving your goals is not as important as what you become by achieving your goals." - Zig Ziglar</div></>,
-        ];
-        return quoteList[Math.floor(Math.random() * quoteList.length)];
+        return sessionStorage.getItem("quote");
+    }
+
+    function generateGuestHome() {
+        if (!userStatus) {
+            return<>
+            <div class = "guest">
+                <div class = "home_guest_login">
+                <div class = "home_title">Welcome to HabitConnect!</div>
+                <div class = "point1"><ul></ul><li>Build lasting habits with our easy-to-use tracker</li></div>
+                <div class = "point2"><ul></ul><li>Manage your to do list with ease. </li></div>
+                <div class = "point3"><ul></ul><li>Rise in the leader boards, and compete against your friends in challenges!</li></div>
+                <div class = "no_account">Don't have an account? <a href="http://localhost:3000/signup">Sign up today!</a></div>               
+                </div>
+                <div class = "home_dailies">
+                    <div class = "dailies_home_title">Dailies</div>
+                    <div class = "dailies_home_desc">Create and track your habits and to do list.</div>
+                    <div class = "dailies_img"></div>
+                </div>
+                <div class = "challenges_home">
+                    <div class = "challenges_home_title">Challenges</div>
+                    <div class = "challenges_home_desc">Challenge your friends to keep <br></br>their streak alive.</div>
+                    <div class = "challenges_img"></div>
+                </div>
+                <div class = "leaderboard_home">
+                    <div class = "leaderboard_home_title">My Leaderboard</div>
+                    <div class = "leaderboard_home_desc">See how you rank along side your friends.</div>
+                    <div class = "leaderboard_img"></div>
+                </div>
+                <div class = "stats_home">
+                    <div class = "stats_home_title">My Stats</div>
+                    <div class = "stats_home_desc">Monitor your progress with a <br></br> personalized statistics page.</div>
+                    <div class = "stats_img"></div>
+                </div>
+            </div>
+            </>;
+        }
     }
 
     //Handles navigation to other pages
@@ -53,7 +118,7 @@ function Home(props) {
     function generateStreakWindow() {
         if (userStatus) {
             let flameColor = "#c0c6b7";
-            let message = <>You've been consistent for {currentStreak} days!<br></br>Extend your streak now!</>
+            let message = <>You've been consistent for {streakN} days!<br></br>Extend your streak now!</>
             if (streakActive) {
                 flameColor = "#e57028";
                 message = <>Congrats! You extended your streak today!<br></br>Checkout what habits you completed?</>
@@ -63,8 +128,8 @@ function Home(props) {
                     <center><div className="StreakNumber">
                         <IoMdFlame size={130} color={flameColor}></IoMdFlame>
                         {currentStreak}</div>
-                        </center>
-                        <center>{message}</center>
+                    </center>
+                    <center>{message}</center>
                 </div>
             </>;
         }
@@ -76,7 +141,15 @@ function Home(props) {
         if (userStatus) {
             return <>
                 <div className='windowStats' id="windowGeneral" onClick={() => handleClick('/stats')}>
-                    <img src={tempStatsImage} width="100%" alt="stats_display" />
+                <div><center>
+                    <br></br>
+                    <div style={{fontSize: 'larger'}}>My Quick Insights:</div>
+                    <div>
+                        <div><ul></ul><li>Longest streak: {quickInsight.LongestStreak}</li></div>
+                        <div><ul></ul><li>Current streak: {quickInsight.CurrentStreak}</li></div>
+                        <div><ul></ul><li>Total Habits Completed: {quickInsight.TotalHabitCompletions}</li></div>
+                    </div></center>
+                </div>
                 </div>
             </>;
         }
@@ -86,14 +159,13 @@ function Home(props) {
     //Returns html with window
     function generateTasksWindow() {
         if (userStatus) {
-            let tasks = 5;
             return <>
                 <div className='window' id="windowGeneral" onClick={() => handleClick('/dailies')}>
                     <center><div className="StreakNumber" >
                         <BiTask size={130} color="#0E80AC"></BiTask>
-                        {tasks}
+                        {todosNumber}
                     </div></center>
-                    <center>You have {tasks} tasks today!<br></br>
+                    <center>You have {todosNumber} tasks today!<br></br>
                         Finish them now?</center>
                 </div>
             </>;
@@ -124,7 +196,7 @@ function Home(props) {
                     <center>
                         <GoGoal size={130} color="#3ac7a8"></GoGoal>
                     </center>
-                    <center>Feelig adventurous today? Try out new challenges!</center>
+                    <center>Feeling adventurous today? Try out new challenges!</center>
                 </div>
             </>;
         }
@@ -132,9 +204,13 @@ function Home(props) {
 
     return (
         <div className="main-container">
-            <div className="message">
+            {/* <div className="message">
             {generateMessage()}
             {generateQuote()}
+            <div id="quote"></div>
+            </div> */}
+            <div>
+                {generateGuestHome()}
             </div>
             <div className="windowGallery">
                 <div className="windowLine">

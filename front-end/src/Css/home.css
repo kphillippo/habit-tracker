@@ -1,59 +1,352 @@
-:root {
-    --light-green-color: #c4d3ad; 
-    --lighter-green-color: #E2E9D6; 
+@import url("https://fonts.googleapis.com/css2?family=Kotta+One:wght@400&display=swap"); 
+
+:root { 
+
+    --light-green-color: #c4d3ad;  
+
+    --lighter-green-color: #E2E9D6;  
+
     --dark-green-color: #92B27A; 
-}
-/* Applies to all windows on the home page*/
-#windowGeneral{
-    background-color: var(--lighter-green-color);
-    border: 15px solid var(--dark-green-color);
-    border-radius: 10px;
-    font-size: 120%;
-    box-shadow: 7px 7px 7px #858a84;
-    transition: box-shadow 0.5s ease;
-}
-#windowGeneral:hover {
-    box-shadow: 12px 12px 12px #a5a8a5;
-    margin-top: 2.35%;
-}
-/* Specifics for different windows  */
-.window{
-    width: 25%;
-    margin: 2.5%;
+
+    overflow-y: scroll;  
+
+} 
+
+/* Applies to all windows on the home page*/ 
+
+#windowGeneral{ 
+
+    background-color: var(--lighter-green-color); 
+
+    border: 15px solid var(--dark-green-color); 
+
+    border-radius: 10px; 
+
+    font-size: 120%; 
+
+    box-shadow: 7px 7px 7px #858a84; 
+
+    transition: box-shadow 0.5s ease; 
+
+} 
+
+#windowGeneral:hover { 
+
+    box-shadow: 12px 12px 12px #a5a8a5; 
+
+    margin-top: 2.35%; 
+
+} 
+
+/* Specifics for different windows  */ 
+
+.window{ 
+
+    width: 25%; 
+
+    margin: 2.5%; 
+
+} 
+
+ 
+
+.windowSecond{ 
+
+    width: 20%; 
+
+    margin-left: 20%; 
+
+    margin-top: 2.5%; 
+
+    margin-bottom: 2.5%; 
+
+} 
+
+ 
+
+.windowStats{ 
+
+    width: 35%; 
+
+    margin: 2.5%; 
+
+} 
+
+ 
+
+.StreakNumber{ 
+
+    font-size: 450%; 
+
+} 
+
+ 
+
+.windowLine{ 
+
+    display: inline-flex; 
+
+    width: 100%; 
+
+} 
+
+@media (max-width: 750px) { 
+
+    .windowLine { 
+
+        display:list-item; 
+
+    } 
+
+    #windowGeneral{ 
+
+        width: 90%; 
+
+    } 
+
+    .windowSecond{ 
+
+        margin-left: 2.5%; 
+
+    } 
+
+} 
+
+ 
+
+.message{ 
+
+    margin-left: 18px; 
+
+} 
+
+ 
+
+.home_guest_login{ 
+
+    position: absolute; 
+
+    top:5em; 
+
+    left:2.5vw; 
+
+    width:95vw; 
+
+    height:25em; 
+
+    border-bottom:0.01vh solid #000; 
+
+} 
+
+ 
+
+.home_title{ 
+
+    padding-top:5%; 
+
+    text-align: center; 
+
+    font-family: Kotta One; 
+
+    font-size:250%; 
+
+} 
+
+.point1{ 
+
+    padding-top: 1%; 
+
+    padding-left:24%; 
+
+    padding-right:24%; 
+
+    font-size:150%; 
+
+} 
+
+.point2{ 
+
+    padding-left:24%; 
+
+    padding-right:24%; 
+
+    font-size:150%; 
+
+} 
+
+.point3{ 
+
+    padding-left:24%; 
+
+    padding-right:24%; 
+
+    font-size:150%; 
+
+} 
+
+.no_account{ 
+
+    padding-top: 1%; 
+
+    text-align: center; 
+
+    font-family: Kotta One; 
+
+    font-size:150%; 
+
+} 
+
+.home_dailies{ 
+
+    position: absolute; 
+
+    left:2.5vw; 
+
+    width:95vw; 
+
+    top:30em; 
+
+    height:25em; 
+
+    border-bottom:0.01vh solid #000; 
+
+} 
+
+.dailies_home_title{ 
+
+    padding-top:1%; 
+
+    padding-left:1%; 
+
+    text-align: left; 
+
+    font-size:250%; 
+
+} 
+
+.dailies_home_desc{ 
+
+    padding-top:1%; 
+
+    padding-left:1%; 
+
+    text-align: left; 
+
+    font-size:150%;    
+
+} 
+.dailies_img{
+    position: absolute;
+    right:5%;
+    top:10%;
+    background-image: url('Dailies.png');
+    background-size:contain;
+    width: 37em;
+    height: 20em;
+    border-radius: 0.6vw;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25); 
 }
 
-.windowSecond{
-    width: 20%;
-    margin-left: 20%;
-    margin-top: 2.5%;
-    margin-bottom: 2.5%;
+.challenges_home{ 
+    position: absolute; 
+    left:2.5vw; 
+    width:95vw; 
+    top:55em; 
+    height:25em; 
+    border-bottom:0.01vh solid #000; 
+} 
+
+.challenges_home_title{ 
+    padding-top:1%; 
+    padding-right:1%; 
+    text-align: right; 
+    font-size:250%; 
+} 
+
+.challenges_home_desc{ 
+    padding-top:1%; 
+    padding-right:1%; 
+    text-align: right; 
+    font-size:150%; 
+} 
+
+.challenges_img{
+    position: absolute;
+    left:5%;
+    top:10%;
+    background-image: url('Challenges.png');
+    background-size:contain;
+    width:43.5em;
+    height:20em;
+    border-radius: 0.6vw;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25); 
 }
 
-.windowStats{
-    width: 35%;
-    margin: 2.5%;
+.leaderboard_home{ 
+    position: absolute; 
+    left:2.5vw; 
+    width:95vw; 
+    top:80em; 
+    height:25em; 
+    border-bottom:0.01vh solid #000; 
+} 
+
+.leaderboard_home_title{ 
+    padding-top:1%; 
+    padding-right:1%; 
+    text-align: left; 
+    font-size:250%; 
+} 
+
+.leaderboard_home_desc{ 
+    padding-top:1%; 
+    padding-right:1%; 
+    text-align: left; 
+    font-size:150%; 
+} 
+
+.leaderboard_img{
+    position: absolute;
+    right:5%;
+    top:10%;
+    background-image: url('Leaderboard.png');
+    background-size:contain;
+    width:38.7em;
+    height:20em;
+    border-radius: 0.6vw;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25); 
 }
 
-.StreakNumber{
-    font-size: 450%;
-}
+.stats_home{ 
+    position: absolute; 
+    left:2.5vw; 
+    width:95vw; 
+    top:105em; 
+    height:25em; 
+    border-bottom:0.01vh solid #000; 
+} 
 
-.windowLine{
-    display: inline-flex;
-    width: 100%;
-}
-@media (max-width: 750px) {
-    .windowLine {
-        display:list-item;
-    }
-    #windowGeneral{
-        width: 90%;
-    }
-    .windowSecond{
-        margin-left: 2.5%;
-    }
-}
+.stats_home_title{ 
+    padding-top:1%; 
+    padding-right:1%; 
+    text-align: right; 
+    font-size:250%; 
+} 
 
-.message{
-    margin-left: 18px;
+.stats_home_desc{ 
+    padding-top:1%; 
+    padding-right:1%;
+    text-align: right; 
+    font-size:150%; 
+} 
+.stats_img{
+    position: absolute;
+    left:5%;
+    top:10%;
+    background-image: url('Stats.png');
+    background-size:contain;
+    width:38.8em;
+    height:20em;
+    border-radius: 0.6vw;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25); 
 }

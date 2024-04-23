@@ -1,7 +1,7 @@
 const express = require('express')
 
 //controller functions
-const { UpdateHabitCheckIn, GetHabitCheckIns } = require('../controllers/HabitCheckInController')
+const { UpdateHabitCheckIn, GetHabitCheckIns, GetCheckInByDate } = require('../controllers/HabitCheckInController')
 
 const router = express.Router()
 
@@ -9,6 +9,7 @@ const router = express.Router()
 
 router.get('/getHabitCheckIns', GetHabitCheckIns);
 router.post('/updateHabitCheckIn', UpdateHabitCheckIn);
+router.get('/getCheckInsByDate', GetCheckInByDate);
 
 
 module.exports = router

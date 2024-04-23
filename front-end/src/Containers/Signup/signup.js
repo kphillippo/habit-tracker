@@ -10,6 +10,7 @@ import Verify from "./verify";
 import PasswordChecklist from "react-password-checklist"
 import {Icon} from 'react-icons-kit';
 import {eyeOff, eye} from 'react-icons-kit/feather';
+import {sendMail} from './sendEmail'
 
 
 const Signup = ({isSignedin, toast}) => {
@@ -23,6 +24,7 @@ const Signup = ({isSignedin, toast}) => {
     const [type, setType] = useState('password');
     const [icon, setIcon] = useState(eyeOff);
     const [code, setCode] = useState('');
+    const [showthing, setShowThing] = useState('none');
     
     let navigate = useNavigate();
 
@@ -54,8 +56,7 @@ const Signup = ({isSignedin, toast}) => {
                 console.log(err);
                 toast.error(err.error);
             })
-        console.log('signed up with:', Fname, Lname, email, username, password);
-        
+        console.log('signed up with:', Fname, Lname, email, username, password);        
     };
 
     function getCode(){
@@ -71,17 +72,44 @@ const Signup = ({isSignedin, toast}) => {
         return str;
     }
 
+    function generateHTML(){
+        var inf = getCode();
+        const message = `
+        <p>
+        <span style="color:rgb(56, 118, 29);">
+        <strong>Welcome to HabitConnect!&nbsp;</strong>
+        </span>
+        </p>
+        <p>There’s only one step left to create your HabitConnect account. Please enter this verification code in the window where you started creating your account:&nbsp;</p>
+        <p>
+            <strong>`+ inf +`</strong>
+        </p>
+        <p>This code is valid while your HabitConnect window stays open.&nbsp;</p>
+        <p>If you did not request to create a HabitConnect account, ignore this email.</p>
+        <span style="color:rgb(153, 153, 153);">Have questions or trouble logging in? Please contact us
+        </span>
+        <a target="_blank" href="mailto:habittrackerrr@gmail.com">
+            <span style="color:rgb(17, 85, 204);">here</span>
+        </a>
+        <span style="color:rgb(153, 153, 153);">.
+        </span>
+        `;
+        return message;
+    }
+    
+
     const handleMail = (event) => {
         event.preventDefault();
         if(password != passwordAgain){
             toast.error("Passwords do not match");
+            setShowThing('block');
         }else{
             const inf = getCode();
             setVerify(true);
             let info = {
                 "to": email,
-                "subject": "Test Test Testing",
-                "text": "Welcome to HabitConnect, here is your verification code: " + inf
+                "subject": "HabitConnect: Account Creation Verification Code",
+                "text": generateHTML()
             }
             apiRequest("POST", "verification/sendEmail", info)
                 .then(({token, ...user}) => {
@@ -113,12 +141,13 @@ const Signup = ({isSignedin, toast}) => {
                 <h1>Create Your Account!</h1>
             </div>
             <div className={'wrapper'}>
-                <form >
+                <form onSubmit={handleMail}>
                     <div className={'inputBox'}>
                         <FaRegUserCircle className="icon"/> First Name: <input type={"text"}
                                                                                placeholder={' First Name'}
                                                                                name={"Fname"}
                                                                                value={Fname}
+                                                                               maxlength="20"
                                                                                onChange={e => setFname(e.target.value)}
                                                                                required/>
                     </div>
@@ -128,6 +157,7 @@ const Signup = ({isSignedin, toast}) => {
                                                                               placeholder={'  Last Name'}
                                                                               name={"Lname"}
                                                                               value={Lname}
+                                                                              maxlength="20"
                                                                               onChange={e => setLname(e.target.value)}
                                                                               required/>
                     </div>
@@ -159,6 +189,10 @@ const Signup = ({isSignedin, toast}) => {
                                                                     name={"password"}
                                                                     value={password}
                                                                     onChange={e => setPassword(e.target.value)}
+                                                                    onFocus={e => {
+                                                                        if(showthing == "block")
+                                                                            setShowThing('none')
+                                                                    }}
                                                                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,16}$"
                                                                     required/>
                         <div className='Icon'> 
@@ -172,6 +206,10 @@ const Signup = ({isSignedin, toast}) => {
                                                                     name={"passwordAgain"}
                                                                     value={passwordAgain}
                                                                     onChange={e => setPasswordAgain(e.target.value)}
+                                                                    onFocus={e => {
+                                                                        if(showthing == "block")
+                                                                            setShowThing('none')
+                                                                    }}
                                                                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,16}$"
                                                                     required/>
                         <div className='Icon'> 
@@ -179,19 +217,20 @@ const Signup = ({isSignedin, toast}) => {
                             </div>                                            
                     </div>
 
-                    <button className={"btn"} onClick={handleMail} >Create Account</button>
+                    <button className={"btn"} type="submit" >Create Account</button>
                 </form>
-                <div className="CheckList">
-                    <PasswordChecklist
-                        rules={["minLength","specialChar","number","capital","lowercase", "match"]}
-                        minLength={8}
-                        value={password}
-                        valueAgain={passwordAgain}
-                    />
-                </div>
+                
                 <Verify show={showVerify} close={() => setVerify(false)} sub={handleSubmit} code ={code} email={email}/>
             </div>
-
+            <div className="checkList">
+            <PasswordChecklist
+                    style={{display:showthing}}
+                    rules={["minLength","specialChar","number","capital","lowercase", "match"]}
+                    minLength={8}
+                    value={password}
+                    valueAgain={passwordAgain}
+                />
+            </div>                                                         
         </div>
     );
 }

@@ -1,53 +1,119 @@
+.body{
+    padding-bottom:0%;
+}
 .parent{
     font-family: 'Kotta One', serif;
+    overflow-y: scroll;
+    height: 180%;
 }
 
 .my-stats{
     box-sizing: border-box;
     position: absolute;
-    width: 91vw;
-    height: 30.75vw;
-    left: 5vw;
-    top: 114px;
-    background: #E2E9D6;
-    box-shadow: 0px 1px 1px 2.5px rgba(0, 0, 0, 0.25);
-    border-radius: 0.5vw;
+    width: 91%;
+    height: 70%;
+    left: 5%;
+    top:8%;
+    border-radius: 0.6vw;
+    background-color: #E2E9D6;
+    box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25);
+    border-width: 0.0001vw;
+    border-style: solid;
+    border: black;
+}
+
+.left{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+.stats_text{
+    position: absolute;
+    top:15%;
+    left:10%;
+    width: 80%;
+    text-align: center;
+}
+.stats_title{
+    font-size: 300%;
+    font-weight: 500;
+}
+.stats_quote{
+    position:absolute;
+    top:175%;
+    font-size: 200%;
+    font-weight: 500;
 }
 
 .quick-insights{
     box-sizing: border-box;
     position: absolute;
-    width: 51.5vw;
-    height: 27vw;
-    left: 38vw;
-    top: 1.75vw;
+    width: 48%;
+    height: 90%;
+    left: 50%;
+    top:5%;
     background: #C4D3AB;
     border: 0.5px solid;
     border-radius: 5px;
     box-shadow: 0vw 1.5px 0.5px 0.5px rgba(0, 0, 0, 0.25);
-}
-
-.my-stats h1{
-    margin-top: 36px;
-    margin-bottom: 0.5rem;
-    font-weight: 400;
-    line-height: 1.2;
-    color: #000000;
-}
-
-.quick-insights .wrapper h1{
-    position: absolute;
-    width: 296.75vw;
-    height: 39vw;
-    left: 550.75vw;
-    top: 148.25vw;
-
-    font-family: 'Kotta One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 75vw;
-    line-height: 39vw;
     text-align: center;
+}
 
-    color: #000000;
-} 
+.quick_title{
+    position: absolute;
+    top:13%;
+    left: 15%;
+    font-size: 300%;
+    font-weight: 500;
+}
+
+.quick_inner{
+    position:absolute;
+    top:30%;
+    left:15%;
+    font-size: 200%;
+    font-weight: 500;
+    text-align: left;
+}
+
+.my_analytics{
+    position: absolute;
+    top:85%;
+    width:100%;
+}
+.analytics_title{
+    text-align: center;
+    font-size: 300%;
+    font-weight: 500;
+}
+.graphs{
+    position: absolute;
+    top: 130%;
+    width: 100%;
+    height:35em;
+}
+
+.graph1{
+    position: absolute;
+    left:10%;
+    width: 80%;
+    height: 80%;
+}
+
+.graph1_title{
+    text-align: center;
+    font-size: 300%;
+    font-weight: 500;
+}
+
+.chart{
+    position: absolute;
+    left:10%;
+    width: 80%;
+    height: 100%;
+}
+
+
+
+
+
