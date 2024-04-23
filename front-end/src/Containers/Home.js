@@ -86,7 +86,6 @@ function Home(props) {
                 <div class = "home_dailies">
                     <div class = "dailies_home_title">Dailies</div>
                     <div class = "dailies_home_desc">Create and track your habits and to do list.</div>
-                    <div class = "dailies_img"><img></img></div>
                 </div>
                 <div class = "challenges_home">
                     <div class = "challenges_home_title">Challenges</div>
