@@ -141,7 +141,7 @@ const Signup = ({isSignedin, toast}) => {
                 <h1>Create Your Account!</h1>
             </div>
             <div className={'wrapper'}>
-                <form onSubmit={{handleMail}}>
+                <form onSubmit={handleMail}>
                     <div className={'inputBox'}>
                         <FaRegUserCircle className="icon"/> First Name: <input type={"text"}
                                                                                placeholder={' First Name'}
