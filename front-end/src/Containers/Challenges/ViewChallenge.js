@@ -61,8 +61,9 @@ class ViewChallenge extends Component {
             memberList[i] = (
                 <tr key = {i}>
                     <td width={"10%"}></td>
-                    <td width="70%" id="challenge" > {this.state.Members[i]} </td>
+                    <td width="60%" id="challenge" > {this.state.Members[i]} </td>
                     <td width="20%"><IoMdFlame color='#e57028'></IoMdFlame>  {this.state.Streak[i]}</td>
+                    <td width="10%"></td>
                 </tr>
             )
         }
@@ -90,8 +91,9 @@ class ViewChallenge extends Component {
                             <table>
                                 <tr>
                                     <td width="15%"></td>
-                                    <td width="65%" id="challenge"> Participants</td>
+                                    <td width="55%" id="challenge"> Participants</td>
                                     <td width="20%"> My Streak</td>
+                                    <td width="10%"></td>
                                 </tr>
                             </table>
                         </div>

@@ -120,10 +120,6 @@ body{
     padding-left: 10px;
 }
 
-Lcontent{
-    overflow-y: scroll;
-}
-
 .FriendsTable{
     height: 25vh;
     overflow-y: scroll;
@@ -134,7 +130,7 @@ Lcontent{
 }
 
 .joinedBtn{
-    padding: 5px;
+    padding: 5px 15px 5px 15px;
     background-color: #92B27A;
     border-radius: 10px;
     border: 0;
@@ -145,6 +141,11 @@ Lcontent{
     position: absolute;
     left: 50vw;
     top: 50vh;
+}
+
+.challengeManager_div{
+    height: 50vh;
+    
 }
 
 
