@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const GroupHabitModel = require("./GroupHabit");
+const UserModel = require("./User");
 
 const HabitCheckInSchema = new mongoose.Schema({
     HabitID:{
@@ -43,7 +44,11 @@ HabitCheckInSchema.post('save', async function(doc, next) {
         if (habit.lastCheckIn.toDateString() !== (new Date()).toDateString()) {
             if (habit.lastCheckIn.toDateString() === dayBefore.toDateString()) {
                 habit.Streak += 1;
-
+                const user = await UserModel.findById(habit.Owner);
+                if (habit.Streak > user.LongestStreak) {
+                    user.LongestStreak = habit.Streak;
+                    await user.save();
+                }
                 //if the habit is a group habit it will update the grouphabit streak too
                 if(habit.GroupHabitID){
                     GroupHabitModel.checkIn(habit.GroupHabitID, habit.Owner);
