@@ -22,191 +22,195 @@ afterAll(async () => {
 });
 
 describe('User API', () => {
+  describe('Create new user', () => {
+    //create new user without errors
+    test('Create new user', async () => {
 
-  //create new user without errors
-  test('Create new user', async () => {
-
-    //deletes the user if it already exists
-    const deleteUser = await request(app)
-      .post('/api/user/delete')
-      .send({ Username: 'testuser'})
+      //deletes the user if it already exists
+      const deleteUser = await request(app)
+        .post('/api/user/delete')
+        .send({ Username: 'testuser'})
 
 
-    //test data
-    const userData = {
-      FirstName: 'test',
-      LastName: 'tester',
-      Email: 'tester@email.com',
-      Username: 'testuser',
-      Password: 'passwordW1!'
-    };
+      //test data
+      const userData = {
+        FirstName: 'test',
+        LastName: 'tester',
+        Email: 'tester@email.com',
+        Username: 'testuser',
+        Password: 'passwordW1!'
+      };
 
-    //signs up user 
-    const response = await request(app)
-    .post('/api/user/signup')
-    .send(userData)
-    .set('Accept', 'application/json');
+      //signs up user 
+      const response = await request(app)
+      .post('/api/user/signup')
+      .send(userData)
+      .set('Accept', 'application/json');
 
-    expect(response.status).toBe(200); // Assuming successful user creation returns status 200
-  });
+      expect(response.status).toBe(200); // Assuming successful user creation returns status 200
+    });
 
-  //create a new user with an email that alread exists
-  test('Fail create new user, email in use', async () => {
+    //create a new user with an email that alread exists
+    test('Fail create new user, email in use', async () => {
 
-    //test data
-    const userData = {
-      FirstName: 'test',
-      LastName: 'tester',
-      Email: 'tester@email.com',
-      Username: 'testuser2',
-      Password: 'passwordW1!'
-    };
+      //test data
+      const userData = {
+        FirstName: 'test',
+        LastName: 'tester',
+        Email: 'tester@email.com',
+        Username: 'testuser23',
+        Password: 'passwordW1!'
+      };
 
-    //signs up user 
-    const response = await request(app)
-    .post('/api/user/signup')
-    .send(userData)
-    .set('Accept', 'application/json');
+      //signs up user 
+      const response = await request(app)
+      .post('/api/user/signup')
+      .send(userData)
+      .set('Accept', 'application/json');
 
-    expect(response.status).toBe(400); // Assuming failed user creation returns status 400
-    expect(response.body.error).toBe('Email already in use!'); //expected error message
-  });
+      expect(response.status).toBe(400); // Assuming failed user creation returns status 400
+      expect(response.body.error).toBe('Email already in use!'); //expected error message
+    });
 
-  //create a new user with an username that alread exists
-  test('Fail create new user, username in use', async () => {
+    //create a new user with an username that alread exists
+    test('Fail create new user, username in use', async () => {
 
-    //test data
-    const userData = {
-      FirstName: 'test',
-      LastName: 'tester',
-      Email: 'tester2@email.com',
-      Username: 'testuser',
-      Password: 'passwordW1!'
-    };
+      //test data
+      const userData = {
+        FirstName: 'test',
+        LastName: 'tester',
+        Email: 'tester2@email.com',
+        Username: 'cristalKittyyyyyy',
+        Password: 'passwordW1!'
+      };
 
-    //signs up user 
-    const response = await request(app)
-    .post('/api/user/signup')
-    .send(userData)
-    .set('Accept', 'application/json');
+      //signs up user 
+      const response = await request(app)
+      .post('/api/user/signup')
+      .send(userData)
+      .set('Accept', 'application/json');
 
-    expect(response.status).toBe(400); // Assuming failed user creation returns status 400
-    expect(response.body.error).toBe('Username already in use!'); //expected error message
-  });
+      expect(response.status).toBe(400); // Assuming failed user creation returns status 400
+      expect(response.body.error).toBe('Username already in use!'); //expected error message
+    });
 
-  //create a new user with password not good enough
-  test('Fail create new user, password not good enough', async () => {
+    //create a new user with password not good enough
+    test('Fail create new user, password not good enough', async () => {
 
-    //test data
-    const userData = {
-      FirstName: 'test',
-      LastName: 'tester',
-      Email: 'tester2@email.com',
-      Username: 'testuser2',
-      Password: 'password'
-    };
+      //test data
+      const userData = {
+        FirstName: 'test',
+        LastName: 'tester',
+        Email: 'tester2@email.com',
+        Username: 'testuser2',
+        Password: 'password'
+      };
 
-    //signs up user 
-    const response = await request(app)
-    .post('/api/user/signup')
-    .send(userData)
-    .set('Accept', 'application/json');
+      //signs up user 
+      const response = await request(app)
+      .post('/api/user/signup')
+      .send(userData)
+      .set('Accept', 'application/json');
 
-    expect(response.status).toBe(400); // Assuming failed user creation returns status 400
-    expect(response.body.error).toBe('Password must contain a capital, a lowercase, a symbol and 8 characters total!'); //expected error message
-  });
+      expect(response.status).toBe(400); // Assuming failed user creation returns status 400
+      expect(response.body.error).toBe('Password must contain a capital, a lowercase, a symbol and 8 characters total!'); //expected error message
+    });
 
-  //create a new user with email not in email format
-  test('Fail create new user, email not in email format', async () => {
+    //create a new user with email not in email format
+    test('Fail create new user, email not in email format', async () => {
 
-    //test data
-    const userData = {
-      FirstName: 'test',
-      LastName: 'tester',
-      Email: 'tester2',
-      Username: 'testuser2',
-      Password: 'passwordW1!'
-    };
+      //test data
+      const userData = {
+        FirstName: 'test',
+        LastName: 'tester',
+        Email: 'tester2',
+        Username: 'testuser2',
+        Password: 'passwordW1!'
+      };
 
-    //signs up user 
-    const response = await request(app)
-    .post('/api/user/signup')
-    .send(userData)
-    .set('Accept', 'application/json');
+      //signs up user 
+      const response = await request(app)
+      .post('/api/user/signup')
+      .send(userData)
+      .set('Accept', 'application/json');
 
-    expect(response.status).toBe(400); // Assuming failed user creation returns status 400
-    expect(response.body.error).toBe('Email is not valid!'); //expected error message
-  });
+      expect(response.status).toBe(400); // Assuming failed user creation returns status 400
+      expect(response.body.error).toBe('Email is not valid!'); //expected error message
+    });
 
-  //create a new user with not all fields filled
-  test('Fail create new user, not all fields filled', async () => {
+    //create a new user with not all fields filled
+    test('Fail create new user, not all fields filled', async () => {
 
-    //test data
-    const userData = {
-      FirstName: '',
-      LastName: '',
-      Email: '',
-      Username: '',
-      Password: ''
-    };
+      //test data
+      const userData = {
+        FirstName: '',
+        LastName: '',
+        Email: '',
+        Username: '',
+        Password: ''
+      };
 
-    //signs up user 
-    const response = await request(app)
-    .post('/api/user/signup')
-    .send(userData)
-    .set('Accept', 'application/json');
+      //signs up user 
+      const response = await request(app)
+      .post('/api/user/signup')
+      .send(userData)
+      .set('Accept', 'application/json');
 
-    expect(response.status).toBe(400); // Assuming failed user creation returns status 400
-    expect(response.body.error).toBe('All fields must be filled!'); //expected error message
-  });
+      expect(response.status).toBe(400); // Assuming failed user creation returns status 400
+      expect(response.body.error).toBe('All fields must be filled!'); //expected error message
+    });
+  })
 
-  //login a user
-  test('User login', async () => {
+  describe('Login', () => {
+    //login a user
+    test('User login', async () => {
 
-    // Call the login static method
-    const response = await request(app)
-      .post('/api/user/login')
-      .send({ Username: 'testuser', Password: 'passwordW1!' })
+      // Call the login static method
+      const response = await request(app)
+        .post('/api/user/login')
+        .send({ Username: 'testuser', Password: 'passwordW1!' })
 
-    expect(response.status).toBe(200);// Assuming successful user login returns status 200
-  });
+      expect(response.status).toBe(200);// Assuming successful user login returns status 200
+    });
 
-  //login a user not all fields filled
-  test('Fail user login, not all field filled', async () => {
+    //login a user not all fields filled
+    test('Fail user login, not all field filled', async () => {
 
-    // Call the login static method
-    const response = await request(app)
-      .post('/api/user/login')
-      .send({ Username: '', Password: '' })
+      // Call the login static method
+      const response = await request(app)
+        .post('/api/user/login')
+        .send({ Username: '', Password: '' })
 
-    expect(response.status).toBe(400);// Assuming failed user login returns status 400
-    expect(response.body.error).toBe('All fields must be filled!'); //expected error message
-  });
+      expect(response.status).toBe(400);// Assuming failed user login returns status 400
+      expect(response.body.error).toBe('All fields must be filled!'); //expected error message
+    });
 
-  //login a user with invalid username
-  test('Fail user login, invalid username', async () => {
+    //login a user with invalid username
+    test('Fail user login, invalid username', async () => {
 
-    // Call the login static method
-    const response = await request(app)
-      .post('/api/user/login')
-      .send({ Username: 'fail', Password: 'fail' })
+      // Call the login static method
+      const response = await request(app)
+        .post('/api/user/login')
+        .send({ Username: 'fail', Password: 'fail' })
 
-    expect(response.status).toBe(400);// Assuming failed user login returns status 400
-    expect(response.body.error).toBe('That user does not exist!'); //expected error message
-  });
+      expect(response.status).toBe(400);// Assuming failed user login returns status 400
+      expect(response.body.error).toBe('That user does not exist!'); //expected error message
+    });
 
-   //login a user with invalid password
-  test('Fail user login, invalid password', async () => {
+    //login a user with invalid password
+    test('Fail user login, invalid password', async () => {
 
-    // Call the login static method
-    const response = await request(app)
-      .post('/api/user/login')
-      .send({ Username: 'testuser', Password: 'fail' })
+      // Call the login static method
+      const response = await request(app)
+        .post('/api/user/login')
+        .send({ Username: 'testuser', Password: 'fail' })
 
-    expect(response.status).toBe(400);// Assuming failed user login returns status 400
-    expect(response.body.error).toBe('Incorrect Password!'); //expected error message
-  });
+      expect(response.status).toBe(400);// Assuming failed user login returns status 400
+      expect(response.body.error).toBe('Incorrect Password!'); //expected error message
+    });
+  })
 
+  describe('Access Profile Info', () => {
   //access profile info
   test('Access Profile Info', async () => {
 
@@ -223,7 +227,7 @@ describe('User API', () => {
 
     // Call the getUserprofileInfo static method
     const response = await request(app)
-      .post('/api/user/userProfileInfo?user_id=65f3a52aa08c8a8cafda8d4c')
+      .post('/api/user/userProfileInfo?user_id=6625b49359d4b4857fcf6312')
       .send({ _id: '65f3a52aa08c8a8cafda8d4c'})
 
     expect(response.status).toBe(200);// Assuming successful user profile info access returns status 200
@@ -239,13 +243,15 @@ describe('User API', () => {
 
     expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
   });
+})
 
+describe('Update Profile Info', () => {
   //Sucessful update profile info
   test('Update Profile Info', async () => {
 
     //test data
     const userData = {
-      _id: _id,
+      _id: '65f4b32629fe09988206d72a',
       FirstName: 'John',
       LastName: 'Doe',
       Email: 'JohnDoe@email.com',
@@ -258,6 +264,20 @@ describe('User API', () => {
       .send(userData)
 
     expect(response.status).toBe(200);// Assuming failed user profile info access returns status 400
+
+    //test data
+    const userData2 = {
+      _id: '65f4b32629fe09988206d72a',
+      FirstName: 'John',
+      LastName: 'Doe',
+      Email: 'JohnDoe@email.com',
+      Username: 'John'
+    };
+
+    // Call the updateUserInfo static method
+    const response2 = await request(app)
+      .post('/api/user/updateUserInfo')
+      .send(userData2)
   });
 
   //fail to update profile info, username already exists
@@ -265,7 +285,7 @@ describe('User API', () => {
 
     //test data
     const userData = {
-      _id: _id,
+      _id: '65f4b32629fe09988206d72a',
       FirstName: 'test',
       LastName: 'tester',
       Email: 'tester123@email.com',
@@ -286,7 +306,7 @@ describe('User API', () => {
 
     //test data
     const userData = {
-      _id: _id,
+      _id: '65f4b32629fe09988206d72a',
       FirstName: 'test',
       LastName: 'tester',
       Email: 'tester@email.com',
@@ -301,13 +321,15 @@ describe('User API', () => {
     expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
     expect(response.body.error).toBe('Email already in use!'); //expected error message
   });
+})
 
+describe('Update Passwroed', () => {
   //Update users password
   test('Update users password', async () => {
 
     //test data
     const userData = {
-      _id: _id,
+      _id: '65f4b32629fe09988206d72a',
       Password: 'Password1!',
       newPassword:'Password!2'
     };
@@ -322,7 +344,7 @@ describe('User API', () => {
     //change it again so it works again next time
     //test data
     const userData2 = {
-      _id: _id,
+      _id: '65f4b32629fe09988206d72a',
       Password: 'Password!2',
       newPassword:'Password1!'
     };
@@ -338,7 +360,7 @@ describe('User API', () => {
 
     //test data
     const userData = {
-      _id: _id,
+      _id: '65f4b32629fe09988206d72a',
       Password: 'Password!2',
       newPassword:'Password!2'
     };
@@ -357,7 +379,7 @@ describe('User API', () => {
 
     //test data
     const userData = {
-      _id: _id,
+      _id: '65f4b32629fe09988206d72a',
       Password: 'Password1!',
       newPassword:'Password1!'
     };
@@ -376,8 +398,8 @@ describe('User API', () => {
 
     //test data
     const userData = {
-      _id: _id,
-      Password: 'Password!1',
+      _id: '65f4b32629fe09988206d72a',
+      Password: 'Password1!',
       newPassword:'Password'
     };
 
@@ -389,7 +411,9 @@ describe('User API', () => {
     expect(response.status).toBe(400);// Assuming failed user profile info access returns status 400
     expect(response.body.error).toBe('Password must contain a capital, a lowercase, a symbol and 8 characters total!'); //expected error message
   });
+})
 
+describe('Delete User', () => {
   //delete user
   test('Delete user', async () => {
 
@@ -412,4 +436,5 @@ describe('User API', () => {
     expect(response.status).toBe(500);// Assuming failed user deletion returns status 500
     expect(response.body.error).toBe('User not found!'); //expected error message
   });
+})
 });

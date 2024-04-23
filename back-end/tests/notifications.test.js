@@ -117,7 +117,7 @@ describe('Notifications API', () => {
 
     describe('Make Notification on Login Depending on Number of Habits', () => {
         //Successfully Return Notifications
-        test('Login with 1 habit and 1 notification', async () => {
+        test('Login with 1 habit and 1 todo', async () => {
 
             //make a habit
             const testData1 = {
@@ -146,7 +146,7 @@ describe('Notifications API', () => {
 
             //login
             const testData3 = {
-                Username: "AnotherTester",
+                Username: "tesing5",
                 Password: "Password1!"
             }
 
@@ -170,7 +170,7 @@ describe('Notifications API', () => {
         });
 
         //Successfully Return Notifications
-        test('Login with 2 habits and 2 notifications', async () => {
+        test('Login with 2 habits and 2 todos', async () => {
 
             //make a habit
             const testData1 = {
@@ -224,7 +224,7 @@ describe('Notifications API', () => {
 
             //login
             const testData3 = {
-                Username: "AnotherTester",
+                Username: "tesing5",
                 Password: "Password1!"
             }
 
