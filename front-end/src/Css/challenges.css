@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Krona+One:wght@400&display=swap");
 
 body{
-    overflow: hidden;
     font-family: 'Kotta One', serif;
 }
 
@@ -34,6 +33,7 @@ body{
     left: 25%;
     margin-top: 20px;
     padding: 10px 10px 0 10px;
+    overflow-y: auto;
 }
 
 .challenge-page  table{
@@ -132,5 +132,20 @@ Lcontent{
     background-color: white;
     border-radius: 10px;
 }
+
+.joinedBtn{
+    padding: 5px;
+    background-color: #92B27A;
+    border-radius: 10px;
+    border: 0;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.2);
+}
+
+.centr{
+    position: absolute;
+    left: 50vw;
+    top: 50vh;
+}
+
 
 

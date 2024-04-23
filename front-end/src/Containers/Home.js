@@ -11,9 +11,10 @@ import { useNavigate } from "react-router-dom";
 
 function Home(props) {
     const [todosNumber, setTodosNumber] = useState(0);
+    const [streakN, setstreakN] = useState(0);
     const userStatus = props.data.userToken;
-    const streakActive = false;
-    let currentStreak = props.data.userStreak;
+    let currentStreak = sessionStorage.getItem("userStreak");
+    const streakActive = currentStreak>0 ? true: false;
     if (currentStreak == "undefined") {
         currentStreak = 0;
     }
@@ -23,6 +24,16 @@ function Home(props) {
         apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
         .then(res => {
             setTodosNumber(res.length);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        const userdata = {
+            userId: sessionStorage.getItem("userId")
+        }
+        apiRequest("POST", "user/returnStreak", userdata)
+        .then(res => {
+            setstreakN(res.Streak);
         })
         .catch(err => {
             console.log(err);
@@ -56,7 +67,7 @@ function Home(props) {
                 <div class = "point1"><ul></ul><li>Build lasting habits with our easy-to-use tracker</li></div>
                 <div class = "point2"><ul></ul><li>Manage your to do list with ease. </li></div>
                 <div class = "point3"><ul></ul><li>Rise in the leader boards, and compete against your friends in challenges!</li></div>
-                <div class = "no_account">Don’t have an account? <a href="http://localhost:3000/signup">Sign up today!</a></div>               
+                <div class = "no_account">Don't have an account? <a href="http://localhost:3000/signup">Sign up today!</a></div>               
                 </div>
                 <div class = "home_dailies">
                     <div class = "dailies_home_title">Dailies</div>
@@ -89,7 +100,7 @@ function Home(props) {
     function generateStreakWindow() {
         if (userStatus) {
             let flameColor = "#c0c6b7";
-            let message = <>You've been consistent for {currentStreak} days!<br></br>Extend your streak now!</>
+            let message = <>You've been consistent for {streakN} days!<br></br>Extend your streak now!</>
             if (streakActive) {
                 flameColor = "#e57028";
                 message = <>Congrats! You extended your streak today!<br></br>Checkout what habits you completed?</>
@@ -112,7 +123,15 @@ function Home(props) {
         if (userStatus) {
             return <>
                 <div className='windowStats' id="windowGeneral" onClick={() => handleClick('/stats')}>
-                    <img src={tempStatsImage} width="100%" alt="stats_display" />
+                <div><center>
+                    <div style={{fontSize: 'larger'}}>My Quick Insights:</div>
+                    <div>
+                        <div><ul></ul><li>Longest streak:</li></div>
+                        <div><ul></ul><li>Current streak:</li></div>
+                        <div><ul></ul><li>Total Habits Completed:</li></div>
+                        <div><ul></ul><li>Total To Do's Completed:</li></div>
+                    </div></center>
+                </div>
                 </div>
             </>;
         }

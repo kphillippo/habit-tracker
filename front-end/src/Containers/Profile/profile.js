@@ -71,7 +71,7 @@ function Profile(props) {
                     </div>
                     <table className="profileInfo">
                         <tbody>
-                            <tr key={"FirstName"} onClick={() => setViewFriendPopup(true)}>
+                            <tr key={"FirstName"} onClick={() => setUpdateUserPopUp("FirstName")}>
                                 <td>FirstName:</td>
                                 <td>&nbsp;&nbsp;{sessionStorage.getItem("userFirstName")}</td>
                                 <td><FaPencil size="2vw" color={penColor} id="pen"></FaPencil></td>

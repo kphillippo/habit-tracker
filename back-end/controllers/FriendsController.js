@@ -20,7 +20,7 @@ const sendFriendRequest = async (req, res) => {
         //trys to send friend request
         const request = await Friend.sendFriendRequest(User, FriendsWithUsername);
 
-        const title = "Friend Request";
+        const title = "Friend Request Sent";
         const message = `
                     <p>
             <span style="color:rgb(56, 118, 29);">

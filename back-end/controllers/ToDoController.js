@@ -1,6 +1,7 @@
 const ToDo = require('../models/ToDo');
 const ObjectId = require('mongoose').Types.ObjectId;
 const User = require('../models/User');
+const ToDoCheckIn = require('../models/ToDoCheckIn');
 
 //controller functions go here
 const createToDo = async (req, res) => {
@@ -26,6 +27,12 @@ const getToDos = async (req, res) => {
             throw new Error("User not found");
         }
         const todos = await ToDo.find({ Owner: UserId  });
+        const checkIn = ToDoCheckIn.findOne({ToDoID: todos._id, CheckInTime: {$gte: new Date(new Date().setUTCHours(0,0,0,0)), $lt: new Date(new Date().setUTCHours(23,59,59,999))}});
+        if (!checkIn) {
+            todos.Status = false;
+        } else {
+            todos.Status = checkIn.Status;
+        }
         res.status(200).json(todos);
     } catch (error) {
         res.status(400).json({ error: error.message });

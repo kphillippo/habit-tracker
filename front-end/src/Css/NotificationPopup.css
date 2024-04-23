@@ -54,3 +54,10 @@
 .TitleNotification{
     font-size: xx-large;
 }
+.notification{
+    height: 27px;
+    border-bottom: 0.5px solid #000; 
+}
+.notificationAction{
+    font-style: oblique;
+}

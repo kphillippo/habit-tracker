@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class NewHabitPopup extends Component {
+class NewChallengePopup extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +26,7 @@ class NewHabitPopup extends Component {
             this.props.toast.error("The name is too long!")
         }
         else{
-            this.props.createHabit(this.state)
+            this.props.createChallenge(this.state)
             this.props.setTrigger(false)
         }
         
@@ -59,42 +59,32 @@ class NewHabitPopup extends Component {
         return trigger ? (
             <div className="newhabit_popup">
                 <div className= "newhabit_popup-inner">
-                    <div className = "newhabit_Title">Add New Habit</div>
-                    <div className = "newhabit_columns">
-                        <label className = "newhabit_name_label" for = "name_input">Name:</label>
-                        <div className="timer_input_wrapper">
+                    <div class = "newhabit_Title">Add New Habit</div>
+                    <div class = "newhabit_columns">
+                        <label class = "newhabit_name_label" for = "name_input">Name:</label>
+                        <div class="timer_input_wrapper">
                         <input id = "newhabit_name_input" type="text" name="Title" onChange={this.handleChange}></input>
                         </div>
 
 
-                        <label className = "newhabit_name_label" for="newhabit_timer_input">Timer:</label>
-                        <div className="timer_input_wrapper">
+                        <label class = "newhabit_name_label" for="newhabit_timer_input">Timer:</label>
+                        <div class="timer_input_wrapper">
                             <input id="newhabit_timer_input" type="number" name="Goal" disabled={this.state.MeasurementType !== "1"} onChange={this.handleChange}/>
                             <span>(s)</span>
                             <input type="radio" id="timerOption" name="MeasurementType" value="1" onChange={this.handleOptionChange} checked={this.state.MeasurementType === "1"} />
                         </div>
                             
-                        <label className = "newhabit_name_label" for="newhabit_counter_input">Counter:</label>
-                        <div className="timer_input_wrapper">
+                        <label class = "newhabit_name_label" for="newhabit_counter_input">Counter:</label>
+                        <div class="timer_input_wrapper">
                                 
                             <input id="newhabit_counter_input" type="number" name="Goal" disabled={this.state.MeasurementType !== "2"} onChange={this.handleChange}/>
                             <input type="radio" id="counterOption" name="MeasurementType" value="2" onChange={this.handleOptionChange} checked={this.state.MeasurementType === "2"} />
                         </div>
-
-                            
-                        <label className = "newhabit_frequency_label"for = "frequency_input">Frequency:</label>
-                        <div className="timer_input_wrapper">
-                            <select id = "newhabit_frequency_input" onChange={this.handleChange}>
-                                <option value = "Daily">Every Day</option>
-                                <option value = "Weekly">Every Week</option>
-                                <option value = "Monthly">Every Month</option>
-                            </select>
-                        </div>
                             
                         
                     </div>
-                        <button className = "newhabit_close" onClick={() => this.props.setTrigger(false)}>X</button>
-                        <button className = "newhabit_savesubmit" onClick={() => this.handleSave()}>Save & Close</button>
+                        <button class = "newhabit_close" onClick={() => this.props.setTrigger(false)}>X</button>
+                        <button class = "newhabit_savesubmit" onClick={() => this.handleSave()}>Save & Close</button>
                    
                 </div>
             </div> 
@@ -102,4 +92,4 @@ class NewHabitPopup extends Component {
     }
 }
 
-export default NewHabitPopup;
+export default NewChallengePopup;

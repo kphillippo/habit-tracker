@@ -78,7 +78,6 @@ function getTodos(){
   console.log("get to dos in the front-end")
     apiRequest("GET", `todo/getTodos?user_id=${sessionStorage.getItem("userId")}`)
     .then(res => {
-        
         setTodos(res);
     })
     .catch(err => {
