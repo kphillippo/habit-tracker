@@ -34,8 +34,11 @@ function Challenges(props){
     };
 
     const getChallenges = async() => {
+        let info = {
+            "UserID" : sessionStorage.getItem("userId")
+        }
         try{
-            const response = await apiRequest("POST", `groupHabit/returnGroupHabits`)
+            const response = await apiRequest("POST", `groupHabit/returnGroupHabits`, info)
             const data = await response;
             setChallenges(data)
         }catch (err) {
