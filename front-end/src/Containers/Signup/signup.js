@@ -113,7 +113,7 @@ const Signup = ({isSignedin, toast}) => {
             }
             apiRequest("POST", "verification/sendEmail", info)
                 .then(({token, ...user}) => {
-                    toast.success(`Email has been sent to ${user.Email}!`)
+                    toast.success(`Email has been sent to ` + email +`!`)
                 })
                 .catch(err => {
                     toast.error(err.error);
