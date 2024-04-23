@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const UserModel = require("./User");
+const FriendsModel = require('./Friends');
 
 const GroupHabitSchema = new mongoose.Schema({
     Owner: {
@@ -148,6 +149,19 @@ GroupHabitSchema.statics.removeUser = async function(User_id, GroupHabitID) {
 GroupHabitSchema.statics.findById = async function(GroupHabitID) {
     //find the group habit by its unique ID
     const groupHabit = await this.findOne({ _id: GroupHabitID });
+
+    return groupHabit;
+}
+
+//find the group habits made by either you or your friends
+GroupHabitSchema.statics.findFriendsHabits = async function(UserID) {
+
+    //gets list of you and your friends id's
+    let friends = await FriendsModel.findFriends(UserID).select('FriendsWith');
+    friends.push("yourAdditionalString");
+
+    //finds all the group habits user and their friends have made
+    const groupHabits = await GroupHabit.find({ Owner: { $in: friends } });
 
     return groupHabit;
 }
