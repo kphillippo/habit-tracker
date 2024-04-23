@@ -48,7 +48,7 @@ const data = {"userId": friend.id,
 
   return (
     <div className="bg_blur">
-      <div style={{ height: '45%'}} className="mainFrame">
+      <div style={{ height: '55%'}} className="mainFrame">
         <div className="innerFrame">
           <center><div className="Title">
             View Friend Profile<br></br>
