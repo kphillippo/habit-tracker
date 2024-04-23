@@ -86,18 +86,22 @@ function Home(props) {
                 <div class = "home_dailies">
                     <div class = "dailies_home_title">Dailies</div>
                     <div class = "dailies_home_desc">Create and track your habits and to do list.</div>
+                    <div class = "dailies_img"></div>
                 </div>
                 <div class = "challenges_home">
                     <div class = "challenges_home_title">Challenges</div>
-                    <div class = "challenges_home_desc">Challenge your friends to keep their streak alive.</div>
+                    <div class = "challenges_home_desc">Challenge your friends to keep <br></br>their streak alive.</div>
+                    <div class = "challenges_img"></div>
                 </div>
                 <div class = "leaderboard_home">
                     <div class = "leaderboard_home_title">My Leaderboard</div>
                     <div class = "leaderboard_home_desc">See how you rank along side your friends.</div>
+                    <div class = "leaderboard_img"></div>
                 </div>
                 <div class = "stats_home">
                     <div class = "stats_home_title">My Stats</div>
-                    <div class = "stats_home_desc">Monitor your progress with a personalized statistics page.</div>
+                    <div class = "stats_home_desc">Monitor your progress with a <br></br> personalized statistics page.</div>
+                    <div class = "stats_img"></div>
                 </div>
             </div>
             </>;
