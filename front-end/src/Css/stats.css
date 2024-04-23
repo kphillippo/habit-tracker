@@ -4,6 +4,7 @@
 .parent{
     font-family: 'Kotta One', serif;
     overflow-y: scroll;
+    height: 180%;
 }
 
 .my-stats{

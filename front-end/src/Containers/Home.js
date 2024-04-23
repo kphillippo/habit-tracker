@@ -142,6 +142,7 @@ function Home(props) {
             return <>
                 <div className='windowStats' id="windowGeneral" onClick={() => handleClick('/stats')}>
                 <div><center>
+                    <br></br>
                     <div style={{fontSize: 'larger'}}>My Quick Insights:</div>
                     <div>
                         <div><ul></ul><li>Longest streak: {quickInsight.LongestStreak}</li></div>

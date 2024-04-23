@@ -237,167 +237,116 @@
 } 
 .dailies_img{
     position: absolute;
-    left:39%;
+    right:5%;
     top:10%;
     background-image: url('Dailies.png');
     background-size:contain;
-    width: 60%;
-    height:78.5%;
+    width: 37em;
+    height: 20em;
     border-radius: 0.6vw;
     box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25); 
 }
 
 .challenges_home{ 
-
     position: absolute; 
-
     left:2.5vw; 
-
     width:95vw; 
-
     top:55em; 
-
     height:25em; 
-
     border-bottom:0.01vh solid #000; 
-
 } 
 
 .challenges_home_title{ 
-
     padding-top:1%; 
-
     padding-right:1%; 
-
     text-align: right; 
-
     font-size:250%; 
-
 } 
 
 .challenges_home_desc{ 
-
     padding-top:1%; 
-
     padding-right:1%; 
-
     text-align: right; 
-
     font-size:150%; 
-
 } 
 
 .challenges_img{
     position: absolute;
-    left:3%;
+    left:5%;
     top:10%;
     background-image: url('Challenges.png');
     background-size:contain;
-    width: 60%;
-    height:78%;
+    width:43.5em;
+    height:20em;
     border-radius: 0.6vw;
     box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25); 
 }
 
 .leaderboard_home{ 
-
     position: absolute; 
-
     left:2.5vw; 
-
     width:95vw; 
-
     top:80em; 
-
     height:25em; 
-
     border-bottom:0.01vh solid #000; 
-
 } 
 
 .leaderboard_home_title{ 
-
     padding-top:1%; 
-
     padding-right:1%; 
-
     text-align: left; 
-
     font-size:250%; 
-
 } 
 
 .leaderboard_home_desc{ 
-
     padding-top:1%; 
-
     padding-right:1%; 
-
     text-align: left; 
-
     font-size:150%; 
-
 } 
 
 .leaderboard_img{
     position: absolute;
-    left:39%;
+    right:5%;
     top:10%;
     background-image: url('Leaderboard.png');
     background-size:contain;
-    width: 60%;
-    height:78%;
+    width:38.7em;
+    height:20em;
     border-radius: 0.6vw;
     box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25); 
 }
 
 .stats_home{ 
-
     position: absolute; 
-
     left:2.5vw; 
-
     width:95vw; 
-
     top:105em; 
-
     height:25em; 
-
     border-bottom:0.01vh solid #000; 
-
 } 
 
 .stats_home_title{ 
-
     padding-top:1%; 
-
     padding-right:1%; 
-
     text-align: right; 
-
     font-size:250%; 
-
 } 
 
 .stats_home_desc{ 
-
     padding-top:1%; 
-
-    padding-right:1%; 
-
+    padding-right:1%;
     text-align: right; 
-
     font-size:150%; 
-
 } 
 .stats_img{
     position: absolute;
-    left:3%;
+    left:5%;
     top:10%;
     background-image: url('Stats.png');
     background-size:contain;
-    width: 60%;
-    height:78%;
+    width:38.8em;
+    height:20em;
     border-radius: 0.6vw;
     box-shadow: 0 4px 2px 3px rgba(0, 0, 0, 0.25); 
 }
