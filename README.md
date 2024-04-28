@@ -18,6 +18,10 @@ HabitConnect is not currently publicly hosted. This installation guide was creat
 
 This user manual has been created to give a comprehensive overview of the HabitConnect website, for both first time users, and experienced users who have questions about functionalities of the site. The document provides a brief introduction to HabitConnect, including the project objectives, along with a description of how to get started on the site. It continues, providing an outline of the functionalities of pages available to the user, information on account management, a troubleshooting FAQ, and finally information on how to contact the developers regarding updates and feedback for the website. 
 
+## Site Introduction and Demonstration
+
+[Introduction to HabitConnect](https://www.youtube.com/watch?v=jobu9mN4Yjo).
+
 ## Team Members
 
 | Name            | Role            | Student ID | Brock Email      | GitHub Username |
@@ -38,27 +42,31 @@ This user manual has been created to give a comprehensive overview of the HabitC
 
 [Webpage Design Using Figma](https://www.figma.com/file/g4kPNHlQEehR718MbzswRJ/Design?type=design&node-id=0%3A1&mode=design&t=GJo5eAb9d65voeO9-1)
 
+## User Requirements Document
+
+[Updated User Requirements Document on Google Drive](https://docs.google.com/document/d/1Q2D5-TmcToMA5m-zfrtyOv8wrwMg2XZ6XxQs1W1_U9s/edit?usp=sharing)
+
 ## Project Objective
 
 Addressing the growing prevalence of unhealthy lifestyles, there is an increasing need for a shift towards healthier habits. While many aspire to improve their lifestyles, the challenge lies in taking action amid busy schedules or forgetfulness. This project aims to provide a tool to monitor their daily habits, facilitating the process of creating and maintaining healthier routines. The primary objective is to serve as a self-reflection tool, accommodating any commitments provided by the user. Examples range from small tasks like making the bed daily to more significant ones such as frequenting the gym. Additional goals include recording daily habits, tracking progress, reminder notifications, fostering friendly competition through leaderboards, and promoting long-term goals. The significance of a habit tracker lies in enhancing self-awareness, promoting accountability, offering motivation through progress visualization, and contributing to efficient time management for a more organized and productive lifestyle.
 
-## Timeline
+## Project Timeline
 
-Release Planning Document Due: January 26th (COMPLETE)
+Release Planning Document Due: January 26th 
 
-Sprint 1 Deadline: February 23rd (COMPLETE)
+Sprint 1 Deadline: February 23rd 
 
-Progress Report 1 Due: March 1st (COMPLETE)
+Progress Report 1 Due: March 1st 
 
-Sprint 2 Deadline: March 15th (COMPLETE)
+Sprint 2 Deadline: March 15th 
 
-Progress Report 2 Due: April 1st (COMPLETE)
+Progress Report 2 Due: April 1st 
 
-Sprint 3 Deadline: April 12th (COMPLETE)
+Sprint 3 Deadline: April 12th 
 
-Development Completion Deadline: April 19th (COMPLETE)
+Development Completion Deadline: April 19th
 
-Final Presentation: April 23rd (2:00pm)
+Final Presentation: April 23rd 
 
 Sprint 4 Deadline: April 26th
 
