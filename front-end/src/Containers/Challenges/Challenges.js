@@ -125,7 +125,7 @@ function Challenges(props){
         }
 
         return <>
-            <button  className="newChallenge" onClick={() => setChallengeManager(true)}>Create Challenge</button>
+            <button  className="newChallenge" onClick={() => setChallengeManager(true)}>Challenge Manager</button>
                 <div className="challenge-page">
                     <div id="TableHead">
                         <table>
